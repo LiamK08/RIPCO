@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Coastline tokens: tile = color-bg #0E1E30, wave = color-accent #55CBE0,
+       undertow = color-accent-strong #7FDCEC at low opacity -->
+  <rect width="64" height="64" rx="15" fill="#0E1E30"/>
+  <path d="M13 36 C 19 26, 26 26, 31 33 C 36 40, 44 41, 51 31"
+        fill="none" stroke="#55CBE0" stroke-width="6" stroke-linecap="round"/>
+  <path d="M15 47 C 21 40, 28 40, 33 45 C 38 50, 45 50, 50 44"
+        fill="none" stroke="#7FDCEC" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+</svg>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RipCo — AI rip current detection for iPhone</title>
+  <meta name="description" content="RipCo runs computer vision on public beach cameras to detect rip currents in real time and warn you before you get in the water. An aid for beachgoers — never a substitute for lifeguards and flags.">
+  <meta name="theme-color" content="#0E1E30">
+  <meta property="og:title" content="RipCo — AI rip current detection for iPhone">
+  <meta property="og:description" content="Computer vision on public beach cams, watching for rip currents in real time. Always swim between the red and yellow flags.">
+  <meta property="og:type" content="website">
+  <!-- TODO at deploy: point og:image (and add og:url) at absolute production URLs -->
+  <meta property="og:image" content="assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body id="top">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="site-header__inner container">
+      <a class="brand" href="#top" aria-label="RipCo — back to top">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="34" height="34">
+        <span class="brand__name">RipCo</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle__label">Menu</span>
+        <span class="nav-toggle__box" aria-hidden="true">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main" data-nav>
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#problem" data-nav-link>The problem</a></li>
+          <li><a class="site-nav__link" href="#how" data-nav-link>How it works</a></li>
+          <li><a class="site-nav__link" href="#features" data-nav-link>Features</a></li>
+          <li><a class="site-nav__link" href="#water-rules" data-nav-link>Water rules</a></li>
+          <li><a class="site-nav__link" href="#faq" data-nav-link>FAQ</a></li>
+          <li class="site-nav__cta-item">
+            <a class="button button--primary site-nav__cta" href="#download">Get the app</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas class="hero__waves" data-hero-canvas aria-hidden="true"></canvas>
+      <div class="hero__inner container">
+        <p class="eyebrow hero__eyebrow">RipCo for iPhone · AI rip current detection</p>
+        <h1 class="hero__title" id="hero-title">
+          See the rip<br>before you're in it.
+        </h1>
+        <p class="hero__lead">
+          RipCo watches public beach cameras with computer vision and flags rip
+          currents in real time — clear red warnings on a live view of your beach,
+          before you step into the water.
+        </p>
+        <div class="hero__actions">
+          <a class="appstore-link" href="#download">
+            <img src="assets/app-store-badge.svg" alt="Download RipCo on the App Store" width="180" height="53">
+          </a>
+          <a class="button button--ghost" href="#how">See how it works</a>
+        </div>
+        <p class="hero__note" role="note">
+          RipCo is an aid, not a lifeguard. Rip currents can appear even in
+          calmer-looking water — always swim between the red and yellow flags
+          and follow lifeguard instructions.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================ PROBLEM ============================= -->
+    <section class="section section--problem" id="problem" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">The problem</p>
+          <h2 class="section__title" id="problem-title">
+            The deadliest hazard at the beach is nearly invisible.
+          </h2>
+          <p class="section__lead">
+            A rip current is a narrow channel of water flowing away from shore.
+            It doesn't splash or roar — it often looks like the calmest gap
+            between the waves. That's exactly what makes it dangerous.
+          </p>
+        </div>
+
+        <div class="stats" data-stats>
+          <div class="stat reveal">
+            <p class="stat__value">
+              <span class="stat__number" data-count-to="100" data-count-suffix="+" aria-hidden="true">100+</span>
+              <span class="visually-hidden">More than 100</span>
+            </p>
+            <p class="stat__label">people drown in rip currents in the U.S. in a typical year</p>
+          </div>
+          <div class="stat reveal">
+            <p class="stat__value">
+              <span class="stat__number" data-count-to="80" data-count-suffix="%" aria-hidden="true">80%</span>
+              <span class="visually-hidden">80 percent</span>
+            </p>
+            <p class="stat__label">of surf beach lifeguard rescues involve rip currents</p>
+          </div>
+          <div class="stat reveal">
+            <p class="stat__value">
+              <span class="stat__number" data-count-to="8" data-count-suffix="&nbsp;ft/s" aria-hidden="true">8&nbsp;ft/s</span>
+              <span class="visually-hidden">8 feet per second</span>
+            </p>
+            <p class="stat__label">peak speed of a strong rip — faster than an Olympic swimmer</p>
+          </div>
+        </div>
+        <p class="stats__source reveal">Estimates from NOAA and the United States Lifesaving Association.</p>
+
+        <div class="problem__closer reveal">
+          <p>
+            Trained lifeguards spot rips by reading subtle patterns in the surf —
+            a darker channel, a gap in the breaking waves, foam pulling out to sea.
+            <strong>RipCo's computer vision is trained to read the same patterns,</strong>
+            and to put that reading in your pocket before you reach the sand.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== HOW IT WORKS ========================= -->
+    <section class="section section--how" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">How it works</p>
+          <h2 class="section__title" id="how-title">Trained eyes on the water, all day long.</h2>
+        </div>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__index" aria-hidden="true">01</span>
+            <h3 class="step__title">Plugged into public beach cams</h3>
+            <p class="step__body">
+              RipCo reads existing public camera feeds along the coast. No new
+              hardware and no drones — the cameras are already watching the water.
+            </p>
+          </li>
+          <li class="step reveal">
+            <span class="step__index" aria-hidden="true">02</span>
+            <h3 class="step__title">Computer vision reads the surf</h3>
+            <p class="step__body">
+              The model analyses the feed frame by frame, looking for the visual
+              signature of a rip: a darker channel, a break in the whitewater,
+              sediment streaming out to sea.
+            </p>
+          </li>
+          <li class="step reveal">
+            <span class="step__index" aria-hidden="true">03</span>
+            <h3 class="step__title">A warning you can read at a glance</h3>
+            <p class="step__body">
+              When a likely rip is found, RipCo outlines the area in red on the
+              live view with a confidence score — and plain guidance on what to do.
+            </p>
+          </li>
+        </ol>
+
+        <figure class="detect reveal is-detected" data-detect
+                aria-label="Animated illustration of RipCo's detection overlay: a beach camera frame in which a rip current is outlined in red while a confidence score rises to 94 percent.">
+          <div class="detect__frame">
+            <svg class="detect__scene" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="detect-water" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="var(--art-water-far)"/>
+                  <stop offset="0.55" stop-color="var(--art-water-mid)"/>
+                  <stop offset="1" stop-color="var(--art-water-near)"/>
+                </linearGradient>
+                <linearGradient id="detect-channel" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="var(--art-channel-far)"/>
+                  <stop offset="1" stop-color="var(--art-channel-near)"/>
+                </linearGradient>
+                <linearGradient id="detect-scan" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="var(--accent-0)"/>
+                  <stop offset="0.5" stop-color="var(--accent-45)"/>
+                  <stop offset="1" stop-color="var(--accent-0)"/>
+                </linearGradient>
+              </defs>
+
+              <!-- open water -->
+              <rect x="0" y="0" width="800" height="500" fill="url(#detect-water)"/>
+
+              <!-- rip channel: darker water flowing out through the surf -->
+              <path d="M462 470
+                       C 448 420, 452 370, 462 320
+                       C 472 268, 494 220, 520 186
+                       C 534 168, 552 152, 574 142
+                       C 548 158, 528 178, 512 204
+                       C 490 240, 474 284, 466 330
+                       C 458 376, 458 424, 470 470 Z"
+                    fill="url(#detect-channel)" opacity="0.9"/>
+              <path d="M470 452 C 462 400, 466 348, 480 300 C 494 252, 516 212, 546 180"
+                    fill="none" stroke="var(--art-channel-streak)" stroke-width="10"
+                    stroke-linecap="round" opacity="0.5"/>
+              <path d="M492 448 C 486 404, 492 356, 506 312 C 518 274, 536 240, 558 212"
+                    fill="none" stroke="var(--art-channel-streak)" stroke-width="6"
+                    stroke-linecap="round" opacity="0.35"/>
+
+              <!-- breaking wave foam lines, with a tell-tale gap over the channel -->
+              <g fill="none" stroke="var(--art-foam)" stroke-linecap="round">
+                <path d="M-10 208 Q 60 198 130 208 T 270 208 T 410 206" stroke-width="5" opacity="0.55"/>
+                <path d="M610 196 Q 680 188 750 198 T 830 196" stroke-width="5" opacity="0.5"/>
+                <path d="M-10 268 Q 70 256 150 268 T 310 268 T 430 264" stroke-width="7" opacity="0.7"/>
+                <path d="M600 258 Q 670 248 740 260 T 830 256" stroke-width="7" opacity="0.65"/>
+                <path d="M-10 330 Q 80 318 170 330 T 350 330 T 440 326" stroke-width="9" opacity="0.85"/>
+                <path d="M596 320 Q 668 310 740 322 T 830 318" stroke-width="9" opacity="0.8"/>
+                <path d="M-10 392 Q 90 380 190 392 T 390 392 T 452 390" stroke-width="11" opacity="0.95"/>
+                <path d="M582 384 Q 660 374 738 386 T 830 382" stroke-width="11" opacity="0.9"/>
+              </g>
+
+              <!-- shorebreak and sand -->
+              <path d="M0 442 Q 100 430 200 440 T 400 440 T 600 438 T 800 440 L 800 500 L 0 500 Z"
+                    fill="var(--art-wet-sand)"/>
+              <path d="M0 464 Q 120 454 240 462 T 480 462 T 800 460 L 800 500 L 0 500 Z"
+                    fill="var(--art-sand)"/>
+              <path d="M0 442 Q 100 430 200 440 T 400 440 T 600 438 T 800 440"
+                    fill="none" stroke="var(--art-foam)" stroke-width="5" opacity="0.9"/>
+
+              <!-- scanning sweep -->
+              <rect class="detect__scanline" data-detect-scan x="-90" y="0" width="90" height="500"
+                    fill="url(#detect-scan)"/>
+
+              <!-- detection overlay -->
+              <g class="detect__overlay" data-detect-overlay>
+                <path class="detect__fill" data-detect-fill
+                      d="M428 476
+                         C 414 410, 420 344, 442 284
+                         C 462 228, 494 178, 540 140
+                         C 566 120, 592 110, 612 112
+                         C 622 128, 618 150, 602 172
+                         C 570 208, 542 252, 522 302
+                         C 504 348, 496 396, 500 444
+                         C 500 458, 494 470, 480 476 Z"
+                      fill="var(--safety-red-veil)"/>
+                <path class="detect__outline" data-detect-outline
+                      d="M428 476
+                         C 414 410, 420 344, 442 284
+                         C 462 228, 494 178, 540 140
+                         C 566 120, 592 110, 612 112
+                         C 622 128, 618 150, 602 172
+                         C 570 208, 542 252, 522 302
+                         C 504 348, 496 396, 500 444
+                         C 500 458, 494 470, 480 476 Z"
+                      fill="none" stroke="var(--safety-red)" stroke-width="4"
+                      stroke-linejoin="round" stroke-linecap="round"/>
+                <path class="detect__flow" data-detect-flow
+                      d="M472 452 C 462 396, 468 338, 486 286 C 502 240, 526 200, 556 168"
+                      fill="none" stroke="var(--safety-red)" stroke-width="3"
+                      stroke-linecap="round" stroke-dasharray="4 14"/>
+              </g>
+
+              <!-- viewfinder corner brackets -->
+              <g fill="none" stroke="var(--accent-60)" stroke-width="4" stroke-linecap="round" opacity="0.9">
+                <path d="M22 54 L22 22 L54 22"/>
+                <path d="M746 22 L778 22 L778 54"/>
+                <path d="M778 446 L778 478 L746 478"/>
+                <path d="M54 478 L22 478 L22 446"/>
+              </g>
+            </svg>
+
+            <div class="detect__hud" aria-hidden="true">
+              <p class="detect__cam">North Beach · Cam 02 · Live</p>
+              <p class="detect__status" data-detect-status>
+                <span class="detect__status-dot"></span>
+                <span data-detect-status-text>Rip current detected</span>
+              </p>
+              <p class="detect__chip" data-detect-chip>
+                Rip signature&nbsp;<span class="detect__conf" data-detect-conf>94</span>%
+              </p>
+            </div>
+          </div>
+          <figcaption class="detect__caption">
+            Illustration of RipCo's live detection overlay. Camera coverage and
+            detection quality vary by beach and conditions — the overlay never
+            replaces flags or lifeguards.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================ FEATURES ============================ -->
+    <section class="section section--features" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Features</p>
+          <h2 class="section__title" id="features-title">Built for one job: fewer people in rips.</h2>
+        </div>
+
+        <div class="features">
+          <article class="feature reveal">
+            <span class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8"/><path d="M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8"/>
+                <path d="M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16"/><path d="M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/>
+                <circle cx="12" cy="12" r="3.25"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">Live detection overlay</h3>
+            <p class="feature__body">
+              Likely rips outlined in red on the camera view, with a confidence
+              score that updates as conditions shift.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <span class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6.5h16"/><path d="M4 12h16"/><path d="M4 17.5h16"/>
+                <circle cx="8" cy="6.5" r="1.6"/><circle cx="14" cy="12" r="1.6"/><circle cx="10" cy="17.5" r="1.6"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">Three honest condition levels</h3>
+            <p class="feature__body">
+              One glance tells you how RipCo reads the water right now:
+            </p>
+            <ul class="levels">
+              <li class="level"><span class="level__dot level__dot--green" aria-hidden="true"></span><span class="level__text"><strong>Calmer water</strong> — nothing detected on camera</span></li>
+              <li class="level"><span class="level__dot level__dot--amber" aria-hidden="true"></span><span class="level__text"><strong>Caution</strong> — conditions favour rips forming</span></li>
+              <li class="level"><span class="level__dot level__dot--red" aria-hidden="true"></span><span class="level__text"><strong>Hazard</strong> — likely rip detected now</span></li>
+            </ul>
+            <p class="feature__body feature__body--fine">
+              Green is never a promise. Rips can appear even in calmer-looking
+              water, so the flags and lifeguards always have the final word.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <span class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s-6.5-5.3-6.5-10A6.5 6.5 0 0 1 12 4.5 6.5 6.5 0 0 1 18.5 11c0 4.7-6.5 10-6.5 10Z"/>
+                <circle cx="12" cy="11" r="2.4"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">Your beaches, watched</h3>
+            <p class="feature__body">
+              Save the beaches you swim at and get a notification the moment a
+              rip is detected or conditions worsen.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <span class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 21V4"/><path d="M6 5h11l-2.5 3.5L17 12H6"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">Flag-first guidance</h3>
+            <p class="feature__body">
+              Every screen in the app points to the same rule: swim between the
+              red and yellow flags, and follow lifeguard instructions.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <span class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v4"/><path d="M12 16.5v4"/><path d="M3.5 12h4"/><path d="M16.5 12h4"/>
+                <circle cx="12" cy="12" r="2.2"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">Caught-in-a-rip coach</h3>
+            <p class="feature__body">
+              A clear guide that works offline: stay calm, float, don't fight the
+              current, swim parallel to shore, signal for help.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <span class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17c1.5-1.2 3-1.8 4.5-1.8S10.5 15.8 12 17s3 1.8 4.5 1.8S19.5 18.2 21 17"/>
+                <path d="M3 11c1.5-1.2 3-1.8 4.5-1.8S10.5 9.8 12 11s3 1.8 4.5 1.8S19.5 12.2 21 11"/>
+                <path d="M8 5.5c1-.8 2-1.2 3-1.2s2 .4 3 1.2"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">Coverage that grows</h3>
+            <p class="feature__body">
+              RipCo works wherever there's a public beach cam, and new coasts are
+              added continuously. Missing yours? Request it in the app.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== WATER RULES ========================== -->
+    <section class="section section--rules" id="water-rules" aria-labelledby="rules-title">
+      <div class="container">
+        <div class="rules-panel reveal">
+          <div class="section__head section__head--tight">
+            <p class="eyebrow eyebrow--alert">Read this before you swim</p>
+            <h2 class="section__title" id="rules-title">RipCo is an aid. It is never a verdict.</h2>
+            <p class="section__lead">
+              No app can tell you the water is fine to enter — and RipCo never
+              will. Detection can miss rips, cameras can go down, and conditions
+              change in minutes. Whatever the app shows, the rules below always apply.
+            </p>
+          </div>
+
+          <ul class="rules">
+            <li class="rule reveal">
+              <h3 class="rule__title">Swim between the red and yellow flags</h3>
+              <p class="rule__body">
+                That's the patrolled zone, chosen by lifeguards reading the water
+                in person. If there are no flags and no patrol, don't swim.
+              </p>
+            </li>
+            <li class="rule reveal">
+              <h3 class="rule__title">Lifeguards outrank the app</h3>
+              <p class="rule__body">
+                If a lifeguard's instruction differs from anything RipCo shows,
+                follow the lifeguard. Every time, without exception.
+              </p>
+            </li>
+            <li class="rule reveal">
+              <h3 class="rule__title">Calmer-looking water is not clear water</h3>
+              <p class="rule__body">
+                Rips often form in the smoothest gap between breaking waves — the
+                spot that looks most inviting can be the one flowing out to sea.
+              </p>
+            </li>
+            <li class="rule reveal">
+              <h3 class="rule__title">If in doubt, don't go out</h3>
+              <p class="rule__body">
+                No detection result, no green level and no calm surface changes
+                this rule. When you're unsure, stay on the sand.
+              </p>
+            </li>
+          </ul>
+
+          <div class="rip-guide reveal">
+            <h3 class="rip-guide__title">If you're ever caught in a rip</h3>
+            <ol class="rip-guide__steps">
+              <li><strong>Stay calm and float.</strong> A rip pulls you away from shore, not under the water.</li>
+              <li><strong>Don't swim against it.</strong> Even strong swimmers tire fighting a current head-on.</li>
+              <li><strong>Swim parallel to the beach</strong> until you're out of the channel, then angle back to shore.</li>
+              <li><strong>Can't get out?</strong> Keep floating, raise one arm and shout for help.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== FAQ ============================== -->
+    <section class="section section--faq" id="faq" aria-labelledby="faq-title">
+      <div class="container container--narrow">
+        <div class="section__head reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="section__title" id="faq-title">Questions, answered straight.</h2>
+        </div>
+
+        <div class="faq reveal">
+          <details class="faq__item">
+            <summary class="faq__question">Does RipCo replace lifeguards or beach flags?</summary>
+            <div class="faq__answer">
+              <p>
+                No — and it never will. RipCo is an extra pair of eyes, not a
+                verdict on the water. Lifeguards and the red and yellow flags are
+                the standard you swim by; the app exists to back them up, warn you
+                earlier and help you understand what they're protecting you from.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">How accurate is the detection?</summary>
+            <div class="faq__answer">
+              <p>
+                Every detection ships with a confidence score, and we publish how
+                the model performs by beach and by conditions inside the app. But
+                no model is perfect: RipCo can miss rips and can flag features
+                that aren't rips. That's why nothing in the app is ever presented
+                as an all-clear — treat every session as if a rip could be there.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">Which beaches are covered?</summary>
+            <div class="faq__answer">
+              <p>
+                Any beach with a public camera feed we can read. The in-app map
+                shows live coverage, and you can request a beach — public cams are
+                added continuously, prioritised by how many people ask.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">Does it work without a signal?</summary>
+            <div class="faq__answer">
+              <p>
+                The live camera view needs a data connection. The caught-in-a-rip
+                guide and the flag rules are stored on your phone, so the guidance
+                that matters most is always available — even with no signal on the sand.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">Am I on camera? What about privacy?</summary>
+            <div class="faq__answer">
+              <p>
+                RipCo analyses public, already-broadcast camera feeds, and the
+                model reads the water surface — it doesn't identify people, track
+                individuals or store footage of beachgoers.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">How much does it cost?</summary>
+            <div class="faq__answer">
+              <p>
+                RipCo is free to download, and core rip warnings for your saved
+                beaches are included. We think a warning that keeps someone out of
+                a rip shouldn't sit behind a paywall.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ DOWNLOAD ============================ -->
+    <section class="section section--download" id="download" aria-labelledby="download-title">
+      <div class="container">
+        <div class="download-panel reveal">
+          <p class="eyebrow">Get RipCo</p>
+          <h2 class="section__title" id="download-title">Know the water before you get there.</h2>
+          <p class="section__lead">
+            Free on iPhone. Check your beach on the way, see what the cameras see,
+            and get a warning the moment a rip is detected.
+          </p>
+          <div class="download-panel__actions">
+            <!-- TODO at launch: replace with RipCo's App Store listing URL -->
+            <a class="appstore-link" href="https://apps.apple.com/" aria-describedby="download-note">
+              <img src="assets/app-store-badge.svg" alt="Download RipCo on the App Store" width="200" height="59">
+            </a>
+          </div>
+          <p class="download-panel__meta">Requires iOS 17 or later · Free download</p>
+          <p class="download-panel__note" id="download-note">
+            Whatever RipCo shows, swim between the red and yellow flags and follow
+            lifeguard instructions.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="brand" href="#top" aria-label="RipCo — back to top">
+            <img class="brand__mark" src="assets/logo.svg" alt="" width="30" height="30">
+            <span class="brand__name">RipCo</span>
+          </a>
+          <p class="site-footer__tagline">
+            Rip current detection from public beach cams. An aid for beachgoers —
+            never a substitute for lifeguards, flags or your own judgement.
+          </p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#water-rules">Water rules</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#download">Download</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="site-footer__bottom">
+        <p>© <span data-year>2026</span> RipCo. Statistics are estimates from NOAA and the United States Lifesaving Association.</p>
+        <p>Made with respect for lifeguards everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
