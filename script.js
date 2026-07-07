@@ -388,6 +388,20 @@
     var flow = detect.querySelector('[data-detect-flow]');
     var confEl = detect.querySelector('[data-detect-conf]');
     var statusText = detect.querySelector('[data-detect-status-text]');
+    var clockEl = detect.querySelector('[data-detect-clock]');
+    var lastClock = '';
+
+    var updateClock = function () {
+      if (!clockEl) return;
+      var d = new Date();
+      var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+      var stamp = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+      if (stamp !== lastClock) {
+        lastClock = stamp;
+        clockEl.textContent = stamp;
+      }
+    };
+    updateClock();
 
     var outlineLength = 0;
     try {
@@ -470,6 +484,7 @@
 
     var detectFrame = function (now) {
       if (phaseStart === null) enterPhase(0, now);
+      updateClock();
 
       var phase = PHASES[phaseIndex];
       var elapsed = now - phaseStart;
