@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beaches | RipCo</title>
+  <meta name="description" content="RipCo brings the authoritative beach-condition sources together in one place: BeachSafe, Surf Life Saving Australia and the Bureau of Meteorology. Starting at Manly Beach and built to scale.">
+  <meta name="theme-color" content="#0E1E30">
+  <meta property="og:title" content="Beaches | RipCo">
+  <meta property="og:description" content="The authoritative condition sources, brought together in one place. Starting at Manly Beach.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body id="top">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================ SHARED HEADER ============================ -->
+  <header class="site-header" data-header>
+    <div class="scroll-progress" data-progress aria-hidden="true"></div>
+    <div class="site-header__inner container container--wide">
+      <a class="brand" href="index.html" aria-label="RipCo, home">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="28" height="28">
+        <span class="brand__name">RipCo</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu" data-nav-toggle>
+        <span class="nav-toggle__box" aria-hidden="true">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary" data-nav>
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html" data-nav-link>Home</a></li>
+          <li><a class="site-nav__link" href="how-it-works.html" data-nav-link>How it works</a></li>
+          <li><a class="site-nav__link" href="features.html" data-nav-link>Features</a></li>
+          <li><a class="site-nav__link" href="beaches.html" data-nav-link>Beaches</a></li>
+          <li><a class="site-nav__link" href="safety.html" data-nav-link>Safety</a></li>
+          <li class="site-nav__cta-item">
+            <a class="btn btn--app site-nav__cta" href="#" aria-label="Download RipCo on the App Store">
+              <svg class="btn__apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span class="btn__stack"><small>Download on the</small><b>App Store</b></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================== PAGE HERO ============================= -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="eyebrow">Beaches</p>
+          <h1 class="page-hero__title">The authoritative sources, brought together.</h1>
+          <p class="page-hero__lead">
+            RipCo does not replace the official sources for beach conditions. It
+            brings them together in one place, so you can check wind, swell, tide,
+            water temperature, patrol flags and hazard reports without opening six
+            different sites. Each condition below links to its authoritative source.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= CONDITIONS ============================ -->
+    <section class="section" aria-labelledby="conditions-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Conditions</p>
+          <h2 class="section-title" id="conditions-title">What to check, and where it comes from.</h2>
+        </div>
+
+        <div class="sources stagger">
+          <a class="source-card reveal" href="http://www.bom.gov.au" target="_blank" rel="noopener noreferrer">
+            <span class="source-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 12h15a3 3 0 1 1-3 3"/><path d="M3 16h9a2.5 2.5 0 1 1-2.5 2.5"/></svg>
+            </span>
+            <h3 class="source-card__title">Wind</h3>
+            <p class="source-card__body">Speed and direction shape the surf and how a rip behaves through the day.</p>
+            <span class="source-card__from">From the Bureau of Meteorology <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a class="source-card reveal" href="http://www.bom.gov.au" target="_blank" rel="noopener noreferrer">
+            <span class="source-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14c1.8-1.5 3.6-2.3 5.4-2.3S11 12.5 12 14s3.6 2.3 5.4 2.3S21 15.5 22 14"/><path d="M2 8c1.8-1.5 3.6-2.3 5.4-2.3S11 6.5 12 8"/></svg>
+            </span>
+            <h3 class="source-card__title">Swell</h3>
+            <p class="source-card__body">Wave height and period drive the energy at the beach and the size of any rip.</p>
+            <span class="source-card__from">From the Bureau of Meteorology <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a class="source-card reveal" href="http://www.bom.gov.au" target="_blank" rel="noopener noreferrer">
+            <span class="source-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="m9 6 3-3 3 3"/><path d="M2 15c1.8-1.4 3.6-2.1 5.4-2.1S11 13.6 12 15s3.6 2.1 5.4 2.1S21 16.4 22 15"/><path d="M2 20c1.8-1.4 3.6-2.1 5.4-2.1S11 18.6 12 20"/></svg>
+            </span>
+            <h3 class="source-card__title">Tide</h3>
+            <p class="source-card__body">Tidal state changes the sandbanks and channels a rip can run through.</p>
+            <span class="source-card__from">From the Bureau of Meteorology <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a class="source-card reveal" href="http://www.bom.gov.au" target="_blank" rel="noopener noreferrer">
+            <span class="source-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0z"/><path d="M12 13.5V9"/></svg>
+            </span>
+            <h3 class="source-card__title">Water temperature</h3>
+            <p class="source-card__body">How cold the water is affects how long you can stay in and how you cope.</p>
+            <span class="source-card__from">From the Bureau of Meteorology <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a class="source-card reveal" href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">
+            <span class="source-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4"/><path d="M6 5h11l-2.5 3.5L17 12H6"/></svg>
+            </span>
+            <h3 class="source-card__title">Patrol flags</h3>
+            <p class="source-card__body">Whether a beach is patrolled, its patrol times, and where the red and yellow flags are set.</p>
+            <span class="source-card__from">From BeachSafe <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a class="source-card reveal" href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">
+            <span class="source-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+            </span>
+            <h3 class="source-card__title">Hazard reports</h3>
+            <p class="source-card__body">Known hazards and current warnings for a beach, alongside its general safety information.</p>
+            <span class="source-card__from">From BeachSafe <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ THE SOURCES =========================== -->
+    <section class="section section--tint" aria-labelledby="authorities-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">The authorities</p>
+          <h2 class="section-title" id="authorities-title">Where the information comes from.</h2>
+          <p class="section-lead">
+            These are the authoritative sources for Australian beach conditions and
+            safety. RipCo brings them together and points you back to them. It does
+            not replace them.
+          </p>
+        </div>
+
+        <div class="sources stagger">
+          <a class="source-card reveal" href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">
+            <h3 class="source-card__title">BeachSafe</h3>
+            <p class="source-card__body">Surf Life Saving Australia's public guide to beaches, patrol information, flags and hazards.</p>
+            <span class="source-card__from">beachsafe.org.au <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="source-card reveal" href="https://sls.com.au" target="_blank" rel="noopener noreferrer">
+            <h3 class="source-card__title">Surf Life Saving Australia</h3>
+            <p class="source-card__body">The national body for surf lifesaving, patrols and beach-safety education.</p>
+            <span class="source-card__from">sls.com.au <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="source-card reveal" href="http://www.bom.gov.au" target="_blank" rel="noopener noreferrer">
+            <h3 class="source-card__title">Bureau of Meteorology</h3>
+            <p class="source-card__body">Australia's national weather, tide, swell and marine forecasting service.</p>
+            <span class="source-card__from">bom.gov.au <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
+
+        <div class="origins reveal">
+          <h3 class="origins__title">Starting at Manly Beach</h3>
+          <p class="origins__body">
+            RipCo starts at Manly Beach and is built to scale to other Australian
+            beaches over time. Coverage depends on a beach having a public camera
+            feed to work with. Wherever RipCo reaches, the rule stays the same:
+            swim between the red and yellow flags and follow the lifeguards.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== CTA ================================= -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container cta__inner">
+        <h2 class="cta__title" id="cta-title">One place to check before you go.</h2>
+        <p class="cta__lead">Free on iPhone. Starting at Manly Beach and built to grow.</p>
+        <div class="cta__actions">
+          <a class="btn btn--app btn--lg" href="#" aria-label="Download RipCo on the App Store">
+            <svg class="btn__apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            <span class="btn__stack"><small>Download on the</small><b>App Store</b></span>
+          </a>
+        </div>
+        <p class="cta__note">Whatever RipCo shows, swim between the red and yellow flags and follow the lifeguards.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ SHARED FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="container container--wide">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a class="brand" href="index.html" aria-label="RipCo, home">
+            <img class="brand__mark" src="assets/logo.svg" alt="" width="26" height="26">
+            <span class="brand__name">RipCo</span>
+          </a>
+          <p class="site-footer__line">Always swim between the red and yellow flags and follow the lifeguards. RipCo is an aid and not a substitute for lifeguard advice.</p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="beaches.html">Beaches</a></li>
+            <li><a href="safety.html">Safety</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="site-footer__base">
+        <p>© <span data-year>2026</span> RipCo</p>
+        <p>Rip currents can appear even in calmer-looking water.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

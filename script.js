@@ -1,583 +1,320 @@
-/* RipCo marketing site — vanilla JS, no dependencies.
-   Everything degrades: without JS the page is fully readable, the detection
-   figure shows its final (detected) state and all content is visible. */
+/* RipCo marketing site. Shared behaviour, vanilla JS, no dependencies.
+   Loaded on every page. Everything is guarded, so each module runs only
+   where its markup exists. The site is fully readable without JS:
+   nav wraps, reveal content is visible, the detection figure shows its
+   final state, and stats show their written values. */
 
 (function () {
   'use strict';
 
-  var reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function prefersReducedMotion() {
-    return reducedMotionQuery.matches;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function prefersReducedMotion() { return reducedMotion.matches; }
+  function onMotionChange(handler) {
+    if (typeof reducedMotion.addEventListener === 'function') reducedMotion.addEventListener('change', handler);
+    else if (typeof reducedMotion.addListener === 'function') reducedMotion.addListener(handler);
   }
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  var easeOutCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
 
-  function onMotionPreferenceChange(handler) {
-    if (typeof reducedMotionQuery.addEventListener === 'function') {
-      reducedMotionQuery.addEventListener('change', handler);
-    } else if (typeof reducedMotionQuery.addListener === 'function') {
-      reducedMotionQuery.addListener(handler);
-    }
-  }
+  /* ====================================================================
+     Active navigation tab (headers are byte-identical across pages, so
+     the current tab is resolved at runtime from the URL)
+     ==================================================================== */
 
-  function cssVar(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  }
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.site-nav__link'));
+    if (!links.length) return;
+    var path = window.location.pathname.split('/').pop() || 'index.html';
+    if (path === '') path = 'index.html';
+    links.forEach(function (link) {
+      var href = (link.getAttribute('href') || '').split('/').pop();
+      if (href === path || (path === 'index.html' && (href === '' || href === 'index.html'))) {
+        link.classList.add('is-active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  })();
 
-  var easeOutCubic = function (t) {
-    return 1 - Math.pow(1 - t, 3);
-  };
+  /* ====================================================================
+     Header: scrolled state + scroll-progress cue
+     ==================================================================== */
 
-  /* ======================================================================
-     Header: shadow once the page scrolls
-     ====================================================================== */
+  (function () {
+    var header = document.querySelector('[data-header]');
+    if (!header) return;
+    var progress = header.querySelector('[data-progress]');
 
-  var header = document.querySelector('[data-header]');
+    var update = function () {
+      var y = window.scrollY || window.pageYOffset;
+      header.classList.toggle('is-scrolled', y > 4);
+      if (progress) {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var p = max > 0 ? Math.min(y / max, 1) : 0;
+        progress.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+      }
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
 
-  function updateHeader() {
-    if (header) {
-      header.classList.toggle('is-scrolled', window.scrollY > 4);
-    }
-  }
-
-  window.addEventListener('scroll', updateHeader, { passive: true });
-  updateHeader();
-
-  /* ======================================================================
+  /* ====================================================================
      Mobile navigation
-     ====================================================================== */
+     ==================================================================== */
 
-  var navToggle = document.querySelector('[data-nav-toggle]');
-  var nav = document.querySelector('[data-nav]');
-  var desktopNavQuery = window.matchMedia('(min-width: 48em)');
+  (function () {
+    var toggle = document.querySelector('[data-nav-toggle]');
+    var nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+    var desktop = window.matchMedia('(min-width: 52.0625em)');
 
-  function navIsOpen() {
-    return document.body.classList.contains('nav-open');
-  }
-
-  function setNavOpen(open) {
-    document.body.classList.toggle('nav-open', open);
-    if (navToggle) {
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-  }
-
-  if (navToggle && nav) {
-    navToggle.addEventListener('click', function () {
-      setNavOpen(!navIsOpen());
-    });
-
-    // Close on link click (in-page navigation)
-    nav.addEventListener('click', function (event) {
-      if (event.target.closest('a')) {
-        setNavOpen(false);
-      }
-    });
-
-    // Close on Escape, return focus to the toggle
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && navIsOpen()) {
-        setNavOpen(false);
-        navToggle.focus();
-      }
-    });
-
-    // Close when tapping the scrim / anywhere outside the panel
-    document.addEventListener('click', function (event) {
-      if (
-        navIsOpen() &&
-        !nav.contains(event.target) &&
-        !navToggle.contains(event.target)
-      ) {
-        setNavOpen(false);
-      }
-    });
-
-    // Reset state when the viewport grows past the mobile breakpoint
-    var handleViewportChange = function () {
-      if (desktopNavQuery.matches) {
-        setNavOpen(false);
-      }
-    };
-    if (typeof desktopNavQuery.addEventListener === 'function') {
-      desktopNavQuery.addEventListener('change', handleViewportChange);
-    } else if (typeof desktopNavQuery.addListener === 'function') {
-      desktopNavQuery.addListener(handleViewportChange);
-    }
-  }
-
-  /* ======================================================================
-     Active-section highlighting in the nav
-     ====================================================================== */
-
-  var navLinks = Array.prototype.slice.call(
-    document.querySelectorAll('[data-nav-link]')
-  );
-
-  if (navLinks.length && 'IntersectionObserver' in window) {
-    var sectionsByLink = navLinks
-      .map(function (link) {
-        var id = link.getAttribute('href').slice(1);
-        var section = document.getElementById(id);
-        return section ? { link: link, section: section } : null;
-      })
-      .filter(Boolean);
-
-    var setActive = function (activeLink) {
-      navLinks.forEach(function (link) {
-        if (link === activeLink) {
-          link.setAttribute('aria-current', 'true');
-        } else {
-          link.removeAttribute('aria-current');
-        }
-      });
+    var isOpen = function () { return document.body.classList.contains('nav-open'); };
+    var setOpen = function (open) {
+      document.body.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     };
 
-    var sectionObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var match = sectionsByLink.find(function (pair) {
-            return pair.section === entry.target;
-          });
-          if (match) setActive(match.link);
-        });
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    );
-
-    sectionsByLink.forEach(function (pair) {
-      sectionObserver.observe(pair.section);
+    toggle.addEventListener('click', function () { setOpen(!isOpen()); });
+    nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) { setOpen(false); toggle.focus(); }
     });
-  }
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !nav.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+    });
+    var onViewport = function () { if (desktop.matches) setOpen(false); };
+    if (typeof desktop.addEventListener === 'function') desktop.addEventListener('change', onViewport);
+    else if (typeof desktop.addListener === 'function') desktop.addListener(onViewport);
+  })();
 
-  /* ======================================================================
+  /* ====================================================================
      Reveal on scroll
-     ====================================================================== */
+     ==================================================================== */
 
-  var revealTargets = Array.prototype.slice.call(
-    document.querySelectorAll('.reveal')
-  );
+  (function () {
+    var targets = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (!targets.length) return;
 
-  function showAllReveals() {
-    revealTargets.forEach(function (el) {
-      el.classList.add('is-visible');
-    });
-  }
+    var showAll = function () { targets.forEach(function (el) { el.classList.add('is-visible'); }); };
 
-  if (revealTargets.length) {
-    if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
-      showAllReveals();
-    } else {
-      var revealObserver = new IntersectionObserver(
-        function (entries, observer) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
-      );
-      revealTargets.forEach(function (el) {
-        revealObserver.observe(el);
+    if (prefersReducedMotion() || !('IntersectionObserver' in window)) { showAll(); return; }
+
+    var observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
       });
-      onMotionPreferenceChange(function () {
-        if (prefersReducedMotion()) {
-          revealObserver.disconnect();
-          showAllReveals();
-        }
-      });
-    }
-  }
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
 
-  /* ======================================================================
+    targets.forEach(function (el) { observer.observe(el); });
+    onMotionChange(function () { if (prefersReducedMotion()) { observer.disconnect(); showAll(); } });
+  })();
+
+  /* ====================================================================
      Count-up stats
-     ====================================================================== */
+     ==================================================================== */
 
-  var counters = Array.prototype.slice.call(
-    document.querySelectorAll('[data-count-to]')
-  );
+  (function () {
+    var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count-to]'));
+    if (!counters.length || !('IntersectionObserver' in window) || prefersReducedMotion()) return;
 
-  function renderCount(el, value) {
-    var suffix = el.getAttribute('data-count-suffix') || '';
-    el.textContent = String(value) + suffix;
-  }
-
-  if (counters.length) {
-    var animateCounter = function (el) {
+    var render = function (el, value) {
+      el.textContent = String(value) + (el.getAttribute('data-count-suffix') || '');
+    };
+    var animate = function (el) {
       var target = parseInt(el.getAttribute('data-count-to'), 10);
       if (isNaN(target)) return;
-      if (prefersReducedMotion()) {
-        renderCount(el, target);
-        return;
-      }
-      var duration = 1600;
-      var start = null;
+      var duration = 1600, start = null;
       var tick = function (now) {
         if (start === null) start = now;
-        var progress = Math.min((now - start) / duration, 1);
-        renderCount(el, Math.round(easeOutCubic(progress) * target));
-        if (progress < 1) {
-          window.requestAnimationFrame(tick);
-        }
+        var p = Math.min((now - start) / duration, 1);
+        render(el, Math.round(easeOutCubic(p) * target));
+        if (p < 1) window.requestAnimationFrame(tick);
       };
-      renderCount(el, 0);
+      render(el, 0);
       window.requestAnimationFrame(tick);
     };
 
-    if ('IntersectionObserver' in window && !prefersReducedMotion()) {
-      var counterObserver = new IntersectionObserver(
-        function (entries, observer) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              animateCounter(entry.target);
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-      counters.forEach(function (el) {
-        renderCount(el, 0); // start from zero so the count-up never rewinds
-        counterObserver.observe(el);
+    var observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { animate(entry.target); obs.unobserve(entry.target); }
       });
-    }
-    // Otherwise the markup already contains the final values — nothing to do.
-  }
+    }, { threshold: 0.6 });
 
-  /* ======================================================================
-     Hero: slow layered wave lines on canvas
-     ====================================================================== */
+    counters.forEach(function (el) { render(el, 0); observer.observe(el); });
+  })();
 
-  var heroCanvas = document.querySelector('[data-hero-canvas]');
+  /* ====================================================================
+     Pinned scroll stepper (sticky visual, advancing steps)
+     ==================================================================== */
 
-  if (heroCanvas && heroCanvas.getContext) {
-    var ctx = heroCanvas.getContext('2d');
-    var heroVisible = true;
-    var rafId = null;
-    var startTime = null;
+  (function () {
+    var pins = Array.prototype.slice.call(document.querySelectorAll('[data-pin]'));
+    if (!pins.length || !('IntersectionObserver' in window)) return;
 
-    var waveColors = function () {
-      return [
-        cssVar('--wave-line-3'),
-        cssVar('--wave-line-2'),
-        cssVar('--wave-line-1')
-      ];
-    };
+    pins.forEach(function (pin) {
+      var steps = Array.prototype.slice.call(pin.querySelectorAll('[data-pin-step]'));
+      var panels = Array.prototype.slice.call(pin.querySelectorAll('[data-pin-panel]'));
+      if (!steps.length) return;
 
-    var sizeCanvas = function () {
-      var rect = heroCanvas.getBoundingClientRect();
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      heroCanvas.width = Math.max(1, Math.round(rect.width * dpr));
-      heroCanvas.height = Math.max(1, Math.round(rect.height * dpr));
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
+      var setActive = function (index) {
+        steps.forEach(function (s, i) { s.classList.toggle('is-active', i === index); });
+        panels.forEach(function (p, i) { p.classList.toggle('is-active', i === index); });
+        pin.setAttribute('data-active', String(index));
+      };
+      setActive(0);
 
-    var drawWaves = function (elapsedSeconds) {
-      var rect = heroCanvas.getBoundingClientRect();
-      var w = rect.width;
-      var h = rect.height;
-      ctx.clearRect(0, 0, w, h);
-
-      var colors = waveColors();
-      var layerCount = colors.length;
-
-      for (var layer = 0; layer < layerCount; layer++) {
-        var baseY = h * (0.62 + 0.13 * layer);
-        var amplitude = 14 + layer * 9;
-        var wavelength = 0.0050 - layer * 0.0011;
-        var speed = 0.10 + layer * 0.05;
-        var phase = elapsedSeconds * speed + layer * 2.1;
-
-        ctx.beginPath();
-        for (var x = 0; x <= w; x += 4) {
-          var y =
-            baseY +
-            Math.sin(x * wavelength * Math.PI * 2 + phase) * amplitude +
-            Math.sin(x * wavelength * Math.PI * 5 + phase * 1.6) * (amplitude * 0.22);
-          if (x === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var index = steps.indexOf(entry.target);
+            if (index !== -1) setActive(index);
           }
-        }
-        ctx.strokeStyle = colors[layer];
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-    };
+        });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
-    var frame = function (now) {
-      if (startTime === null) startTime = now;
-      drawWaves((now - startTime) / 1000);
-      rafId = window.requestAnimationFrame(frame);
-    };
-
-    var stopWaves = function () {
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-    };
-
-    var startWaves = function () {
-      if (
-        rafId === null &&
-        heroVisible &&
-        !document.hidden &&
-        !prefersReducedMotion()
-      ) {
-        rafId = window.requestAnimationFrame(frame);
-      }
-    };
-
-    sizeCanvas();
-    if (prefersReducedMotion()) {
-      drawWaves(0); // one calm, static frame
-    } else {
-      startWaves();
-    }
-
-    window.addEventListener('resize', function () {
-      sizeCanvas();
-      if (prefersReducedMotion()) drawWaves(0);
+      steps.forEach(function (s) { observer.observe(s); });
     });
+  })();
 
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        stopWaves();
-      } else {
-        startWaves();
-      }
-    });
+  /* ====================================================================
+     Detection illustration (how-it-works). Diagram only, never a result.
+     Loop: scan -> trace red outline -> confidence climbs -> hold -> reset.
+     Markup ships the detected state, so no-JS and reduced-motion users see
+     a complete, correct illustration.
+     ==================================================================== */
 
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        // records arrive oldest-first; only the newest reflects current state
-        heroVisible = entries[entries.length - 1].isIntersecting;
-        if (heroVisible) {
-          startWaves();
-        } else {
-          stopWaves();
-        }
-      }).observe(heroCanvas);
-    }
+  (function () {
+    var detect = document.querySelector('[data-detect]');
+    if (!detect) return;
 
-    onMotionPreferenceChange(function () {
-      if (prefersReducedMotion()) {
-        stopWaves();
-        sizeCanvas();
-        drawWaves(0);
-      } else {
-        startWaves();
-      }
-    });
-  }
-
-  /* ======================================================================
-     Detection centrepiece: scan → trace outline → confidence climbs → hold
-     ====================================================================== */
-
-  var detect = document.querySelector('[data-detect]');
-
-  if (detect) {
     var outline = detect.querySelector('[data-detect-outline]');
     var fill = detect.querySelector('[data-detect-fill]');
     var overlay = detect.querySelector('[data-detect-overlay]');
     var flow = detect.querySelector('[data-detect-flow]');
     var confEl = detect.querySelector('[data-detect-conf]');
     var statusText = detect.querySelector('[data-detect-status-text]');
-    var clockEl = detect.querySelector('[data-detect-clock]');
-    var lastClock = '';
-
-    var updateClock = function () {
-      if (!clockEl) return;
-      var d = new Date();
-      var pad = function (n) { return (n < 10 ? '0' : '') + n; };
-      var stamp = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
-      if (stamp !== lastClock) {
-        lastClock = stamp;
-        clockEl.textContent = stamp;
-      }
-    };
-    updateClock();
 
     var outlineLength = 0;
-    try {
-      outlineLength = outline.getTotalLength();
-    } catch (err) {
-      outlineLength = 0;
-    }
+    if (outline) { try { outlineLength = outline.getTotalLength(); } catch (e) { outlineLength = 0; } }
 
     var PHASES = [
-      { name: 'scan', duration: 3200 },
-      { name: 'lock', duration: 1500 },
-      { name: 'hold', duration: 3800 },
+      { name: 'scan',  duration: 3000 },
+      { name: 'lock',  duration: 1500 },
+      { name: 'hold',  duration: 3600 },
       { name: 'reset', duration: 900 }
     ];
 
-    var detectRaf = null;
-    var phaseIndex = 0;
-    var phaseStart = null;
-    var detectVisible = true;
+    var raf = null, phaseIndex = 0, phaseStart = null, visible = true;
 
-    var setConfidence = function (value) {
-      confEl.textContent = String(Math.round(value));
-    };
+    var setConf = function (v) { if (confEl) confEl.textContent = String(Math.round(v)); };
 
-    var setDetectedState = function () {
+    var setDetected = function () {
       detect.classList.remove('is-scanning');
       detect.classList.add('is-detected');
-      overlay.style.opacity = '1';
-      outline.style.strokeDasharray = 'none';
-      outline.style.strokeDashoffset = '0';
-      outline.style.opacity = '1';
-      fill.style.opacity = '1';
-      flow.style.opacity = '0.9';
-      statusText.textContent = 'Rip current detected';
-      setConfidence(94);
+      if (overlay) overlay.style.opacity = '1';
+      if (outline) { outline.style.strokeDasharray = 'none'; outline.style.strokeDashoffset = '0'; outline.style.opacity = '1'; }
+      if (fill) fill.style.opacity = '1';
+      if (flow) flow.style.opacity = '0.85';
+      if (statusText) statusText.textContent = 'Rip detected';
+      setConf(94);
     };
 
-    /* The markup ships the detected state (correct for no-JS visitors);
-       this rewinds it to "nothing found yet" before the loop animates. */
-    var primeScanVisuals = function () {
+    var primeScan = function () {
       detect.classList.remove('is-detected');
-      statusText.textContent = 'Analysing feed…';
-      setConfidence(0);
-      overlay.style.opacity = '1';
-      fill.style.opacity = '0';
-      flow.style.opacity = '0';
-      if (outlineLength > 0) {
-        outline.style.strokeDasharray = String(outlineLength);
-        outline.style.strokeDashoffset = String(outlineLength);
-        outline.style.opacity = '1';
-      } else {
-        // can't trace the path — keep it hidden until the detected phase
-        outline.style.opacity = '0';
+      if (statusText) statusText.textContent = 'Analysing feed';
+      setConf(0);
+      if (overlay) overlay.style.opacity = '1';
+      if (fill) fill.style.opacity = '0';
+      if (flow) flow.style.opacity = '0';
+      if (outline) {
+        if (outlineLength > 0) {
+          outline.style.strokeDasharray = String(outlineLength);
+          outline.style.strokeDashoffset = String(outlineLength);
+          outline.style.opacity = '1';
+        } else {
+          outline.style.opacity = '0';
+        }
       }
     };
 
     var enterPhase = function (index, now) {
-      phaseIndex = index;
-      phaseStart = now;
+      phaseIndex = index; phaseStart = now;
       var name = PHASES[phaseIndex].name;
-
-      if (name === 'scan') {
-        primeScanVisuals();
-        detect.classList.add('is-scanning');
-      } else if (name === 'lock') {
-        detect.classList.remove('is-scanning');
-        statusText.textContent = 'Rip signature found';
-      } else if (name === 'hold') {
+      if (name === 'scan') { primeScan(); detect.classList.add('is-scanning'); }
+      else if (name === 'lock') { detect.classList.remove('is-scanning'); if (statusText) statusText.textContent = 'Rip signature found'; }
+      else if (name === 'hold') {
         detect.classList.add('is-detected');
-        statusText.textContent = 'Rip current detected';
-        outline.style.opacity = '1';
-        fill.style.opacity = '1';
-        flow.style.opacity = '0.9';
+        if (statusText) statusText.textContent = 'Rip detected';
+        if (outline) outline.style.opacity = '1';
+        if (fill) fill.style.opacity = '1';
+        if (flow) flow.style.opacity = '0.85';
       } else if (name === 'reset') {
-        overlay.style.opacity = '0';
+        if (overlay) overlay.style.opacity = '0';
         detect.classList.remove('is-detected');
-        statusText.textContent = 'Analysing feed…';
+        if (statusText) statusText.textContent = 'Analysing feed';
       }
     };
 
-    var detectFrame = function (now) {
+    var frame = function (now) {
       if (phaseStart === null) enterPhase(0, now);
-      updateClock();
-
       var phase = PHASES[phaseIndex];
       var elapsed = now - phaseStart;
       var t = Math.min(elapsed / phase.duration, 1);
 
-      if (phase.name === 'scan') {
-        // Confidence creeps up while the sweep runs
-        setConfidence(easeOutCubic(t) * 34);
-      } else if (phase.name === 'lock') {
-        // Trace the outline and push confidence to 94
-        if (outlineLength > 0) {
-          outline.style.strokeDashoffset = String(
-            outlineLength * (1 - easeOutCubic(t))
-          );
-        }
-        setConfidence(34 + easeOutCubic(t) * 60);
-      } else if (phase.name === 'hold') {
-        // Confidence breathes gently around its lock value
-        setConfidence(94 + Math.sin(elapsed / 500) * 1.2);
-      }
+      if (phase.name === 'scan') setConf(easeOutCubic(t) * 34);
+      else if (phase.name === 'lock') {
+        if (outline && outlineLength > 0) outline.style.strokeDashoffset = String(outlineLength * (1 - easeOutCubic(t)));
+        setConf(34 + easeOutCubic(t) * 60);
+      } else if (phase.name === 'hold') setConf(94 + Math.sin(elapsed / 500) * 1.1);
 
-      if (t >= 1) {
-        enterPhase((phaseIndex + 1) % PHASES.length, now);
-      }
-      detectRaf = window.requestAnimationFrame(detectFrame);
+      if (t >= 1) enterPhase((phaseIndex + 1) % PHASES.length, now);
+      raf = window.requestAnimationFrame(frame);
     };
 
-    var stopDetect = function () {
-      if (detectRaf !== null) {
-        window.cancelAnimationFrame(detectRaf);
-        detectRaf = null;
-      }
+    var stop = function () { if (raf !== null) { window.cancelAnimationFrame(raf); raf = null; } };
+    var start = function () {
+      if (prefersReducedMotion()) { stop(); setDetected(); return; }
+      if (raf === null && visible && !document.hidden) { phaseStart = null; phaseIndex = 0; raf = window.requestAnimationFrame(frame); }
     };
 
-    var startDetect = function () {
-      if (prefersReducedMotion()) {
-        stopDetect();
-        setDetectedState();
-        return;
-      }
-      if (detectRaf === null && detectVisible && !document.hidden) {
-        phaseStart = null;
-        phaseIndex = 0;
-        detectRaf = window.requestAnimationFrame(detectFrame);
-      }
-    };
+    if (prefersReducedMotion()) setDetected(); else primeScan();
 
-    if (prefersReducedMotion()) {
-      setDetectedState();
-    } else {
-      primeScanVisuals();
-    }
-
-    // Observe regardless of the current motion preference, so visibility
-    // tracking stays correct if the preference changes mid-session.
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
-        // records arrive oldest-first; only the newest reflects current state
-        detectVisible = entries[entries.length - 1].isIntersecting;
-        if (detectVisible) {
-          startDetect();
-        } else {
-          stopDetect();
-        }
+        visible = entries[entries.length - 1].isIntersecting;
+        if (visible) start(); else stop();
       }, { threshold: 0.25 }).observe(detect);
     } else if (!prefersReducedMotion()) {
-      startDetect();
+      start();
     }
 
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        stopDetect();
-      } else {
-        startDetect();
-      }
-    });
+    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+    onMotionChange(function () { if (prefersReducedMotion()) { stop(); setDetected(); } else start(); });
+  })();
 
-    onMotionPreferenceChange(function () {
-      if (prefersReducedMotion()) {
-        stopDetect();
-        setDetectedState();
-      } else {
-        startDetect();
-      }
-    });
-  }
+  /* ====================================================================
+     Image slots: mark empty on load failure so the neutral placeholder
+     shows instead of a broken-image icon
+     ==================================================================== */
 
-  /* ======================================================================
+  (function () {
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.slot img, .device__screen img, .hero__bg img'));
+    imgs.forEach(function (img) {
+      var mark = function () {
+        var host = img.closest('.slot') || img.closest('.device') || img.closest('.hero__bg');
+        if (host) host.classList.add('is-empty');
+      };
+      if (img.complete && img.naturalWidth === 0) mark();
+      img.addEventListener('error', mark);
+    });
+  })();
+
+  /* ====================================================================
      Footer year
-     ====================================================================== */
+     ==================================================================== */
 
-  var yearEl = document.querySelector('[data-year]');
-  if (yearEl) {
-    yearEl.textContent = String(new Date().getFullYear());
-  }
+  (function () {
+    var el = document.querySelector('[data-year]');
+    if (el) el.textContent = String(new Date().getFullYear());
+  })();
 })();
