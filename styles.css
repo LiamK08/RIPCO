@@ -1459,3 +1459,301 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   .hero__inner { grid-template-columns: 1fr; }
   .hero__visual { order: 2; }
 }
+
+/* --------------------------- Sydney beaches map ------------------------- */
+/* The map card, pins, details panel and locked block reuse the existing
+   token set only. Pins are neutral brand blue, never a safety colour. */
+
+.map-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.map-canvas {
+  width: 100%;
+  height: clamp(420px, 62vh, 580px);
+  background: var(--sand-deep);
+  z-index: 0;
+}
+@media (max-width: 40em) { .map-canvas { height: 420px; } }
+
+.map-fallback {
+  padding: var(--space-7) var(--space-5);
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* Leaflet chrome, restyled to the site */
+#beach-map.leaflet-container {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  background: var(--sand-deep);
+}
+#beach-map .leaflet-bar {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+#beach-map .leaflet-bar a {
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-soft);
+}
+#beach-map .leaflet-bar a:last-child { border-bottom: 0; }
+#beach-map .leaflet-bar a:hover { background: var(--sand-deep); color: var(--ink); }
+#beach-map .leaflet-bar a.leaflet-disabled { background: var(--sand-deep); color: var(--ink-faint); }
+#beach-map .leaflet-control-attribution {
+  background: var(--paper);
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-top-left-radius: var(--radius-sm);
+}
+#beach-map .leaflet-control-attribution a { color: var(--accent-deep); }
+
+/* Pins (Leaflet divIcons) */
+.map-pin { background: transparent; border: 0; }
+.map-pin svg { display: block; }
+.map-pin:hover { cursor: pointer; }
+
+/* Permanent "Live" label beside the Manly pin */
+.map-live-label {
+  background: var(--paper);
+  color: var(--accent-strong);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  padding: 0.1rem 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.map-live-label::before { display: none; }
+
+/* Details panel */
+.map-panel {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 1100;
+  width: min(21.5rem, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  overflow: auto;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+}
+@media (max-width: 40em) {
+  .map-panel {
+    top: auto;
+    bottom: var(--space-2);
+    left: var(--space-2);
+    right: var(--space-2);
+    width: auto;
+    max-height: 78%;
+  }
+}
+
+.map-panel__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.map-panel__name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+.map-panel__close {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.map-panel__close:hover { background: var(--sand-deep); color: var(--ink); }
+.map-panel__close svg { width: 0.9rem; height: 0.9rem; }
+
+.map-tag {
+  flex: none;
+  padding: 0.18rem 0.6rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-pill);
+  background: var(--sand-deep);
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.map-tag--live {
+  background: var(--accent-tint);
+  color: var(--accent-strong);
+}
+
+.map-panel__stats {
+  margin-top: var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.map-stat {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-3);
+  background: var(--sand);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+}
+.map-stat__icon {
+  grid-row: 1 / 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
+}
+.map-stat__icon svg { width: 1.1rem; height: 1.1rem; }
+.map-stat__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.map-stat__value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.map-stat__na { color: var(--ink-faint); font-weight: 500; }
+
+.map-skel {
+  display: inline-block;
+  width: 3.2rem;
+  height: 0.85em;
+  border-radius: var(--radius-pill);
+  background: var(--sand-deep);
+}
+
+/* Locked, app-only safety read. A lock and abstract shimmer bars only,
+   never a number, colour rating or anything that could read as a value. */
+.map-locked {
+  margin-top: var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-4);
+  background: var(--sand);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+}
+.map-locked__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.map-locked__lock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
+}
+.map-locked__lock svg { width: 1rem; height: 1rem; }
+.map-locked__title { font-size: 0.95rem; font-weight: 700; color: var(--ink); }
+.map-locked__shimmer {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: var(--space-3);
+}
+.map-locked__shimmer span {
+  height: 0.55rem;
+  border-radius: var(--radius-pill);
+  background: var(--sand-deep);
+}
+.map-locked__shimmer span:nth-child(1) { width: 62%; }
+.map-locked__shimmer span:nth-child(2) { width: 40%; }
+.map-locked__shimmer span:nth-child(3) { width: 74%; }
+.map-locked__body {
+  margin-top: var(--space-3);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.map-locked__cta {
+  margin-top: var(--space-3);
+  width: 100%;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.92rem;
+}
+
+/* Legend under the map */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--line-soft);
+  background: var(--paper);
+}
+.map-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.map-legend__pin { width: 0.85rem; height: auto; flex: none; }
+.map-legend__note { margin-left: auto; font-size: 0.8rem; color: var(--ink-faint); }
+@media (max-width: 48em) { .map-legend__note { margin-left: 0; width: 100%; } }
+
+/* Map motion, fully disabled under reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .map-panel:not([hidden]) { animation: map-panel-in 240ms var(--ease-out); }
+  .map-skel {
+    background-image: linear-gradient(90deg, var(--sand-deep), var(--accent-tint), var(--sand-deep));
+    background-size: 200% 100%;
+    animation: map-shimmer 1.3s linear infinite;
+  }
+  .map-locked__shimmer span {
+    background-image: linear-gradient(90deg, var(--sand-deep), var(--accent-tint), var(--sand-deep));
+    background-size: 200% 100%;
+    animation: map-shimmer 2.2s linear infinite;
+  }
+}
+@keyframes map-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes map-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}

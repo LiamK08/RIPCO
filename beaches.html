@@ -18,8 +18,11 @@
   <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="assets/vendor/leaflet/leaflet.js" defer></script>
+  <script src="map.js" defer></script>
 </head>
 <body id="top">
 
@@ -74,8 +77,43 @@
       </div>
     </section>
 
+    <!-- =============================== MAP ================================ -->
+    <section class="section section--flush" aria-labelledby="map-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Sydney coverage</p>
+          <h2 class="section-title" id="map-title">Every beach on one <em class="accent">map</em>.</h2>
+          <p class="section-lead">
+            Hover or tap a pin for live conditions. The conditions shown come from
+            public sources and are available for every listed beach. Live rip
+            detection currently starts at Manly and is rolling out to more
+            Australian beaches, so it is never implied where it does not run.
+          </p>
+        </div>
+
+        <div class="map-card reveal">
+          <div id="beach-map" class="map-canvas" aria-label="Interactive map of Sydney beaches covered by RipCo, from Palm Beach to Cronulla">
+            <noscript>
+              <p class="map-fallback">The interactive map needs JavaScript. Every beach and official source is listed below.</p>
+            </noscript>
+          </div>
+          <div class="map-legend">
+            <span class="map-legend__item">
+              <svg class="map-legend__pin" viewBox="0 0 30 40" aria-hidden="true" focusable="false"><path d="M15 1.5C7.8 1.5 2 7.2 2 14.3 2 24 15 38 15 38s13-14 13-23.7C28 7.2 22.2 1.5 15 1.5Z" fill="var(--accent-deep)" stroke="var(--paper)" stroke-width="2"/><circle cx="15" cy="14.5" r="5.4" fill="var(--paper)"/><circle cx="15" cy="14.5" r="2.6" fill="var(--accent-deep)"/></svg>
+              Live rip detection, Manly
+            </span>
+            <span class="map-legend__item">
+              <svg class="map-legend__pin" viewBox="0 0 26 35" aria-hidden="true" focusable="false"><path d="M13 1.5C6.9 1.5 2 6.4 2 12.4 2 20.8 13 33 13 33s11-12.2 11-20.6C24 6.4 19.1 1.5 13 1.5Z" fill="var(--paper)" stroke="var(--accent-deep)" stroke-width="2"/><circle cx="13" cy="12.6" r="3.4" fill="var(--accent-deep)"/></svg>
+              Conditions only
+            </span>
+            <span class="map-legend__note">Live conditions from Open-Meteo public data</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============================= CONDITIONS ============================ -->
-    <section class="section section--flush" aria-labelledby="conditions-title">
+    <section class="section" aria-labelledby="conditions-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Conditions</p>
