@@ -322,10 +322,10 @@
      ==================================================================== */
 
   (function () {
-    var imgs = Array.prototype.slice.call(document.querySelectorAll('.slot img, .device__screen img, .hero__bg img, .page-hero__bg img'));
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.slot img, .device__screen img'));
     imgs.forEach(function (img) {
       var mark = function () {
-        var host = img.closest('.slot') || img.closest('.device') || img.closest('.hero__bg') || img.closest('.page-hero__bg');
+        var host = img.closest('.slot') || img.closest('.device');
         if (host) host.classList.add('is-empty');
       };
       if (img.complete && img.naturalWidth === 0) mark();

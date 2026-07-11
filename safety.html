@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Safety | RipCo</title>
-  <meta name="description" content="RipCo's safety commitment. RipCo is an aid, not a replacement for judgement. It never tells you a beach is fine to enter, rip currents can appear even in calmer-looking water, and you must always swim between the red and yellow flags and follow the lifeguards.">
-  <meta name="theme-color" content="#0E1E30">
+  <meta name="description" content="RipCo's safety commitment. RipCo is an aid, not a replacement for judgement. It never tells you a beach is &quot;safe&quot;, rip currents can appear even in calmer-looking water, and you must always swim between the red and yellow flags and follow the lifeguards.">
+  <meta name="theme-color" content="#FBF8F2">
   <meta property="og:title" content="Safety | RipCo">
-  <meta property="og:description" content="RipCo's safety commitment. RipCo is an aid, not a replacement for judgement. It never tells you a beach is fine to enter, rip currents can appear even in calmer-looking water, and you must always swim between the red and yellow flags and follow the lifeguards.">
+  <meta property="og:description" content="RipCo's safety commitment. RipCo is an aid, not a replacement for judgement. It never tells you a beach is &quot;safe&quot;, rip currents can appear even in calmer-looking water, and you must always swim between the red and yellow flags and follow the lifeguards.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
@@ -27,10 +30,10 @@
     <div class="scroll-progress" data-progress aria-hidden="true"></div>
     <div class="site-header__inner container container--wide">
       <a class="brand" href="index.html" aria-label="RipCo, home">
-        <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
         <span class="brand__name">RipCo</span>
       </a>
@@ -55,12 +58,8 @@
 
   <main id="main">
 
-    <!-- ========================= PAGE HERO (image-led) ===================== -->
-    <section class="page-hero page-hero--media">
-      <div class="page-hero__bg">
-        <img src="assets/beach-2.jpg" alt="" loading="eager" width="2400" height="1350">
-      </div>
-      <div class="page-hero__media-scrim" aria-hidden="true"></div>
+    <!-- ============================== PAGE HERO ============================= -->
+    <section class="page-hero">
       <div class="container">
         <div class="page-hero__inner">
           <p class="eyebrow eyebrow--alert">Safety</p>
@@ -72,6 +71,11 @@
             product.
           </p>
         </div>
+        <figure class="photo-figure page-hero__photo reveal">
+          <div class="slot slot--wide" data-label="Photo">
+            <img src="assets/beach-2.jpg" alt="Lifeguard flags standing on the sand of an Australian beach as waves roll in behind them" loading="lazy" width="2100" height="900">
+          </div>
+        </figure>
       </div>
     </section>
 
@@ -80,7 +84,7 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Our commitment</p>
-          <h2 class="section-title" id="pledge-title">What RipCo will and will not do.</h2>
+          <h2 class="section-title" id="pledge-title">What RipCo will and will not <em class="accent">do</em>.</h2>
         </div>
 
         <div class="pledge stagger">
@@ -183,10 +187,10 @@
       <div class="site-footer__grid">
         <div class="site-footer__brand">
           <a class="brand" href="index.html" aria-label="RipCo, home">
-            <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
             <span class="brand__name">RipCo</span>
           </a>
@@ -204,7 +208,7 @@
           <h2>How it works</h2>
           <ul>
             <li><a href="how-it-works.html">The pipeline</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="account.html#faq">FAQ</a></li>
           </ul>
         </nav>
         <nav class="site-footer__col" aria-label="Safety">

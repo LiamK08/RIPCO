@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Get early access | RipCo</title>
   <meta name="description" content="Join the RipCo early-access list. RipCo is coming to the App Store, starting at Manly Beach. An aid for beachgoers, never a substitute for lifeguards and flags.">
-  <meta name="theme-color" content="#0E1E30">
+  <meta name="theme-color" content="#FBF8F2">
   <meta property="og:title" content="Get early access | RipCo">
   <meta property="og:description" content="Join the RipCo early-access list. RipCo is coming to the App Store, starting at Manly Beach. An aid for beachgoers, never a substitute for lifeguards and flags.">
   <meta property="og:type" content="website">
@@ -14,6 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
@@ -28,10 +31,10 @@
     <div class="scroll-progress" data-progress aria-hidden="true"></div>
     <div class="site-header__inner container container--wide">
       <a class="brand" href="index.html" aria-label="RipCo, home">
-        <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
         <span class="brand__name">RipCo</span>
       </a>
@@ -140,6 +143,87 @@
       </div>
     </section>
 
+    <!-- ================================ FAQ ================================ -->
+    <section class="section section--tint" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="section-title" id="faq-title">Questions, answered <em class="accent">straight</em>.</h2>
+        </div>
+
+        <div class="faq reveal" data-accordion>
+          <div class="faq__item">
+            <h3><button class="faq__btn" type="button" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">Does RipCo replace lifeguards?<span class="faq__marker" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              <div class="faq__panel-inner">
+                <p class="faq__answer">No. RipCo is an extra pair of eyes, not a verdict on the water. Lifeguards and the red and yellow flags are the standard you swim by. The app exists to back them up and warn you earlier, never to replace them.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__btn" type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">How accurate is the detection?<span class="faq__marker" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              <div class="faq__panel-inner">
+                <p class="faq__answer">Every detection carries a confidence percentage, and that is a reading, not a promise. RipCo can miss rips and can flag features that are not rips. Nothing in the app is ever presented as an all-clear, so treat every session as though a rip could be present.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__btn" type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">Does it work at night or in poor visibility?<span class="faq__marker" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              <div class="faq__panel-inner">
+                <p class="faq__answer">Detection needs a usable camera image. At night, in heavy rain or in strong glare, detection quality drops or becomes unavailable, and the app says so plainly rather than guessing. Conditions data remains available, and the rules do not change: flags and lifeguards first.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__btn" type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">Which beaches are covered?<span class="faq__marker" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              <div class="faq__panel-inner">
+                <p class="faq__answer">RipCo starts at Manly Beach and is built to scale to other Australian beaches. Coverage depends on a beach having a public camera feed the app can read.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__btn" type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">Does it use my location?<span class="faq__marker" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a5" role="region" aria-labelledby="faq-q5">
+              <div class="faq__panel-inner">
+                <p class="faq__answer">Only if you allow it, and only to show beaches near you. You can search for any beach without sharing your location. Location access is never required.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__btn" type="button" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">Is my data private?<span class="faq__marker" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a6" role="region" aria-labelledby="faq-q6">
+              <div class="faq__panel-inner">
+                <p class="faq__answer">RipCo keeps data to a minimum. The cameras are public feeds that already exist, and the model reads the water surface, not people. Early access asks for your email only, and it is used to contact you about RipCo, nothing else.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__btn" type="button" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">Is it free?<span class="faq__marker" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a7" role="region" aria-labelledby="faq-q7">
+              <div class="faq__panel-inner">
+                <p class="faq__answer">Yes. RipCo is a free consumer app, with no subscription and no tiers. It will launch free on the App Store.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== CTA ================================= -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container cta__inner">
+        <h2 class="cta__title" id="cta-title">While you wait, learn to <em class="accent">read</em> the water.</h2>
+        <p class="cta__lead">See how the detection pipeline works, and what RipCo will and will not do.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary btn--lg" href="how-it-works.html">See how it works</a>
+          <a class="btn btn--ghost btn--lg" href="safety.html">Our safety commitment</a>
+        </div>
+        <p class="cta__note">Whatever RipCo shows, swim between the red and yellow flags and follow the lifeguards.</p>
+      </div>
+    </section>
   </main>
 
   <!-- ============================ SHARED FOOTER ============================ -->
@@ -148,10 +232,10 @@
       <div class="site-footer__grid">
         <div class="site-footer__brand">
           <a class="brand" href="index.html" aria-label="RipCo, home">
-            <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
             <span class="brand__name">RipCo</span>
           </a>
@@ -169,7 +253,7 @@
           <h2>How it works</h2>
           <ul>
             <li><a href="how-it-works.html">The pipeline</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="account.html#faq">FAQ</a></li>
           </ul>
         </nav>
         <nav class="site-footer__col" aria-label="Safety">

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Beaches | RipCo</title>
   <meta name="description" content="RipCo brings the authoritative beach-condition sources together in one place: BeachSafe, Surf Life Saving Australia and the Bureau of Meteorology. Starting at Manly Beach and built to scale.">
-  <meta name="theme-color" content="#0E1E30">
+  <meta name="theme-color" content="#FBF8F2">
   <meta property="og:title" content="Beaches | RipCo">
   <meta property="og:description" content="RipCo brings the authoritative beach-condition sources together in one place: BeachSafe, Surf Life Saving Australia and the Bureau of Meteorology. Starting at Manly Beach and built to scale.">
   <meta property="og:type" content="website">
@@ -14,6 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
@@ -27,10 +30,10 @@
     <div class="scroll-progress" data-progress aria-hidden="true"></div>
     <div class="site-header__inner container container--wide">
       <a class="brand" href="index.html" aria-label="RipCo, home">
-        <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
         <span class="brand__name">RipCo</span>
       </a>
@@ -72,11 +75,11 @@
     </section>
 
     <!-- ============================= CONDITIONS ============================ -->
-    <section class="section" aria-labelledby="conditions-title">
+    <section class="section section--flush" aria-labelledby="conditions-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Conditions</p>
-          <h2 class="section-title" id="conditions-title">What to check, and where it comes from.</h2>
+          <h2 class="section-title" id="conditions-title">What to check, and <em class="accent">where</em> it comes from.</h2>
         </div>
 
         <div class="sources stagger">
@@ -130,7 +133,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
             </span>
             <h3 class="source-card__title">Hazard reports</h3>
-            <p class="source-card__body">Known hazards and current warnings for a beach, alongside its general safety information.</p>
+            <p class="source-card__body">Known hazards and current warnings for a beach, alongside its general water-safety information.</p>
             <span class="source-card__from">From BeachSafe <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
           </a>
         </div>
@@ -145,8 +148,8 @@
           <h2 class="section-title" id="authorities-title">Where the information comes from.</h2>
           <p class="section-lead">
             These are the authoritative sources for Australian beach conditions and
-            safety. RipCo brings them together and points you back to them. It does
-            not replace them.
+            water safety. RipCo brings them together and points you back to them.
+            It does not replace them.
           </p>
         </div>
 
@@ -168,8 +171,8 @@
           </a>
         </div>
 
-        <figure class="reveal" style="margin-top: var(--space-8)">
-          <div class="slot slot--wide">
+        <figure class="photo-figure reveal page-hero__photo">
+          <div class="slot slot--wide" data-label="Photo">
             <img src="assets/beach-1.jpg" alt="A wide view of an Australian surf beach with waves breaking along the shoreline" loading="lazy" width="2100" height="900">
           </div>
         </figure>
@@ -206,10 +209,10 @@
       <div class="site-footer__grid">
         <div class="site-footer__brand">
           <a class="brand" href="index.html" aria-label="RipCo, home">
-            <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
             <span class="brand__name">RipCo</span>
           </a>
@@ -227,7 +230,7 @@
           <h2>How it works</h2>
           <ul>
             <li><a href="how-it-works.html">The pipeline</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="account.html#faq">FAQ</a></li>
           </ul>
         </nav>
         <nav class="site-footer__col" aria-label="Safety">

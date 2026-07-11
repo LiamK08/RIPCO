@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>How it works | RipCo</title>
   <meta name="description" content="How RipCo detects rip currents: it reads existing public beach cameras, uses AI computer vision to identify rips, and shows them as a clear visual warning outlined in red with a confidence percentage.">
-  <meta name="theme-color" content="#0E1E30">
+  <meta name="theme-color" content="#FBF8F2">
   <meta property="og:title" content="How it works | RipCo">
   <meta property="og:description" content="How RipCo detects rip currents: it reads existing public beach cameras, uses AI computer vision to identify rips, and shows them as a clear visual warning outlined in red with a confidence percentage.">
   <meta property="og:type" content="website">
@@ -14,6 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
@@ -27,10 +30,10 @@
     <div class="scroll-progress" data-progress aria-hidden="true"></div>
     <div class="site-header__inner container container--wide">
       <a class="brand" href="index.html" aria-label="RipCo, home">
-        <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
         <span class="brand__name">RipCo</span>
       </a>
@@ -70,63 +73,18 @@
       </div>
     </section>
 
-    <!-- ========================= PINNED PIPELINE ========================== -->
-    <section class="section" aria-labelledby="pipeline-title">
+    <!-- ==================== PINNED PIPELINE (navy band) ==================== -->
+    <section class="band" aria-labelledby="pipeline-title">
       <div class="container">
         <h2 class="visually-hidden" id="pipeline-title">The detection pipeline</h2>
         <div class="pin pin--reverse" data-pin>
           <div class="pin__visual">
-            <figure class="detect is-detected" data-detect aria-label="Illustration of how RipCo shows a detection: a schematic camera frame in which a rip current is traced with a red outline while a confidence percentage rises to 94 percent.">
-              <div class="detect__frame">
-                <span class="detect__tag">Illustration</span>
-                <svg class="detect__scene" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-                  <defs>
-                    <linearGradient id="detect-scan" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0" stop-color="var(--accent-0)"/>
-                      <stop offset="0.5" stop-color="var(--accent-45)"/>
-                      <stop offset="1" stop-color="var(--accent-0)"/>
-                    </linearGradient>
-                  </defs>
-
-                  <path class="detect__grid-line" d="M80 0V600 M160 0V600 M240 0V600 M320 0V600 M400 0V600 M480 0V600 M560 0V600 M640 0V600 M720 0V600 M800 0V600 M880 0V600 M0 80H960 M0 160H960 M0 240H960 M0 320H960 M0 400H960 M0 480H960 M0 560H960"/>
-
-                  <path class="detect__channel" d="M556 600 C 540 512, 548 420, 576 340 C 596 282, 628 232, 664 200 C 640 236, 622 282, 610 336 C 596 400, 592 500, 604 600 Z"/>
-
-                  <g>
-                    <path class="detect__wave" d="M-10 250 Q 120 240 250 250 T 500 248" stroke-width="4"/>
-                    <path class="detect__wave" d="M710 246 Q 820 238 940 246 T 990 244" stroke-width="4"/>
-                    <path class="detect__wave" d="M-10 330 Q 130 318 270 330 T 520 326" stroke-width="5"/>
-                    <path class="detect__wave" d="M700 322 Q 810 314 930 324 T 990 320" stroke-width="5"/>
-                    <path class="detect__wave" d="M-10 414 Q 140 400 290 414 T 540 410" stroke-width="6"/>
-                    <path class="detect__wave" d="M690 404 Q 800 394 928 406 T 990 402" stroke-width="6"/>
-                    <path class="detect__wave" d="M-10 498 Q 150 484 310 498 T 560 494" stroke-width="7"/>
-                    <path class="detect__wave" d="M676 488 Q 796 478 924 490 T 990 486" stroke-width="7"/>
-                  </g>
-
-                  <rect class="detect__scanline" data-detect-scan x="-120" y="0" width="120" height="600" fill="url(#detect-scan)"/>
-
-                  <g class="detect__overlay" data-detect-overlay>
-                    <path class="detect__fill" data-detect-fill d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
-                    <path class="detect__outline" data-detect-outline d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
-                    <path class="detect__flow" data-detect-flow d="M596 540 C 585 474, 592 406, 612 344 C 630 290, 658 242, 692 206"/>
-                  </g>
-                </svg>
-
-                <div class="detect__hud">
-                  <p class="detect__status" data-detect-status>
-                    <span class="detect__status-dot"></span>
-                    <span data-detect-status-text>Rip detected</span>
-                  </p>
-                  <p class="detect__chip" data-detect-chip>Confidence <span data-detect-conf>94</span>%</p>
-                </div>
+            <div class="device">
+              <div class="device__notch" aria-hidden="true"></div>
+              <div class="device__screen" data-label="Screenshot">
+                <img src="assets/app-detection.png" alt="RipCo's live camera view with a detected rip current outlined in red and a confidence percentage" loading="eager" width="390" height="844">
               </div>
-              <figcaption class="detect__caption">
-                Illustration of how a detection is shown in the app. This is a
-                diagram, not a real screenshot or a real result. In the app,
-                detections appear on the live camera view and always defer to the
-                flags and the lifeguards.
-              </figcaption>
-            </figure>
+            </div>
           </div>
 
           <div class="pin__steps">
@@ -161,6 +119,74 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ======================= DETECTION ILLUSTRATION ====================== -->
+    <section class="section" aria-labelledby="detect-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">The warning, up close</p>
+          <h2 class="section-title" id="detect-title">What a detection <em class="accent">looks</em> like.</h2>
+          <p class="section-lead">
+            This is an animated illustration of how the app presents a detection:
+            the feed is analysed, a likely rip is traced in red, and a confidence
+            percentage climbs as the model settles. It is a diagram, not a real
+            camera frame.
+          </p>
+        </div>
+
+        <figure class="detect is-detected reveal" data-detect aria-label="Illustration of how RipCo shows a detection: a schematic camera frame in which a rip current is traced with a red outline while a confidence percentage rises to 94 percent.">
+          <div class="detect__frame">
+            <span class="detect__tag">Illustration</span>
+            <svg class="detect__scene" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="detect-scan" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="var(--accent-on-navy)" stop-opacity="0"/>
+                  <stop offset="0.5" stop-color="var(--accent-on-navy)" stop-opacity="0.4"/>
+                  <stop offset="1" stop-color="var(--accent-on-navy)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <path class="detect__grid-line" d="M80 0V600 M160 0V600 M240 0V600 M320 0V600 M400 0V600 M480 0V600 M560 0V600 M640 0V600 M720 0V600 M800 0V600 M880 0V600 M0 80H960 M0 160H960 M0 240H960 M0 320H960 M0 400H960 M0 480H960 M0 560H960"/>
+
+              <path class="detect__channel" d="M556 600 C 540 512, 548 420, 576 340 C 596 282, 628 232, 664 200 C 640 236, 622 282, 610 336 C 596 400, 592 500, 604 600 Z"/>
+
+              <g>
+                <path class="detect__wave" d="M-10 250 Q 120 240 250 250 T 500 248" stroke-width="4"/>
+                <path class="detect__wave" d="M710 246 Q 820 238 940 246 T 990 244" stroke-width="4"/>
+                <path class="detect__wave" d="M-10 330 Q 130 318 270 330 T 520 326" stroke-width="5"/>
+                <path class="detect__wave" d="M700 322 Q 810 314 930 324 T 990 320" stroke-width="5"/>
+                <path class="detect__wave" d="M-10 414 Q 140 400 290 414 T 540 410" stroke-width="6"/>
+                <path class="detect__wave" d="M690 404 Q 800 394 928 406 T 990 402" stroke-width="6"/>
+                <path class="detect__wave" d="M-10 498 Q 150 484 310 498 T 560 494" stroke-width="7"/>
+                <path class="detect__wave" d="M676 488 Q 796 478 924 490 T 990 486" stroke-width="7"/>
+              </g>
+
+              <rect class="detect__scanline" data-detect-scan x="-120" y="0" width="120" height="600" fill="url(#detect-scan)"/>
+
+              <g class="detect__overlay" data-detect-overlay>
+                <path class="detect__fill" data-detect-fill d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
+                <path class="detect__outline" data-detect-outline d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
+                <path class="detect__flow" data-detect-flow d="M596 540 C 585 474, 592 406, 612 344 C 630 290, 658 242, 692 206"/>
+              </g>
+            </svg>
+
+            <div class="detect__hud">
+              <p class="detect__status" data-detect-status>
+                <span class="detect__status-dot"></span>
+                <span data-detect-status-text>Rip detected</span>
+              </p>
+              <p class="detect__chip" data-detect-chip>Confidence <span data-detect-conf>94</span>%</p>
+            </div>
+          </div>
+          <figcaption class="detect__caption">
+            Illustration of how a detection is shown in the app. This is a
+            diagram, not a real screenshot or a real result. In the app,
+            detections appear on the live camera view and always defer to the
+            flags and the lifeguards.
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -212,10 +238,10 @@
       <div class="site-footer__grid">
         <div class="site-footer__brand">
           <a class="brand" href="index.html" aria-label="RipCo, home">
-            <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="var(--accent)"/>
+          <path fill="var(--on-accent)" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
+          <path fill="var(--on-accent)" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
         </svg>
             <span class="brand__name">RipCo</span>
           </a>
@@ -233,7 +259,7 @@
           <h2>How it works</h2>
           <ul>
             <li><a href="how-it-works.html">The pipeline</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="account.html#faq">FAQ</a></li>
           </ul>
         </nav>
         <nav class="site-footer__col" aria-label="Safety">

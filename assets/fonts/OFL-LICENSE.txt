@@ -1,3 +1,7 @@
-Instrument Serif is licensed under the SIL Open Font License 1.1.
+Fraunces is licensed under the SIL Open Font License 1.1.
+(c) The Fraunces Project Authors (github.com/undercasetype/Fraunces).
+
+Inter is licensed under the SIL Open Font License 1.1.
+(c) The Inter Project Authors (github.com/rsms/inter).
+
 https://openfontlicense.org
-(c) The Instrument Serif Project Authors.
