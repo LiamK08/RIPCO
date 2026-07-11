@@ -1,8 +1,8 @@
 /* RipCo marketing site. Shared behaviour, vanilla JS, no dependencies.
-   Loaded on every page. Everything is guarded, so each module runs only
-   where its markup exists. The site is fully readable without JS:
-   nav wraps, reveal content is visible, the detection figure shows its
-   final state, and stats show their written values. */
+   Loaded on every page. Every module is guarded, so each runs only where
+   its markup exists. The site is fully readable without JS: nav wraps,
+   reveal content is visible, the detection diagram shows its final state,
+   stats show their written values and FAQ answers are open. */
 
 (function () {
   'use strict';
@@ -13,12 +13,11 @@
     if (typeof reducedMotion.addEventListener === 'function') reducedMotion.addEventListener('change', handler);
     else if (typeof reducedMotion.addListener === 'function') reducedMotion.addListener(handler);
   }
-  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
   var easeOutCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
 
   /* ====================================================================
-     Active navigation tab (headers are byte-identical across pages, so
-     the current tab is resolved at runtime from the URL)
+     Active navigation tab (headers are byte-identical, so the current
+     tab is resolved at runtime from the URL)
      ==================================================================== */
 
   (function () {
@@ -36,7 +35,7 @@
   })();
 
   /* ====================================================================
-     Header: scrolled state + scroll-progress cue
+     Header: scrolled hairline + scroll-progress cue
      ==================================================================== */
 
   (function () {
@@ -66,7 +65,7 @@
     var toggle = document.querySelector('[data-nav-toggle]');
     var nav = document.querySelector('[data-nav]');
     if (!toggle || !nav) return;
-    var desktop = window.matchMedia('(min-width: 52.0625em)');
+    var desktop = window.matchMedia('(min-width: 56.0625em)');
 
     var isOpen = function () { return document.body.classList.contains('nav-open'); };
     var setOpen = function (open) {
@@ -153,13 +152,10 @@
 
     pins.forEach(function (pin) {
       var steps = Array.prototype.slice.call(pin.querySelectorAll('[data-pin-step]'));
-      var panels = Array.prototype.slice.call(pin.querySelectorAll('[data-pin-panel]'));
       if (!steps.length) return;
 
       var setActive = function (index) {
         steps.forEach(function (s, i) { s.classList.toggle('is-active', i === index); });
-        panels.forEach(function (p, i) { p.classList.toggle('is-active', i === index); });
-        pin.setAttribute('data-active', String(index));
       };
       setActive(0);
 
@@ -177,10 +173,38 @@
   })();
 
   /* ====================================================================
+     FAQ accordion (accessible: buttons with aria-expanded + regions)
+     ==================================================================== */
+
+  (function () {
+    var accordions = Array.prototype.slice.call(document.querySelectorAll('[data-accordion]'));
+    if (!accordions.length) return;
+
+    accordions.forEach(function (acc) {
+      var buttons = Array.prototype.slice.call(acc.querySelectorAll('.faq__btn'));
+
+      var setExpanded = function (btn, expanded) {
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        var item = btn.closest('.faq__item');
+        if (item) item.classList.toggle('is-open', expanded);
+      };
+
+      buttons.forEach(function (btn, i) {
+        setExpanded(btn, i === 0); // first item open by default
+        btn.addEventListener('click', function () {
+          var isOpen = btn.getAttribute('aria-expanded') === 'true';
+          buttons.forEach(function (other) { setExpanded(other, false); });
+          setExpanded(btn, !isOpen);
+        });
+      });
+    });
+  })();
+
+  /* ====================================================================
      Detection illustration (how-it-works). Diagram only, never a result.
-     Loop: scan -> trace red outline -> confidence climbs -> hold -> reset.
-     Markup ships the detected state, so no-JS and reduced-motion users see
-     a complete, correct illustration.
+     Loop: scan, trace red outline, confidence climbs, hold, reset.
+     Markup ships the detected state, so no-JS and reduced-motion users
+     see a complete, correct illustration.
      ==================================================================== */
 
   (function () {
@@ -298,10 +322,10 @@
      ==================================================================== */
 
   (function () {
-    var imgs = Array.prototype.slice.call(document.querySelectorAll('.slot img, .device__screen img, .hero__bg img'));
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.slot img, .device__screen img, .hero__bg img, .page-hero__bg img'));
     imgs.forEach(function (img) {
       var mark = function () {
-        var host = img.closest('.slot') || img.closest('.device') || img.closest('.hero__bg');
+        var host = img.closest('.slot') || img.closest('.device') || img.closest('.hero__bg') || img.closest('.page-hero__bg');
         if (host) host.classList.add('is-empty');
       };
       if (img.complete && img.naturalWidth === 0) mark();

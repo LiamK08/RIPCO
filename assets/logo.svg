@@ -1,9 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="RipCo logo">
-  <!-- Coastline tokens: tile = color-surface #13273D, border = color-line-strong #315377,
-       wave = color-accent #55CBE0, undertow = color-accent-strong #7FDCEC at low opacity -->
-  <rect x="2" y="2" width="60" height="60" rx="15" fill="#13273D" stroke="#315377" stroke-width="2"/>
-  <path d="M13 36 C 19 26, 26 26, 31 33 C 36 40, 44 41, 51 31"
-        fill="none" stroke="#55CBE0" stroke-width="5" stroke-linecap="round"/>
-  <path d="M15 46 C 21 39, 28 39, 33 44 C 38 49, 45 49, 50 43"
-        fill="none" stroke="#7FDCEC" stroke-width="3.5" stroke-linecap="round" opacity="0.45"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="RipCo mark">
+  <!-- Coastline tokens: strokes = color-text #EDF3F9, accent arc = accent #54C9E4.
+       Nested wave arcs receding seaward: water pulling away from shore. -->
+  <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="#EDF3F9" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="#EDF3F9" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="#54C9E4" stroke-width="2.4" stroke-linecap="round"/>
 </svg>

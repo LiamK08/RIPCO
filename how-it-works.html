@@ -7,7 +7,7 @@
   <meta name="description" content="How RipCo detects rip currents: it reads existing public beach cameras, uses AI computer vision to identify rips, and shows them as a clear visual warning outlined in red with a confidence percentage.">
   <meta name="theme-color" content="#0E1E30">
   <meta property="og:title" content="How it works | RipCo">
-  <meta property="og:description" content="RipCo reads public beach cameras, identifies rips with computer vision, and shows a clear visual warning. An aid, not a guarantee.">
+  <meta property="og:description" content="How RipCo detects rip currents: it reads existing public beach cameras, uses AI computer vision to identify rips, and shows them as a clear visual warning outlined in red with a confidence percentage.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -27,7 +27,11 @@
     <div class="scroll-progress" data-progress aria-hidden="true"></div>
     <div class="site-header__inner container container--wide">
       <a class="brand" href="index.html" aria-label="RipCo, home">
-        <img class="brand__mark" src="assets/logo.svg" alt="" width="28" height="28">
+        <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
         <span class="brand__name">RipCo</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu" data-nav-toggle>
@@ -38,17 +42,12 @@
       </button>
       <nav class="site-nav" id="site-nav" aria-label="Primary" data-nav>
         <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="index.html" data-nav-link>Home</a></li>
-          <li><a class="site-nav__link" href="how-it-works.html" data-nav-link>How it works</a></li>
-          <li><a class="site-nav__link" href="features.html" data-nav-link>Features</a></li>
-          <li><a class="site-nav__link" href="beaches.html" data-nav-link>Beaches</a></li>
-          <li><a class="site-nav__link" href="safety.html" data-nav-link>Safety</a></li>
-          <li class="site-nav__cta-item">
-            <a class="btn btn--app site-nav__cta" href="#" aria-label="Download RipCo on the App Store">
-              <svg class="btn__apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-              <span class="btn__stack"><small>Download on the</small><b>App Store</b></span>
-            </a>
-          </li>
+          <li><a class="site-nav__link" href="index.html">Home</a></li>
+          <li><a class="site-nav__link" href="how-it-works.html">How it works</a></li>
+          <li><a class="site-nav__link" href="features.html">Features</a></li>
+          <li><a class="site-nav__link" href="beaches.html">Beaches</a></li>
+          <li><a class="site-nav__link" href="safety.html">Safety</a></li>
+          <li class="site-nav__cta-item"><a class="btn btn--primary site-nav__cta" href="account.html">Get early access</a></li>
         </ul>
       </nav>
     </div>
@@ -61,7 +60,7 @@
       <div class="container">
         <div class="page-hero__inner">
           <p class="eyebrow">How it works</p>
-          <h1 class="page-hero__title">From a public camera to a warning in your hand.</h1>
+          <h1 class="page-hero__title">From a public camera to a warning in your <em class="accent">hand</em>.</h1>
           <p class="page-hero__lead">
             RipCo does not need new cameras or new hardware. It reads feeds that
             already watch the water, identifies rip currents with computer vision,
@@ -89,13 +88,10 @@
                     </linearGradient>
                   </defs>
 
-                  <!-- diagram grid -->
                   <path class="detect__grid-line" d="M80 0V600 M160 0V600 M240 0V600 M320 0V600 M400 0V600 M480 0V600 M560 0V600 M640 0V600 M720 0V600 M800 0V600 M880 0V600 M0 80H960 M0 160H960 M0 240H960 M0 320H960 M0 400H960 M0 480H960 M0 560H960"/>
 
-                  <!-- schematic channel band -->
                   <path class="detect__channel" d="M556 600 C 540 512, 548 420, 576 340 C 596 282, 628 232, 664 200 C 640 236, 622 282, 610 336 C 596 400, 592 500, 604 600 Z"/>
 
-                  <!-- schematic wave lines with a gap over the channel -->
                   <g>
                     <path class="detect__wave" d="M-10 250 Q 120 240 250 250 T 500 248" stroke-width="4"/>
                     <path class="detect__wave" d="M710 246 Q 820 238 940 246 T 990 244" stroke-width="4"/>
@@ -107,10 +103,8 @@
                     <path class="detect__wave" d="M676 488 Q 796 478 924 490 T 990 486" stroke-width="7"/>
                   </g>
 
-                  <!-- scanning sweep -->
                   <rect class="detect__scanline" data-detect-scan x="-120" y="0" width="120" height="600" fill="url(#detect-scan)"/>
 
-                  <!-- detection overlay -->
                   <g class="detect__overlay" data-detect-overlay>
                     <path class="detect__fill" data-detect-fill d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
                     <path class="detect__outline" data-detect-outline d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
@@ -175,7 +169,7 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow eyebrow--alert">What it is, and what it is not</p>
-          <h2 class="section-title" id="aid-title">RipCo is an aid, not a guarantee.</h2>
+          <h2 class="section-title" id="aid-title">An aid, not a <em class="accent">guarantee</em>.</h2>
           <p class="section-lead">
             A confidence percentage is a reading, not a promise. No model is
             perfect, and RipCo is built to be honest about that.
@@ -201,13 +195,11 @@
     <!-- =============================== CTA ================================= -->
     <section class="cta" aria-labelledby="cta-title">
       <div class="container cta__inner">
-        <h2 class="cta__title" id="cta-title">See it on your beach.</h2>
-        <p class="cta__lead">Free on iPhone. Starting at Manly Beach and built to grow.</p>
+        <h2 class="cta__title" id="cta-title">See it on <em class="accent">your</em> beach.</h2>
+        <p class="cta__lead">RipCo is coming to the App Store. Join the early-access list and be first in at Manly Beach.</p>
         <div class="cta__actions">
-          <a class="btn btn--app btn--lg" href="#" aria-label="Download RipCo on the App Store">
-            <svg class="btn__apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-            <span class="btn__stack"><small>Download on the</small><b>App Store</b></span>
-          </a>
+          <a class="btn btn--primary btn--lg" href="account.html">Get early access</a>
+          <a class="btn btn--ghost btn--lg" href="how-it-works.html">See how it works</a>
         </div>
         <p class="cta__note">Whatever RipCo shows, swim between the red and yellow flags and follow the lifeguards.</p>
       </div>
@@ -220,23 +212,48 @@
       <div class="site-footer__grid">
         <div class="site-footer__brand">
           <a class="brand" href="index.html" aria-label="RipCo, home">
-            <img class="brand__mark" src="assets/logo.svg" alt="" width="26" height="26">
+            <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+          <path d="M5.5 24.5C10 19.5 22 19.5 26.5 24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M8.5 17.5C12 13.5 20 13.5 23.5 17.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M11.5 10.5C13.8 8 18.2 8 20.5 10.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
             <span class="brand__name">RipCo</span>
           </a>
           <p class="site-footer__line">Always swim between the red and yellow flags and follow the lifeguards. RipCo is an aid and not a substitute for lifeguard advice.</p>
         </div>
-        <nav class="site-footer__nav" aria-label="Footer">
+        <nav class="site-footer__col" aria-label="Product">
+          <h2>Product</h2>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="how-it-works.html">How it works</a></li>
             <li><a href="features.html">Features</a></li>
             <li><a href="beaches.html">Beaches</a></li>
-            <li><a href="safety.html">Safety</a></li>
+            <li><a href="account.html">Get early access</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__col" aria-label="How it works">
+          <h2>How it works</h2>
+          <ul>
+            <li><a href="how-it-works.html">The pipeline</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__col" aria-label="Safety">
+          <h2>Safety</h2>
+          <ul>
+            <li><a href="safety.html">Our commitment</a></li>
+            <li><a href="safety.html#caught">Caught in a rip</a></li>
+          </ul>
+        </nav>
+        <nav class="site-footer__col" aria-label="Official sources">
+          <h2>Official sources</h2>
+          <ul>
+            <li><a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">BeachSafe</a></li>
+            <li><a href="https://sls.com.au" target="_blank" rel="noopener noreferrer">Surf Life Saving Australia</a></li>
+            <li><a href="http://www.bom.gov.au" target="_blank" rel="noopener noreferrer">Bureau of Meteorology</a></li>
           </ul>
         </nav>
       </div>
       <div class="site-footer__base">
-        <p>© <span data-year>2026</span> RipCo</p>
+        <p>&copy; <span data-year>2026</span> RipCo</p>
         <p>Rip currents can appear even in calmer-looking water.</p>
       </div>
     </div>
