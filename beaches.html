@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Beaches | RipCo</title>
   <meta name="description" content="RipCo brings the authoritative beach-condition sources together in one place: BeachSafe, Surf Life Saving Australia and the Bureau of Meteorology. Starting at Manly Beach and built to scale.">
-  <meta name="theme-color" content="#FBF8F2">
+  <meta name="theme-color" content="#F7F3EA">
   <meta property="og:title" content="Beaches | RipCo">
   <meta property="og:description" content="RipCo brings the authoritative beach-condition sources together in one place: BeachSafe, Surf Life Saving Australia and the Bureau of Meteorology. Starting at Manly Beach and built to scale.">
   <meta property="og:type" content="website">
@@ -14,9 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="styles.css">
@@ -99,11 +99,11 @@
           </div>
           <div class="map-legend">
             <span class="map-legend__item">
-              <svg class="map-legend__pin" viewBox="0 0 30 40" aria-hidden="true" focusable="false"><path d="M15 1.5C7.8 1.5 2 7.2 2 14.3 2 24 15 38 15 38s13-14 13-23.7C28 7.2 22.2 1.5 15 1.5Z" fill="var(--accent-deep)" stroke="var(--paper)" stroke-width="2"/><circle cx="15" cy="14.5" r="5.4" fill="var(--paper)"/><circle cx="15" cy="14.5" r="2.6" fill="var(--accent-deep)"/></svg>
+              <svg class="map-legend__pin" viewBox="0 0 30 40" aria-hidden="true" focusable="false"><path d="M15 1.5C7.8 1.5 2 7.2 2 14.3 2 24 15 38 15 38s13-14 13-23.7C28 7.2 22.2 1.5 15 1.5Z" fill="var(--accent)" stroke="var(--paper-raised)" stroke-width="2"/><circle cx="15" cy="14.5" r="5.4" fill="var(--paper-raised)"/><circle cx="15" cy="14.5" r="2.6" fill="var(--accent)"/></svg>
               Live rip detection, Manly
             </span>
             <span class="map-legend__item">
-              <svg class="map-legend__pin" viewBox="0 0 26 35" aria-hidden="true" focusable="false"><path d="M13 1.5C6.9 1.5 2 6.4 2 12.4 2 20.8 13 33 13 33s11-12.2 11-20.6C24 6.4 19.1 1.5 13 1.5Z" fill="var(--paper)" stroke="var(--accent-deep)" stroke-width="2"/><circle cx="13" cy="12.6" r="3.4" fill="var(--accent-deep)"/></svg>
+              <svg class="map-legend__pin" viewBox="0 0 26 35" aria-hidden="true" focusable="false"><path d="M13 1.5C6.9 1.5 2 6.4 2 12.4 2 20.8 13 33 13 33s11-12.2 11-20.6C24 6.4 19.1 1.5 13 1.5Z" fill="var(--paper-raised)" stroke="var(--accent)" stroke-width="2"/><circle cx="13" cy="12.6" r="3.4" fill="var(--accent)"/></svg>
               Conditions only
             </span>
             <span class="map-legend__note">Live conditions from Open-Meteo public data</span>
@@ -179,7 +179,7 @@
     </section>
 
     <!-- ============================ THE SOURCES =========================== -->
-    <section class="section section--tint" aria-labelledby="authorities-title">
+    <section class="band" aria-labelledby="authorities-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">The authorities</p>
@@ -194,7 +194,7 @@
         <div class="sources stagger">
           <a class="source-card reveal" href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">
             <h3 class="source-card__title">BeachSafe</h3>
-            <p class="source-card__body">Surf Life Saving Australia's public guide to beaches, patrol information, flags and hazards.</p>
+            <p class="source-card__body">Surf Life Saving Australia&rsquo;s public guide to beaches, patrol information, flags and hazards.</p>
             <span class="source-card__from">beachsafe.org.au <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
           </a>
           <a class="source-card reveal" href="https://sls.com.au" target="_blank" rel="noopener noreferrer">
@@ -204,7 +204,7 @@
           </a>
           <a class="source-card reveal" href="http://www.bom.gov.au" target="_blank" rel="noopener noreferrer">
             <h3 class="source-card__title">Bureau of Meteorology</h3>
-            <p class="source-card__body">Australia's national weather, tide, swell and marine forecasting service.</p>
+            <p class="source-card__body">Australia&rsquo;s national weather, tide, swell and marine forecasting service.</p>
             <span class="source-card__from">bom.gov.au <span class="source-card__arrow" aria-hidden="true">&rarr;</span></span>
           </a>
         </div>

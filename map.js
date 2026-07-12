@@ -160,14 +160,14 @@
   function pinSvg(live) {
     if (live) {
       return '<svg viewBox="0 0 30 40" width="30" height="40" aria-hidden="true" focusable="false">' +
-        '<path d="M15 1.5C7.8 1.5 2 7.2 2 14.3 2 24 15 38 15 38s13-14 13-23.7C28 7.2 22.2 1.5 15 1.5Z" fill="var(--accent-deep)" stroke="var(--paper)" stroke-width="2"/>' +
-        '<circle cx="15" cy="14.5" r="5.4" fill="var(--paper)"/>' +
-        '<circle cx="15" cy="14.5" r="2.6" fill="var(--accent-deep)"/>' +
+        '<path d="M15 1.5C7.8 1.5 2 7.2 2 14.3 2 24 15 38 15 38s13-14 13-23.7C28 7.2 22.2 1.5 15 1.5Z" fill="var(--accent)" stroke="var(--paper-raised)" stroke-width="2"/>' +
+        '<circle cx="15" cy="14.5" r="5.4" fill="var(--paper-raised)"/>' +
+        '<circle cx="15" cy="14.5" r="2.6" fill="var(--accent)"/>' +
         '</svg>';
     }
     return '<svg viewBox="0 0 26 35" width="26" height="35" aria-hidden="true" focusable="false">' +
-      '<path d="M13 1.5C6.9 1.5 2 6.4 2 12.4 2 20.8 13 33 13 33s11-12.2 11-20.6C24 6.4 19.1 1.5 13 1.5Z" fill="var(--paper)" stroke="var(--accent-deep)" stroke-width="2"/>' +
-      '<circle cx="13" cy="12.6" r="3.4" fill="var(--accent-deep)"/>' +
+      '<path d="M13 1.5C6.9 1.5 2 6.4 2 12.4 2 20.8 13 33 13 33s11-12.2 11-20.6C24 6.4 19.1 1.5 13 1.5Z" fill="var(--paper-raised)" stroke="var(--accent)" stroke-width="2"/>' +
+      '<circle cx="13" cy="12.6" r="3.4" fill="var(--accent)"/>' +
       '</svg>';
   }
 
