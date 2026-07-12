@@ -1685,6 +1685,13 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   background: var(--sand);
 }
 
+/* Honest recency line under the stats grid */
+.map-asat {
+  margin: var(--space-2) 0 0;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+
 /* Locked, app-only safety read. A lock and abstract shimmer bars only,
    never a number, colour rating or anything that could read as a value. */
 .map-locked {
@@ -1757,6 +1764,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 }
 .map-legend__pin { width: 0.85rem; height: auto; flex: none; }
 .map-legend__note { margin-left: auto; font-size: 0.8rem; color: var(--ink-faint); }
+.map-legend__note a { color: inherit; text-underline-offset: 2px; }
 @media (max-width: 48em) { .map-legend__note { margin-left: 0; width: 100%; } }
 
 /* Map motion, fully disabled under reduced motion */

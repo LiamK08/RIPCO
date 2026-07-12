@@ -16,10 +16,9 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="script.js" defer></script>
 </head>
 <body id="top">
 
@@ -82,7 +81,7 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/feature-safety-brief.png" alt="RipCo&rsquo;s AI Safety Brief screen summarising the conditions at a beach in plain English" loading="lazy" width="390" height="844">
+                <img src="assets/feature-safety-brief.png" alt="RipCo&rsquo;s AI Safety Brief screen summarising the conditions at a beach in plain English" loading="lazy" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>
@@ -98,7 +97,7 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/feature-live-camera.png" alt="RipCo&rsquo;s live camera view with a rip current outlined in red and a confidence percentage" loading="lazy" width="390" height="844">
+                <img src="assets/feature-live-camera.png" alt="RipCo&rsquo;s live camera view with a rip current outlined in red and a confidence percentage" loading="lazy" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>
@@ -114,7 +113,7 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/feature-conditions.png" alt="RipCo&rsquo;s Marine Conditions screen showing wind, swell, tide and water temperature" loading="lazy" width="390" height="844">
+                <img src="assets/feature-conditions.png" alt="RipCo&rsquo;s Marine Conditions screen showing wind, swell, tide and water temperature" loading="lazy" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>
@@ -130,7 +129,7 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/feature-shark-watch.png" alt="RipCo&rsquo;s Shark Watch screen showing community-reported hazard sightings" loading="lazy" width="390" height="844">
+                <img src="assets/feature-shark-watch.png" alt="RipCo&rsquo;s Shark Watch screen showing community-reported hazard sightings" loading="lazy" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>
@@ -146,7 +145,7 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/feature-ask-ripco.png" alt="RipCo&rsquo;s Ask RipCo assistant answering a beach-safety question in a chat" loading="lazy" width="390" height="844">
+                <img src="assets/feature-ask-ripco.png" alt="RipCo&rsquo;s Ask RipCo assistant answering a beach-safety question in a chat" loading="lazy" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>

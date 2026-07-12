@@ -16,10 +16,9 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="script.js" defer></script>
 </head>
 <body id="top">
 
@@ -73,7 +72,7 @@
         </div>
         <figure class="photo-figure page-hero__photo reveal">
           <div class="slot slot--wide" data-label="Photo">
-            <img src="assets/beach-2.jpg" alt="Lifeguard flags standing on the sand of an Australian beach as waves roll in behind them" loading="lazy" width="2100" height="900">
+            <img src="assets/beach-2.jpg" alt="Lifeguard flags standing on the sand of an Australian beach as waves roll in behind them" loading="lazy" width="2100" height="900" decoding="async">
           </div>
         </figure>
       </div>

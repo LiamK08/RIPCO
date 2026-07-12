@@ -16,11 +16,10 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
-  <script type="module" src="auth.js"></script>
+  <script src="script.js" defer></script>
+  <script src="auth.js" defer></script>
 </head>
 <body id="top">
 
@@ -114,6 +113,10 @@
                 <div class="field">
                   <label class="field__label" for="auth-email">Email address</label>
                   <input class="field__input" id="auth-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" data-auth-email>
+                </div>
+                <div class="visually-hidden" aria-hidden="true">
+                  <label for="auth-company-site">Leave this field empty</label>
+                  <input id="auth-company-site" name="company_site" type="text" tabindex="-1" autocomplete="off" data-auth-hp>
                 </div>
                 <p class="auth-msg" data-auth-message hidden></p>
                 <button class="btn btn--primary" type="submit" data-auth-submit>Request early access</button>

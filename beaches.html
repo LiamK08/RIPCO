@@ -16,11 +16,10 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="script.js" defer></script>
   <script src="assets/vendor/leaflet/leaflet.js" defer></script>
   <script src="map.js" defer></script>
 </head>
@@ -106,7 +105,7 @@
               <svg class="map-legend__pin" viewBox="0 0 26 35" aria-hidden="true" focusable="false"><path d="M13 1.5C6.9 1.5 2 6.4 2 12.4 2 20.8 13 33 13 33s11-12.2 11-20.6C24 6.4 19.1 1.5 13 1.5Z" fill="var(--paper-raised)" stroke="var(--accent)" stroke-width="2"/><circle cx="13" cy="12.6" r="3.4" fill="var(--accent)"/></svg>
               Conditions only
             </span>
-            <span class="map-legend__note">Live conditions from Open-Meteo public data</span>
+            <span class="map-legend__note">Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo.com</a> under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></span>
           </div>
         </div>
       </div>
@@ -211,7 +210,7 @@
 
         <figure class="photo-figure reveal page-hero__photo">
           <div class="slot slot--wide" data-label="Photo">
-            <img src="assets/beach-1.jpg" alt="A wide view of an Australian surf beach with waves breaking along the shoreline" loading="lazy" width="2100" height="900">
+            <img src="assets/beach-1.jpg" alt="A wide view of an Australian surf beach with waves breaking along the shoreline" loading="lazy" width="2100" height="900" decoding="async">
           </div>
         </figure>
 

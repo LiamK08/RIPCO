@@ -45,15 +45,33 @@
     { id: 'cronulla',       name: 'Cronulla Beach', lat: -34.0546, lng: 151.1533, live: false }
   ];
 
-  var TILE_URL = 'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-  var TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>';
+  /* --------------------------------------------------------------
+     Tiles. CARTO's keyless light basemap is the interim provider and
+     acceptable at launch scale with attribution. The durable answer
+     is a keyed free tier: create a key at cloud.maptiler.com, paste
+     it into MAPTILER_KEY below, then in the MapTiler dashboard open
+     API keys, select the key, and add your production domain under
+     Allowed HTTP origins so the key works nowhere else.
+     -------------------------------------------------------------- */
+  var MAPTILER_KEY = '';
+  var TILE_URL = MAPTILER_KEY
+    ? 'https://api.maptiler.com/maps/dataviz-light/256/{z}/{x}/{y}.png?key=' + MAPTILER_KEY
+    : 'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  var TILE_ATTRIBUTION = (MAPTILER_KEY
+    ? '&copy; <a href="https://www.maptiler.com/copyright/" target="_blank" rel="noopener noreferrer">MapTiler</a> '
+    : '&copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a> ')
+    + '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors';
 
   var mapEl = document.getElementById('beach-map');
   if (!mapEl) return;
 
   /* Honest failure if the vendored Leaflet did not load */
   if (typeof L === 'undefined') {
-    mapEl.innerHTML = '<p class="map-fallback">The interactive map could not load. Every beach and official source is listed below.</p>';
+    var fallbackMsg = document.createElement('p');
+    fallbackMsg.className = 'map-fallback';
+    fallbackMsg.textContent = 'The interactive map could not load. Every beach and official source is listed below.';
+    mapEl.textContent = '';
+    mapEl.appendChild(fallbackMsg);
     return;
   }
 
@@ -66,7 +84,7 @@
      cannot be loaded is shown as "Unavailable", never invented.
      ================================================================ */
 
-  var conditions = { status: 'pending', byId: {} };
+  var conditions = { status: 'pending', byId: {}, fetchedAt: null, stale: false };
   var COMPASS = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
 
   function compass(deg) {
@@ -82,7 +100,38 @@
     return [];
   }
 
-  function fetchConditions() {
+  function getJson(url, timeoutMs) {
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, timeoutMs);
+    return fetch(url, { signal: controller.signal })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .finally(function () { clearTimeout(timer); });
+  }
+
+  /* Primary path: the site's own cached proxy, one request for every
+     beach, so visitors do not hit Open-Meteo directly at all. */
+  function fetchViaProxy() {
+    return getJson('/api/conditions', 8000).then(function (json) {
+      if (!json || json.error || !json.beaches) throw new Error('proxy error');
+      BEACHES.forEach(function (beach) {
+        var c = json.beaches[beach.id] || {};
+        conditions.byId[beach.id] = {
+          airC: num(c.airC), windKmh: num(c.windKmh), windDeg: num(c.windDeg),
+          waterC: num(c.waterC), waveM: num(c.waveM), waveS: num(c.waveS)
+        };
+      });
+      conditions.fetchedAt = json.fetchedAt || null;
+      conditions.stale = !!json.stale;
+    });
+  }
+
+  /* Second path: direct Open-Meteo from the visitor's own IP, used only
+     if the proxy fails (for example a shared-IP rate limit on the edge).
+     Same two batched requests the site has always made. */
+  function fetchDirect() {
     var lats = BEACHES.map(function (b) { return b.lat; }).join(',');
     var lngs = BEACHES.map(function (b) { return b.lng; }).join(',');
 
@@ -95,18 +144,9 @@
       '&current=sea_surface_temperature,wave_height,wave_period' +
       '&timezone=Australia%2FSydney';
 
-    var getJson = function (url) {
-      return fetch(url).then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      });
-    };
-
-    /* Each request settles independently, so one failing source never
-       hides real data from the other. */
     return Promise.all([
-      getJson(forecastUrl).catch(function () { return null; }),
-      getJson(marineUrl).catch(function () { return null; })
+      getJson(forecastUrl, 8000).catch(function () { return null; }),
+      getJson(marineUrl, 8000).catch(function () { return null; })
     ]).then(function (results) {
       var forecast = toList(results[0]);
       var marine = toList(results[1]);
@@ -122,9 +162,22 @@
           waveS: num(m.wave_period)
         };
       });
-      conditions.status = 'ready';
+      if (forecast.length || marine.length) {
+        conditions.fetchedAt = new Date().toISOString();
+      }
+    });
+  }
+
+  function fetchConditions() {
+    return fetchViaProxy().catch(function () {
+      /* Not an error for the visitor: the direct path is a clean second
+         route because Open-Meteo limits by IP and theirs is unused. */
+      console.warn('RipCo map: conditions proxy unavailable, using direct Open-Meteo fallback.');
+      return fetchDirect();
     }).catch(function () {
-      conditions.status = 'ready'; /* per-stat values stay null: Unavailable */
+      /* Both paths failed: values stay null and render as Unavailable. */
+    }).then(function () {
+      conditions.status = 'ready';
     });
   }
 
@@ -140,7 +193,11 @@
     fadeAnimation: !prefersReducedMotion(),
     markerZoomAnimation: !prefersReducedMotion(),
     minZoom: 9,
-    maxZoom: 16
+    maxZoom: 16,
+    /* Sydney coastline only: no panning the world and pulling tiles
+       the site does not need. */
+    maxBounds: L.latLngBounds([-34.45, 150.45], [-33.20, 151.95]),
+    maxBoundsViscosity: 1.0
   });
   map.attributionControl.setPrefix(false);
 
@@ -148,7 +205,10 @@
     attribution: TILE_ATTRIBUTION,
     subdomains: 'abcd',
     detectRetina: false,
-    crossOrigin: true
+    crossOrigin: true,
+    /* Tile providers block requests with a stripped Referer, so make
+       sure one is sent. */
+    referrerPolicy: 'strict-origin-when-cross-origin'
   }).addTo(map);
 
   var bounds = L.latLngBounds(BEACHES.map(function (b) { return [b.lat, b.lng]; }));
@@ -198,13 +258,13 @@
   var STATS = [
     {
       key: 'airC', label: 'Air temp',
-      icon: '<path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0z"/><path d="M12 13.5V9"/>',
+      icon: [{ t: 'path', a: { d: 'M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0z' } }, { t: 'path', a: { d: 'M12 13.5V9' } }],
       format: function (c) { return Math.round(c.airC) + '\u00A0°C'; },
       has: function (c) { return c.airC !== null; }
     },
     {
       key: 'windKmh', label: 'Wind',
-      icon: '<path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 12h15a3 3 0 1 1-3 3"/><path d="M3 16h9a2.5 2.5 0 1 1-2.5 2.5"/>',
+      icon: [{ t: 'path', a: { d: 'M3 8h11a3 3 0 1 0-3-3' } }, { t: 'path', a: { d: 'M3 12h15a3 3 0 1 1-3 3' } }, { t: 'path', a: { d: 'M3 16h9a2.5 2.5 0 1 1-2.5 2.5' } }],
       format: function (c) {
         var dir = c.windDeg !== null ? ' ' + compass(c.windDeg) : '';
         return Math.round(c.windKmh) + '\u00A0km/h' + dir;
@@ -213,13 +273,13 @@
     },
     {
       key: 'waterC', label: 'Water temp',
-      icon: '<path d="M12 3.5C12 3.5 6.5 10 6.5 14.5a5.5 5.5 0 0 0 11 0C17.5 10 12 3.5 12 3.5Z"/>',
+      icon: [{ t: 'path', a: { d: 'M12 3.5C12 3.5 6.5 10 6.5 14.5a5.5 5.5 0 0 0 11 0C17.5 10 12 3.5 12 3.5Z' } }],
       format: function (c) { return Math.round(c.waterC) + '\u00A0°C'; },
       has: function (c) { return c.waterC !== null; }
     },
     {
       key: 'waveM', label: 'Swell',
-      icon: '<path d="M2 14c1.8-1.5 3.6-2.3 5.4-2.3S11 12.5 12 14s3.6 2.3 5.4 2.3S21 15.5 22 14"/><path d="M2 8c1.8-1.5 3.6-2.3 5.4-2.3S11 6.5 12 8"/>',
+      icon: [{ t: 'path', a: { d: 'M2 14c1.8-1.5 3.6-2.3 5.4-2.3S11 12.5 12 14s3.6 2.3 5.4 2.3S21 15.5 22 14' } }, { t: 'path', a: { d: 'M2 8c1.8-1.5 3.6-2.3 5.4-2.3S11 6.5 12 8' } }],
       format: function (c) {
         var v = (Math.round(c.waveM * 10) / 10).toFixed(1) + '\u00A0m';
         if (c.waveS !== null) v += ' at ' + Math.round(c.waveS) + '\u00A0s';
@@ -229,63 +289,141 @@
     }
   ];
 
-  function statValueHtml(beach, stat) {
+  /* All panel content is built with DOM APIs and textContent. No dynamic
+     string ever reaches innerHTML. */
+
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined && text !== null) node.textContent = text;
+    return node;
+  }
+
+  function svgIcon(shapes, strokeWidth) {
+    var svg = document.createElementNS(SVG_NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', String(strokeWidth || 1.6));
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true');
+    shapes.forEach(function (shape) {
+      var node = document.createElementNS(SVG_NS, shape.t);
+      Object.keys(shape.a).forEach(function (k) { node.setAttribute(k, shape.a[k]); });
+      svg.appendChild(node);
+    });
+    return svg;
+  }
+
+  var statCells = {};
+  var asAtLine = null;
+
+  function fillStatCell(cell, beach, stat) {
+    cell.textContent = '';
     if (conditions.status === 'pending') {
-      return '<span class="map-skel" aria-hidden="true"></span><span class="visually-hidden">Loading</span>';
+      var skel = el('span', 'map-skel');
+      skel.setAttribute('aria-hidden', 'true');
+      cell.appendChild(skel);
+      cell.appendChild(el('span', 'visually-hidden', 'Loading'));
+      return;
     }
     var c = conditions.byId[beach.id];
     if (c && stat.has(c)) {
-      var span = document.createElement('span');
-      span.textContent = stat.format(c);
-      return span.outerHTML;
+      cell.appendChild(el('span', null, stat.format(c)));
+    } else {
+      cell.appendChild(el('span', 'map-stat__na', 'Unavailable'));
     }
-    return '<span class="map-stat__na">Unavailable</span>';
+  }
+
+  function asAtText() {
+    if (!conditions.fetchedAt) return '';
+    var d = new Date(conditions.fetchedAt);
+    if (isNaN(d.getTime())) return '';
+    var hh = String(d.getHours()); if (hh.length < 2) hh = '0' + hh;
+    var mm = String(d.getMinutes()); if (mm.length < 2) mm = '0' + mm;
+    return 'Conditions as at ' + hh + ':' + mm;
+  }
+
+  function updateAsAt() {
+    if (!asAtLine) return;
+    var text = asAtText();
+    asAtLine.textContent = text;
+    asAtLine.hidden = !text;
   }
 
   function renderPanel(beach) {
-    var tag = beach.live
-      ? '<span class="map-tag map-tag--live">Live</span>'
-      : '<span class="map-tag">Conditions only</span>';
-    var lockedLine = beach.live
-      ? 'RipCo reads this beach live in the app.'
-      : 'Detection is rolling out beach by beach.';
+    panel.textContent = '';
+    statCells = {};
 
-    var statsHtml = STATS.map(function (stat) {
-      return '<div class="map-stat">' +
-        '<span class="map-stat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + stat.icon + '</svg></span>' +
-        '<span class="map-stat__label">' + stat.label + '</span>' +
-        '<span class="map-stat__value" data-stat="' + stat.key + '">' + statValueHtml(beach, stat) + '</span>' +
-        '</div>';
-    }).join('');
+    var head = el('div', 'map-panel__head');
+    head.appendChild(el('h3', 'map-panel__name', beach.name));
+    head.appendChild(el('span', beach.live ? 'map-tag map-tag--live' : 'map-tag',
+      beach.live ? 'Live' : 'Conditions only'));
+    var closeBtn = el('button', 'map-panel__close');
+    closeBtn.type = 'button';
+    closeBtn.setAttribute('aria-label', 'Close beach details');
+    closeBtn.appendChild(svgIcon([{ t: 'path', a: { d: 'm6 6 12 12M18 6 6 18' } }], 2));
+    closeBtn.addEventListener('click', closePanel);
+    head.appendChild(closeBtn);
+    panel.appendChild(head);
 
-    panel.innerHTML =
-      '<div class="map-panel__head">' +
-        '<h3 class="map-panel__name">' + beach.name + '</h3>' +
-        tag +
-        '<button class="map-panel__close" type="button" aria-label="Close beach details" data-map-close>' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>' +
-        '</button>' +
-      '</div>' +
-      '<div class="map-panel__stats">' + statsHtml + '</div>' +
-      '<div class="map-locked">' +
-        '<div class="map-locked__head">' +
-          '<span class="map-locked__lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></span>' +
-          '<h4 class="map-locked__title">RipCo’s safety read</h4>' +
-        '</div>' +
-        '<div class="map-locked__shimmer" aria-hidden="true"><span></span><span></span><span></span></div>' +
-        '<p class="map-locked__body">' + lockedLine + ' Rip detection, confidence and the safety colour are read in the app, and never guessed here. Always swim between the red and yellow flags.</p>' +
-        '<a class="btn btn--primary map-locked__cta" href="account.html">Get early access</a>' +
-      '</div>';
+    var grid = el('div', 'map-panel__stats');
+    STATS.forEach(function (stat) {
+      var box = el('div', 'map-stat');
+      var icon = el('span', 'map-stat__icon');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.appendChild(svgIcon(stat.icon));
+      box.appendChild(icon);
+      box.appendChild(el('span', 'map-stat__label', stat.label));
+      var value = el('span', 'map-stat__value');
+      fillStatCell(value, beach, stat);
+      statCells[stat.key] = value;
+      box.appendChild(value);
+      grid.appendChild(box);
+    });
+    panel.appendChild(grid);
 
-    panel.querySelector('[data-map-close]').addEventListener('click', closePanel);
+    asAtLine = el('p', 'map-asat');
+    panel.appendChild(asAtLine);
+    updateAsAt();
+
+    var locked = el('div', 'map-locked');
+    var lockedHead = el('div', 'map-locked__head');
+    var lock = el('span', 'map-locked__lock');
+    lock.setAttribute('aria-hidden', 'true');
+    lock.appendChild(svgIcon([
+      { t: 'rect', a: { x: '5', y: '10.5', width: '14', height: '9.5', rx: '2.5' } },
+      { t: 'path', a: { d: 'M8 10.5V8a4 4 0 0 1 8 0v2.5' } }
+    ], 1.8));
+    lockedHead.appendChild(lock);
+    lockedHead.appendChild(el('h4', 'map-locked__title', 'RipCo\u2019s safety read'));
+    locked.appendChild(lockedHead);
+
+    var shimmer = el('div', 'map-locked__shimmer');
+    shimmer.setAttribute('aria-hidden', 'true');
+    for (var s = 0; s < 3; s++) shimmer.appendChild(el('span'));
+    locked.appendChild(shimmer);
+
+    locked.appendChild(el('p', 'map-locked__body',
+      (beach.live ? 'RipCo reads this beach live in the app.' : 'Detection is rolling out beach by beach.') +
+      ' Rip detection, confidence and the safety colour are read in the app, and never guessed here. Always swim between the red and yellow flags.'));
+
+    var cta = el('a', 'btn btn--primary map-locked__cta', 'Get early access');
+    cta.href = 'account.html';
+    locked.appendChild(cta);
+    panel.appendChild(locked);
   }
 
   function refreshOpenStats() {
     if (!openBeach || panel.hidden) return;
     STATS.forEach(function (stat) {
-      var cell = panel.querySelector('[data-stat="' + stat.key + '"]');
-      if (cell) cell.innerHTML = statValueHtml(openBeach, stat);
+      var cell = statCells[stat.key];
+      if (cell) fillStatCell(cell, openBeach, stat);
     });
+    updateAsAt();
   }
 
   function openPanel(beach, trigger) {
