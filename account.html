@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Get early access | RipCo</title>
   <meta name="description" content="Join the RipCo early-access list. RipCo is coming to the App Store, starting at Manly Beach. An aid for beachgoers, never a substitute for lifeguards and flags.">
-  <meta name="theme-color" content="#FBF8F2">
+  <meta name="theme-color" content="#F7F3EA">
   <meta property="og:title" content="Get early access | RipCo">
   <meta property="og:description" content="Join the RipCo early-access list. RipCo is coming to the App Store, starting at Manly Beach. An aid for beachgoers, never a substitute for lifeguards and flags.">
   <meta property="og:type" content="website">
@@ -14,13 +14,12 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
-  <script type="module" src="auth.js"></script>
+  <script src="script.js" defer></script>
+  <script src="auth.js" defer></script>
 </head>
 <body id="top">
 
@@ -115,6 +114,10 @@
                   <label class="field__label" for="auth-email">Email address</label>
                   <input class="field__input" id="auth-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" data-auth-email>
                 </div>
+                <div class="visually-hidden" aria-hidden="true">
+                  <label for="auth-company-site">Leave this field empty</label>
+                  <input id="auth-company-site" name="company_site" type="text" tabindex="-1" autocomplete="off" data-auth-hp>
+                </div>
                 <p class="auth-msg" data-auth-message hidden></p>
                 <button class="btn btn--primary" type="submit" data-auth-submit>Request early access</button>
               </form>
@@ -129,7 +132,7 @@
             </div>
 
             <div data-auth-state="account">
-              <h2 class="auth-card__title">You're on the RipCo early-access list.</h2>
+              <h2 class="auth-card__title">You&rsquo;re on the RipCo early-access list.</h2>
               <p class="auth-account__email" data-auth-account-email></p>
               <p class="auth-account__status">
                 We will email you when RipCo goes live at Manly Beach. Until then
@@ -144,7 +147,7 @@
     </section>
 
     <!-- ================================ FAQ ================================ -->
-    <section class="section section--tint" id="faq" aria-labelledby="faq-title">
+    <section class="band" id="faq" aria-labelledby="faq-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">FAQ</p>

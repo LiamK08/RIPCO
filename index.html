@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RipCo: AI rip current detection for iPhone</title>
   <meta name="description" content="RipCo runs computer vision on existing public beach cameras to detect rip currents in real time and show them as a clear visual warning. An aid for beachgoers, never a substitute for lifeguards and flags.">
-  <meta name="theme-color" content="#FBF8F2">
+  <meta name="theme-color" content="#F7F3EA">
   <meta property="og:title" content="RipCo: AI rip current detection for iPhone">
   <meta property="og:description" content="RipCo runs computer vision on existing public beach cameras to detect rip currents in real time and show them as a clear visual warning. An aid for beachgoers, never a substitute for lifeguards and flags.">
   <meta property="og:type" content="website">
@@ -14,12 +14,12 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/app-detection.png" as="image">
+  <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="script.js" defer></script>
 </head>
 <body id="top">
 
@@ -84,7 +84,7 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/app-detection.png" alt="RipCo showing a detected rip current outlined in red on a live beach camera view, with a confidence percentage" loading="eager" width="390" height="844">
+                <img src="assets/app-detection.png" alt="RipCo showing a detected rip current outlined in red on a live beach camera view, with a confidence percentage" loading="eager" fetchpriority="high" width="390" height="844" decoding="async">
               </div>
             </div>
             <p class="panel__caption">The detection view in the app</p>
@@ -98,7 +98,7 @@
       <div class="container container--wide">
         <figure class="photo-figure reveal">
           <div class="slot slot--wide" data-label="Photo">
-            <img src="assets/hero-beach.jpg" alt="A bright, sunny morning at an Australian surf beach, with waves breaking along the sand" loading="lazy" width="2100" height="900">
+            <img src="assets/hero-beach.jpg" alt="A bright, sunny morning at an Australian surf beach, with waves breaking along the sand" loading="lazy" width="2100" height="900" decoding="async">
           </div>
         </figure>
       </div>
@@ -201,7 +201,7 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/app-detection.png" alt="RipCo app showing the live camera view with a rip current outlined in red" loading="lazy" width="390" height="844">
+                <img src="assets/app-detection.png" alt="RipCo app showing the live camera view with a rip current outlined in red" loading="lazy" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>

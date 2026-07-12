@@ -1,0 +1,2 @@
+supabase-js v2.110.2 UMD browser bundle, vendored from the npm registry.
+Source: https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.110.2.tgz
