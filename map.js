@@ -192,11 +192,12 @@
     zoomAnimation: !prefersReducedMotion(),
     fadeAnimation: !prefersReducedMotion(),
     markerZoomAnimation: !prefersReducedMotion(),
-    minZoom: 9,
+    minZoom: 10,
     maxZoom: 16,
-    /* Sydney coastline only: no panning the world and pulling tiles
-       the site does not need. */
-    maxBounds: L.latLngBounds([-34.45, 150.45], [-33.20, 151.95]),
+    /* Sydney coastline only: tight enough that inland suburbs never
+       dominate the frame, and no tiles are pulled that the site does
+       not need. */
+    maxBounds: L.latLngBounds([-34.30, 150.90], [-33.35, 151.75]),
     maxBoundsViscosity: 1.0
   });
   map.attributionControl.setPrefix(false);
@@ -211,8 +212,13 @@
     referrerPolicy: 'strict-origin-when-cross-origin'
   }).addTo(map);
 
-  var bounds = L.latLngBounds(BEACHES.map(function (b) { return [b.lat, b.lng]; }));
-  map.fitBounds(bounds, { padding: [36, 36], animate: false });
+  /* Fit tight to the coastline, Palm Beach to Cronulla. The eastern
+     edge extends into the sea so the coast fills the frame instead of
+     the inland suburbs. */
+  map.fitBounds(L.latLngBounds([-34.075, 151.13], [-33.575, 151.52]), {
+    padding: [12, 12],
+    animate: false
+  });
 
   /* Neutral brand-blue pins. The live-detection beach gets a filled,
      ringed variant with a permanent "Live" label. Never a safety colour. */
@@ -231,12 +237,36 @@
       '</svg>';
   }
 
-  function makeIcon(beach) {
+  /* Pins in tight north-south chains overlap at low zoom, so members
+     of each chain fan a few pixels east in rotation. The offset is
+     dropped once the visitor zooms in far enough for the pins to
+     separate naturally. The live pin never shifts, because its
+     permanent label is anchored to the true position. */
+  var SPREAD_MAX_ZOOM = 12;
+  var SPREAD_STEP_PX = 14;
+  (function assignSpread() {
+    var chain = 0;
+    for (var i = 0; i < BEACHES.length; i++) {
+      if (i > 0 && Math.abs(BEACHES[i].lat - BEACHES[i - 1].lat) < 0.024 &&
+          Math.abs(BEACHES[i].lng - BEACHES[i - 1].lng) < 0.05) {
+        chain += 1;
+      } else {
+        chain = 0;
+      }
+      BEACHES[i].spread = BEACHES[i].live ? 0 : (chain % 3) * SPREAD_STEP_PX;
+    }
+  })();
+
+  function currentSpread(beach) {
+    return map.getZoom() <= SPREAD_MAX_ZOOM ? beach.spread : 0;
+  }
+
+  function makeIcon(beach, spreadPx) {
     return L.divIcon({
       className: 'map-pin' + (beach.live ? ' map-pin--live' : ''),
       html: pinSvg(beach.live),
       iconSize: beach.live ? [30, 40] : [26, 35],
-      iconAnchor: beach.live ? [15, 38] : [13, 33]
+      iconAnchor: [(beach.live ? 15 : 13) - (spreadPx || 0), beach.live ? 38 : 33]
     });
   }
 
@@ -412,7 +442,7 @@
       ' Rip detection, confidence and the safety colour are read in the app, and never guessed here. Always swim between the red and yellow flags.'));
 
     var cta = el('a', 'btn btn--primary map-locked__cta', 'Get early access');
-    cta.href = 'account.html';
+    cta.href = '/account';
     locked.appendChild(cta);
     panel.appendChild(locked);
   }
@@ -448,9 +478,11 @@
      Markers
      ================================================================ */
 
+  var markerRefs = [];
+
   BEACHES.forEach(function (beach) {
     var marker = L.marker([beach.lat, beach.lng], {
-      icon: makeIcon(beach),
+      icon: makeIcon(beach, currentSpread(beach)),
       keyboard: true,
       riseOnHover: true,
       title: beach.name + (beach.live ? ', live rip detection in the app' : ', conditions only')
@@ -480,6 +512,18 @@
       if (e.originalEvent && (e.originalEvent.key === 'Enter' || e.originalEvent.key === ' ')) {
         openPanel(beach, marker.getElement());
       }
+    });
+
+    markerRefs.push({ marker: marker, beach: beach, decorate: decorate });
+  });
+
+  /* Re-apply or drop the fan offset as the zoom level crosses the
+     threshold. setIcon replaces the element, so accessibility
+     attributes are re-applied afterwards. */
+  map.on('zoomend', function () {
+    markerRefs.forEach(function (ref) {
+      ref.marker.setIcon(makeIcon(ref.beach, currentSpread(ref.beach)));
+      ref.decorate();
     });
   });
 

@@ -23,11 +23,17 @@
   (function () {
     var links = Array.prototype.slice.call(document.querySelectorAll('.site-nav__link'));
     if (!links.length) return;
-    var path = window.location.pathname.split('/').pop() || 'index.html';
-    if (path === '') path = 'index.html';
+    /* Clean URLs: /beaches and /beaches.html both resolve to "beaches",
+       and the home page resolves to "". */
+    function pageKey(pathname) {
+      return (pathname.split('/').pop() || '')
+        .replace(/\.html$/, '')
+        .replace(/^index$/, '');
+    }
+    var path = pageKey(window.location.pathname);
     links.forEach(function (link) {
-      var href = (link.getAttribute('href') || '').split('/').pop();
-      if (href === path || (path === 'index.html' && (href === '' || href === 'index.html'))) {
+      var href = (link.getAttribute('href') || '').split('#')[0];
+      if (pageKey(href) === path) {
         link.classList.add('is-active');
         link.setAttribute('aria-current', 'page');
       }
