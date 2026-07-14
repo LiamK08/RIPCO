@@ -101,6 +101,7 @@
   --line-soft: rgb(12 23 32 / 0.09);
   --shadow-card: 0 1px 2px rgb(58 46 28 / 0.05), 0 20px 50px -22px rgb(58 46 28 / 0.18);
   --shadow-device: 0 34px 80px -30px rgb(18 22 26 / 0.5);
+  --shadow-device-soft: 0 2px 6px rgb(58 46 28 / 0.08), 0 24px 60px -28px rgb(58 46 28 / 0.35);
   --shadow-btn: 0 10px 26px -12px rgb(16 87 125 / 0.55);
   --focus-ring: 0 0 0 3px rgb(62 159 201 / 0.5);
   --scrim-photo: linear-gradient(to top, rgb(12 23 32 / 0.16), rgb(12 23 32 / 0) 45%);
@@ -248,6 +249,8 @@ body::after {
   flex: none;
 }
 .eyebrow--alert { color: var(--safety-red-deep); }
+/* No dot: for rows where an icon tile above is already the marker */
+.eyebrow--plain::before { content: none; }
 
 /* Marketing section headers are centred: dot eyebrow, serif headline,
    optional subhead. Left alignment remains only inside genuine
@@ -977,6 +980,16 @@ html.js .pin__step.is-active { opacity: 1; }
 }
 .page-hero .container { position: relative; }
 .page-hero__inner { max-width: 50rem; }
+
+/* Centred page-hero variant: dot eyebrow, centred serif headline and
+   subhead, compact padding so the first row starts within reach. */
+.page-hero--centred { padding-block: clamp(3.5rem, 6vh, 5rem) clamp(2.75rem, 5vw, 4.25rem); }
+.page-hero--centred .page-hero__inner {
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.page-hero--centred .page-hero__lead { margin-inline: auto; max-width: 60ch; }
 .page-hero__title {
   margin-top: 1.25rem;
   font-family: var(--font-serif);
@@ -995,34 +1008,57 @@ html.js .pin__step.is-active { opacity: 1; }
 }
 .page-hero__photo { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
 
-/* ---------------------------- Feature rows ----------------------------- */
+/* ---------------------------- Feature rows -----------------------------
+   Compact two-column rows on light paper, alternating base and band per
+   strip. The dark device frame is the focal object on the light page.
+   The text column is a single top-to-bottom stack: tile, plain eyebrow,
+   serif heading, body. Nothing sits beside the tile. */
+
+.feature-strip { padding-block: var(--section-pad-snug); }
+.feature-strip--tint {
+  background: var(--paper-2);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
 
 .feature-row {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   align-items: center;
-  gap: clamp(2.5rem, 6vw, 5.5rem);
-  padding-block: clamp(2.75rem, 7vw, 5rem);
+  gap: clamp(2.5rem, 6vw, 5rem);
 }
-.feature-row + .feature-row { border-top: 1px solid var(--line-soft); }
-.feature-row--reverse .feature-row__media { order: 2; }
-.feature-row--reverse .feature-row__text { order: 1; }
-.feature-row__media { display: flex; justify-content: center; }
-.feature-row__icon { margin-bottom: var(--space-4); }
+.feature-row__text { order: 1; }
+.feature-row__media { order: 2; display: flex; justify-content: center; }
+.feature-row--reverse { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+.feature-row--reverse .feature-row__media { order: 1; }
+.feature-row--reverse .feature-row__text { order: 2; }
+
+.feature-row__icon { display: flex; margin-bottom: var(--space-5); }
+.feature-row__text .eyebrow { display: block; }
 .feature-row__title {
   margin-top: var(--space-3);
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(1.6rem, 1.2rem + 1.7vw, 2.3rem);
+  font-size: clamp(1.6rem, 1.2rem + 1.7vw, 2.2rem);
   letter-spacing: -0.012em;
   line-height: 1.12;
 }
-.feature-row__body { margin-top: var(--space-4); color: var(--ink-muted); max-width: 32rem; }
+.feature-row__body { margin-top: var(--space-4); color: var(--ink-muted); max-width: 52ch; }
+
+/* A considered product shot, not an oversized frame */
+.feature-row .device {
+  width: min(14.5rem, 58vw);
+  border-color: var(--line);
+  box-shadow: var(--shadow-device-soft);
+}
 
 @media (max-width: 56em) {
   .feature-row { grid-template-columns: 1fr; }
-  .feature-row--reverse .feature-row__media { order: 0; }
+  .feature-row--reverse { grid-template-columns: 1fr; }
+  .feature-row__text,
   .feature-row--reverse .feature-row__text { order: 1; }
+  .feature-row__media,
+  .feature-row--reverse .feature-row__media { order: 2; }
 }
 
 /* --------------------------- Detection diagram -------------------------
@@ -1135,9 +1171,6 @@ html.js .detect:not(.is-detected) .detect__chip {
 /* ---------------- Deep-band variants for components inside .band -------- */
 
 .band .pin__step-title { color: var(--on-deep); }
-.band .feature-row + .feature-row { border-top-color: var(--deep-line); }
-.band .feature-row__title { color: var(--on-deep); }
-.band .feature-row__body { color: var(--on-deep-soft); }
 .band .origins { border-top-color: var(--deep-line); }
 .band .origins__title { color: var(--on-deep); }
 .band .origins__body { color: var(--on-deep-soft); }
