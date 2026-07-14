@@ -72,13 +72,30 @@
      amber, orange, gold or alert red: those hues are locked safety
      signals and are never decorative. In any context showing real
      condition data (map panel, conditions cards) use only sky and
-     stone. */
-  --tint-sky-bg: #DCEBF5;   --tint-sky-fg: #1E5F86;
-  --tint-peri-bg: #E0E3F5;  --tint-peri-fg: #3F4A8A;
-  --tint-lav-bg: #E9E2F2;   --tint-lav-fg: #5B4A80;
-  --tint-rose-bg: #F3E2E4;  --tint-rose-fg: #8A4A56;
-  --tint-clay-bg: #F1E7DC;  --tint-clay-fg: #7A5C42;
-  --tint-stone-bg: #E4E7E7; --tint-stone-fg: #4A5556;
+     slate. */
+  --tint-sky-bg: #CBE0F0;
+  --tint-sky-ink: #0E4A6E;
+  --tint-sky-ring: #0E4A6E1F;
+
+  --tint-periwinkle-bg: #D3D9F2;
+  --tint-periwinkle-ink: #343D80;
+  --tint-periwinkle-ring: #343D801F;
+
+  --tint-lavender-bg: #E0D5F0;
+  --tint-lavender-ink: #4A3778;
+  --tint-lavender-ring: #4A37781F;
+
+  --tint-rose-bg: #F2D5DC;
+  --tint-rose-ink: #8B3E52;
+  --tint-rose-ring: #8B3E521F;
+
+  --tint-clay-bg: #EDD9C6;
+  --tint-clay-ink: #7A4C2E;
+  --tint-clay-ring: #7A4C2E1F;
+
+  --tint-slate-bg: #D5DEE3;
+  --tint-slate-ink: #2F4550;
+  --tint-slate-ring: #2F45501F;
 
   /* LOCKED safety colours. Meaning only, never decoration.
      green = calmer water, amber = caution, red = rip / hazard. */
@@ -127,7 +144,7 @@
   --section-pad-snug: clamp(2.25rem, 5vw, 3.75rem);
 
   --radius-sm: 10px;
-  --radius-tile: 22%;      /* squircle icon tiles                    */
+  --radius-tile: 25%;      /* squircle icon tiles: 18px at 72px      */
   --radius-device: 44px;   /* iPhone silhouette; screen derives from it */
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -639,6 +656,13 @@ em.accent {
 .slot--wide { aspect-ratio: 21 / 9; }
 .slot--photo { aspect-ratio: 16 / 9; }
 
+/* No photograph shipped yet: collapse the figure rather than showing an
+   empty grey box. Drop the real image into assets/ and it reappears.
+   The index photo section holds nothing but the figure, so it collapses
+   whole; is-empty is set by JS, hence the html.js guard. */
+html.js .photo-figure:has(.slot.is-empty) { display: none; }
+html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none; }
+
 .photo-figure .slot { box-shadow: var(--shadow-card); }
 .photo-figure .slot::after {
   content: '';
@@ -723,27 +747,49 @@ em.accent {
 /* --------------------------- Tinted icon tiles --------------------------
    Squircle tiles with a soft tint background and a solid glyph in the
    matching deeper tint. Assign a different tint per card in a repeating
-   order (sky, clay, stone, rose, peri, lav) so no grid is single-hue.
-   Data contexts (map panel, conditions cards) use sky and stone only. */
+   order (sky, clay, slate, rose, peri, lav) so no grid is single-hue.
+   Data contexts (map panel, conditions cards) use sky and slate only. */
 
 .tile {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: var(--radius-tile);
   background: var(--tile-bg, var(--tint-sky-bg));
-  color: var(--tile-fg, var(--tint-sky-fg));
+  color: var(--tile-ink, var(--tint-sky-ink));
+  /* Inset family ring to define the tile on warm paper, plus a soft
+     family-tinted lift. Not a card border. */
+  box-shadow:
+    inset 0 0 0 1px var(--tile-ring, var(--tint-sky-ring)),
+    0 10px 24px -14px var(--tile-ring, var(--tint-sky-ring));
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
-.tile svg { width: 1.75rem; height: 1.75rem; }
+.tile svg { width: 2rem; height: 2rem; }
 
-.tile--sky   { --tile-bg: var(--tint-sky-bg);   --tile-fg: var(--tint-sky-fg); }
-.tile--peri  { --tile-bg: var(--tint-peri-bg);  --tile-fg: var(--tint-peri-fg); }
-.tile--lav   { --tile-bg: var(--tint-lav-bg);   --tile-fg: var(--tint-lav-fg); }
-.tile--rose  { --tile-bg: var(--tint-rose-bg);  --tile-fg: var(--tint-rose-fg); }
-.tile--clay  { --tile-bg: var(--tint-clay-bg);  --tile-fg: var(--tint-clay-fg); }
-.tile--stone { --tile-bg: var(--tint-stone-bg); --tile-fg: var(--tint-stone-fg); }
+/* Hover on the parent cell lifts the tile only; no colour change */
+.benefit:hover .tile,
+.card:hover .tile,
+.source-card:hover .tile {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 0 0 1px var(--tile-ring, var(--tint-sky-ring)),
+    0 14px 30px -14px var(--tile-ring, var(--tint-sky-ring));
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile { transition: none; }
+  .benefit:hover .tile,
+  .card:hover .tile,
+  .source-card:hover .tile { transform: none; }
+}
+
+.tile--sky   { --tile-bg: var(--tint-sky-bg);        --tile-ink: var(--tint-sky-ink);        --tile-ring: var(--tint-sky-ring); }
+.tile--peri  { --tile-bg: var(--tint-periwinkle-bg); --tile-ink: var(--tint-periwinkle-ink); --tile-ring: var(--tint-periwinkle-ring); }
+.tile--lav   { --tile-bg: var(--tint-lavender-bg);   --tile-ink: var(--tint-lavender-ink);   --tile-ring: var(--tint-lavender-ring); }
+.tile--rose  { --tile-bg: var(--tint-rose-bg);       --tile-ink: var(--tint-rose-ink);       --tile-ring: var(--tint-rose-ring); }
+.tile--clay  { --tile-bg: var(--tint-clay-bg);       --tile-ink: var(--tint-clay-ink);       --tile-ring: var(--tint-clay-ring); }
+.tile--slate { --tile-bg: var(--tint-slate-bg);      --tile-ink: var(--tint-slate-ink);      --tile-ring: var(--tint-slate-ring); }
 
 /* ------------------------------ Benefits -------------------------------
    Airy benefit grid: no card border, background or shadow. The tinted
@@ -1480,12 +1526,61 @@ html.js .faq__panel-inner { overflow: hidden; }
 
 .auth-faq { padding-top: 0; }
 
-/* ------------------------------- Footer -------------------------------- */
+/* ------------------------------- Footer --------------------------------
+   ReFresh-style closing: a centred italic tagline above the link columns,
+   and a giant serif wordmark cropped by the bottom edge of the page. The
+   wordmark is paper-white over a faint sky wash: a watermark, present but
+   quiet, and always aria-hidden. */
 
 .site-footer {
+  position: relative;
+  overflow: hidden;
   background: var(--sand);
   border-top: 1px solid var(--line-soft);
-  padding-block: var(--space-8) var(--space-6);
+  padding-top: var(--space-8);
+}
+/* Soft sky wash rising from the page bottom, behind the wordmark */
+.site-footer::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: clamp(12rem, 32vw, 24rem);
+  pointer-events: none;
+  background: linear-gradient(to top, var(--wash-sky), transparent);
+}
+.site-footer > .container { position: relative; }
+
+.site-footer__tagline {
+  margin: 0 auto clamp(3rem, 7vw, 4.75rem);
+  max-width: 42rem;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
+  letter-spacing: var(--display-tracking);
+  line-height: 1.35;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.site-footer__wordmark {
+  position: relative;
+  height: clamp(3.9rem, 12.5vw, 11.5rem);
+  margin-top: clamp(2.25rem, 5vw, 3.5rem);
+  overflow: hidden;
+  text-align: center;
+}
+.site-footer__wordmark span {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-weight: var(--display-weight);
+  font-size: clamp(7rem, 23vw, 21rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--surface);
+  user-select: none;
 }
 .site-footer__grid {
   display: grid;
@@ -1534,6 +1629,10 @@ html.js .faq__panel-inner { overflow: hidden; }
   border-top: 1px solid var(--line);
   font-size: 0.85rem;
   color: var(--ink-muted);
+}
+
+@media (max-width: 40em) {
+  .site-footer__base { flex-direction: column; }
 }
 
 /* ------------------------------ Reveal --------------------------------- */
@@ -1740,7 +1839,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-sm);
 }
-/* Data context: sky and stone tints only, never a decorative hue */
+/* Data context: sky and slate tints only, never a decorative hue */
 .map-stat__icon {
   grid-row: 1 / 3;
   display: inline-flex;
@@ -1750,7 +1849,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   height: 2rem;
   border-radius: var(--radius-tile);
   background: var(--tint-sky-bg);
-  color: var(--tint-sky-fg);
+  color: var(--tint-sky-ink);
 }
 .map-stat__icon svg { width: 1.1rem; height: 1.1rem; }
 .map-stat__label {
@@ -1804,8 +1903,8 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   width: 1.7rem;
   height: 1.7rem;
   border-radius: var(--radius-tile);
-  background: var(--tint-stone-bg);
-  color: var(--tint-stone-fg);
+  background: var(--tint-slate-bg);
+  color: var(--tint-slate-ink);
 }
 .map-locked__lock svg { width: 1rem; height: 1rem; }
 .map-locked__title { font-size: 0.95rem; font-weight: 700; color: var(--ink); }
@@ -1867,7 +1966,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
     animation: map-shimmer 1.3s linear infinite;
   }
   .map-locked__shimmer span {
-    background-image: linear-gradient(90deg, var(--paper-2), var(--tint-stone-bg), var(--paper-2));
+    background-image: linear-gradient(90deg, var(--paper-2), var(--tint-slate-bg), var(--paper-2));
     background-size: 200% 100%;
     animation: map-shimmer 2.2s linear infinite;
   }
