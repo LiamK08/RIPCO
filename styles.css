@@ -1582,6 +1582,15 @@ html.js .faq__panel-inner { overflow: hidden; }
   color: var(--surface);
   user-select: none;
 }
+/* The wave mark sits beside the giant wordmark in the same
+   watermark surface white, cap-height sized */
+.site-footer__wordmark svg {
+  display: inline-block;
+  height: 0.68em;
+  width: auto;
+  margin-right: 0.09em;
+  vertical-align: baseline;
+}
 .site-footer__grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) repeat(4, minmax(0, 1fr));
