@@ -1,11 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="RipCo">
-  <defs>
-    <linearGradient id="rc-ocean" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#1D9BD8"/>
-      <stop offset="1" stop-color="#0B72AC"/>
-    </linearGradient>
-  </defs>
-  <path d="M0 32 C0 6.4 6.4 0 32 0 C57.6 0 64 6.4 64 32 C64 57.6 57.6 64 32 64 C6.4 64 0 57.6 0 32 Z" fill="url(#rc-ocean)"/>
-  <path fill="#FFFFFF" d="M11.5 45.5 C11.5 28 21.5 14 37.5 12.5 C45.5 11.8 51.8 16 52.4 22.2 C53 28.5 48.5 33.2 42.5 33.7 C45.6 29.6 45.1 24.5 41 22.5 C36.5 20.4 30.4 23 27.4 29 C24.4 35 25.4 41 30 46 Z"/>
-  <path fill="#FFFFFF" d="M31.5 40.5 C38 44.3 46.5 45.2 56 42.6 C50.5 48.8 39.5 49.8 32 44.9 C30.8 44.1 30.8 41.9 31.5 40.5 Z"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect x="14.5" y="3" width="35" height="58" rx="10" fill="#10577D"/><path fill="#FFFFFF" d="M20 48 C20 35 26.5 25.8 37 24.2 C40.6 23.6 43.7 25.3 44.8 28.3 C42 27.9 39.3 29.1 37.8 31.8 C42 33.3 44.6 37.4 44.6 42.6 L44.6 48 Z"/></svg>

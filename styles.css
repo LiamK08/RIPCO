@@ -3,7 +3,7 @@
    Design system: "Sunlit Coast"
 
    Light, warm, beach-toned theme with real tonal range. Editorial serif
-   headlines (Instrument Serif, one italic accent word per heading), Geist
+   headlines (Newsreader, one italic accent word per heading), Geist
    body, a deep oceanic accent, and a
    small number of deep Coastline-navy product bands that showcase the dark
    app UI in device frames.
@@ -15,16 +15,16 @@
 /* ------------------------------ Fonts ---------------------------------- */
 
 @font-face {
-  font-family: 'Instrument Serif';
-  src: url('assets/fonts/instrument-serif-latin.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'Newsreader';
+  src: url('assets/fonts/newsreader-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 200 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Instrument Serif';
-  src: url('assets/fonts/instrument-serif-italic-latin.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'Newsreader';
+  src: url('assets/fonts/newsreader-latin-wght-italic.woff2') format('woff2-variations');
+  font-weight: 200 800;
   font-style: italic;
   font-display: swap;
 }
@@ -106,9 +106,13 @@
   --focus-ring: 0 0 0 3px rgb(62 159 201 / 0.5);
   --scrim-photo: linear-gradient(to top, rgb(12 23 32 / 0.16), rgb(12 23 32 / 0) 45%);
 
-  /* Type */
-  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  /* Type. The display serif is confident and substantial, never
+     delicate: weight around 550, tight but not fashion-tight tracking. */
+  --font-serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
   --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --display-weight: 550;
+  --display-tracking: -0.015em;
+  --display-leading: 1.05;
 
   /* Rhythm */
   --space-1: 0.25rem;
@@ -123,6 +127,8 @@
   --section-pad-snug: clamp(2.25rem, 5vw, 3.75rem);
 
   --radius-sm: 10px;
+  --radius-tile: 22%;      /* squircle icon tiles                    */
+  --radius-device: 44px;   /* iPhone silhouette; screen derives from it */
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
@@ -266,10 +272,10 @@ body::after {
 .section-title {
   margin-top: var(--space-4);
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(2.1rem, 1.25rem + 3.1vw, 3.4rem);
-  line-height: 1.04;
-  letter-spacing: -0.02em;
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
   color: var(--ink);
   text-wrap: balance;
 }
@@ -286,7 +292,7 @@ body::after {
 em.accent {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: inherit;
   color: var(--accent);
 }
 
@@ -347,7 +353,7 @@ em.accent {
   background: var(--ink);
   color: var(--paper);
   padding: 0.65rem 1.4rem;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   gap: 0.7rem;
 }
 .btn--app:hover { background: var(--deep-raised); color: var(--paper); }
@@ -468,7 +474,7 @@ em.accent {
 
 .hero {
   position: relative;
-  padding-block: clamp(5.5rem, 9vh, 8rem) clamp(5rem, 8vh, 7.5rem);
+  padding-block: clamp(2.75rem, 5vh, 4.25rem) clamp(4rem, 7vh, 5.5rem);
   overflow: hidden;
 }
 .hero::before {
@@ -484,25 +490,25 @@ em.accent {
 .hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  align-items: start;
-  gap: clamp(2.5rem, 6vw, 5rem);
+  grid-template-columns: minmax(0, 6.5fr) minmax(0, 5.5fr);
+  align-items: center;
+  gap: clamp(2rem, 4.5vw, 3.75rem);
 }
 
 .hero__title {
-  margin-top: 1.25rem;
   font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(2.75rem, 6.2vw, 5.5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-weight: var(--display-weight);
+  font-size: clamp(2.75rem, 6vw, 5.25rem);
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
   color: var(--ink);
+  max-width: 16ch;
   text-wrap: balance;
 }
 
 .hero__lead {
   margin-top: 1.75rem;
-  max-width: 31rem;
+  max-width: 52ch;
   font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
   line-height: 1.6;
   color: var(--ink-muted);
@@ -515,34 +521,42 @@ em.accent {
   margin-top: 2.5rem;
 }
 
+/* The safety line is a designed element: a solid signal-red flag sized
+   to the type and aligned to the optical centre of the first line. */
 .hero__note {
   display: flex;
   align-items: flex-start;
-  gap: 0.55rem;
+  gap: 0.6rem;
   margin-top: var(--space-6);
   max-width: 30rem;
   font-size: 0.9rem;
   line-height: 1.55;
   color: var(--ink-muted);
 }
-.hero__note svg { width: 1rem; height: 1rem; flex: none; margin-top: 0.2rem; color: var(--safety-red); }
-
-/* The hero device sits on a deep-navy panel: dark app UI on the light page */
-.hero__visual { display: flex; justify-content: center; }
-
-.panel--navy {
-  background: linear-gradient(160deg, var(--deep-raised), var(--deep) 62%);
-  border-radius: var(--radius-xl);
-  padding: clamp(1.75rem, 3.5vw, 2.75rem);
-  box-shadow: var(--shadow-device);
+.hero__note svg {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  margin-top: 0.28em; /* (line-height 1.55em minus 1em) / 2 */
+  color: var(--safety-red);
 }
-.panel__caption {
-  margin-top: var(--space-5);
+
+/* The dark app in its frame sits directly on the light paper: the
+   device is the focal object, no panel around it. */
+.hero__visual { display: flex; justify-content: center; }
+.hero__product { display: flex; flex-direction: column; align-items: center; }
+.hero .device {
+  width: min(20rem, 74vw);
+  border-color: var(--line);
+  box-shadow: var(--shadow-device-soft);
+}
+.hero__caption {
+  margin-top: var(--space-4);
   text-align: center;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--on-deep-soft);
+  color: var(--ink-muted);
 }
 
 /* ----------------------------- iPhone frame ---------------------------- */
@@ -550,7 +564,7 @@ em.accent {
 .device {
   position: relative;
   width: min(17.5rem, 68vw);
-  border-radius: 44px;
+  border-radius: var(--radius-device);
   padding: 10px;
   background: var(--ink);
   border: 1px solid var(--deep-line);
@@ -568,7 +582,7 @@ em.accent {
 .device__screen {
   position: relative;
   aspect-ratio: 390 / 844;
-  border-radius: 34px;
+  border-radius: calc(var(--radius-device) - 10px);
   overflow: hidden;
   background: var(--deep);
 }
@@ -659,7 +673,7 @@ em.accent {
 }
 .trust__figure {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-variant-numeric: tabular-nums;
   font-size: 1.25rem;
   color: var(--ink);
@@ -684,10 +698,10 @@ em.accent {
 .stat__value {
   margin: 0;
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(3rem, 2rem + 4vw, 4.75rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
   color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
@@ -718,7 +732,7 @@ em.accent {
   justify-content: center;
   width: 3.75rem;
   height: 3.75rem;
-  border-radius: 22%;
+  border-radius: var(--radius-tile);
   background: var(--tile-bg, var(--tint-sky-bg));
   color: var(--tile-fg, var(--tint-sky-fg));
 }
@@ -748,9 +762,9 @@ em.accent {
 .benefit__title {
   margin-top: var(--space-5);
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.4rem;
-  letter-spacing: -0.008em;
+  letter-spacing: var(--display-tracking);
   line-height: 1.2;
   color: var(--ink);
 }
@@ -831,9 +845,9 @@ html.js .pin__step.is-active { opacity: 1; }
 .pin__step-title {
   margin-top: var(--space-3);
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.4rem, 1.1rem + 1.3vw, 1.9rem);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--display-tracking);
   line-height: 1.15;
 }
 .pin__step-body { margin-top: var(--space-3); color: var(--ink-muted); }
@@ -863,9 +877,9 @@ html.js .pin__step.is-active { opacity: 1; }
 .card__title {
   margin-top: var(--space-5);
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.4rem;
-  letter-spacing: -0.008em;
+  letter-spacing: var(--display-tracking);
   line-height: 1.2;
   color: var(--ink);
 }
@@ -883,10 +897,10 @@ html.js .pin__step.is-active { opacity: 1; }
 .free { text-align: center; }
 .free__title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(2.2rem, 1.4rem + 3.6vw, 4rem);
-  letter-spacing: -0.015em;
-  line-height: 1.06;
+  letter-spacing: var(--display-tracking);
+  line-height: var(--display-leading);
   text-wrap: balance;
 }
 .free__body {
@@ -907,9 +921,9 @@ html.js .pin__step.is-active { opacity: 1; }
 .safety-strip__title {
   margin-top: var(--space-4);
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--display-tracking);
   line-height: 1.15;
 }
 .safety-strip__body { margin: var(--space-4) auto 0; max-width: 38rem; color: var(--ink-muted); }
@@ -926,7 +940,7 @@ html.js .pin__step.is-active { opacity: 1; }
   background: var(--paper);
   color: var(--ink);
   border-top: 1px solid var(--line-soft);
-  padding-block: clamp(5rem, 11vw, 7.5rem);
+  padding-block: var(--section-pad);
 }
 .cta::before {
   content: '';
@@ -940,10 +954,10 @@ html.js .pin__step.is-active { opacity: 1; }
 .cta__inner { position: relative; text-align: center; }
 .cta__title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(2.4rem, 1.4rem + 4.4vw, 4.6rem);
-  letter-spacing: -0.02em;
-  line-height: 1.02;
+  letter-spacing: var(--display-tracking);
+  line-height: var(--display-leading);
   color: var(--ink);
   text-wrap: balance;
 }
@@ -993,10 +1007,10 @@ html.js .pin__step.is-active { opacity: 1; }
 .page-hero__title {
   margin-top: 1.25rem;
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(2.6rem, 5vw, 4.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
   text-wrap: balance;
 }
 .page-hero__lead {
@@ -1038,9 +1052,9 @@ html.js .pin__step.is-active { opacity: 1; }
 .feature-row__title {
   margin-top: var(--space-3);
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.6rem, 1.2rem + 1.7vw, 2.2rem);
-  letter-spacing: -0.012em;
+  letter-spacing: var(--display-tracking);
   line-height: 1.12;
 }
 .feature-row__body { margin-top: var(--space-4); color: var(--ink-muted); max-width: 52ch; }
@@ -1207,9 +1221,9 @@ html.js .detect:not(.is-detected) .detect__chip {
 .source-card:hover .source-card__icon { transform: translateY(-3px); }
 .source-card__title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.4rem;
-  letter-spacing: -0.008em;
+  letter-spacing: var(--display-tracking);
   line-height: 1.2;
 }
 .source-card__body { margin: var(--space-3) auto 0; max-width: 26rem; font-size: 0.98rem; color: var(--ink-muted); flex: 1; }
@@ -1231,9 +1245,9 @@ html.js .detect:not(.is-detected) .detect__chip {
 }
 .origins__title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.5rem;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--display-tracking);
 }
 .origins__body { margin-top: var(--space-4); color: var(--ink-muted); }
 
@@ -1248,10 +1262,10 @@ html.js .detect:not(.is-detected) .detect__chip {
 .pledge__item { border-top: 1px solid var(--line); padding-top: var(--space-5); }
 .pledge__title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.35rem;
   line-height: 1.25;
-  letter-spacing: -0.008em;
+  letter-spacing: var(--display-tracking);
 }
 .pledge__body { margin-top: var(--space-3); color: var(--ink-muted); }
 
@@ -1266,10 +1280,10 @@ html.js .detect:not(.is-detected) .detect__chip {
 .banner__flag { width: clamp(2.5rem, 6vw, 3.5rem); height: auto; }
 .banner__title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.5rem, 1.1rem + 1.9vw, 2.4rem);
   line-height: 1.18;
-  letter-spacing: -0.012em;
+  letter-spacing: var(--display-tracking);
   text-wrap: balance;
 }
 @media (max-width: 40em) { .banner { flex-direction: column; align-items: flex-start; } }
@@ -1366,7 +1380,7 @@ html.js .faq__panel-inner { overflow: hidden; }
 .auth {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(4.5rem, 10vw, 7rem);
+  padding-block: var(--section-pad);
 }
 .auth::before {
   content: '';
@@ -1389,10 +1403,10 @@ html.js .faq__panel-inner { overflow: hidden; }
 .auth__title {
   margin-top: var(--space-5);
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(2.5rem, 1.5rem + 4vw, 4.2rem);
-  line-height: 1.06;
-  letter-spacing: -0.02em;
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
 }
 .auth__lead { margin-top: var(--space-5); color: var(--ink-muted); max-width: 32rem; }
 .auth__points {
@@ -1425,9 +1439,9 @@ html.js .faq__panel-inner { overflow: hidden; }
 .auth-card [data-auth-state].is-current { display: block; }
 .auth-card__title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.6rem;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--display-tracking);
   line-height: 1.2;
 }
 .auth-card__body { margin-top: var(--space-4); color: var(--ink-muted); font-size: 0.98rem; }
@@ -1670,9 +1684,9 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 }
 .map-panel__name {
   font-family: var(--font-serif);
-  font-weight: 600;
+  font-weight: var(--display-weight);
   font-size: 1.25rem;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--display-tracking);
 }
 .map-panel__close {
   margin-left: auto;
@@ -1734,7 +1748,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: 22%;
+  border-radius: var(--radius-tile);
   background: var(--tint-sky-bg);
   color: var(--tint-sky-fg);
 }
@@ -1789,7 +1803,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   justify-content: center;
   width: 1.7rem;
   height: 1.7rem;
-  border-radius: 22%;
+  border-radius: var(--radius-tile);
   background: var(--tint-stone-bg);
   color: var(--tint-stone-fg);
 }
