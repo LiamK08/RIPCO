@@ -981,23 +981,24 @@ html.js .pin__step.is-active { opacity: 1; }
    The deep navy is reserved for the single product band. */
 
 .cta {
-  position: relative;
-  overflow: hidden;
   background: var(--paper);
   color: var(--ink);
-  border-top: 1px solid var(--line-soft);
-  padding-block: var(--section-pad);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
 }
-.cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+/* The closing CTA is a rounded wash card inset from the page edges,
+   so it reads as one considered moment rather than a full-bleed band */
+.cta__inner {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line-soft);
   background:
-    radial-gradient(52rem 32rem at 85% -20%, var(--wash-sky), transparent 62%),
-    radial-gradient(48rem 30rem at 0% 120%, var(--wash-rose), transparent 62%);
+    radial-gradient(46rem 30rem at 85% -15%, var(--wash-sky), transparent 62%),
+    radial-gradient(44rem 30rem at 2% 118%, var(--wash-lav), transparent 62%),
+    var(--paper-2);
+  padding: clamp(4rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 4rem);
 }
-.cta__inner { position: relative; text-align: center; }
 .cta__title {
   font-family: var(--font-serif);
   font-weight: var(--display-weight);
@@ -1998,7 +1999,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 .page-home .section--flush { padding-top: 0; }
 .page-home .section--snug-top { padding-top: var(--section-pad-snug); }
 .page-home .section--snug-bottom { padding-bottom: var(--section-pad-snug); }
-.page-home .cta { padding-block: clamp(4rem, 8vw, 6rem); }
+.page-home .cta { padding-block: clamp(2.5rem, 5vw, 4rem); }
 
 /* The single navy band: tighter step column and band padding */
 .page-home .band { padding-block: clamp(3rem, 6vw, 4.5rem); }
@@ -2034,4 +2035,52 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 .page-home .free__points li:first-child { border-top: 1px solid var(--line); }
 @media (max-width: 56em) {
   .page-home .free { grid-template-columns: 1fr; }
+}
+
+/* ------------------------------ In the news ----------------------------
+   Three-up press and research cards: image preview on top, quiet topic
+   line and serif source name below. Links go to real organisations;
+   the image slots take real artwork dropped into assets/. */
+
+.news {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+@media (max-width: 62em) {
+  .news { grid-template-columns: 1fr; max-width: 30rem; margin-inline: auto; }
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 180ms var(--ease-out);
+}
+.news-card:hover { transform: translateY(-3px); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .news-card { transition: none; }
+  .news-card:hover { transform: none; }
+}
+.news-card .slot {
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--line-soft);
+  aspect-ratio: 16 / 10;
+}
+.news-card__meta { padding: var(--space-5); }
+.news-card__topic { font-size: 0.88rem; color: var(--ink-muted); }
+.news-card__source {
+  margin-top: var(--space-2);
+  font-family: var(--font-serif);
+  font-weight: var(--display-weight);
+  font-size: 1.5rem;
+  letter-spacing: var(--display-tracking);
+  line-height: 1.2;
 }
