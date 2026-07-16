@@ -65,6 +65,8 @@
   --accent-bright: #3E9FC9; /* accent word on deep, small highlights  */
   --accent-tint: #DEEAF1;   /* pale ocean tint: selection, live tag   */
   --on-accent: #FFFFFF;
+  --on-accent-soft: rgb(255 255 255 / 0.8);
+  --on-accent-line: rgb(255 255 255 / 0.38);
 
   /* Decorative pastel tints for marketing furniture ONLY (benefit
      grids, feature icons, steps, FAQ). Each pair is a soft tile
@@ -982,37 +984,68 @@ html.js .pin__step.is-active { opacity: 1; }
 
 .cta {
   background: var(--paper);
-  color: var(--ink);
+  color: var(--on-accent);
   padding-block: clamp(2.5rem, 5vw, 4rem);
 }
-/* The closing CTA is a rounded wash card inset from the page edges,
-   so it reads as one considered moment rather than a full-bleed band */
+/* The closing CTA is a rounded ocean-blue band inset from the page
+   edges, with a slow liquid wash drifting behind the copy. The motion
+   is decorative only and fully stops under reduced motion. */
 .cta__inner {
   position: relative;
   overflow: hidden;
   text-align: center;
   border-radius: var(--radius-xl);
-  border: 1px solid var(--line-soft);
-  background:
-    radial-gradient(46rem 30rem at 85% -15%, var(--wash-sky), transparent 62%),
-    radial-gradient(44rem 30rem at 2% 118%, var(--wash-lav), transparent 62%),
-    var(--paper-2);
-  padding: clamp(4rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 4rem);
+  background: linear-gradient(150deg, var(--accent), var(--accent-hover));
+  padding: clamp(4.5rem, 10vw, 7.5rem) clamp(1.5rem, 5vw, 4rem);
 }
+.cta__inner::before,
+.cta__inner::after {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  pointer-events: none;
+  filter: blur(48px);
+}
+.cta__inner::before {
+  background:
+    radial-gradient(34% 30% at 24% 32%, var(--accent-bright), transparent 70%),
+    radial-gradient(26% 26% at 78% 18%, var(--accent-bright), transparent 70%);
+  opacity: 0.5;
+}
+.cta__inner::after {
+  background:
+    radial-gradient(30% 28% at 70% 76%, var(--accent-bright), transparent 70%),
+    radial-gradient(36% 30% at 18% 82%, var(--accent-hover), transparent 72%);
+  opacity: 0.45;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cta__inner::before { animation: cta-liquid-a 26s ease-in-out infinite alternate; }
+  .cta__inner::after { animation: cta-liquid-b 34s ease-in-out infinite alternate; }
+}
+@keyframes cta-liquid-a {
+  from { transform: translate3d(-5%, -4%, 0) rotate(0deg) scale(1); }
+  to { transform: translate3d(6%, 5%, 0) rotate(24deg) scale(1.18); }
+}
+@keyframes cta-liquid-b {
+  from { transform: translate3d(5%, 4%, 0) rotate(0deg) scale(1.12); }
+  to { transform: translate3d(-6%, -5%, 0) rotate(-20deg) scale(0.96); }
+}
+.cta__inner > * { position: relative; }
 .cta__title {
   font-family: var(--font-serif);
   font-weight: var(--display-weight);
   font-size: clamp(2.4rem, 1.4rem + 4.4vw, 4.6rem);
   letter-spacing: var(--display-tracking);
   line-height: var(--display-leading);
-  color: var(--ink);
+  color: var(--on-accent);
   text-wrap: balance;
 }
+.cta em.accent { color: var(--tint-sky-bg); }
 .cta__lead {
   margin: var(--space-5) auto 0;
   max-width: 34rem;
   font-size: 1.125rem;
-  color: var(--ink-muted);
+  color: var(--on-accent-soft);
 }
 .cta__actions {
   display: flex;
@@ -1021,7 +1054,11 @@ html.js .pin__step.is-active { opacity: 1; }
   gap: var(--space-3);
   margin-top: var(--space-6);
 }
-.cta__note { margin-top: var(--space-6); font-size: 0.9rem; color: var(--ink-muted); }
+.cta .btn--primary { background: var(--on-accent); color: var(--accent); box-shadow: none; }
+.cta .btn--primary:hover { background: var(--tint-sky-bg); color: var(--accent-hover); }
+.cta .btn--ghost { color: var(--on-accent); border-color: var(--on-accent-line); }
+.cta .btn--ghost:hover { background: var(--on-accent-line); color: var(--on-accent); border-color: var(--on-accent); }
+.cta__note { margin-top: var(--space-6); font-size: 0.9rem; color: var(--on-accent-soft); }
 
 /* ----------------------------- Page heroes ----------------------------- */
 
@@ -2042,16 +2079,47 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
    line and serif source name below. Links go to real organisations;
    the image slots take real artwork dropped into assets/. */
 
+.news-carousel { position: relative; }
 .news {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
   gap: var(--space-5);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 6px 20px;
+  margin: -6px -6px -20px;
+  scrollbar-width: none;
 }
-@media (max-width: 62em) {
-  .news { grid-template-columns: 1fr; max-width: 30rem; margin-inline: auto; }
+.news::-webkit-scrollbar { display: none; }
+
+.news-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: opacity 160ms var(--ease-out);
 }
+.news-nav svg { width: 1.1rem; height: 1.1rem; }
+.news-nav:hover { color: var(--accent); }
+.news-nav:disabled { opacity: 0.3; cursor: default; color: var(--ink); }
+.news-nav--prev { left: -1.4rem; }
+.news-nav--next { right: -1.4rem; }
+@media (max-width: 48em) { .news-nav { display: none; } }
 
 .news-card {
+  flex: 0 0 min(23.5rem, 84vw);
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   background: var(--surface);

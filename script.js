@@ -340,6 +340,43 @@
   })();
 
   /* ====================================================================
+     In the news carousel (About page): arrow buttons scroll the track
+     one card at a time. Swipe and keyboard scrolling work without JS.
+     ==================================================================== */
+
+  (function () {
+    var track = document.querySelector('[data-news-track]');
+    var prev = document.querySelector('[data-news-prev]');
+    var next = document.querySelector('[data-news-next]');
+    if (!track || !prev || !next) return;
+
+    function step() {
+      var card = track.querySelector('.news-card');
+      if (!card) return 360;
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 24;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function scrollByCards(direction) {
+      track.scrollBy({
+        left: direction * step(),
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+      });
+    }
+
+    prev.addEventListener('click', function () { scrollByCards(-1); });
+    next.addEventListener('click', function () { scrollByCards(1); });
+
+    function update() {
+      prev.disabled = track.scrollLeft <= 8;
+      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 8;
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  /* ====================================================================
      Footer year
      ==================================================================== */
 
