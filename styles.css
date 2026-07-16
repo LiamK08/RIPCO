@@ -412,6 +412,8 @@ em.accent {
   gap: var(--space-5);
   min-height: var(--header-h);
 }
+/* Nudge the header brand in from the left edge */
+.site-header .brand { margin-left: clamp(0.5rem, 2.5vw, 2.5rem); }
 
 .brand {
   display: inline-flex;
