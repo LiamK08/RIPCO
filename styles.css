@@ -405,12 +405,17 @@ em.accent {
   z-index: 1;
 }
 
+/* The brand anchors to the top right corner; navigation sits left.
+   Done in CSS only so the header markup stays byte-identical. */
 .site-header__inner {
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-5);
   min-height: var(--header-h);
+  max-width: none;
+  padding-inline: clamp(1.1rem, 2.5vw, 2rem);
 }
 
 .brand {
@@ -421,10 +426,13 @@ em.accent {
   color: var(--ink);
 }
 .brand__mark { width: 1.75rem; height: 1.75rem; flex: none; }
+/* Serif masthead wordmark, matching the giant footer RipCo */
 .brand__name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: var(--font-serif);
+  font-weight: var(--display-weight);
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
+  line-height: 1;
   color: var(--ink);
 }
 
