@@ -142,6 +142,8 @@
   --space-6: 2.25rem;
   --space-7: 3.5rem;
   --space-8: 5rem;
+  --content-max: 75rem;    /* readable column: running text, standard sections */
+  --wide-max: 87.5rem;     /* hero bands, grids, full-width band sections      */
   --section-pad: clamp(4rem, 9vw, 6.75rem);
   --section-pad-snug: clamp(2.25rem, 5vw, 3.75rem);
 
@@ -236,11 +238,11 @@ body::after {
 
 .container {
   width: 100%;
-  max-width: 71.25rem;
+  max-width: var(--content-max);
   margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
-.container--wide { max-width: 80rem; }
+.container--wide { max-width: var(--wide-max); }
 
 .section { padding-block: var(--section-pad); }
 .section--tint {
@@ -839,7 +841,7 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
   pointer-events: none;
   background: radial-gradient(50rem 30rem at 82% -5%, var(--wash-sky-faint), transparent 60%);
 }
-.band > .container { position: relative; }
+.band > .container { position: relative; max-width: var(--wide-max); }
 .band .eyebrow { color: var(--accent-bright); }
 .band em.accent { color: var(--accent-bright); }
 .band .section-title { color: var(--on-deep); }
@@ -994,6 +996,7 @@ html.js .pin__step.is-active { opacity: 1; }
   position: relative;
   overflow: hidden;
   text-align: center;
+  max-width: var(--wide-max);
   border-radius: var(--radius-xl);
   background: linear-gradient(150deg, var(--accent), var(--accent-hover));
   padding: clamp(4.5rem, 10vw, 7.5rem) clamp(1.5rem, 5vw, 4rem);
@@ -1005,22 +1008,25 @@ html.js .pin__step.is-active { opacity: 1; }
   inset: -35%;
   pointer-events: none;
   filter: blur(48px);
+  will-change: transform;
 }
 .cta__inner::before {
   background:
     radial-gradient(34% 30% at 24% 32%, var(--accent-bright), transparent 70%),
     radial-gradient(26% 26% at 78% 18%, var(--accent-bright), transparent 70%);
-  opacity: 0.5;
+  opacity: 0.42;
 }
 .cta__inner::after {
   background:
     radial-gradient(30% 28% at 70% 76%, var(--accent-bright), transparent 70%),
     radial-gradient(36% 30% at 18% 82%, var(--accent-hover), transparent 72%);
-  opacity: 0.45;
+  opacity: 0.36;
 }
+/* The drift runs on the About-page hero band only; every other page
+   keeps the same liquid texture as a still image. */
 @media (prefers-reduced-motion: no-preference) {
-  .cta__inner::before { animation: cta-liquid-a 26s ease-in-out infinite alternate; }
-  .cta__inner::after { animation: cta-liquid-b 34s ease-in-out infinite alternate; }
+  .page-home .cta__inner::before { animation: cta-liquid-a 26s ease-in-out infinite alternate; }
+  .page-home .cta__inner::after { animation: cta-liquid-b 34s ease-in-out infinite alternate; }
 }
 @keyframes cta-liquid-a {
   from { transform: translate3d(-5%, -4%, 0) rotate(0deg) scale(1); }
