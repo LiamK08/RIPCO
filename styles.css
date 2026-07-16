@@ -405,17 +405,12 @@ em.accent {
   z-index: 1;
 }
 
-/* The brand anchors to the top right corner; navigation sits left.
-   Done in CSS only so the header markup stays byte-identical. */
 .site-header__inner {
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-5);
   min-height: var(--header-h);
-  max-width: none;
-  padding-inline: clamp(1.1rem, 2.5vw, 2rem);
 }
 
 .brand {
