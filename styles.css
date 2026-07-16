@@ -1988,3 +1988,50 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
 }
+
+/* --------------------------- Home page rhythm --------------------------
+   Scoped to .page-home only: a tighter, content-proportional vertical
+   scale for the landing page. No other page carries this class, so
+   nothing below can shift the other five pages. */
+
+.page-home .section { padding-block: clamp(3.5rem, 7vw, 5.5rem); }
+.page-home .section--flush { padding-top: 0; }
+.page-home .section--snug-top { padding-top: var(--section-pad-snug); }
+.page-home .section--snug-bottom { padding-bottom: var(--section-pad-snug); }
+.page-home .cta { padding-block: clamp(4rem, 8vw, 6rem); }
+
+/* The single navy band: tighter step column and band padding */
+.page-home .band { padding-block: clamp(3rem, 6vw, 4.5rem); }
+.page-home .pin__steps {
+  gap: clamp(2.25rem, 7vh, 4rem);
+  padding-block: clamp(0.75rem, 3vh, 1.75rem);
+}
+.page-home .band__more { margin-top: clamp(1.25rem, 3vw, 2rem); }
+
+/* "Free. For every beachgoer." becomes a two-column block: the serif
+   statement on the left, the three supporting facts as a compact
+   hairline-separated stack on the right. */
+.page-home .free {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  text-align: left;
+}
+.page-home .free__body { margin: var(--space-4) 0 0; max-width: 34rem; }
+.page-home .free__points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.page-home .free__points li {
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.page-home .free__points li:first-child { border-top: 1px solid var(--line); }
+@media (max-width: 56em) {
+  .page-home .free { grid-template-columns: 1fr; }
+}
