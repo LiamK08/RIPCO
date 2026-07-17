@@ -43,13 +43,12 @@
   --paper: #FDFBF7;         /* primary canvas                         */
   --paper-2: #F6F2EA;       /* alternating band, used sparingly       */
   --surface: #FFFFFF;       /* cards and panels float on this         */
-  --paper-raised: var(--surface);
-  --sand: var(--paper-2);   /* legacy alias for the alternating band  */
 
-  /* Ink, editorial contrast */
+  /* Ink ramp, editorial contrast. Three steps only: headings, body,
+     captions. Every grey on the site is one of these. */
   --ink: #0E1A24;
-  --ink-muted: #5B6975;     /* secondary text, AA on paper and band   */
-  --ink-faint: #8B97A1;     /* captions and labels only               */
+  --ink-secondary: #3A4650; /* body text, comfortably AA on paper and band */
+  --ink-muted: #626D78;     /* captions and labels, AA at small sizes on both papers */
 
   /* Deep Coastline bands, tying the site to the app */
   --deep: #0E1E30;
@@ -59,45 +58,16 @@
   --on-deep: #F2EFE8;
   --on-deep-soft: #A7B3BD;
 
-  /* Deep oceanic accent */
+  /* Deep oceanic accent: the ONE decorative colour. Everything
+     interactive or highlighted is a step of this ramp. */
   --accent: #10577D;        /* buttons, links, accent word on light   */
   --accent-hover: #0C4462;
+  --accent-pressed: #093750;
   --accent-bright: #3E9FC9; /* accent word on deep, small highlights  */
-  --accent-tint: #DEEAF1;   /* pale ocean tint: selection, live tag   */
+  --accent-tint: #DEEAF1;   /* pale ocean tint: selection, live tag, icon tiles */
   --on-accent: #FFFFFF;
   --on-accent-soft: rgb(255 255 255 / 0.8);
   --on-accent-line: rgb(255 255 255 / 0.38);
-
-  /* Decorative pastel tints for marketing furniture ONLY (feature
-     grids, source cards, steps, FAQ). Each pair is a soft tile
-     background plus a deeper glyph colour. Deliberately NO green,
-     amber, orange, gold or alert red: those hues are locked safety
-     signals and are never decorative. In any context showing real
-     condition data (map panel, conditions cards) use only sky and
-     slate. */
-  --tint-sky-bg: #CBE0F0;
-  --tint-sky-ink: #0E4A6E;
-  --tint-sky-ring: #0E4A6E1F;
-
-  --tint-periwinkle-bg: #D3D9F2;
-  --tint-periwinkle-ink: #343D80;
-  --tint-periwinkle-ring: #343D801F;
-
-  --tint-lavender-bg: #E0D5F0;
-  --tint-lavender-ink: #4A3778;
-  --tint-lavender-ring: #4A37781F;
-
-  --tint-rose-bg: #F2D5DC;
-  --tint-rose-ink: #8B3E52;
-  --tint-rose-ring: #8B3E521F;
-
-  --tint-clay-bg: #EDD9C6;
-  --tint-clay-ink: #7A4C2E;
-  --tint-clay-ring: #7A4C2E1F;
-
-  --tint-slate-bg: #D5DEE3;
-  --tint-slate-ink: #2F4550;
-  --tint-slate-ring: #2F45501F;
 
   /* LOCKED safety colours. Meaning only, never decoration.
      green = calmer water, amber = caution, red = rip / hazard. */
@@ -107,13 +77,11 @@
   --safety-red-deep: #B3261C;
   --safety-red-fill: rgb(217 48 37 / 0.16);
 
-  /* Gradient washes: pale sky, rose and lavender only, always at low
-     opacity. Explicitly no peach, apricot, gold or amber: those sit in
-     the hazard signal family. */
+  /* Gradient washes: the pale ocean sky only, always at low opacity.
+     Explicitly no peach, apricot, gold or amber: those sit in the
+     hazard signal family. */
   --wash-sky: rgb(62 159 201 / 0.12);
   --wash-sky-faint: rgb(62 159 201 / 0.07);
-  --wash-rose: rgb(196 116 130 / 0.09);
-  --wash-lav: rgb(129 106 168 / 0.08);
 
   /* Hairlines at ten percent ink, soft warm shadows */
   --line: rgb(12 23 32 / 0.14);
@@ -148,12 +116,13 @@
   --section-pad-snug: clamp(2.25rem, 5vw, 3.75rem);
 
   --radius-sm: 10px;
-  --radius-tile: 25%;      /* squircle icon tiles: 18px at 72px      */
+  --radius-tile: 18px;     /* 72px icon tiles, one modest radius     */
   --radius-device: 44px;   /* iPhone silhouette; screen derives from it */
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
-  --radius-pill: 999px;
+  --radius-btn: 12px;      /* shared buttons: modest corner, not a pill */
+  --radius-pill: 999px;    /* chips, badges and dots only            */
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --header-h: 4.25rem;
@@ -305,7 +274,7 @@ body::after {
   margin-top: var(--space-5);
   font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.1875rem);
   line-height: 1.62;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   max-width: 62ch;
 }
 
@@ -340,7 +309,7 @@ em.accent {
   gap: 0.5rem;
   padding: 0.8rem 1.65rem;
   border: 1px solid transparent;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-btn);
   font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 600;
@@ -350,7 +319,7 @@ em.accent {
   transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out),
               border-color 160ms var(--ease-out), transform 160ms var(--ease-out);
 }
-.btn:focus-visible { box-shadow: var(--focus-ring); border-radius: var(--radius-pill); }
+.btn:focus-visible { box-shadow: var(--focus-ring); border-radius: var(--radius-btn); }
 .btn:active { transform: translateY(1px); }
 
 .btn--primary {
@@ -359,13 +328,14 @@ em.accent {
   box-shadow: var(--shadow-btn);
 }
 .btn--primary:hover { background: var(--accent-hover); color: var(--on-accent); }
+.btn--primary:active { background: var(--accent-pressed); }
 
 .btn--ghost {
   background: transparent;
   color: var(--ink);
   border-color: var(--line);
 }
-.btn--ghost:hover { border-color: var(--ink-faint); color: var(--ink); background: var(--paper-raised); }
+.btn--ghost:hover { border-color: var(--ink-muted); color: var(--ink); background: var(--surface); }
 
 .btn--lg { padding: 0.95rem 2rem; font-size: 1.05rem; }
 
@@ -374,7 +344,6 @@ em.accent {
   background: var(--ink);
   color: var(--paper);
   padding: 0.65rem 1.4rem;
-  border-radius: var(--radius-md);
   gap: 0.7rem;
 }
 .btn--app:hover { background: var(--deep-raised); color: var(--paper); }
@@ -447,11 +416,11 @@ em.accent {
   border-radius: var(--radius-pill);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   text-decoration: none;
   transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out);
 }
-.site-nav__link:hover { color: var(--ink); background: var(--sand); }
+.site-nav__link:hover { color: var(--ink); background: var(--paper-2); }
 .site-nav__link.is-active { color: var(--ink); font-weight: 600; }
 .site-nav__cta-item { margin-left: var(--space-3); }
 .site-nav__cta { white-space: nowrap; }
@@ -510,7 +479,7 @@ em.accent {
   pointer-events: none;
   background:
     radial-gradient(56rem 34rem at 85% -12%, var(--wash-sky-faint), transparent 65%),
-    radial-gradient(60rem 38rem at -10% 110%, var(--wash-rose), transparent 65%);
+    radial-gradient(60rem 38rem at -10% 110%, var(--wash-sky-faint), transparent 65%);
 }
 
 .hero__inner {
@@ -537,7 +506,7 @@ em.accent {
   max-width: 52ch;
   font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
   line-height: 1.6;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 
 .hero__actions {
@@ -557,7 +526,7 @@ em.accent {
   max-width: 30rem;
   font-size: 0.9rem;
   line-height: 1.55;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 .hero__note svg {
   width: 1em;
@@ -582,7 +551,7 @@ em.accent {
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 
 /* ----------------------------- iPhone frame ---------------------------- */
@@ -640,7 +609,7 @@ em.accent {
   position: relative;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: var(--sand);
+  background: var(--paper-2);
   border: 1px solid var(--line-soft);
 }
 .slot::before {
@@ -653,7 +622,7 @@ em.accent {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-muted);
 }
 .slot img {
   position: relative;
@@ -685,7 +654,7 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
 .photo-figure figcaption {
   margin-top: var(--space-4);
   font-size: 0.88rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 
 /* ----------------------------- Trust strip ----------------------------- */
@@ -701,7 +670,7 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
 }
 .trust__item {
   font-size: 0.92rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   text-align: center;
 }
 .trust__figure {
@@ -741,38 +710,43 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
 .stat__label {
   margin-top: var(--space-4);
   font-size: 0.98rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   max-width: 17rem;
 }
 .stats__source {
   margin-top: var(--space-6);
   font-size: 0.85rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 @media (max-width: 48em) {
   .stats { grid-template-columns: 1fr; gap: var(--space-5); }
 }
 
-/* --------------------------- Tinted icon tiles --------------------------
-   Squircle tiles with a soft tint background and a solid glyph in the
-   matching deeper tint. Assign a different tint per card in a repeating
-   order (sky, clay, slate, rose, peri, lav) so no grid is single-hue.
-   Data contexts (map panel, conditions cards) use sky and slate only. */
+/* ----------------------------- Icon tiles -------------------------------
+   ONE restrained treatment for every topic tile on the site: a soft
+   ocean tint square with a solid navy glyph. Tiles differ by GLYPH
+   only, never by colour. Each tile is a static topic icon; no tile
+   colour encodes a condition, verdict or state.
+   Alternative: a monochrome no-tile look is one edit away, set
+   background transparent and drop the box-shadow, keeping the glyph. */
 
 .tile {
+  /* Custom property so glyph cutout strokes in inline SVGs can
+     reference the tile background via var(--tile-bg). */
+  --tile-bg: var(--accent-tint);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 4.5rem;
   height: 4.5rem;
   border-radius: var(--radius-tile);
-  background: var(--tile-bg, var(--tint-sky-bg));
-  color: var(--tile-ink, var(--tint-sky-ink));
-  /* Inset family ring to define the tile on warm paper, plus a soft
-     family-tinted lift. Not a card border. */
+  background: var(--tile-bg);
+  color: var(--accent-hover);
+  /* Inset hairline ring to define the tile on warm paper, plus a
+     subtle neutral lift. Not a card border. */
   box-shadow:
-    inset 0 0 0 1px var(--tile-ring, var(--tint-sky-ring)),
-    0 10px 24px -14px var(--tile-ring, var(--tint-sky-ring));
+    inset 0 0 0 1px var(--line-soft),
+    0 10px 24px -14px var(--line);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .tile svg { width: 2rem; height: 2rem; }
@@ -782,21 +756,14 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
 .source-card:hover .tile {
   transform: translateY(-2px);
   box-shadow:
-    inset 0 0 0 1px var(--tile-ring, var(--tint-sky-ring)),
-    0 14px 30px -14px var(--tile-ring, var(--tint-sky-ring));
+    inset 0 0 0 1px var(--line-soft),
+    0 14px 30px -14px var(--line);
 }
 @media (prefers-reduced-motion: reduce) {
   .tile { transition: none; }
   .card:hover .tile,
   .source-card:hover .tile { transform: none; }
 }
-
-.tile--sky   { --tile-bg: var(--tint-sky-bg);        --tile-ink: var(--tint-sky-ink);        --tile-ring: var(--tint-sky-ring); }
-.tile--peri  { --tile-bg: var(--tint-periwinkle-bg); --tile-ink: var(--tint-periwinkle-ink); --tile-ring: var(--tint-periwinkle-ring); }
-.tile--lav   { --tile-bg: var(--tint-lavender-bg);   --tile-ink: var(--tint-lavender-ink);   --tile-ring: var(--tint-lavender-ring); }
-.tile--rose  { --tile-bg: var(--tint-rose-bg);       --tile-ink: var(--tint-rose-ink);       --tile-ring: var(--tint-rose-ring); }
-.tile--clay  { --tile-bg: var(--tint-clay-bg);       --tile-ink: var(--tint-clay-ink);       --tile-ring: var(--tint-clay-ring); }
-.tile--slate { --tile-bg: var(--tint-slate-bg);      --tile-ink: var(--tint-slate-ink);      --tile-ring: var(--tint-slate-ring); }
 
 /* --------------------------- Navy product band ------------------------- */
 
@@ -873,7 +840,7 @@ html.js .pin__step.is-active { opacity: 1; }
   letter-spacing: var(--display-tracking);
   line-height: 1.15;
 }
-.pin__step-body { margin-top: var(--space-3); color: var(--ink-muted); }
+.pin__step-body { margin-top: var(--space-3); color: var(--ink-secondary); }
 .band .pin__step-body { color: var(--on-deep-soft); }
 
 @media (max-width: 56em) {
@@ -910,7 +877,7 @@ html.js .pin__step.is-active { opacity: 1; }
   margin: var(--space-3) auto 0;
   max-width: 26rem;
   font-size: 0.98rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 .card--link { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .card--link .card__more { margin-top: var(--space-4); }
@@ -929,7 +896,7 @@ html.js .pin__step.is-active { opacity: 1; }
 .free__body {
   margin: var(--space-5) auto 0;
   max-width: 34rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   font-size: clamp(1.05rem, 1rem + 0.3vw, 1.15rem);
 }
 
@@ -949,7 +916,7 @@ html.js .pin__step.is-active { opacity: 1; }
   letter-spacing: var(--display-tracking);
   line-height: 1.15;
 }
-.safety-strip__body { margin: var(--space-4) auto 0; max-width: 38rem; color: var(--ink-muted); }
+.safety-strip__body { margin: var(--space-4) auto 0; max-width: 38rem; color: var(--ink-secondary); }
 .safety-strip .btn { margin-top: var(--space-5); }
 
 /* -------------------------------- CTA ----------------------------------
@@ -1060,7 +1027,7 @@ html.js .pin__step.is-active { opacity: 1; }
   color: var(--on-accent);
   text-wrap: balance;
 }
-.cta em.accent { color: var(--tint-sky-bg); }
+.cta em.accent { color: var(--accent-tint); }
 .cta__lead {
   margin: var(--space-5) auto 0;
   max-width: 34rem;
@@ -1077,7 +1044,7 @@ html.js .pin__step.is-active { opacity: 1; }
   margin-top: var(--space-6);
 }
 .cta .btn--primary { background: var(--on-accent); color: var(--accent); box-shadow: none; }
-.cta .btn--primary:hover { background: var(--tint-sky-bg); color: var(--accent-hover); }
+.cta .btn--primary:hover { background: var(--accent-tint); color: var(--accent-hover); }
 .cta .btn--ghost { color: var(--on-accent); border-color: var(--on-accent-line); }
 .cta .btn--ghost:hover { background: var(--on-accent-line); color: var(--on-accent); border-color: var(--on-accent); }
 .cta__note { margin-top: var(--space-6); font-size: 0.9rem; color: var(--on-accent-soft); }
@@ -1096,7 +1063,7 @@ html.js .pin__step.is-active { opacity: 1; }
   pointer-events: none;
   background:
     radial-gradient(50rem 30rem at 88% -20%, var(--wash-sky-faint), transparent 62%),
-    radial-gradient(54rem 34rem at -12% 120%, var(--wash-lav), transparent 62%);
+    radial-gradient(54rem 34rem at -12% 120%, var(--wash-sky-faint), transparent 62%);
 }
 .page-hero .container { position: relative; }
 .page-hero__inner { max-width: 50rem; }
@@ -1124,7 +1091,7 @@ html.js .pin__step.is-active { opacity: 1; }
   max-width: 62ch;
   font-size: clamp(1.05rem, 1rem + 0.4vw, 1.2rem);
   line-height: 1.65;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 .page-hero__photo { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
 
@@ -1163,7 +1130,7 @@ html.js .pin__step.is-active { opacity: 1; }
   letter-spacing: var(--display-tracking);
   line-height: 1.12;
 }
-.feature-row__body { margin-top: var(--space-4); color: var(--ink-muted); max-width: 52ch; }
+.feature-row__body { margin-top: var(--space-4); color: var(--ink-secondary); max-width: 52ch; }
 
 /* A considered product shot, not an oversized frame */
 .feature-row .device {
@@ -1282,7 +1249,7 @@ html.js .detect:not(.is-detected) .detect__chip {
   margin-top: var(--space-4);
   font-size: 0.88rem;
   line-height: 1.6;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 .band .detect__caption { color: var(--on-deep-soft); }
 .band .detect__frame { border-color: var(--deep-line); }
@@ -1332,7 +1299,7 @@ html.js .detect:not(.is-detected) .detect__chip {
   letter-spacing: var(--display-tracking);
   line-height: 1.2;
 }
-.source-card__body { margin: var(--space-3) auto 0; max-width: 26rem; font-size: 0.98rem; color: var(--ink-muted); flex: 1; }
+.source-card__body { margin: var(--space-3) auto 0; max-width: 26rem; font-size: 0.98rem; color: var(--ink-secondary); flex: 1; }
 .source-card__from {
   margin-top: var(--space-4);
   font-size: 0.88rem;
@@ -1355,7 +1322,7 @@ html.js .detect:not(.is-detected) .detect__chip {
   font-size: 1.5rem;
   letter-spacing: var(--display-tracking);
 }
-.origins__body { margin-top: var(--space-4); color: var(--ink-muted); }
+.origins__body { margin-top: var(--space-4); color: var(--ink-secondary); }
 
 /* ------------------------------ Safety page ---------------------------- */
 
@@ -1373,7 +1340,7 @@ html.js .detect:not(.is-detected) .detect__chip {
   line-height: 1.25;
   letter-spacing: var(--display-tracking);
 }
-.pledge__body { margin-top: var(--space-3); color: var(--ink-muted); }
+.pledge__body { margin-top: var(--space-3); color: var(--ink-secondary); }
 
 .banner {
   display: flex;
@@ -1407,7 +1374,7 @@ html.js .detect:not(.is-detected) .detect__chip {
   display: flex;
   gap: var(--space-4);
   align-items: flex-start;
-  background: var(--paper-raised);
+  background: var(--surface);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
@@ -1425,7 +1392,7 @@ html.js .detect:not(.is-detected) .detect__chip {
   font-weight: 600;
   font-size: 1rem;
 }
-.rip-guide__step p { color: var(--ink-muted); }
+.rip-guide__step p { color: var(--ink-secondary); }
 .rip-guide__step strong { color: var(--ink); }
 
 /* --------------------------------- FAQ --------------------------------- */
@@ -1477,7 +1444,7 @@ html.js .faq__item.is-open .faq__panel { grid-template-rows: 1fr; }
 html.js .faq__panel-inner { overflow: hidden; }
 .faq__answer {
   padding-bottom: var(--space-5);
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   max-width: 40rem;
 }
 
@@ -1494,7 +1461,7 @@ html.js .faq__panel-inner { overflow: hidden; }
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(46rem 28rem at 90% -15%, var(--wash-rose), transparent 62%),
+    radial-gradient(46rem 28rem at 90% -15%, var(--wash-sky-faint), transparent 62%),
     radial-gradient(50rem 32rem at -10% 115%, var(--wash-sky-faint), transparent 62%);
 }
 .auth .container { position: relative; }
@@ -1514,7 +1481,7 @@ html.js .faq__panel-inner { overflow: hidden; }
   line-height: var(--display-leading);
   letter-spacing: var(--display-tracking);
 }
-.auth__lead { margin-top: var(--space-5); color: var(--ink-muted); max-width: 32rem; }
+.auth__lead { margin-top: var(--space-5); color: var(--ink-secondary); max-width: 32rem; }
 .auth__points {
   list-style: none;
   margin: var(--space-6) 0 0;
@@ -1527,15 +1494,15 @@ html.js .faq__panel-inner { overflow: hidden; }
   display: flex;
   align-items: flex-start;
   gap: 0.6rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 /* Accent ticks: green stays a locked safety signal, never decoration */
 .auth__point svg { width: 1.1rem; height: 1.1rem; flex: none; margin-top: 0.25rem; color: var(--accent); }
 .auth__soon { margin-top: var(--space-7); }
-.auth__soon-note { margin-top: var(--space-3); font-size: 0.85rem; color: var(--ink-muted); }
+.auth__soon-note { margin-top: var(--space-3); font-size: 0.85rem; color: var(--ink-secondary); }
 
 .auth-card {
-  background: var(--paper-raised);
+  background: var(--surface);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-xl);
   padding: clamp(1.75rem, 4vw, 2.75rem);
@@ -1550,7 +1517,7 @@ html.js .faq__panel-inner { overflow: hidden; }
   letter-spacing: var(--display-tracking);
   line-height: 1.2;
 }
-.auth-card__body { margin-top: var(--space-4); color: var(--ink-muted); font-size: 0.98rem; }
+.auth-card__body { margin-top: var(--space-4); color: var(--ink-secondary); font-size: 0.98rem; }
 
 .field { margin-top: var(--space-5); }
 .field__label {
@@ -1567,10 +1534,11 @@ html.js .faq__panel-inner { overflow: hidden; }
   color: var(--ink);
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: var(--radius-md);
+  /* Matches the button radius so the form reads as one shape system */
+  border-radius: var(--radius-btn);
   transition: border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
 }
-.field__input::placeholder { color: var(--ink-faint); }
+.field__input::placeholder { color: var(--ink-muted); }
 .field__input:focus { outline: none; border-color: var(--accent); box-shadow: var(--focus-ring); }
 
 .auth form .btn { margin-top: var(--space-5); width: 100%; }
@@ -1581,7 +1549,7 @@ html.js .faq__panel-inner { overflow: hidden; }
 }
 .auth-msg--ok { color: var(--safety-green); }
 .auth-account__email { margin-top: var(--space-4); font-weight: 600; }
-.auth-account__status { margin-top: var(--space-3); color: var(--ink-muted); font-size: 0.95rem; }
+.auth-account__status { margin-top: var(--space-3); color: var(--ink-secondary); font-size: 0.95rem; }
 .auth-card [data-auth-state] .btn--ghost { margin-top: var(--space-5); }
 
 .auth-faq { padding-top: 0; }
@@ -1595,7 +1563,7 @@ html.js .faq__panel-inner { overflow: hidden; }
 .site-footer {
   position: relative;
   overflow: hidden;
-  background: var(--sand);
+  background: var(--paper-2);
   border-top: 1px solid var(--line-soft);
   padding-top: var(--space-8);
 }
@@ -1664,14 +1632,14 @@ html.js .faq__panel-inner { overflow: hidden; }
   max-width: 20rem;
   font-size: 0.88rem;
   line-height: 1.6;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 .site-footer__col h2 {
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-muted);
 }
 .site-footer__col ul {
   list-style: none;
@@ -1682,7 +1650,7 @@ html.js .faq__panel-inner { overflow: hidden; }
   gap: var(--space-2);
 }
 .site-footer__col a {
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   text-decoration: none;
   font-size: 0.95rem;
 }
@@ -1697,7 +1665,7 @@ html.js .faq__panel-inner { overflow: hidden; }
   padding-top: var(--space-5);
   border-top: 1px solid var(--line);
   font-size: 0.85rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 
 @media (max-width: 40em) {
@@ -1748,7 +1716,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 
 .map-card {
   position: relative;
-  background: var(--paper-raised);
+  background: var(--surface);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
@@ -1758,7 +1726,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 .map-canvas {
   width: 100%;
   height: clamp(420px, 62vh, 580px);
-  background: var(--sand);
+  background: var(--paper-2);
   z-index: 0;
 }
 @media (max-width: 40em) { .map-canvas { height: 420px; } }
@@ -1766,14 +1734,14 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 .map-fallback {
   padding: var(--space-7) var(--space-5);
   text-align: center;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 
 /* Leaflet chrome, restyled to the site */
 #beach-map.leaflet-container {
   font-family: var(--font-sans);
   font-size: 0.8rem;
-  background: var(--sand);
+  background: var(--paper-2);
 }
 #beach-map .leaflet-bar {
   border: 1px solid var(--line-soft);
@@ -1782,16 +1750,16 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   overflow: hidden;
 }
 #beach-map .leaflet-bar a {
-  background: var(--paper-raised);
+  background: var(--surface);
   color: var(--ink);
   border-bottom: 1px solid var(--line-soft);
 }
 #beach-map .leaflet-bar a:last-child { border-bottom: 0; }
-#beach-map .leaflet-bar a:hover { background: var(--sand); color: var(--ink); }
-#beach-map .leaflet-bar a.leaflet-disabled { background: var(--sand); color: var(--ink-faint); }
+#beach-map .leaflet-bar a:hover { background: var(--paper-2); color: var(--ink); }
+#beach-map .leaflet-bar a.leaflet-disabled { background: var(--paper-2); color: var(--ink-muted); }
 #beach-map .leaflet-control-attribution {
-  background: var(--paper-raised);
-  color: var(--ink-faint);
+  background: var(--surface);
+  color: var(--ink-muted);
   font-size: 0.68rem;
   padding: 2px 8px;
   border-top-left-radius: var(--radius-sm);
@@ -1805,7 +1773,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 
 /* Permanent "Live" label beside the Manly pin */
 .map-live-label {
-  background: var(--paper-raised);
+  background: var(--surface);
   color: var(--accent-hover);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-pill);
@@ -1828,7 +1796,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   width: min(21.5rem, calc(100% - 2rem));
   max-height: calc(100% - 2rem);
   overflow: auto;
-  background: var(--paper-raised);
+  background: var(--surface);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
@@ -1866,11 +1834,11 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   height: 2rem;
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-pill);
-  background: var(--paper-raised);
-  color: var(--ink-muted);
+  background: var(--surface);
+  color: var(--ink-secondary);
   cursor: pointer;
 }
-.map-panel__close:hover { background: var(--sand); color: var(--ink); }
+.map-panel__close:hover { background: var(--paper-2); color: var(--ink); }
 .map-panel__close svg { width: 0.9rem; height: 0.9rem; }
 
 .map-tag {
@@ -1878,8 +1846,8 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   padding: 0.18rem 0.6rem;
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-pill);
-  background: var(--sand);
-  color: var(--ink-muted);
+  background: var(--paper-2);
+  color: var(--ink-secondary);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1908,7 +1876,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-sm);
 }
-/* Data context: sky and slate tints only, never a decorative hue */
+/* Data context: the same single tile treatment, smaller */
 .map-stat__icon {
   grid-row: 1 / 3;
   display: inline-flex;
@@ -1916,9 +1884,9 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: var(--radius-tile);
-  background: var(--tint-sky-bg);
-  color: var(--tint-sky-ink);
+  border-radius: var(--radius-sm);
+  background: var(--accent-tint);
+  color: var(--accent-hover);
 }
 .map-stat__icon svg { width: 1.1rem; height: 1.1rem; }
 .map-stat__label {
@@ -1926,7 +1894,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-muted);
 }
 .map-stat__value {
   font-size: 0.95rem;
@@ -1934,21 +1902,21 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
-.map-stat__na { color: var(--ink-muted); font-weight: 500; }
+.map-stat__na { color: var(--ink-secondary); font-weight: 500; }
 
 .map-skel {
   display: inline-block;
   width: 3.2rem;
   height: 0.85em;
   border-radius: var(--radius-pill);
-  background: var(--sand);
+  background: var(--paper-2);
 }
 
 /* Honest recency line under the stats grid */
 .map-asat {
   margin: var(--space-2) 0 0;
   font-size: 0.78rem;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 
 /* Locked, app-only safety read. A lock and abstract shimmer bars only,
@@ -1971,9 +1939,9 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   justify-content: center;
   width: 1.7rem;
   height: 1.7rem;
-  border-radius: var(--radius-tile);
-  background: var(--tint-slate-bg);
-  color: var(--tint-slate-ink);
+  border-radius: var(--radius-sm);
+  background: var(--accent-tint);
+  color: var(--accent-hover);
 }
 .map-locked__lock svg { width: 1rem; height: 1rem; }
 .map-locked__title { font-size: 0.95rem; font-weight: 700; color: var(--ink); }
@@ -1985,7 +1953,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 .map-locked__shimmer span {
   height: 0.55rem;
   border-radius: var(--radius-pill);
-  background: var(--sand);
+  background: var(--paper-2);
 }
 .map-locked__shimmer span:nth-child(1) { width: 62%; }
 .map-locked__shimmer span:nth-child(2) { width: 40%; }
@@ -1994,7 +1962,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   margin-top: var(--space-3);
   font-size: 0.88rem;
   line-height: 1.55;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 .map-locked__cta {
   margin-top: var(--space-3);
@@ -2011,7 +1979,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   gap: var(--space-3) var(--space-5);
   padding: var(--space-4) var(--space-5);
   border-top: 1px solid var(--line-soft);
-  background: var(--paper-raised);
+  background: var(--surface);
 }
 .map-legend__item {
   display: inline-flex;
@@ -2019,10 +1987,10 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   gap: var(--space-2);
   font-size: 0.88rem;
   font-weight: 500;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
 }
 .map-legend__pin { width: 0.85rem; height: auto; flex: none; }
-.map-legend__note { margin-left: auto; font-size: 0.8rem; color: var(--ink-muted); }
+.map-legend__note { margin-left: auto; font-size: 0.8rem; color: var(--ink-secondary); }
 .map-legend__note a { color: inherit; text-underline-offset: 2px; }
 @media (max-width: 48em) { .map-legend__note { margin-left: 0; width: 100%; } }
 
@@ -2030,12 +1998,12 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
 @media (prefers-reduced-motion: no-preference) {
   .map-panel:not([hidden]) { animation: map-panel-in 240ms var(--ease-out); }
   .map-skel {
-    background-image: linear-gradient(90deg, var(--paper-2), var(--tint-sky-bg), var(--paper-2));
+    background-image: linear-gradient(90deg, var(--paper-2), var(--accent-tint), var(--paper-2));
     background-size: 200% 100%;
     animation: map-shimmer 1.3s linear infinite;
   }
   .map-locked__shimmer span {
-    background-image: linear-gradient(90deg, var(--paper-2), var(--tint-slate-bg), var(--paper-2));
+    background-image: linear-gradient(90deg, var(--paper-2), var(--line-soft), var(--paper-2));
     background-size: 200% 100%;
     animation: map-shimmer 2.2s linear infinite;
   }
@@ -2165,7 +2133,7 @@ html.js .stagger .reveal:nth-child(6) { transition-delay: 350ms; }
   aspect-ratio: 16 / 10;
 }
 .news-card__meta { padding: var(--space-5); }
-.news-card__topic { font-size: 0.88rem; color: var(--ink-muted); }
+.news-card__topic { font-size: 0.88rem; color: var(--ink-secondary); }
 .news-card__source {
   margin-top: var(--space-2);
   font-family: var(--font-serif);
