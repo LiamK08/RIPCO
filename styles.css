@@ -68,8 +68,8 @@
   --on-accent-soft: rgb(255 255 255 / 0.8);
   --on-accent-line: rgb(255 255 255 / 0.38);
 
-  /* Decorative pastel tints for marketing furniture ONLY (benefit
-     grids, feature icons, steps, FAQ). Each pair is a soft tile
+  /* Decorative pastel tints for marketing furniture ONLY (feature
+     grids, source cards, steps, FAQ). Each pair is a soft tile
      background plus a deeper glyph colour. Deliberately NO green,
      amber, orange, gold or alert red: those hues are locked safety
      signals and are never decorative. In any context showing real
@@ -778,7 +778,6 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
 .tile svg { width: 2rem; height: 2rem; }
 
 /* Hover on the parent cell lifts the tile only; no colour change */
-.benefit:hover .tile,
 .card:hover .tile,
 .source-card:hover .tile {
   transform: translateY(-2px);
@@ -788,7 +787,6 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .tile { transition: none; }
-  .benefit:hover .tile,
   .card:hover .tile,
   .source-card:hover .tile { transform: none; }
 }
@@ -799,36 +797,6 @@ html.js .section[aria-label="At the beach"]:has(.slot.is-empty) { display: none;
 .tile--rose  { --tile-bg: var(--tint-rose-bg);       --tile-ink: var(--tint-rose-ink);       --tile-ring: var(--tint-rose-ring); }
 .tile--clay  { --tile-bg: var(--tint-clay-bg);       --tile-ink: var(--tint-clay-ink);       --tile-ring: var(--tint-clay-ring); }
 .tile--slate { --tile-bg: var(--tint-slate-bg);      --tile-ink: var(--tint-slate-ink);      --tile-ring: var(--tint-slate-ring); }
-
-/* ------------------------------ Benefits -------------------------------
-   Airy benefit grid: no card border, background or shadow. The tinted
-   tile floats directly on the paper, everything centred. */
-
-.benefits {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(2.75rem, 6vw, 4rem) var(--space-6);
-}
-@media (max-width: 62em) { .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 40em) { .benefits { grid-template-columns: 1fr; } }
-
-.benefit { text-align: center; }
-.benefit__icon { margin-inline: auto; }
-.benefit__title {
-  margin-top: var(--space-5);
-  font-family: var(--font-serif);
-  font-weight: var(--display-weight);
-  font-size: 1.4rem;
-  letter-spacing: var(--display-tracking);
-  line-height: 1.2;
-  color: var(--ink);
-}
-.benefit__body {
-  margin: var(--space-3) auto 0;
-  max-width: 26rem;
-  font-size: 0.98rem;
-  color: var(--ink-muted);
-}
 
 /* --------------------------- Navy product band ------------------------- */
 
