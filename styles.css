@@ -226,29 +226,16 @@ body::after {
 /* -------------------------- Editorial type ----------------------------- */
 
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  display: inline-block;
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
 }
-/* The small accent dot that opens every eyebrow */
-.eyebrow::before {
-  content: '';
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: var(--radius-pill);
-  background: currentColor;
-  flex: none;
-}
 .eyebrow--alert { color: var(--safety-red-deep); }
-/* No dot: for rows where an icon tile above is already the marker */
-.eyebrow--plain::before { content: none; }
 
-/* Marketing section headers are centred: dot eyebrow, serif headline,
+/* Marketing section headers are centred: eyebrow label, serif headline,
    optional subhead. Left alignment remains only inside genuine
    two-column splits (feature rows). */
 .section-head {
@@ -1068,7 +1055,7 @@ html.js .pin__step.is-active { opacity: 1; }
 .page-hero .container { position: relative; }
 .page-hero__inner { max-width: 50rem; }
 
-/* Centred page-hero variant: dot eyebrow, centred serif headline and
+/* Centred page-hero variant: eyebrow label, centred serif headline and
    subhead, compact padding so the first row starts within reach. */
 .page-hero--centred { padding-block: clamp(3.5rem, 6vh, 5rem) clamp(2.75rem, 5vw, 4.25rem); }
 .page-hero--centred .page-hero__inner {
