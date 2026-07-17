@@ -1010,6 +1010,47 @@ html.js .pin__step.is-active { opacity: 1; }
   to { transform: translate3d(-6%, -5%, 0) rotate(-20deg) scale(0.96); }
 }
 .cta__inner > * { position: relative; }
+/* Soft white puffs rise from a single source at the centre of the band
+   and drift up and away like clouds. Purely decorative: white only, no
+   signal colours, transform and opacity only, and the puffs are invisible
+   wherever the animation does not run (other pages, reduced motion). */
+.cta__smoke {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.cta__smoke span {
+  --puff: clamp(9rem, 22vw, 18rem);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--puff);
+  height: var(--puff);
+  margin: calc(var(--puff) / -2) 0 0 calc(var(--puff) / -2);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--on-accent-soft), transparent 65%);
+  filter: blur(30px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.cta__smoke span:nth-child(1) { --smoke-x: -20%; --smoke-peak: 0.3; --smoke-dur: 17s; --smoke-delay: -2s; }
+.cta__smoke span:nth-child(2) { --puff: clamp(7rem, 17vw, 14rem); --smoke-x: 24%; --smoke-peak: 0.25; --smoke-dur: 21s; --smoke-delay: -9s; }
+.cta__smoke span:nth-child(3) { --smoke-x: 7%; --smoke-peak: 0.31; --smoke-dur: 19s; --smoke-delay: -14s; }
+.cta__smoke span:nth-child(4) { --puff: clamp(11rem, 26vw, 21rem); --smoke-x: -14%; --smoke-peak: 0.22; --smoke-dur: 24s; --smoke-delay: -6s; }
+.cta__smoke span:nth-child(5) { --puff: clamp(8rem, 19vw, 15rem); --smoke-x: 15%; --smoke-peak: 0.28; --smoke-dur: 16s; --smoke-delay: -12s; }
+/* The rise runs on the About-page band only, matching the liquid wash. */
+@media (prefers-reduced-motion: no-preference) {
+  .page-home .cta__smoke span {
+    animation: cta-smoke var(--smoke-dur, 19s) linear infinite;
+    animation-delay: var(--smoke-delay, 0s);
+  }
+}
+@keyframes cta-smoke {
+  0% { transform: translate3d(0, 16%, 0) scale(0.4); opacity: 0; }
+  30% { opacity: var(--smoke-peak, 0.24); }
+  65% { opacity: calc(var(--smoke-peak, 0.24) * 0.5); }
+  100% { transform: translate3d(var(--smoke-x, 0%), -135%, 0) scale(1.55); opacity: 0; }
+}
 .cta__title {
   font-family: var(--font-serif);
   font-weight: var(--display-weight);
@@ -1024,7 +1065,9 @@ html.js .pin__step.is-active { opacity: 1; }
   margin: var(--space-5) auto 0;
   max-width: 34rem;
   font-size: 1.125rem;
-  color: var(--on-accent-soft);
+  /* Full white, not the soft tone: the smoke wash drifts behind this line,
+     and the lead must hold 4.5:1 at the lightest animation frame. */
+  color: var(--on-accent);
 }
 .cta__actions {
   display: flex;
