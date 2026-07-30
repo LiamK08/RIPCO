@@ -214,13 +214,21 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 
 a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 a:hover { color: var(--accent-hover); }
+a:active { color: var(--accent-pressed); }
 
 ::selection { background: var(--accent-tint); color: var(--ink); }
 
+/* The soft ring is the visible state in normal rendering. The transparent
+   outline is what carries it into forced-colors mode, where box-shadow is
+   dropped and a bare outline:none would leave no focus indicator at all. */
 :focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow: var(--focus-ring);
   border-radius: var(--radius-sm);
+}
+@media (forced-colors: active) {
+  :focus-visible { outline-color: Highlight; }
 }
 
 .visually-hidden {
@@ -340,6 +348,7 @@ em.accent {
   padding-bottom: var(--space-05);
 }
 .text-link:hover { color: var(--accent-hover); border-color: var(--accent); }
+.text-link:active { color: var(--accent-pressed); }
 .text-link__arrow { display: inline-block; transition: transform 200ms var(--ease-out); }
 .text-link:hover .text-link__arrow { transform: translateX(3px); }
 
@@ -464,6 +473,7 @@ em.accent {
   transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out);
 }
 .site-nav__link:hover { color: var(--ink); background: var(--paper-2); }
+.site-nav__link:active { background: var(--accent-tint); }
 .site-nav__link.is-active { color: var(--ink); font-weight: 600; }
 .site-nav__cta-item { margin-left: var(--space-3); }
 .site-nav__cta { white-space: nowrap; }
@@ -1120,6 +1130,7 @@ html.js .pin__step.is-active { opacity: 1; }
   color: var(--ink);
 }
 .card--action:hover { color: var(--ink); }
+.card--action:active .card__from { color: var(--accent-pressed); }
 .card--action .card__body { flex: 1; }
 .card--action:hover .card__icon { transform: translateY(-3px); }
 .card__icon { transition: transform 200ms var(--ease-out); }
@@ -1240,6 +1251,7 @@ html.js .pin__step.is-active { opacity: 1; }
   color: var(--ink);
 }
 .faq__btn:hover { color: var(--accent-hover); }
+.faq__btn:active { color: var(--accent-pressed); }
 .faq__marker {
   position: relative;
   flex: none;
@@ -1477,6 +1489,7 @@ html.js .faq__panel-inner { overflow: hidden; }
   font-size: var(--text-base);
 }
 .site-footer__col a:hover { color: var(--accent-hover); text-decoration: underline; }
+.site-footer__col a:active { color: var(--accent-pressed); }
 
 .site-footer__base {
   display: flex;
@@ -1488,6 +1501,19 @@ html.js .faq__panel-inner { overflow: hidden; }
   border-top: 1px solid var(--line);
   font-size: var(--text-xs);
   color: var(--ink-secondary);
+}
+
+.site-footer__base a { color: var(--accent); }
+.site-footer__base a:hover { color: var(--accent-hover); }
+.site-footer__base a:active { color: var(--accent-pressed); }
+/* Marks the reference links as references, so the column cannot be read
+   as a partner or endorsement list. */
+.site-footer__note {
+  margin-top: var(--space-3);
+  font-size: var(--text-3xs);
+  line-height: var(--leading-normal);
+  color: var(--ink-muted);
+  max-width: 22ch;
 }
 
 @media (max-width: 40em) {
