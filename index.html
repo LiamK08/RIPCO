@@ -3,20 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RipCo: AI rip current detection for iPhone</title>
-  <meta name="description" content="RipCo runs computer vision on existing public beach cameras to detect rip currents in real time and show them as a clear visual warning. An aid for beachgoers, never a substitute for lifeguards and flags.">
+  <title>RipCo: rip current detection on live beach cameras</title>
+  <meta name="description" content="RipCo runs computer vision on existing public beach cameras to detect rip currents in real time. A free iPhone app, starting at Manly Beach.">
+  <link rel="canonical" href="https://www.ripcosafety.com/">
   <meta name="theme-color" content="#FDFBF7">
-  <meta property="og:title" content="RipCo: AI rip current detection for iPhone">
-  <meta property="og:description" content="RipCo runs computer vision on existing public beach cameras to detect rip currents in real time and show them as a clear visual warning. An aid for beachgoers, never a substitute for lifeguards and flags.">
+  <meta property="og:site_name" content="RipCo">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:url" content="https://www.ripcosafety.com/">
+  <meta property="og:title" content="RipCo: rip current detection on live beach cameras">
+  <meta property="og:description" content="RipCo runs computer vision on existing public beach cameras to detect rip currents in real time. A free iPhone app, starting at Manly Beach.">
+  <meta property="og:image" content="https://www.ripcosafety.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="RipCo: see the rip before you are in it.">
+  <meta property="og:locale" content="en_AU">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RipCo: rip current detection on live beach cameras">
+  <meta name="twitter:description" content="RipCo runs computer vision on existing public beach cameras to detect rip currents in real time. A free iPhone app, starting at Manly Beach.">
+  <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-image.png">
+  <meta name="twitter:image:alt" content="RipCo: see the rip before you are in it.">
   <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
   <link rel="preload" href="assets/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/newsreader-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/app-detection.png" as="image">
   <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
@@ -58,7 +68,7 @@
           <li><a class="site-nav__link" href="/features">Features</a></li>
           <li><a class="site-nav__link" href="/beaches">Beaches</a></li>
           <li><a class="site-nav__link" href="/safety">Safety</a></li>
-          <li class="site-nav__cta-item"><a class="btn btn--primary site-nav__cta" href="/account">Get early access</a></li>
+          <li class="site-nav__cta-item"><a class="btn btn--primary site-nav__cta" href="/account">Early access</a></li>
         </ul>
       </nav>
     </div>
@@ -77,7 +87,7 @@
             of the water, before you step in.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary btn--lg" href="/account">Get early access</a>
+            <a class="btn btn--primary btn--lg" href="/account">Early access</a>
             <a class="btn btn--ghost btn--lg" href="/how-it-works">See how it works</a>
           </div>
           <p class="hero__note" role="note">
@@ -91,34 +101,11 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/app-detection.png" alt="RipCo showing a detected rip current outlined in red on a live beach camera view, with a confidence percentage" loading="eager" fetchpriority="high" width="390" height="844" decoding="async">
               </div>
             </div>
             <figcaption class="hero__caption">The detection view in the app</figcaption>
           </figure>
         </div>
-      </div>
-    </section>
-
-    <!-- ============================ BEACH PHOTO ============================ -->
-    <section class="section section--flush" aria-label="At the beach">
-      <div class="container container--wide">
-        <figure class="photo-figure reveal">
-          <div class="slot slot--wide" data-label="Photo">
-            <img src="assets/hero-beach.jpg" alt="A bright, sunny morning at an Australian surf beach, with waves breaking along the sand" loading="lazy" width="2100" height="900" decoding="async">
-          </div>
-        </figure>
-      </div>
-    </section>
-
-    <!-- ============================ TRUST STRIP ============================ -->
-    <section class="trust" aria-label="Research background">
-      <div class="container container--wide trust__inner">
-        <p class="trust__item"><span class="trust__figure">78%</span> of surveyed beachgoers could not confidently identify a rip current</p>
-        <span class="trust__sep" aria-hidden="true"></span>
-        <p class="trust__item">Informed by primary research with Surf Life Saving NSW patrol members</p>
-        <span class="trust__sep" aria-hidden="true"></span>
-        <p class="trust__item">Built first for Manly Beach, made to scale across Australia</p>
       </div>
     </section>
 
@@ -149,7 +136,10 @@
             <dt class="stat__label">already check beach conditions before they visit</dt>
           </div>
         </dl>
-        <p class="stats__source reveal">Figures from RipCo beachgoer surveys.</p>
+        <p class="stats__source reveal">
+          Figures from RipCo&rsquo;s own survey of beachgoers. This is our primary
+          research, not third-party or industry data.
+        </p>
       </div>
     </section>
 
@@ -166,7 +156,6 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/app-detection.png" alt="RipCo app showing the live camera view with a rip current outlined in red" loading="lazy" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>
@@ -201,7 +190,9 @@
         <div class="section-head reveal">
           <p class="eyebrow">Features</p>
           <h2 class="section-title" id="features-title">Five tools, one <em class="accent">job</em>.</h2>
-          <p class="section-lead">Everything in RipCo works towards the same outcome: fewer people caught in rips, and more people reading the water before they swim.</p>
+          <p class="section-lead">Five tools in one free app. Rip detection runs at Manly Beach
+            and is rolling out to more Australian beaches; every other beach is
+            conditions only.</p>
         </div>
 
         <div class="cards stagger">
@@ -277,108 +268,14 @@
       </div>
     </section>
 
-    <!-- ============================ IN THE NEWS ============================ -->
-    <section class="section section--snug-top" aria-labelledby="news-title">
-      <div class="container container--wide">
-        <div class="section-head reveal">
-          <p class="eyebrow">Beach safety</p>
-          <h2 class="section-title" id="news-title">In the <em class="accent">news</em>.</h2>
-          <p class="section-lead">
-            Surf Life Saving Australia names rip currents the number one coastal
-            hazard in the country. These are the organisations and researchers
-            covering rips, and the reading worth your time.
-          </p>
-        </div>
-
-        <div class="news-carousel">
-          <button class="news-nav news-nav--prev" type="button" aria-label="Previous articles" data-news-prev><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
-          <div class="news stagger" data-news-track>
-            <a class="news-card reveal" href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-beachsafe.png" alt="BeachSafe guidance on spotting and surviving rip currents" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">Rip current safety</p>
-                <p class="news-card__source">BeachSafe</p>
-              </div>
-            </a>
-            <a class="news-card reveal" href="https://sls.com.au" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-slsa.png" alt="Surf Life Saving Australia coastal safety research" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">National Coastal Safety Report</p>
-                <p class="news-card__source">Surf Life Saving Australia</p>
-              </div>
-            </a>
-            <a class="news-card reveal" href="https://www.royallifesaving.com.au" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-royal-life-saving.png" alt="Royal Life Saving Australia drowning research" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">National Drowning Report</p>
-                <p class="news-card__source">Royal Life Saving</p>
-              </div>
-            </a>
-            <a class="news-card reveal" href="https://www.scienceofthesurf.com" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-science-of-surf.png" alt="Science of the Surf rip current research and education" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">Rip current research</p>
-                <p class="news-card__source">Science of the Surf</p>
-              </div>
-            </a>
-            <a class="news-card reveal" href="https://www.abc.net.au/news" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-abc-news.png" alt="ABC News reporting on rip currents and coastal drownings" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">Rip current coverage</p>
-                <p class="news-card__source">ABC News</p>
-              </div>
-            </a>
-            <a class="news-card reveal" href="https://www.bom.gov.au" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-bom.png" alt="Bureau of Meteorology coastal and marine forecasts" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">Coastal and marine forecasts</p>
-                <p class="news-card__source">Bureau of Meteorology</p>
-              </div>
-            </a>
-            <a class="news-card reveal" href="https://www.unsw.edu.au" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-unsw.png" alt="UNSW Sydney beach safety and rip current research" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">Beach safety research</p>
-                <p class="news-card__source">UNSW Sydney</p>
-              </div>
-            </a>
-            <a class="news-card reveal" href="https://www.surflifesaving.com.au" target="_blank" rel="noopener noreferrer">
-              <div class="slot" data-label="Article image">
-                <img src="assets/news-sls-nsw.png" alt="Surf Life Saving NSW patrols and beach safety programs" loading="lazy" width="1200" height="750" decoding="async">
-              </div>
-              <div class="news-card__meta">
-                <p class="news-card__topic">Patrols on NSW beaches</p>
-                <p class="news-card__source">Surf Life Saving NSW</p>
-              </div>
-            </a>
-          </div>
-          <button class="news-nav news-nav--next" type="button" aria-label="Next articles" data-news-next><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
-        </div>
-      </div>
-    </section>
-
     <!-- =============================== CTA ================================= -->
     <section class="cta" aria-labelledby="cta-title">
       <div class="container cta__inner">
         <div class="cta__smoke" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
         <h2 class="cta__title" id="cta-title">Know the water <em class="accent">before</em> you get there.</h2>
-        <p class="cta__lead">RipCo is coming to the App Store. Join the early-access list and be first in at Manly Beach.</p>
+        <p class="cta__lead">RipCo is coming to the App Store, starting at Manly Beach. Early access opens before launch.</p>
         <div class="cta__actions">
-          <a class="btn btn--primary btn--lg" href="/account">Get early access</a>
+          <a class="btn btn--primary btn--lg" href="/account">Early access</a>
           <a class="btn btn--ghost btn--lg" href="/how-it-works">See how it works</a>
         </div>
         <p class="cta__note">Whatever RipCo shows, swim between the red and yellow flags and follow the lifeguards.</p>
@@ -403,7 +300,7 @@
           <ul>
             <li><a href="/features">Features</a></li>
             <li><a href="/beaches">Beaches</a></li>
-            <li><a href="/account">Get early access</a></li>
+            <li><a href="/account">Early access</a></li>
           </ul>
         </nav>
         <nav class="site-footer__col" aria-label="How it works">
@@ -420,17 +317,19 @@
             <li><a href="/safety#caught">Caught in a rip</a></li>
           </ul>
         </nav>
-        <nav class="site-footer__col" aria-label="Official sources">
-          <h2>Official sources</h2>
+        <nav class="site-footer__col" aria-label="Reference sources">
+          <h2>Reference sources</h2>
           <ul>
             <li><a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">BeachSafe</a></li>
             <li><a href="https://sls.com.au" target="_blank" rel="noopener noreferrer">Surf Life Saving Australia</a></li>
             <li><a href="https://www.bom.gov.au" target="_blank" rel="noopener noreferrer">Bureau of Meteorology</a></li>
           </ul>
+          <p class="site-footer__note">Independent references. Not partners, and not endorsers of RipCo.</p>
         </nav>
       </div>
       <div class="site-footer__base">
         <p>&copy; <span data-year>2026</span> RipCo</p>
+        <p>Weather and marine data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo.com</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.</p>
         <p>Rip currents can appear even in calmer-looking water.</p>
       </div>
     </div>
