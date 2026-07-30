@@ -45,7 +45,7 @@
           <li><a class="site-nav__link" href="/features">Features</a></li>
           <li><a class="site-nav__link" href="/beaches">Beaches</a></li>
           <li><a class="site-nav__link" href="/safety">Safety</a></li>
-          <li class="site-nav__cta-item"><a class="btn btn--primary site-nav__cta" href="/account">Get early access</a></li>
+          <li class="site-nav__cta-item"><a class="btn btn--primary site-nav__cta" href="/account">Early access</a></li>
         </ul>
       </nav>
     </div>
@@ -77,7 +77,6 @@
             <div class="device">
               <div class="device__notch" aria-hidden="true"></div>
               <div class="device__screen" data-label="Screenshot">
-                <img src="assets/app-detection.png" alt="RipCo&rsquo;s live camera view with a detected rip current outlined in red and a confidence percentage" loading="eager" fetchpriority="high" width="390" height="844" decoding="async">
               </div>
             </div>
           </div>
@@ -117,71 +116,38 @@
       </div>
     </section>
 
-    <!-- ======================= DETECTION ILLUSTRATION ====================== -->
-    <section class="section" aria-labelledby="detect-title">
+    <!-- ====================== WHAT THE MODEL LOOKS FOR ==================== -->
+    <section class="section" aria-labelledby="signature-title">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">The warning, up close</p>
-          <h2 class="section-title" id="detect-title">What a detection <em class="accent">looks</em> like.</h2>
+          <p class="eyebrow">The visual signature</p>
+          <h2 class="section-title" id="signature-title">What the model <em class="accent">looks</em> for.</h2>
           <p class="section-lead">
-            This is an animated illustration of how the app presents a detection:
-            the feed is analysed, a likely rip is traced in red, and a confidence
-            percentage climbs as the model settles. It is a diagram, not a real
-            camera frame.
+            A rip leaves a readable trace on the surface. These are the three
+            features the model weighs frame by frame, and they are the same
+            ones lifeguards are trained to read.
           </p>
         </div>
 
-        <figure class="detect is-detected reveal" data-detect aria-label="Illustration of how RipCo shows a detection: a schematic camera frame in which a rip current is traced with a red outline while a confidence percentage rises to 94 percent.">
-          <div class="detect__frame">
-            <span class="detect__tag">Illustration</span>
-            <svg class="detect__scene" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-              <defs>
-                <linearGradient id="detect-scan" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stop-color="var(--accent-bright)" stop-opacity="0"/>
-                  <stop offset="0.5" stop-color="var(--accent-bright)" stop-opacity="0.4"/>
-                  <stop offset="1" stop-color="var(--accent-bright)" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
+        <div class="cards stagger">
+          <article class="card reveal">
+            <h3 class="card__title">A darker channel</h3>
+            <p class="card__body">Deeper water cutting out through the surf reflects less light, so a rip often reads as a darker lane running away from the beach.</p>
+          </article>
+          <article class="card reveal">
+            <h3 class="card__title">A gap in the breaking waves</h3>
+            <p class="card__body">Waves break on the sandbanks either side of a rip but not in the channel itself, leaving a calmer-looking gap in the line of white water.</p>
+          </article>
+          <article class="card reveal">
+            <h3 class="card__title">Foam and sediment moving out</h3>
+            <p class="card__body">Foam, sand and debris streaming away from shore show the direction the water is pulling, which is what separates a rip from a still patch.</p>
+          </article>
+        </div>
 
-              <path class="detect__grid-line" d="M80 0V600 M160 0V600 M240 0V600 M320 0V600 M400 0V600 M480 0V600 M560 0V600 M640 0V600 M720 0V600 M800 0V600 M880 0V600 M0 80H960 M0 160H960 M0 240H960 M0 320H960 M0 400H960 M0 480H960 M0 560H960"/>
-
-              <path class="detect__channel" d="M556 600 C 540 512, 548 420, 576 340 C 596 282, 628 232, 664 200 C 640 236, 622 282, 610 336 C 596 400, 592 500, 604 600 Z"/>
-
-              <g>
-                <path class="detect__wave" d="M-10 250 Q 120 240 250 250 T 500 248" stroke-width="4"/>
-                <path class="detect__wave" d="M710 246 Q 820 238 940 246 T 990 244" stroke-width="4"/>
-                <path class="detect__wave" d="M-10 330 Q 130 318 270 330 T 520 326" stroke-width="5"/>
-                <path class="detect__wave" d="M700 322 Q 810 314 930 324 T 990 320" stroke-width="5"/>
-                <path class="detect__wave" d="M-10 414 Q 140 400 290 414 T 540 410" stroke-width="6"/>
-                <path class="detect__wave" d="M690 404 Q 800 394 928 406 T 990 402" stroke-width="6"/>
-                <path class="detect__wave" d="M-10 498 Q 150 484 310 498 T 560 494" stroke-width="7"/>
-                <path class="detect__wave" d="M676 488 Q 796 478 924 490 T 990 486" stroke-width="7"/>
-              </g>
-
-              <rect class="detect__scanline" data-detect-scan x="-120" y="0" width="120" height="600" fill="url(#detect-scan)"/>
-
-              <g class="detect__overlay" data-detect-overlay>
-                <path class="detect__fill" data-detect-fill d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
-                <path class="detect__outline" data-detect-outline d="M544 566 C 528 486, 534 402, 560 326 C 582 262, 620 204, 672 164 C 704 140, 734 130, 758 134 C 770 154, 764 182, 744 208 C 706 252, 672 306, 650 366 C 630 420, 620 476, 624 534 C 624 552, 616 564, 600 566 Z"/>
-                <path class="detect__flow" data-detect-flow d="M596 540 C 585 474, 592 406, 612 344 C 630 290, 658 242, 692 206"/>
-              </g>
-            </svg>
-
-            <div class="detect__hud">
-              <p class="detect__status" data-detect-status>
-                <span class="detect__status-dot"></span>
-                <span data-detect-status-text>Rip detected</span>
-              </p>
-              <p class="detect__chip" data-detect-chip>Confidence <span data-detect-conf>94</span>%</p>
-            </div>
-          </div>
-          <figcaption class="detect__caption">
-            Illustration of how a detection is shown in the app. This is a
-            diagram, not a real screenshot or a real result. In the app,
-            detections appear on the live camera view and always defer to the
-            flags and the lifeguards.
-          </figcaption>
-        </figure>
+        <p class="reveal band__more">
+          Detection runs at Manly Beach and is rolling out to more Australian
+          beaches. Every other beach on RipCo is conditions only.
+        </p>
       </div>
     </section>
 
@@ -221,10 +187,10 @@
       <div class="container cta__inner">
         <div class="cta__smoke" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
         <h2 class="cta__title" id="cta-title">See it on <em class="accent">your</em> beach.</h2>
-        <p class="cta__lead">RipCo is coming to the App Store. Join the early-access list and be first in at Manly Beach.</p>
+        <p class="cta__lead">RipCo is coming to the App Store, starting at Manly Beach. Early access opens before launch.</p>
         <div class="cta__actions">
-          <a class="btn btn--primary btn--lg" href="/account">Get early access</a>
-          <a class="btn btn--ghost btn--lg" href="/how-it-works">See how it works</a>
+          <a class="btn btn--primary btn--lg" href="/account">Early access</a>
+          <a class="btn btn--ghost btn--lg" href="/features">See the features</a>
         </div>
         <p class="cta__note">Whatever RipCo shows, swim between the red and yellow flags and follow the lifeguards.</p>
       </div>
@@ -248,7 +214,7 @@
           <ul>
             <li><a href="/features">Features</a></li>
             <li><a href="/beaches">Beaches</a></li>
-            <li><a href="/account">Get early access</a></li>
+            <li><a href="/account">Early access</a></li>
           </ul>
         </nav>
         <nav class="site-footer__col" aria-label="How it works">

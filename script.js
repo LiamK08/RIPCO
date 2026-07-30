@@ -1,8 +1,8 @@
 /* RipCo marketing site. Shared behaviour, vanilla JS, no dependencies.
    Loaded on every page. Every module is guarded, so each runs only where
    its markup exists. The site is fully readable without JS: nav wraps,
-   reveal content is visible, the detection diagram shows its final state,
-   stats show their written values and FAQ answers are open. */
+   reveal content is visible, stats show their written values and FAQ
+   answers are open. */
 
 (function () {
   'use strict';
@@ -207,173 +207,21 @@
   })();
 
   /* ====================================================================
-     Detection illustration (how-it-works). Diagram only, never a result.
-     Loop: scan, trace red outline, confidence climbs, hold, reset.
-     Markup ships the detected state, so no-JS and reduced-motion users
-     see a complete, correct illustration.
+     Device screens: when real app captures are dropped in, a failed load
+     falls back to the neutral labelled frame rather than a broken icon.
+     The frames ship empty until those captures exist.
      ==================================================================== */
 
   (function () {
-    var detect = document.querySelector('[data-detect]');
-    if (!detect) return;
-
-    var outline = detect.querySelector('[data-detect-outline]');
-    var fill = detect.querySelector('[data-detect-fill]');
-    var overlay = detect.querySelector('[data-detect-overlay]');
-    var flow = detect.querySelector('[data-detect-flow]');
-    var confEl = detect.querySelector('[data-detect-conf]');
-    var statusText = detect.querySelector('[data-detect-status-text]');
-
-    var outlineLength = 0;
-    if (outline) { try { outlineLength = outline.getTotalLength(); } catch (e) { outlineLength = 0; } }
-
-    var PHASES = [
-      { name: 'scan',  duration: 3000 },
-      { name: 'lock',  duration: 1500 },
-      { name: 'hold',  duration: 3600 },
-      { name: 'reset', duration: 900 }
-    ];
-
-    var raf = null, phaseIndex = 0, phaseStart = null, visible = true;
-
-    var setConf = function (v) { if (confEl) confEl.textContent = String(Math.round(v)); };
-
-    var setDetected = function () {
-      detect.classList.remove('is-scanning');
-      detect.classList.add('is-detected');
-      if (overlay) overlay.style.opacity = '1';
-      if (outline) { outline.style.strokeDasharray = 'none'; outline.style.strokeDashoffset = '0'; outline.style.opacity = '1'; }
-      if (fill) fill.style.opacity = '1';
-      if (flow) flow.style.opacity = '0.85';
-      if (statusText) statusText.textContent = 'Rip detected';
-      setConf(94);
-    };
-
-    var primeScan = function () {
-      detect.classList.remove('is-detected');
-      if (statusText) statusText.textContent = 'Analysing feed';
-      setConf(0);
-      if (overlay) overlay.style.opacity = '1';
-      if (fill) fill.style.opacity = '0';
-      if (flow) flow.style.opacity = '0';
-      if (outline) {
-        if (outlineLength > 0) {
-          outline.style.strokeDasharray = String(outlineLength);
-          outline.style.strokeDashoffset = String(outlineLength);
-          outline.style.opacity = '1';
-        } else {
-          outline.style.opacity = '0';
-        }
-      }
-    };
-
-    var enterPhase = function (index, now) {
-      phaseIndex = index; phaseStart = now;
-      var name = PHASES[phaseIndex].name;
-      if (name === 'scan') { primeScan(); detect.classList.add('is-scanning'); }
-      else if (name === 'lock') { detect.classList.remove('is-scanning'); if (statusText) statusText.textContent = 'Rip signature found'; }
-      else if (name === 'hold') {
-        detect.classList.add('is-detected');
-        if (statusText) statusText.textContent = 'Rip detected';
-        if (outline) outline.style.opacity = '1';
-        if (fill) fill.style.opacity = '1';
-        if (flow) flow.style.opacity = '0.85';
-      } else if (name === 'reset') {
-        if (overlay) overlay.style.opacity = '0';
-        detect.classList.remove('is-detected');
-        if (statusText) statusText.textContent = 'Analysing feed';
-      }
-    };
-
-    var frame = function (now) {
-      if (phaseStart === null) enterPhase(0, now);
-      var phase = PHASES[phaseIndex];
-      var elapsed = now - phaseStart;
-      var t = Math.min(elapsed / phase.duration, 1);
-
-      if (phase.name === 'scan') setConf(easeOutCubic(t) * 34);
-      else if (phase.name === 'lock') {
-        if (outline && outlineLength > 0) outline.style.strokeDashoffset = String(outlineLength * (1 - easeOutCubic(t)));
-        setConf(34 + easeOutCubic(t) * 60);
-      } else if (phase.name === 'hold') setConf(94 + Math.sin(elapsed / 500) * 1.1);
-
-      if (t >= 1) enterPhase((phaseIndex + 1) % PHASES.length, now);
-      raf = window.requestAnimationFrame(frame);
-    };
-
-    var stop = function () { if (raf !== null) { window.cancelAnimationFrame(raf); raf = null; } };
-    var start = function () {
-      if (prefersReducedMotion()) { stop(); setDetected(); return; }
-      if (raf === null && visible && !document.hidden) { phaseStart = null; phaseIndex = 0; raf = window.requestAnimationFrame(frame); }
-    };
-
-    if (prefersReducedMotion()) setDetected(); else primeScan();
-
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        visible = entries[entries.length - 1].isIntersecting;
-        if (visible) start(); else stop();
-      }, { threshold: 0.25 }).observe(detect);
-    } else if (!prefersReducedMotion()) {
-      start();
-    }
-
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
-    onMotionChange(function () { if (prefersReducedMotion()) { stop(); setDetected(); } else start(); });
-  })();
-
-  /* ====================================================================
-     Image slots: mark empty on load failure so the neutral placeholder
-     shows instead of a broken-image icon
-     ==================================================================== */
-
-  (function () {
-    var imgs = Array.prototype.slice.call(document.querySelectorAll('.slot img, .device__screen img'));
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.device__screen img'));
     imgs.forEach(function (img) {
       var mark = function () {
-        var host = img.closest('.slot') || img.closest('.device');
+        var host = img.closest('.device');
         if (host) host.classList.add('is-empty');
       };
       if (img.complete && img.naturalWidth === 0) mark();
       img.addEventListener('error', mark);
     });
-  })();
-
-  /* ====================================================================
-     In the news carousel (About page): arrow buttons scroll the track
-     one card at a time. Swipe and keyboard scrolling work without JS.
-     ==================================================================== */
-
-  (function () {
-    var track = document.querySelector('[data-news-track]');
-    var prev = document.querySelector('[data-news-prev]');
-    var next = document.querySelector('[data-news-next]');
-    if (!track || !prev || !next) return;
-
-    function step() {
-      var card = track.querySelector('.news-card');
-      if (!card) return 360;
-      var gap = parseFloat(getComputedStyle(track).columnGap) || 24;
-      return card.getBoundingClientRect().width + gap;
-    }
-
-    function scrollByCards(direction) {
-      track.scrollBy({
-        left: direction * step(),
-        behavior: prefersReducedMotion() ? 'auto' : 'smooth'
-      });
-    }
-
-    prev.addEventListener('click', function () { scrollByCards(-1); });
-    next.addEventListener('click', function () { scrollByCards(1); });
-
-    function update() {
-      prev.disabled = track.scrollLeft <= 8;
-      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 8;
-    }
-    track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
   })();
 
   /* ====================================================================
