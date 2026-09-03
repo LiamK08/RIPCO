@@ -25,10 +25,8 @@
 
   var configured = SUPABASE_URL.indexOf('https://') === 0 && SUPABASE_ANON_KEY.length > 20;
 
-  /* Abuse limits: a form submitted faster than a person can type an email,
-     or with the hidden decoy field filled in, is treated as automation.
-     Repeat submissions are spaced out client-side. */
-  var MIN_FORM_MS = 2500;
+  /* Abuse limits: a form with the hidden decoy field filled in is treated
+     as automation, and repeat submissions are spaced out client-side. */
   var RETRY_GAP_MS = 8000;
   var MAX_ATTEMPTS = 6;
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -53,24 +51,31 @@
   var attempts = 0;
   var inFlight = false;
 
-  function show(name) {
+  function show(name, focus) {
     Object.keys(states).forEach(function (key) {
       if (states[key]) states[key].classList.toggle('is-current', key === name);
     });
     if (name === 'form' && !formShownAt) formShownAt = Date.now();
+    if (focus && states[name]) {
+      var heading = states[name].querySelector('[tabindex="-1"]');
+      if (heading) heading.focus();
+    }
   }
 
-  function say(text, ok) {
+  function say(text, invalid) {
+    if (emailInput) {
+      if (invalid) emailInput.setAttribute('aria-invalid', 'true');
+      else emailInput.removeAttribute('aria-invalid');
+    }
     if (!message) return;
-    if (!text) { message.hidden = true; return; }
+    if (!text) { message.hidden = true; message.textContent = ''; return; }
     message.hidden = false;
     message.textContent = text;
-    message.classList.toggle('auth-msg--ok', Boolean(ok));
   }
 
   function showSent(email) {
     if (sentTo) sentTo.textContent = email;
-    show('sent');
+    show('sent', true);
   }
 
   /* Load the vendored client from our own origin, once, on demand. */
@@ -136,10 +141,6 @@
         }
 
         var now = Date.now();
-        if (formShownAt && now - formShownAt < MIN_FORM_MS) {
-          say('That was quick. Give it a second and try again.');
-          return;
-        }
         if (now - lastAttemptAt < RETRY_GAP_MS) {
           say('Hold on a moment before trying again.');
           return;
@@ -151,7 +152,8 @@
 
         var email = (emailInput && emailInput.value || '').trim();
         if (!EMAIL_RE.test(email) || email.length > 254) {
-          say('Enter a valid email address.');
+          say('Enter a valid email address.', true);
+          emailInput.focus();
           return;
         }
 
@@ -193,7 +195,7 @@
         } catch (err) {
           /* even if the network call fails, fall back to the form view */
         }
-        show('form');
+        show('form', true);
       });
     }
   }

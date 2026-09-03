@@ -3,42 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How RipCo detects rips: the pipeline</title>
-  <meta name="description" content="RipCo reads existing public beach camera feeds, identifies rip currents with computer vision, and shows them on the live view. No new hardware.">
+  <title>How it works · RipCo</title>
+  <meta name="description" content="How RipCo turns a public beach camera feed into a rip current warning: the camera, the computer-vision model, what it looks for, and what it cannot see.">
   <link rel="canonical" href="https://www.ripcosafety.com/how-it-works">
   <meta name="theme-color" content="#FDFBF7">
   <meta property="og:site_name" content="RipCo">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.ripcosafety.com/how-it-works">
-  <meta property="og:title" content="How RipCo detects rips: the pipeline">
-  <meta property="og:description" content="RipCo reads existing public beach camera feeds, identifies rip currents with computer vision, and shows them on the live view. No new hardware.">
+  <meta property="og:title" content="How it works · RipCo">
+  <meta property="og:description" content="How RipCo turns a public beach camera feed into a rip current warning: the camera, the computer-vision model, what it looks for, and what it cannot see.">
   <meta property="og:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="RipCo: see the rip before you are in it.">
+  <meta property="og:image:alt" content="RipCo wordmark above the line: See the rip before you're in it. AI rip current detection on public beach cameras.">
   <meta property="og:locale" content="en_AU">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="How RipCo detects rips: the pipeline">
-  <meta name="twitter:description" content="RipCo reads existing public beach camera feeds, identifies rip currents with computer vision, and shows them on the live view. No new hardware.">
+  <meta name="twitter:title" content="How it works · RipCo">
+  <meta name="twitter:description" content="How RipCo turns a public beach camera feed into a rip current warning: the camera, the computer-vision model, what it looks for, and what it cannot see.">
   <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-image.png">
-  <meta name="twitter:image:alt" content="RipCo: see the rip before you are in it.">
-  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
-  <link rel="icon" href="assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
-  <link rel="preload" href="assets/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/newsreader-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src&&t.src.indexOf('script.js')!==-1){document.documentElement.classList.remove('js');}},true);</script>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
+  <link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/assets/js-flag.js"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
 </head>
-<body id="top">
+<body>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============================ SHARED HEADER ============================ -->
-  <header class="site-header" data-header>
-    <div class="scroll-progress" data-progress aria-hidden="true"></div>
-    <div class="site-header__inner container container--wide">
+  <header class="masthead" data-header>
+    <div class="masthead__inner wrap">
       <a class="brand" href="/" aria-label="RipCo, home">
         <svg class="brand__mark" viewBox="9 13 48 38" aria-hidden="true" focusable="false"><path fill="var(--accent)" d="M10.5 45.5 C12 32 20.5 20.5 33.5 16.6 C39.5 14.8 45 15.6 48.4 18.8 C51 21.2 52.2 24.6 51.8 28.2 C49.4 25 44.6 24.3 40.4 26.6 C36.6 28.7 34.7 32.3 35.2 36 C35.7 40.2 39.3 43.4 44 44 C48.3 44.6 52.8 43.2 56 40.4 C51 47.4 40.5 50.4 29 49 C22 48.2 15.3 47 10.5 45.5 Z"/></svg>
         <span class="brand__name">RipCo</span>
@@ -49,14 +46,14 @@
           <span class="nav-toggle__bar"></span>
         </span>
       </button>
-      <nav class="site-nav" id="site-nav" aria-label="Primary" data-nav>
-        <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="/">About</a></li>
-          <li><a class="site-nav__link" href="/how-it-works">How it works</a></li>
-          <li><a class="site-nav__link" href="/features">Features</a></li>
-          <li><a class="site-nav__link" href="/beaches">Beaches</a></li>
-          <li><a class="site-nav__link" href="/safety">Safety</a></li>
-          <li class="site-nav__cta-item"><a class="btn btn--primary site-nav__cta" href="/account">Early access</a></li>
+      <nav class="nav" id="site-nav" aria-label="Primary" data-nav>
+        <ul class="nav__list">
+          <li><a class="nav__link" href="/how-it-works" aria-current="page">How it works</a></li>
+          <li><a class="nav__link" href="/features">Features</a></li>
+          <li><a class="nav__link" href="/coverage">Coverage</a></li>
+          <li><a class="nav__link" href="/safety">Safety</a></li>
+          <li><a class="nav__link" href="/about">About</a></li>
+          <li class="nav__cta"><a class="btn btn--ghost btn--sm" href="/early-access">Early access</a></li>
         </ul>
       </nav>
     </div>
@@ -64,201 +61,366 @@
 
   <main id="main">
 
-    <!-- ============================== PAGE HERO ============================= -->
-    <section class="page-hero">
-      <div class="container">
-        <div class="page-hero__inner">
-          <p class="eyebrow">How it works</p>
-          <h1 class="page-hero__title">From a public camera to a warning in your <em class="accent">hand</em>.</h1>
-          <p class="page-hero__lead">
-            RipCo does not need new cameras or new hardware. It reads feeds that
-            already watch the water, identifies rip currents with computer vision,
-            and shows them as a clear visual warning. Here is the whole pipeline.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== PINNED PIPELINE (navy band) ==================== -->
-    <section class="band" aria-labelledby="pipeline-title">
-      <div class="container">
-        <h2 class="visually-hidden" id="pipeline-title">The detection pipeline</h2>
-        <div class="pin pin--reverse" data-pin>
-          <div class="pin__visual">
-            <div class="device">
-              <div class="device__notch" aria-hidden="true"></div>
-              <div class="device__screen" data-label="Screenshot">
-              </div>
-            </div>
-          </div>
-
-          <div class="pin__steps">
-            <div class="pin__step" data-pin-step>
-              <p class="pin__step-index">Step 01</p>
-              <h3 class="pin__step-title">It uses existing public cameras.</h3>
-              <p class="pin__step-body">
-                RipCo connects to public beach camera feeds that are already
-                watching the water. There is no new hardware to install, no drones
-                and nothing for you to set up. If a beach has a public camera,
-                RipCo can work with it.
-              </p>
-            </div>
-            <div class="pin__step" data-pin-step>
-              <p class="pin__step-index">Step 02</p>
-              <h3 class="pin__step-title">AI computer vision identifies rips.</h3>
-              <p class="pin__step-body">
-                The model analyses the feed frame by frame, looking for the visual
-                signature of a rip: a darker channel cutting out through the surf,
-                a gap in the breaking waves, and foam or sediment streaming away
-                from shore.
-              </p>
-            </div>
-            <div class="pin__step" data-pin-step>
-              <p class="pin__step-index">Step 03</p>
-              <h3 class="pin__step-title">You get a clear visual warning.</h3>
-              <p class="pin__step-body">
-                When a likely rip is found, it is outlined in red on the live view
-                with a confidence percentage, so you can see where it is and how
-                sure the model is, then act on it before you get in the water.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================== WHAT THE MODEL LOOKS FOR ==================== -->
-    <section class="section" aria-labelledby="signature-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">The visual signature</p>
-          <h2 class="section-title" id="signature-title">What the model <em class="accent">looks</em> for.</h2>
-          <p class="section-lead">
-            A rip leaves a readable trace on the surface. These are the three
-            features the model weighs frame by frame, and they are the same
-            ones lifeguards are trained to read.
-          </p>
-        </div>
-
-        <div class="cards stagger">
-          <article class="card reveal">
-            <h3 class="card__title">A darker channel</h3>
-            <p class="card__body">Deeper water cutting out through the surf reflects less light, so a rip often reads as a darker lane running away from the beach.</p>
-          </article>
-          <article class="card reveal">
-            <h3 class="card__title">A gap in the breaking waves</h3>
-            <p class="card__body">Waves break on the sandbanks either side of a rip but not in the channel itself, leaving a calmer-looking gap in the line of white water.</p>
-          </article>
-          <article class="card reveal">
-            <h3 class="card__title">Foam and sediment moving out</h3>
-            <p class="card__body">Foam, sand and debris streaming away from shore show the direction the water is pulling, which is what separates a rip from a still patch.</p>
-          </article>
-        </div>
-
-        <p class="reveal band__more">
-          Detection runs at Manly Beach and is rolling out to more Australian
-          beaches. Every other beach on RipCo is conditions only.
+    <section class="page-head" aria-labelledby="page-title">
+      <div class="wrap">
+        <span class="label">How it works</span>
+        <h1 class="h1" id="page-title">From a public camera to a warning on your phone</h1>
+        <p class="lead">
+          RipCo does not need new cameras. It reads a feed that already watches
+          the water, runs a model over each frame and shows a likely rip as a red
+          outline on the live view. This page goes through each stage, then
+          through what the model can&rsquo;t see.
         </p>
       </div>
     </section>
 
-    <!-- ========================= AID, NOT A GUARANTEE ===================== -->
-    <section class="section section--tint" aria-labelledby="aid-title">
-      <div class="container container--wide">
-        <div class="section-head reveal">
-          <p class="eyebrow eyebrow--alert">What it is, and what it is not</p>
-          <h2 class="section-title" id="aid-title">An aid, not a <em class="accent">guarantee</em>.</h2>
-          <p class="section-lead">
-            A confidence percentage is a reading, not a promise. No model is
-            perfect, and RipCo is built to be honest about that.
-          </p>
+    <!-- ============================== STAGES =============================== -->
+    <section class="section" aria-labelledby="stages-title">
+      <div class="wrap">
+        <h2 class="visually-hidden" id="stages-title">The three stages</h2>
+        <figure class="figure">
+          <div class="figure__frame">
+            <svg class="ill" viewBox="0 0 800 236" role="img" aria-labelledby="fig-pipe-title fig-pipe-desc">
+  <title id="fig-pipe-title">The three stages of RipCo</title>
+  <desc id="fig-pipe-desc">Three boxes joined by arrows: a public beach camera, a computer-vision model, and a phone showing a red dashed outline.</desc>
+  <g class="ill__glyph">
+    <rect class="ill__box" x="30" y="16" width="200" height="140" rx="10"/>
+    <rect x="96" y="58" width="84" height="52" rx="8"/>
+    <circle cx="138" cy="84" r="15"/>
+    <circle cx="138" cy="84" r="5.5" fill="var(--ink)"/>
+    <path d="M96 66 L84 60 M96 102 L84 108"/>
+    <path d="M138 110 V132 M118 132 H158"/>
+    <rect class="ill__box" x="300" y="16" width="200" height="140" rx="10"/>
+    <g>
+      <rect x="352" y="48" width="18" height="18" rx="2"/><rect x="374" y="48" width="18" height="18" rx="2"/><rect x="396" y="48" width="18" height="18" rx="2"/><rect x="418" y="48" width="18" height="18" rx="2"/><rect x="440" y="48" width="18" height="18" rx="2"/>
+      <rect x="352" y="70" width="18" height="18" rx="2"/><rect x="374" y="70" width="18" height="18" rx="2"/><rect x="396" y="70" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="418" y="70" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="440" y="70" width="18" height="18" rx="2"/>
+      <rect x="352" y="92" width="18" height="18" rx="2"/><rect x="374" y="92" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="396" y="92" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="418" y="92" width="18" height="18" rx="2"/><rect x="440" y="92" width="18" height="18" rx="2"/>
+      <rect x="352" y="114" width="18" height="18" rx="2"/><rect x="374" y="114" width="18" height="18" rx="2"/><rect x="396" y="114" width="18" height="18" rx="2"/><rect x="418" y="114" width="18" height="18" rx="2"/><rect x="440" y="114" width="18" height="18" rx="2"/>
+    </g>
+    <rect class="ill__box" x="570" y="16" width="200" height="140" rx="10"/>
+    <rect x="640" y="30" width="60" height="112" rx="10"/>
+    <path d="M660 38 H680"/>
+    <path class="ill__detect" style="stroke-width:1.75;stroke-dasharray:4 3" d="M654 74 L686 74 L682 106 L658 106 Z"/>
+    <path class="ill__arrow" d="M236 86 H292 M282 78 L292 86 L282 94"/>
+    <path class="ill__arrow" d="M506 86 H562 M552 78 L562 86 L552 94"/>
+  </g>
+  <text x="30" y="188">Step 01</text>
+  <text x="30" y="212" class="ill__t-lg">Public beach camera</text>
+  <text x="300" y="188">Step 02</text>
+  <text x="300" y="212" class="ill__t-lg">Computer-vision model</text>
+  <text x="570" y="188">Step 03</text>
+  <text x="570" y="212" class="ill__t-lg">Warning on your phone</text>
+</svg>
+          </div>
+          <figcaption class="figure__caption"><b>Fig. 2</b> The three stages: an existing public camera, the model, the warning in the app.</figcaption>
+        </figure>
+
+        <ol class="steps steps--grid" style="margin-top: var(--s-8);">
+          <li class="step">
+            <h3 class="h4 step__title">It uses a camera that already exists</h3>
+            <p class="step__body">Public beach cameras already stream the surf so people can check it from home. RipCo connects to one of those feeds. Nothing new has to be mounted, powered or maintained, which keeps the cost of adding another beach down to software.</p>
+          </li>
+          <li class="step">
+            <h3 class="h4 step__title">A computer-vision model reads each frame</h3>
+            <p class="step__body">The model looks at the surface of the water for the signature of a rip: a darker lane cutting through the surf, a gap in the line of breaking waves, and foam or sand streaming out to sea. It has been developed on footage from a public camera at Manly Beach.</p>
+          </li>
+          <li class="step">
+            <h3 class="h4 step__title">A likely rip is outlined on the live view</h3>
+            <p class="step__body">When the model finds that signature it draws a red outline on the live image and shows its confidence as a percentage. There is no green state. If the model finds nothing, the app says nothing was found, which is different from saying the water is clear.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================ RIP ANATOMY ============================ -->
+    <section class="section section--tint" aria-labelledby="anatomy-title">
+      <div class="wrap">
+        <div class="head">
+          <div class="head__title">
+            <span class="label">What the model looks for</span>
+            <h2 class="h2" id="anatomy-title">A rip seen from above, and from the beach</h2>
+          </div>
+          <div class="head__lead">
+            <p class="lead">Waves push water over the sandbars towards the beach. That water has to get back out, and it does so through the lowest point between the bars. That return flow is the rip.</p>
+          </div>
         </div>
-        <div class="cards stagger">
-          <article class="card reveal">
-            <span class="card__icon tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 5.25c-5 0-8.9 3.4-10.4 6.75 1.5 3.35 5.4 6.75 10.4 6.75s8.9-3.4 10.4-6.75C20.9 8.65 17 5.25 12 5.25Zm0 10.25a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/><path d="M4.03 2.44 21.9 20.3a1.12 1.12 0 0 1-1.6 1.6L2.44 4.04a1.12 1.12 0 1 1 1.6-1.6Z" stroke="var(--tile-bg)" stroke-width="2"/></svg></span>
-            <h3 class="card__title">It can miss a rip</h3>
-            <p class="card__body">Detection depends on what the camera can see. Light, angle, weather and distance all affect it, so a rip can be present without being detected.</p>
+
+        <div class="grid">
+          <figure class="figure span-7">
+            <div class="figure__frame">
+              <svg class="ill" viewBox="0 0 800 560" role="img" aria-labelledby="fig-rip-title fig-rip-desc">
+  <title id="fig-rip-title">Plan view of a rip current</title>
+  <desc id="fig-rip-desc">A beach seen from above. Water flows along the shore from both sides as feeder currents, marked A, turns out to sea through a gap between two sandbars as the neck, marked B, and spreads out beyond the breaking waves as the head, marked C. A camera on the beach looks out across the water.</desc>
+  <rect x="0" y="0" width="800" height="430" fill="var(--water-2)"/>
+  <rect x="0" y="0" width="800" height="150" fill="var(--water-3)"/>
+  <path d="M0 150 L800 150 L800 170 C600 162 200 162 0 170 Z" fill="var(--water-3)" opacity="0.5"/>
+  <path d="M0 240 C120 232 240 236 352 250 L360 334 C240 326 120 330 0 336 Z" fill="var(--water-1)"/>
+  <path d="M448 250 C560 236 680 232 800 240 L800 336 C680 330 560 326 440 334 Z" fill="var(--water-1)"/>
+  <path d="M0 350 C200 344 600 344 800 350 L800 420 C600 414 200 414 0 420 Z" fill="var(--water-3)" opacity="0.28"/>
+  <path d="M372 250 L428 250 L436 424 L364 424 Z" fill="var(--water-4)" opacity="0.55"/>
+  <path d="M400 252 C380 232 332 218 300 192 C332 158 468 158 500 192 C468 218 420 232 400 252 Z" fill="var(--water-4)" opacity="0.6"/>
+  <g fill="none" stroke="var(--foam)" stroke-linecap="round" opacity="0.95">
+    <path d="M18 262 q60 -6 120 0 t120 0 t96 0" stroke-width="8"/>
+    <path d="M446 262 q60 -6 120 0 t120 0 t92 0" stroke-width="8"/>
+    <path d="M30 290 q56 -6 112 0 t112 0 t92 0" stroke-width="6"/>
+    <path d="M452 290 q56 -6 112 0 t112 0 t96 0" stroke-width="6"/>
+    <path d="M14 316 q60 -5 120 0 t120 0 t96 0" stroke-width="5"/>
+    <path d="M444 316 q60 -5 120 0 t120 0 t100 0" stroke-width="5"/>
+  </g>
+  <g class="ill__arrow-soft">
+    <path d="M70 392 C160 388 250 382 350 368"/>
+    <path d="M338 358 L352 367 L340 378"/>
+    <path d="M730 392 C640 388 550 382 450 368"/>
+    <path d="M462 358 L448 367 L460 378"/>
+    <path d="M400 404 L400 262"/>
+    <path d="M390 276 L400 260 L410 276"/>
+    <path d="M396 236 C380 222 356 212 336 200"/>
+    <path d="M350 197 L334 199 L340 212"/>
+    <path d="M404 236 C420 222 444 212 464 200"/>
+    <path d="M450 197 L466 199 L460 212"/>
+  </g>
+  <rect x="0" y="430" width="800" height="130" fill="var(--sand)"/>
+  <rect x="0" y="430" width="800" height="14" fill="var(--sand-2)"/>
+  <path d="M0 431 q100 -4 200 0 t200 0 t200 0 t200 0" fill="none" stroke="var(--foam)" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  <g stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="4 4" fill="none" opacity="0.7">
+    <path d="M700 488 L430 0"/>
+    <path d="M700 488 L800 336"/>
+  </g>
+  <g class="ill__glyph">
+    <rect x="686" y="470" width="28" height="18" rx="4" fill="var(--paper)"/>
+    <circle cx="700" cy="479" r="5" fill="var(--paper)"/>
+    <circle cx="700" cy="479" r="2" fill="var(--ink)"/>
+    <path d="M700 488 V500 M690 500 H710"/>
+  </g>
+  <text x="628" y="520">Beach camera</text>
+  <text x="24" y="42" class="ill__t-on">Deeper water</text>
+  <text x="120" y="228">Sandbar</text>
+  <text x="600" y="228">Sandbar</text>
+  <text x="152" y="345" class="ill__t-sm">Breaking waves</text>
+  <text x="24" y="522">Beach</text>
+  <g>
+    <circle cx="212" cy="374" r="14" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>
+    <text x="212" y="379.5" class="ill__t-key" text-anchor="middle">A</text>
+    <circle cx="588" cy="374" r="14" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>
+    <text x="588" y="379.5" class="ill__t-key" text-anchor="middle">A</text>
+    <circle cx="452" cy="330" r="14" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>
+    <text x="452" y="335.5" class="ill__t-key" text-anchor="middle">B</text>
+    <circle cx="400" cy="130" r="14" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>
+    <text x="400" y="135.5" class="ill__t-key" text-anchor="middle">C</text>
+    <path class="ill__lead" d="M400 144 V162" stroke="var(--surface)"/>
+  </g>
+</svg>
+            </div>
+            <figcaption class="figure__caption"><b>Fig. 3</b> Plan view of a rip current. From the beach, a camera sees the neck (B) as a darker, calmer gap in the line of breaking waves.</figcaption>
+          </figure>
+          <div class="span-5">
+            <dl class="dl">
+              <div class="dl__row"><dt>A &middot; Feeders</dt><dd>Water pushed over the sandbars flows along the beach from both sides towards the low point between them.</dd></div>
+              <div class="dl__row"><dt>B &middot; Neck</dt><dd>The flow turns and runs out through the gap. This is the fastest part: narrow, deeper and darker, with no waves breaking in it.</dd></div>
+              <div class="dl__row"><dt>C &middot; Head</dt><dd>Beyond the breaking waves the current slows and spreads out. Swimmers carried here can move sideways and swim back in.</dd></div>
+            </dl>
+            <p class="body-2 small" style="margin-top: var(--s-5);">The neck is the part a beach camera can see, and the part the model is trained on. Three cues give it away.</p>
+          </div>
+        </div>
+
+        <div class="items items--3" style="margin-top: var(--s-8);">
+          <article class="item">
+            <span class="item__kicker">Cue 1</span>
+            <h3 class="item__title item__title--sans">A darker channel</h3>
+            <p class="item__body">Deeper water cutting out through the surf reflects less light, so a rip often reads as a darker lane running away from the beach.</p>
           </article>
-          <article class="card reveal">
-            <span class="card__icon tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9.25"/><path d="M12 6.75v5.25l3.6 2.1" fill="none" stroke="var(--tile-bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3 class="card__title">Conditions change quickly</h3>
-            <p class="card__body">Rips form and shift in minutes. A calmer-looking stretch of water can become a rip, and the smoothest gap between the waves is often where one is running.</p>
+          <article class="item">
+            <span class="item__kicker">Cue 2</span>
+            <h3 class="item__title item__title--sans">A gap in the breaking waves</h3>
+            <p class="item__body">Waves break on the sandbars either side of a rip but not in the channel itself, leaving a calmer-looking gap in the line of white water.</p>
           </article>
-          <article class="card reveal">
-            <span class="card__icon tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 2.25c.62 0 1.13.5 1.13 1.13v.72c2.9-.75 5.6-.4 8.17.7 2.1.9 4.1 1.05 6.3.35.5-.15.95.21.95.71v8.29c0 .4-.25.75-.63.87-2.6.85-5 .68-7.42-.36-2.4-1.03-4.85-1.33-7.37-.55v6.77c0 .62-.51 1.12-1.13 1.12s-1.12-.5-1.12-1.12V3.38c0-.63.5-1.13 1.12-1.13Z"/></svg></span>
-            <h3 class="card__title">The flags come first</h3>
-            <p class="card__body">Whatever RipCo shows, swim between the red and yellow flags and follow the lifeguards. They are reading the water in person, and they always have the final word.</p>
+          <article class="item">
+            <span class="item__kicker">Cue 3</span>
+            <h3 class="item__title item__title--sans">Foam and sand moving out</h3>
+            <p class="item__body">Foam, sand and debris streaming away from shore show which way the water is pulling, which separates a rip from a patch of still water.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- =============================== CTA ================================= -->
-    <section class="cta" aria-labelledby="cta-title">
-      <div class="container cta__inner">
-        <div class="cta__smoke" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-        <h2 class="cta__title" id="cta-title">See it on <em class="accent">your</em> beach.</h2>
-        <p class="cta__lead">RipCo is coming to the App Store, starting at Manly Beach. Early access opens before launch.</p>
-        <div class="cta__actions">
-          <a class="btn btn--primary btn--lg" href="/account">Early access</a>
-          <a class="btn btn--ghost btn--lg" href="/features">See the features</a>
+    <!-- =============================== LIMITS ============================== -->
+    <section class="section" id="limits" aria-labelledby="limits-title">
+      <div class="wrap">
+        <div class="head">
+          <div class="head__title">
+            <span class="label">Limits</span>
+            <h2 class="h2" id="limits-title">What it can&rsquo;t see</h2>
+          </div>
+          <div class="head__lead">
+            <p class="lead">A confidence figure is a reading from a camera. These are the conditions where that reading is weak or missing, and the app is built to say so rather than guess.</p>
+          </div>
         </div>
-        <p class="cta__note">Whatever RipCo shows, swim between the red and yellow flags and follow the lifeguards.</p>
+
+        <div class="grid">
+          <ol class="steps steps--list span-7">
+            <li class="step">
+              <div>
+                <h3 class="h4 step__title">Night, heavy rain and strong glare</h3>
+                <p class="step__body">The camera image stops being usable. The app shows detection as unavailable, and the conditions data stays.</p>
+              </div>
+            </li>
+            <li class="step">
+              <div>
+                <h3 class="h4 step__title">Small, distant or oblique rips</h3>
+                <p class="step__body">A rip that is small, far from the camera or at a shallow angle to it can be missed. A rip can be present without being detected.</p>
+              </div>
+            </li>
+            <li class="step">
+              <div>
+                <h3 class="h4 step__title">False positives</h3>
+                <p class="step__body">The model can outline something that is not a rip: a shadow, a patch of weed, a lull between sets. The confidence figure exists so you can weigh each outline.</p>
+              </div>
+            </li>
+            <li class="step">
+              <div>
+                <h3 class="h4 step__title">Water that changes in minutes</h3>
+                <p class="step__body">Rips form, move and fade with the sets and the tide. A frame is a moment, not a forecast.</p>
+              </div>
+            </li>
+            <li class="step">
+              <div>
+                <h3 class="h4 step__title">Beaches without a usable camera</h3>
+                <p class="step__body">Detection needs a public camera with a clear view of the surf zone. Everywhere else the app shows conditions only, and says so.</p>
+              </div>
+            </li>
+          </ol>
+          <div class="span-4 start-9">
+            <div class="callout">
+              <h3 class="callout__title">Whatever the screen shows</h3>
+              <p class="callout__body">Swim between the red and yellow flags and follow the lifeguards on duty. RipCo can miss a rip. They are reading the water in person.</p>
+              <p class="small" style="margin-top: var(--s-4);"><a class="link" href="/safety">The safety commitment</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ MANLY PILOT ============================ -->
+    <section class="section section--tint" aria-labelledby="pilot-title">
+      <div class="wrap grid">
+        <div class="span-5">
+          <span class="label">Where it stands</span>
+          <h2 class="h2" id="pilot-title">The Manly Beach pilot</h2>
+          <p class="lead" style="margin-top: var(--s-4); max-width: 26rem;">Manly Beach is where the model has been developed and tested. It is a patrolled beach with a public camera looking along the surf zone.</p>
+          <!-- STUDENT: this is the place to add real test detail once you are happy to publish it:
+               which camera and operator, the date range you tested over, how many frames you labelled,
+               and what the model got right and wrong. A marker will value an honest number more than a
+               polished sentence. -->
+        </div>
+        <div class="span-6 start-7">
+          <dl class="dl">
+            <div class="dl__row"><dt>Status</dt><dd>Prototype</dd></div>
+            <div class="dl__row"><dt>Detection</dt><dd>Developed and tested on a public camera at Manly Beach</dd></div>
+            <div class="dl__row"><dt>Other beaches</dt><dd>Conditions only: wind, swell, air and water temperature <span class="caption">See <a href="/coverage">coverage</a> for the full list.</span></dd></div>
+            <div class="dl__row"><dt>App Store</dt><dd>Not yet submitted</dd></div>
+            <div class="dl__row"><dt>Early access</dt><dd>List not open yet</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ FAQ ================================ -->
+    <section class="section" aria-labelledby="faq-title">
+      <div class="wrap grid">
+        <div class="span-4">
+          <span class="label">Common questions</span>
+          <h2 class="h2" id="faq-title">Accuracy, night, coverage and location</h2>
+        </div>
+        <div class="span-8 start-5">
+          <div class="faq-list">
+            <details class="faq">
+              <summary>How accurate is the detection?</summary>
+              <div class="faq__body">
+                <p>Every outline carries a confidence percentage, and that figure is a reading rather than a promise. The model can miss rips and can outline things that are not rips. Nothing in the app is presented as an all-clear, so treat every session as though a rip could be present.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary>Does it work at night or in poor visibility?</summary>
+              <div class="faq__body">
+                <p>Detection needs a usable camera image. At night, in heavy rain or in strong glare, the app shows detection as unavailable rather than guessing. Conditions data stays available, and the rule does not change: flags and lifeguards first.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary>Which beaches have detection?</summary>
+              <div class="faq__body">
+                <p>Manly Beach, where the model has been developed and tested. Detection can extend to any beach with a public camera that gives a clear view of the surf zone. Until then, other beaches show conditions only. The <a href="/coverage">coverage page</a> lists every beach in the app.</p>
+              </div>
+            </details>
+            <details class="faq">
+              <summary>Does it use my location?</summary>
+              <div class="faq__body">
+                <p>Only if you allow it, and only to show beaches near you. You can search for any beach without sharing your location.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--flush-top">
+      <div class="wrap">
+        <div class="next">
+          <div class="next__copy">
+            <h2 class="h3">Next: what the app promises, and what it refuses to say</h2>
+          </div>
+          <div class="next__actions">
+            <a class="btn btn--primary" href="/safety">The safety commitment</a>
+            <a class="btn btn--ghost" href="/features">All features</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- ============================ SHARED FOOTER ============================ -->
-  <footer class="site-footer">
-    <div class="container container--wide">
-      <p class="site-footer__tagline">An extra pair of eyes on the water at Australian beaches</p>
-      <div class="site-footer__grid">
-        <div class="site-footer__brand">
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
           <a class="brand" href="/" aria-label="RipCo, home">
             <svg class="brand__mark" viewBox="9 13 48 38" aria-hidden="true" focusable="false"><path fill="var(--accent)" d="M10.5 45.5 C12 32 20.5 20.5 33.5 16.6 C39.5 14.8 45 15.6 48.4 18.8 C51 21.2 52.2 24.6 51.8 28.2 C49.4 25 44.6 24.3 40.4 26.6 C36.6 28.7 34.7 32.3 35.2 36 C35.7 40.2 39.3 43.4 44 44 C48.3 44.6 52.8 43.2 56 40.4 C51 47.4 40.5 50.4 29 49 C22 48.2 15.3 47 10.5 45.5 Z"/></svg>
             <span class="brand__name">RipCo</span>
           </a>
-          <p class="site-footer__line">Always swim between the red and yellow flags and follow the lifeguards. RipCo is an aid and not a substitute for lifeguard advice.</p>
+          <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifeguards on duty.</p>
+          <p class="footer__note">An independent student project. Not affiliated with or endorsed by Surf Life Saving Australia, the Bureau of Meteorology or any beach camera operator.</p>
         </div>
-        <nav class="site-footer__col" aria-label="Product">
+        <nav class="footer__col" aria-label="Product">
           <h2>Product</h2>
           <ul>
+            <li><a href="/how-it-works">How it works</a></li>
             <li><a href="/features">Features</a></li>
-            <li><a href="/beaches">Beaches</a></li>
-            <li><a href="/account">Early access</a></li>
+            <li><a href="/coverage">Coverage</a></li>
+            <li><a href="/early-access">Early access</a></li>
           </ul>
         </nav>
-        <nav class="site-footer__col" aria-label="How it works">
-          <h2>How it works</h2>
-          <ul>
-            <li><a href="/how-it-works">The pipeline</a></li>
-            <li><a href="/account#faq">FAQ</a></li>
-          </ul>
-        </nav>
-        <nav class="site-footer__col" aria-label="Safety">
+        <nav class="footer__col" aria-label="Safety">
           <h2>Safety</h2>
           <ul>
-            <li><a href="/safety">Our commitment</a></li>
-            <li><a href="/safety#caught">Caught in a rip</a></li>
+            <li><a href="/safety">The commitment</a></li>
+            <li><a href="/safety#caught">If you're caught in a rip</a></li>
+            <li><a href="/how-it-works#limits">What it can't see</a></li>
+            <li><a href="/privacy">Privacy</a></li>
           </ul>
         </nav>
-        <nav class="site-footer__col" aria-label="Reference sources">
-          <h2>Reference sources</h2>
+        <nav class="footer__col" aria-label="Project">
+          <h2>Project</h2>
           <ul>
-            <li><a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">BeachSafe</a></li>
-            <li><a href="https://sls.com.au" target="_blank" rel="noopener noreferrer">Surf Life Saving Australia</a></li>
-            <li><a href="https://www.bom.gov.au" target="_blank" rel="noopener noreferrer">Bureau of Meteorology</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/about#research">Research</a></li>
+            <li><a href="/about#decisions">Design decisions</a></li>
+            <li><a href="/about#sources">Sources</a></li>
           </ul>
-          <p class="site-footer__note">Independent references. Not partners, and not endorsers of RipCo.</p>
         </nav>
       </div>
-      <div class="site-footer__base">
-        <p>&copy; <span data-year>2026</span> RipCo</p>
-        <p>Weather and marine data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo.com</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.</p>
-        <p>Rip currents can appear even in calmer-looking water.</p>
+      <div class="footer__base">
+        <p>&copy; 2026 RipCo. A Year 12 Design and Technology major work, Sydney.</p>
+        <p>Weather and marine data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> (CC BY 4.0). Map tiles &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>.</p>
       </div>
     </div>
-    <div class="site-footer__wordmark" aria-hidden="true"><span><svg viewBox="9 13 48 38" focusable="false"><path fill="currentColor" d="M10.5 45.5 C12 32 20.5 20.5 33.5 16.6 C39.5 14.8 45 15.6 48.4 18.8 C51 21.2 52.2 24.6 51.8 28.2 C49.4 25 44.6 24.3 40.4 26.6 C36.6 28.7 34.7 32.3 35.2 36 C35.7 40.2 39.3 43.4 44 44 C48.3 44.6 52.8 43.2 56 40.4 C51 47.4 40.5 50.4 29 49 C22 48.2 15.3 47 10.5 45.5 Z"/></svg>RipCo</span></div>
   </footer>
 
 </body>

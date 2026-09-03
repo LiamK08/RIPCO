@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page not found · RipCo</title>
-  <meta name="description" content="That page does not exist. Head back to the RipCo home page, or read how rip current detection works.">
-  <link rel="canonical" href="https://www.ripcosafety.com/404">
-  <meta name="robots" content="noindex, follow">
+  <title>Privacy · RipCo</title>
+  <meta name="description" content="What this website and the RipCo app collect, and what they do not. No analytics, no tracking, an optional location permission, and an early-access email used for RipCo updates only.">
+  <link rel="canonical" href="https://www.ripcosafety.com/privacy">
   <meta name="theme-color" content="#FDFBF7">
   <meta property="og:site_name" content="RipCo">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.ripcosafety.com/404">
-  <meta property="og:title" content="Page not found · RipCo">
-  <meta property="og:description" content="That page does not exist. Head back to the RipCo home page, or read how rip current detection works.">
+  <meta property="og:url" content="https://www.ripcosafety.com/privacy">
+  <meta property="og:title" content="Privacy · RipCo">
+  <meta property="og:description" content="What this website and the RipCo app collect, and what they do not. No analytics, no tracking, an optional location permission, and an early-access email used for RipCo updates only.">
   <meta property="og:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="RipCo wordmark above the line: See the rip before you're in it. AI rip current detection on public beach cameras.">
   <meta property="og:locale" content="en_AU">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Page not found · RipCo">
-  <meta name="twitter:description" content="That page does not exist. Head back to the RipCo home page, or read how rip current detection works.">
+  <meta name="twitter:title" content="Privacy · RipCo">
+  <meta name="twitter:description" content="What this website and the RipCo app collect, and what they do not. No analytics, no tracking, an optional location permission, and an early-access email used for RipCo updates only.">
   <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
@@ -62,14 +61,52 @@
 
   <main id="main">
 
-    <section class="page-head" aria-labelledby="page-title" style="border-bottom: 0;">
+    <section class="page-head" aria-labelledby="page-title">
       <div class="wrap">
-        <span class="label">404</span>
-        <h1 class="h1" id="page-title">That page has drifted out to sea</h1>
-        <p class="lead">The address may be mistyped, or the page has moved. The safest route is back to shore.</p>
-        <div class="actions" style="margin-top: var(--s-6);">
-          <a class="btn btn--primary btn--lg" href="/">Back to the home page</a>
-          <a class="btn btn--ghost btn--lg" href="/how-it-works">How it works</a>
+        <span class="label">Privacy</span>
+        <h1 class="h1" id="page-title">What is collected, and what isn&rsquo;t</h1>
+        <p class="lead">RipCo is a student project, and this page is written to be read rather than skimmed. It covers this website, the early-access list and the app.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="site-title">
+      <div class="wrap grid">
+        <div class="span-4">
+          <span class="label">This website</span>
+          <h2 class="h2" id="site-title">No analytics, no cookies, no trackers</h2>
+        </div>
+        <div class="span-7 start-6 prose">
+          <p>This site sets no cookies and runs no analytics or advertising scripts. Fonts, scripts and images are served from this site&rsquo;s own domain.</p>
+          <p>Two things load from elsewhere, on the coverage page only. Your browser fetches map tiles from CARTO, drawn from OpenStreetMap data, and beach conditions from this site&rsquo;s own server, which asks Open-Meteo on your behalf. If that server is unavailable your browser asks Open-Meteo directly. In each case the other service receives the same technical details any web request carries, such as your IP address. Neither is given anything about you by this site.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tint" aria-labelledby="list-title">
+      <div class="wrap grid">
+        <div class="span-4">
+          <span class="label">Early access</span>
+          <h2 class="h2" id="list-title">One email address, one purpose</h2>
+        </div>
+        <div class="span-7 start-6 prose">
+          <p>The early-access list is not open yet, and until it is, the early-access page collects nothing. When it opens, it will ask for an email address and nothing else. That address is used to send RipCo updates: the launch, and detection reaching new beaches.</p>
+          <p>It is not shared or sold. Every email will carry a way to leave the list, and leaving removes your address.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="app-title">
+      <div class="wrap grid">
+        <div class="span-4">
+          <span class="label">The app</span>
+          <h2 class="h2" id="app-title">Location is optional, and the cameras are public</h2>
+        </div>
+        <div class="span-7 start-6 prose">
+          <p>Location access is optional and is used only to show beaches near you. You can search for any beach without it.</p>
+          <p>The camera feeds RipCo reads are public streams that already exist. The model reads the surface of the water for the signature of a rip. It is not built to identify people.</p>
+          <p>Hazard sightings you report through Shark Watch are shared with other people using the app at that beach. Reports are unverified.</p>
+          <!-- STUDENT: if you add a contact email, this is the place: "Questions about privacy: you@example.com". -->
+          <p class="caption">This page was last updated in September 2026.</p>
         </div>
       </div>
     </section>

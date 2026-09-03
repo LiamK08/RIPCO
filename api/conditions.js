@@ -18,7 +18,7 @@
 
 'use strict';
 
-/* Keep this list in sync with BEACHES in /map.js (ids and coordinates). */
+/* Keep this list in sync with the beach table in /coverage.html (ids and coordinates). */
 var BEACHES = [
   { id: 'palm-beach', lat: -33.5965, lng: 151.3235 },
   { id: 'whale-beach', lat: -33.6130, lng: 151.3315 },

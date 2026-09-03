@@ -1,64 +1,89 @@
 # RipCo — marketing site
 
-Marketing site for **RipCo**, an iOS app that runs computer vision on existing
-public beach cameras to detect rip currents and show them as a clear visual
-warning. RipCo is an aid for beachgoers, never a substitute for lifeguards and
-the red and yellow flags — the site is written and designed around that rule.
+Marketing site for **RipCo**, a free iPhone app that runs computer vision on
+existing public beach cameras and outlines likely rip currents on the live view.
+RipCo is a Year 12 Design and Technology major work. The site is written for two
+readers at once: a beachgoer deciding whether to trust the app, and an HSC marker
+assessing the need, the research and the design decisions behind it.
+
+The site never says a beach is safe, never shows a fabricated detection, and
+never quotes a figure it cannot source. Keep it that way.
+
+## Pages
+
+| URL | Job |
+| --- | --- |
+| `/` | The claim, the problem (sourced figures + the survey), how it works in brief, what is in the app, the safety position, a note from the maker |
+| `/how-it-works` | The three stages, a plan-view diagram of a rip, the three visual cues, what the model cannot see, the Manly pilot, FAQ |
+| `/features` | Rip detection as the core feature, the four tools around it, what was left out on purpose |
+| `/coverage` | Map of 26 Sydney beaches with live conditions, the beach table (source of truth for the map), what it takes to add a beach |
+| `/safety` | The commitment, the flags, what to do if caught in a rip |
+| `/about` | Why it was built, research, design decisions, project status, sources and thanks |
+| `/early-access` | The list (dormant until Supabase keys are set), what happens to your email |
+| `/privacy` | What is and is not collected |
+
+`/beaches` and `/account` redirect to `/coverage` and `/early-access`
+(see `vercel.json`).
+
+## Things only you can fill in
+
+Search the HTML for `STUDENT:` comments. Each marks a place where a real detail
+belongs and a placeholder would be worse than nothing:
+
+- Your name, in the maker's note on the home page and the sign-off on About.
+- Survey sample size, place and month (home page and About).
+- The month of the patrol-member interview (About).
+- Which Manly camera, the test date range and what the model got right and wrong
+  (How it works, "The Manly Beach pilot").
+- A contact email (Privacy), once you decide to publish one.
+
+### App screenshots
+
+The site currently uses drawn diagrams instead of app screenshots. When you have
+real captures, drop them in `assets/screens/` and use the `SCREENSHOT SLOT`
+comments on the home and features pages. Export at 390×844 (or 1170×2532 for 3×).
+Any capture that shows a detection must be genuine model output; write the caption
+to say the beach, the date and the confidence figure shown.
 
 ## Stack
 
-Deliberately boring: static HTML, one hand-written stylesheet, vanilla JS.
-No framework, no build step, no client-side dependencies fetched from a CDN.
+Static HTML, one hand-written stylesheet, vanilla JS. No framework, no build step,
+no third-party scripts.
 
 | Piece | What it is |
 | --- | --- |
-| `*.html` | One file per page, shared header/footer markup |
-| `styles.css` | The whole design system ("Sunlit Coast"); every colour is a token in `:root` |
-| `script.js` | Shared behaviour (nav, reveals, FAQ, detection diagram) — all progressive enhancement |
-| `map.js` | Leaflet map of Sydney beaches with live conditions (beaches page only) |
-| `auth.js` | Supabase early-access signup (account page only; dormant until keys are set) |
+| `*.html` | One file per page; header and footer are byte-identical across pages |
+| `styles.css` | The whole design system; every colour, size and space is a token in `:root` |
+| `assets/js-flag.js` | One line that adds the `js` class so the mobile menu can hide until it works |
+| `script.js` | Mobile navigation, screenshot fallback |
+| `map.js` | Leaflet map on the coverage page; reads the beach table in the HTML |
+| `auth.js` | Supabase early-access signup; dormant until the two keys at the top are set |
 | `api/conditions.js` | Vercel serverless function proxying Open-Meteo, edge-cached |
+| `assets/fonts/` | Newsreader (optical-size cut) and Geist, self-hosted under the OFL |
 | `assets/vendor/` | Pinned, self-hosted copies of Leaflet and the Supabase client |
 
 ## Local development
 
-Any static file server works:
-
 ```sh
-python3 -m http.server 8000
-# or
 npx serve .
 ```
 
-Then open <http://localhost:8000>. Notes:
+`serve` handles clean URLs (`/features`), which the pages rely on. The conditions
+proxy only runs on Vercel (`vercel dev` if you need it); the map falls back to
+Open-Meteo directly, then to "Unavailable".
 
-- Production uses Vercel's `cleanUrls`, so internal links are extension-less
-  (`/features`). With a plain file server, open pages as `/features.html`.
-- `/api/conditions` only runs on Vercel (`vercel dev` if you need it locally);
-  the map falls back gracefully without it.
+## Design system in a paragraph
+
+Warm paper, ink, one ocean-blue accent for links and buttons. Newsreader for
+headings (weight 500 at display sizes, 550–600 below), Geist for everything else.
+One 80rem container with a 12-column grid, left-aligned; section titles sit on the
+left with their lead on the right. Diagrams are inline SVG coloured from the
+tokens, numbered as figures with captions. Green, amber and red carry meaning
+only: the flags, and the detection outline. There are no gradients, blur washes,
+grain, scroll animations or count-ups.
 
 ## Deployment
 
-Deployed on Vercel, region `syd1`. `vercel.json` carries the whole config:
-clean URLs, long-lived immutable caching for assets, and a strict security
-header set (CSP with hashed inline script, HSTS, frame denial). If you add an
-inline script, its hash must be added to the CSP or it will not execute.
-
-A custom `404.html` is served automatically for unknown routes.
-
-## Design system in one paragraph
-
-Warm paper canvas, editorial Newsreader serif headlines with exactly one
-italic accent word, Geist for body text, and a deep oceanic accent. Green,
-amber and red are **locked safety signals** and are never used decoratively.
-Missing imagery renders as quiet labelled slots — the site never fakes an app
-UI, a photo or a detection result. All tokens live at the top of `styles.css`.
-
-## House rules
-
-- RipCo never tells anyone a beach is safe to enter. No copy, component or
-  data display may imply a safety verdict.
-- Every claim defers to the official sources: BeachSafe, Surf Life Saving
-  Australia and the Bureau of Meteorology.
-- No tracking, no analytics, no third-party requests beyond the documented
-  data sources in the CSP.
+Vercel, region `syd1`. `vercel.json` carries clean URLs, the redirects, immutable
+caching for assets and a strict header set. The CSP allows scripts from this origin
+only, so do not add inline scripts.
