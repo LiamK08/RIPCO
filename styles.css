@@ -1015,3 +1015,116 @@ sup.fn a { text-decoration: none; font-weight: 600; }
   body { background: #fff; color: #000; }
   a { color: inherit; text-decoration: none; }
 }
+
+/* ------------------------------ Utilities ------------------------------ */
+
+.mt-3 { margin-top: var(--s-3); }
+.mt-4 { margin-top: var(--s-4); }
+.mt-5 { margin-top: var(--s-5); }
+.mt-6 { margin-top: var(--s-6); }
+.mt-7 { margin-top: var(--s-7); }
+.mt-8 { margin-top: var(--s-8); }
+.mt-9 { margin-top: var(--s-9); }
+.m-0 { margin: 0; }
+.max-20 { max-width: 20rem; }
+.max-26 { max-width: 26rem; }
+.max-32 { max-width: 32rem; }
+.text-body { font-size: var(--text-body); }
+.sources--lg { font-size: var(--text-small); color: var(--ink-2); }
+.page-head--plain { border-bottom: 0; }
+.label.mt-7 { display: block; }
+
+/* Diagram details set by class, never by style attributes (CSP) */
+.ill .ill__detect--sm { stroke-width: 1.75; stroke-dasharray: 4 3; }
+.ill .ill__t-chip { fill: #fff; font-size: 11.5px; letter-spacing: 0.08em; }
+
+/* ------------------------ Hero product composition --------------------- */
+
+.hero__product { display: grid; }
+.hero__product > * { grid-area: 1 / 1; }
+.hero__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s-5);
+  align-items: end;
+  justify-content: end;
+}
+.hero__stage .device { width: min(18rem, 70vw); margin: 0; }
+.hero__stage-caption { max-width: 15rem; padding-bottom: var(--s-7); font-size: var(--text-small); }
+.hero__stage-caption b { color: var(--ink); }
+.device--auto .device__screen { aspect-ratio: auto; }
+html:not(.js) .hero__stage { display: none; }
+html.js .hero__fallback { display: none; }
+html.js .hero__stage.is-empty { display: none; }
+html.js .hero__stage.is-empty + .hero__fallback { display: block; }
+@media (max-width: 56em) {
+  .hero__stage { grid-template-columns: 1fr; justify-content: start; }
+  .hero__stage .device { margin-inline: auto; }
+  .hero__stage-caption { order: 2; padding-bottom: 0; max-width: 24rem; margin-inline: auto; text-align: center; }
+}
+
+/* ------------------------- Annotated app screen ------------------------ */
+
+.annot {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--s-8) var(--gap);
+  align-items: start;
+}
+.annot__stage { display: flex; justify-content: center; }
+.annot__stage .device { width: min(19rem, 100%); margin: 0; }
+.annot__stage .device__screen { position: relative; }
+.annot__overlay { position: absolute; inset: 0; pointer-events: none; }
+.annot__marker {
+  position: absolute;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.35rem;
+  text-align: center;
+}
+.annot__marker--1 { left: 26%; top: 11.2%; }
+.annot__marker--2 { left: 88%; top: 36.4%; }
+.annot__marker--3 { left: 60%; top: 39.2%; }
+.annot__marker--4 { left: 87%; top: 69.6%; }
+.annot__marker--5 { left: 24.5%; top: 74.5%; }
+.annot__marker--6 { left: 50%; top: 90.6%; }
+.annot__legend { list-style: none; margin: 0; padding: 0; counter-reset: annot; border-top: 1px solid var(--line-strong); }
+.annot__legend li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: var(--s-3);
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: var(--text-small);
+}
+.annot__legend li b { color: var(--ink); }
+.annot__legend li::before {
+  counter-increment: annot;
+  content: counter(annot);
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.35rem;
+  text-align: center;
+  margin-top: 0.05rem;
+}
+html.js .annot.is-empty { display: none; }
+@media (max-width: 56em) { .annot { grid-template-columns: 1fr; } }
+
+/* Criteria table: three readable columns */
+.table--criteria td { font-size: var(--text-small); line-height: 1.45; padding-right: var(--s-5); }
+.table--criteria td:first-child { width: 30%; }
+.table--criteria th:first-child { width: 30%; }

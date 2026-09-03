@@ -44,6 +44,8 @@
       function hide() {
         var host = img.closest('.device');
         if (host) host.classList.add('is-empty');
+        var stage = img.closest('[data-screen-stage]');
+        if (stage) stage.classList.add('is-empty');
       }
       if (img.complete && img.naturalWidth === 0) hide();
       img.addEventListener('error', hide);

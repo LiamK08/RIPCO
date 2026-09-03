@@ -38,7 +38,7 @@
   <header class="masthead" data-header>
     <div class="masthead__inner wrap">
       <a class="brand" href="/" aria-label="RipCo, home">
-        <svg class="brand__mark" viewBox="9 13 48 38" aria-hidden="true" focusable="false"><path fill="var(--accent)" d="M10.5 45.5 C12 32 20.5 20.5 33.5 16.6 C39.5 14.8 45 15.6 48.4 18.8 C51 21.2 52.2 24.6 51.8 28.2 C49.4 25 44.6 24.3 40.4 26.6 C36.6 28.7 34.7 32.3 35.2 36 C35.7 40.2 39.3 43.4 44 44 C48.3 44.6 52.8 43.2 56 40.4 C51 47.4 40.5 50.4 29 49 C22 48.2 15.3 47 10.5 45.5 Z"/></svg>
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
         <span class="brand__name">RipCo</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu" data-nav-toggle>
@@ -87,9 +87,22 @@
             <span>RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifeguards on duty.</span>
           </p>
         </div>
-        <figure class="figure hero__figure span-6">
-          <div class="figure__frame">
-            <svg class="ill" viewBox="0 0 800 500" role="img" aria-labelledby="fig-camera-title fig-camera-desc">
+        <div class="hero__product span-6">
+          <div class="hero__stage" data-screen-stage>
+            <p class="hero__stage-caption caption">
+              <b>The home screen.</b> Conditions near you, then your saved beaches:
+              a live camera tag, a risk score built from the conditions, and the
+              patrol line under every card.
+            </p>
+            <div class="device device--auto">
+              <div class="device__screen">
+                <img src="/assets/screens/home.png" width="983" height="2000" alt="RipCo home screen. Good morning, 13 degrees, Thursday 27 August, 4 beaches monitored near you. A Near you card reads 4 beaches nearby, 3 streaming live, patrol unknown, check the flags, with water 18.0 degrees, air 13.4 degrees, wind 19 kilometres an hour and swell 1.2 metres. Below it a Manly Beach card marked Live shows a risk gauge at 55, Moderate risk, and the line patrol unknown, check the flags." fetchpriority="high">
+              </div>
+            </div>
+          </div>
+          <figure class="figure hero__fallback">
+            <div class="figure__frame">
+              <svg class="ill" viewBox="0 0 800 500" role="img" aria-labelledby="fig-camera-title fig-camera-desc">
   <title id="fig-camera-title">Illustration of the detection overlay on a beach camera view</title>
   <desc id="fig-camera-desc">A drawn beach scene from a camera looking out to sea. Lines of breaking waves run across the surf on both sides. A darker, calmer channel cuts out through them and a red dashed outline marks it, labelled Likely rip.</desc>
   <rect x="0" y="0" width="800" height="30" fill="var(--sea)"/>
@@ -139,19 +152,16 @@
   <path d="M0 441 q100 -4 200 0 t200 0 t200 0 t200 0" fill="none" stroke="var(--foam)" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
   <path class="ill__detect" d="M446 458 L584 458 L562 300 L620 236 Q632 190 580 182 L464 182 Q412 190 424 236 L478 300 Z"/>
   <rect x="446" y="150" width="104" height="24" rx="4" fill="var(--safety-red)"/>
-  <text x="498" y="166.5" text-anchor="middle" style="fill:#fff;font-size:11.5px;letter-spacing:.08em">Likely rip</text>
+  <text x="498" y="166.5" text-anchor="middle" class="ill__t-chip">Likely rip</text>
 </svg>
-          </div>
-          <figcaption class="figure__caption">
-            <b>Fig. 1</b> What a detection looks like on the live view: the likely rip
-            outlined in red, with the model&rsquo;s confidence shown beside it in the app.
-            This is a drawn illustration, not a capture from the app.
-          </figcaption>
-          <!-- SCREENSHOT SLOT. When you have a real capture of the detection view,
-               replace the figure above with:
-               <div class="device"><div class="device__screen"><img src="/assets/screens/detection.png" width="390" height="844" alt="RipCo detection view at Manly Beach: a likely rip outlined in red on the live camera image, with the confidence figure" loading="eager"></div></div>
-               and change the caption to describe the real capture (beach, date, confidence shown). -->
-        </figure>
+            </div>
+            <figcaption class="figure__caption">
+              <b>Fig. 1</b> What a detection looks like on the live view: the likely rip
+              outlined in red, with the model&rsquo;s confidence shown beside it in the app.
+              This is a drawn illustration, not a capture from the app.
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -190,10 +200,10 @@
           </div>
         </dl>
 
-        <div class="grid" style="margin-top: var(--s-9);">
+        <div class="mt-9 grid">
           <div class="span-4">
             <span class="label">What beachgoers told me</span>
-            <p class="caption" style="margin-top: var(--s-3); max-width: 20rem;">
+            <p class="mt-3 max-20 caption">
               From my survey of beachgoers, run for this project. The questions,
               sample and full results are in the design folio.
               <!-- STUDENT: add the sample size and month here, e.g. "Sixty-two responses, March 2026." -->
@@ -215,7 +225,7 @@
           </ul>
         </div>
 
-        <ol class="sources" style="margin-top: var(--s-7);">
+        <ol class="mt-7 sources">
           <li id="src-1">Surf Life Saving Australia, <cite>National Coastal Safety Report 2025</cite>. Coastal drowning deaths for the 2024&ndash;25 financial year; rip currents in at least 37% of beach drowning deaths. <a href="#ref-1" aria-label="Back to text">&uarr;</a></li>
           <li id="src-2">Surf Life Saving Australia, <cite>National Coastal Safety Survey</cite>, 2018: three in four respondents could not identify a rip. <a href="#ref-2" aria-label="Back to text">&uarr;</a></li>
         </ol>
@@ -260,7 +270,7 @@
     <rect class="ill__box" x="570" y="16" width="200" height="140" rx="10"/>
     <rect x="640" y="30" width="60" height="112" rx="10"/>
     <path d="M660 38 H680"/>
-    <path class="ill__detect" style="stroke-width:1.75;stroke-dasharray:4 3" d="M654 74 L686 74 L682 106 L658 106 Z"/>
+    <path class="ill__detect ill__detect--sm" d="M654 74 L686 74 L682 106 L658 106 Z"/>
     <path class="ill__arrow" d="M236 86 H292 M282 78 L292 86 L282 94"/>
     <path class="ill__arrow" d="M506 86 H562 M552 78 L562 86 L552 94"/>
   </g>
@@ -272,10 +282,10 @@
   <text x="570" y="212" class="ill__t-lg">Warning on your phone</text>
 </svg>
           </div>
-          <figcaption class="figure__caption"><b>Fig. 2</b> The three stages: an existing public camera, the model, the warning in the app.</figcaption>
+          <figcaption class="figure__caption"><b>The three stages.</b> An existing public camera, the model, the warning in the app.</figcaption>
         </figure>
 
-        <ol class="steps steps--grid" style="margin-top: var(--s-8);">
+        <ol class="mt-8 steps steps--grid">
           <li class="step">
             <h3 class="h4 step__title">Existing public cameras</h3>
             <p class="step__body">Many beaches already have a public camera pointed at the water. RipCo reads that feed. There is nothing to install and nothing to mount.</p>
@@ -286,11 +296,11 @@
           </li>
           <li class="step">
             <h3 class="h4 step__title">A warning you can read at a glance</h3>
-            <p class="step__body">A likely rip is outlined in red with the model&rsquo;s confidence. The app has no green state and never tells you the water is fine to enter.</p>
+            <p class="step__body">A likely rip is outlined in red with the model&rsquo;s confidence. The app never tells you the water is fine to enter, and the flags line stays on screen.</p>
           </li>
         </ol>
 
-        <p style="margin-top: var(--s-7);"><a class="link" href="/how-it-works">Read the full pipeline, including what the model can&rsquo;t see</a></p>
+        <p class="mt-7"><a class="link" href="/how-it-works">Read the full pipeline, including what the model can&rsquo;t see</a></p>
       </div>
     </section>
 
@@ -304,8 +314,9 @@
           </div>
           <div class="head__lead">
             <p class="lead">
-              Detection is the reason RipCo exists. Four other tools sit beside it so
-              you can check one beach in one place before you leave the house.
+              Detection is the reason RipCo exists. Around it sit the conditions, a
+              risk score, alerts, live cameras and two community tools, so you can
+              check one beach in one place before you leave the house.
             </p>
           </div>
         </div>
@@ -316,27 +327,35 @@
             <div class="grid">
               <div class="span-6">
                 <h3 class="item__title">Live camera with rip detection</h3>
-                <p class="item__body" style="font-size: var(--text-body);">The live view from the beach camera, with likely rips outlined in red and a confidence figure beside each one. Detection has been developed and tested on a public camera at Manly Beach. Every other beach in the app shows conditions only.</p>
+                <p class="text-body item__body">The live view from the beach camera, with likely rips outlined in red and a confidence figure beside each one. Detection has been developed and tested on a public camera at Manly Beach. Every other beach in the app shows conditions only.</p>
               </div>
               <div class="span-5 start-8">
                 <dl class="dl">
                   <div class="dl__row"><dt>Red outline</dt><dd>Where the model sees the signature of a rip in the current frame.</dd></div>
                   <div class="dl__row"><dt>Confidence</dt><dd>How sure the model is, as a percentage. A reading from a camera, not a guarantee.</dd></div>
-                  <div class="dl__row"><dt>No green state</dt><dd>The app never marks water as safe. Nothing found means nothing found.</dd></div>
+                  <div class="dl__row"><dt>Risk score</dt><dd>Each beach card also carries a score out of 100 built from the live conditions, labelled as a level of risk. The lowest band is still a level of risk, and the word safe does not appear.</dd></div>
                 </dl>
               </div>
             </div>
           </article>
         </div>
 
-        <div class="items items--4" style="margin-top: var(--s-7);">
+        <div class="items items--3 mt-7">
           <article class="item">
             <h3 class="item__title item__title--sans">Safety brief</h3>
             <p class="item__body">A short plain-English summary of what the water is doing at your beach right now, with the flags reminder built in.</p>
           </article>
           <article class="item">
-            <h3 class="item__title item__title--sans">Marine conditions</h3>
-            <p class="item__body">Wind, swell, tide and water temperature for your beach in one view, so you know what to expect before you arrive.</p>
+            <h3 class="item__title item__title--sans">Conditions and risk score</h3>
+            <p class="item__body">Water and air temperature, wind, swell and tide for your beach, and a risk score out of 100 built from them, shown as a level of risk.</p>
+          </article>
+          <article class="item">
+            <h3 class="item__title item__title--sans">Alerts</h3>
+            <p class="item__body">The app watches your saved beaches and flags changing conditions before you head out.</p>
+          </article>
+          <article class="item">
+            <h3 class="item__title item__title--sans">Live cameras</h3>
+            <p class="item__body">Beaches with a public camera stream live in the app and carry a Live tag. Detection runs on the stream only where it has been tested.</p>
           </article>
           <article class="item">
             <h3 class="item__title item__title--sans">Shark Watch</h3>
@@ -348,7 +367,7 @@
           </article>
         </div>
 
-        <p style="margin-top: var(--s-7);"><a class="link" href="/features">All five tools in detail</a></p>
+        <p class="mt-7"><a class="link" href="/features">Every tool in detail, and the home screen annotated</a></p>
       </div>
     </section>
 
@@ -374,8 +393,8 @@
         <div class="span-5 self-center">
           <span class="label">Why I built it</span>
           <h2 class="h2" id="why-title">A Year 12 project with one job</h2>
-          <p class="lead" style="margin-top: var(--s-4); max-width: 26rem;">RipCo is my Design and Technology major work. It started with a survey and a camera that was already there.</p>
-          <p style="margin-top: var(--s-5);"><a class="link" href="/about">About the project, the research and the design decisions</a></p>
+          <p class="mt-4 max-26 lead">RipCo is my Design and Technology major work. It started with a survey and a camera that was already there.</p>
+          <p class="mt-5"><a class="link" href="/about">About the project, the research and the design decisions</a></p>
         </div>
         <div class="note span-6 start-7">
           <span class="label">A note from the maker</span>
@@ -397,8 +416,8 @@
       <div class="wrap grid">
         <div class="span-7">
           <h2 class="h2" id="cta-title">Launching first at Manly Beach</h2>
-          <p class="lead" style="margin-top: var(--s-4);">The early-access list opens before the App Store launch. Leave your email once it does and you&rsquo;ll hear first when the app goes live.</p>
-          <div class="actions" style="margin-top: var(--s-6);">
+          <p class="mt-4 lead">The early-access list opens before the App Store launch. Leave your email once it does and you&rsquo;ll hear first when the app goes live.</p>
+          <div class="mt-6 actions">
             <a class="btn btn--primary btn--lg" href="/early-access">Early access</a>
             <a class="btn btn--ghost btn--lg" href="/coverage">See the coverage map</a>
           </div>
@@ -413,7 +432,7 @@
       <div class="footer__grid">
         <div>
           <a class="brand" href="/" aria-label="RipCo, home">
-            <svg class="brand__mark" viewBox="9 13 48 38" aria-hidden="true" focusable="false"><path fill="var(--accent)" d="M10.5 45.5 C12 32 20.5 20.5 33.5 16.6 C39.5 14.8 45 15.6 48.4 18.8 C51 21.2 52.2 24.6 51.8 28.2 C49.4 25 44.6 24.3 40.4 26.6 C36.6 28.7 34.7 32.3 35.2 36 C35.7 40.2 39.3 43.4 44 44 C48.3 44.6 52.8 43.2 56 40.4 C51 47.4 40.5 50.4 29 49 C22 48.2 15.3 47 10.5 45.5 Z"/></svg>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
             <span class="brand__name">RipCo</span>
           </a>
           <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifeguards on duty.</p>
@@ -443,6 +462,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/about#research">Research</a></li>
             <li><a href="/about#decisions">Design decisions</a></li>
+            <li><a href="/about#criteria">Design criteria</a></li>
             <li><a href="/about#sources">Sources</a></li>
           </ul>
         </nav>

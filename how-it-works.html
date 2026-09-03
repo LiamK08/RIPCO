@@ -37,7 +37,7 @@
   <header class="masthead" data-header>
     <div class="masthead__inner wrap">
       <a class="brand" href="/" aria-label="RipCo, home">
-        <svg class="brand__mark" viewBox="9 13 48 38" aria-hidden="true" focusable="false"><path fill="var(--accent)" d="M10.5 45.5 C12 32 20.5 20.5 33.5 16.6 C39.5 14.8 45 15.6 48.4 18.8 C51 21.2 52.2 24.6 51.8 28.2 C49.4 25 44.6 24.3 40.4 26.6 C36.6 28.7 34.7 32.3 35.2 36 C35.7 40.2 39.3 43.4 44 44 C48.3 44.6 52.8 43.2 56 40.4 C51 47.4 40.5 50.4 29 49 C22 48.2 15.3 47 10.5 45.5 Z"/></svg>
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
         <span class="brand__name">RipCo</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu" data-nav-toggle>
@@ -100,7 +100,7 @@
     <rect class="ill__box" x="570" y="16" width="200" height="140" rx="10"/>
     <rect x="640" y="30" width="60" height="112" rx="10"/>
     <path d="M660 38 H680"/>
-    <path class="ill__detect" style="stroke-width:1.75;stroke-dasharray:4 3" d="M654 74 L686 74 L682 106 L658 106 Z"/>
+    <path class="ill__detect ill__detect--sm" d="M654 74 L686 74 L682 106 L658 106 Z"/>
     <path class="ill__arrow" d="M236 86 H292 M282 78 L292 86 L282 94"/>
     <path class="ill__arrow" d="M506 86 H562 M552 78 L562 86 L552 94"/>
   </g>
@@ -115,7 +115,7 @@
           <figcaption class="figure__caption"><b>Fig. 2</b> The three stages: an existing public camera, the model, the warning in the app.</figcaption>
         </figure>
 
-        <ol class="steps steps--grid" style="margin-top: var(--s-8);">
+        <ol class="mt-8 steps steps--grid">
           <li class="step">
             <h3 class="h4 step__title">It uses a camera that already exists</h3>
             <p class="step__body">Public beach cameras already stream the surf so people can check it from home. RipCo connects to one of those feeds. Nothing new has to be mounted, powered or maintained, which keeps the cost of adding another beach down to software.</p>
@@ -126,7 +126,7 @@
           </li>
           <li class="step">
             <h3 class="h4 step__title">A likely rip is outlined on the live view</h3>
-            <p class="step__body">When the model finds that signature it draws a red outline on the live image and shows its confidence as a percentage. There is no green state. If the model finds nothing, the app says nothing was found, which is different from saying the water is clear.</p>
+            <p class="step__body">When the model finds that signature it draws a red outline on the live image and shows its confidence as a percentage. If it finds nothing, the app says nothing was found, which is different from saying the water is clear.</p>
           </li>
         </ol>
       </div>
@@ -219,11 +219,11 @@
               <div class="dl__row"><dt>B &middot; Neck</dt><dd>The flow turns and runs out through the gap. This is the fastest part: narrow, deeper and darker, with no waves breaking in it.</dd></div>
               <div class="dl__row"><dt>C &middot; Head</dt><dd>Beyond the breaking waves the current slows and spreads out. Swimmers carried here can move sideways and swim back in.</dd></div>
             </dl>
-            <p class="body-2 small" style="margin-top: var(--s-5);">The neck is the part a beach camera can see, and the part the model is trained on. Three cues give it away.</p>
+            <p class="mt-5 body-2 small">The neck is the part a beach camera can see, and the part the model is trained on. Three cues give it away.</p>
           </div>
         </div>
 
-        <div class="items items--3" style="margin-top: var(--s-8);">
+        <div class="mt-8 items items--3">
           <article class="item">
             <span class="item__kicker">Cue 1</span>
             <h3 class="item__title item__title--sans">A darker channel</h3>
@@ -293,7 +293,7 @@
             <div class="callout">
               <h3 class="callout__title">Whatever the screen shows</h3>
               <p class="callout__body">Swim between the red and yellow flags and follow the lifeguards on duty. RipCo can miss a rip. They are reading the water in person.</p>
-              <p class="small" style="margin-top: var(--s-4);"><a class="link" href="/safety">The safety commitment</a></p>
+              <p class="mt-4 small"><a class="link" href="/safety">The safety commitment</a></p>
             </div>
           </div>
         </div>
@@ -306,7 +306,7 @@
         <div class="span-5">
           <span class="label">Where it stands</span>
           <h2 class="h2" id="pilot-title">The Manly Beach pilot</h2>
-          <p class="lead" style="margin-top: var(--s-4); max-width: 26rem;">Manly Beach is where the model has been developed and tested. It is a patrolled beach with a public camera looking along the surf zone.</p>
+          <p class="mt-4 max-26 lead">Manly Beach is where the model has been developed and tested. It is a patrolled beach with a public camera looking along the surf zone.</p>
           <!-- STUDENT: this is the place to add real test detail once you are happy to publish it:
                which camera and operator, the date range you tested over, how many frames you labelled,
                and what the model got right and wrong. A marker will value an honest number more than a
@@ -382,7 +382,7 @@
       <div class="footer__grid">
         <div>
           <a class="brand" href="/" aria-label="RipCo, home">
-            <svg class="brand__mark" viewBox="9 13 48 38" aria-hidden="true" focusable="false"><path fill="var(--accent)" d="M10.5 45.5 C12 32 20.5 20.5 33.5 16.6 C39.5 14.8 45 15.6 48.4 18.8 C51 21.2 52.2 24.6 51.8 28.2 C49.4 25 44.6 24.3 40.4 26.6 C36.6 28.7 34.7 32.3 35.2 36 C35.7 40.2 39.3 43.4 44 44 C48.3 44.6 52.8 43.2 56 40.4 C51 47.4 40.5 50.4 29 49 C22 48.2 15.3 47 10.5 45.5 Z"/></svg>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
             <span class="brand__name">RipCo</span>
           </a>
           <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifeguards on duty.</p>
@@ -412,6 +412,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/about#research">Research</a></li>
             <li><a href="/about#decisions">Design decisions</a></li>
+            <li><a href="/about#criteria">Design criteria</a></li>
             <li><a href="/about#sources">Sources</a></li>
           </ul>
         </nav>
