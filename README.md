@@ -39,11 +39,17 @@ belongs and a placeholder would be worse than nothing:
 
 ### App screenshots
 
-The site currently uses drawn diagrams instead of app screenshots. When you have
-real captures, drop them in `assets/screens/` and use the `SCREENSHOT SLOT`
-comments on the home and features pages. Export at 390×844 (or 1170×2532 for 3×).
-Any capture that shows a detection must be genuine model output; write the caption
-to say the beach, the date and the confidence figure shown.
+The home screen capture goes at `assets/screens/home.png` (the site expects the
+983×2000 crop without the status bar; if you export a different size, update the
+`width`/`height` attributes on the two `<img>` tags that reference it). It appears
+in the hero on the home page and in the annotated section on the features page.
+Until the file exists, the hero falls back to the drawn illustration and the
+annotated section hides itself.
+
+Further captures (the Detect screen above all) go in the same folder; use the
+`SCREENSHOT SLOT` comments on the home and features pages. Any capture that shows a
+detection must be genuine model output; write the caption to say the beach, the
+date and the confidence figure shown.
 
 ## Stack
 
