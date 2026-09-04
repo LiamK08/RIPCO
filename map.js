@@ -173,7 +173,7 @@
 
   /* Pins in tight north-south chains overlap at low zoom, so chain members
      fan a few pixels east in rotation until the visitor zooms in. */
-  var SPREAD_MAX_ZOOM = 12, SPREAD_STEP_PX = 14;
+  var SPREAD_MAX_ZOOM = 14, SPREAD_STEP_PX = 24;
   (function assignSpread() {
     var chain = 0;
     for (var i = 0; i < BEACHES.length; i++) {
@@ -263,8 +263,8 @@
     var detect = el('div', 'map__detect');
     detect.appendChild(pill);
     detect.appendChild(el('p', null, b.detect
-      ? 'The detection model has been developed and tested on a public camera at this beach. Outlines and confidence figures appear in the app only.'
-      : 'Rip detection has not been tested at this beach. The app shows conditions only here, and says so.'));
+      ? 'I trained and tested the detection model on a public camera at this beach. Outlines and confidence figures appear in the app only.'
+      : 'Rip detection has not been tested at this beach. This page shows its conditions.'));
     bodyEl.appendChild(detect);
 
     var links = el('p', 'map__panel-links');
@@ -294,7 +294,7 @@
   BEACHES.forEach(function (b) {
     var marker = L.marker([b.lat, b.lng], {
       icon: makeIcon(b, 0),
-      keyboard: true,
+      keyboard: false,
       riseOnHover: true,
       title: b.name + (b.detect ? ', rip detection tested' : ', conditions only')
     }).addTo(map);
@@ -306,24 +306,34 @@
     function decorate() {
       var node = marker.getElement();
       if (!node) return;
-      node.setAttribute('role', 'button');
-      node.setAttribute('aria-label', b.name + (b.detect ? ', rip detection tested. Show conditions.' : ', conditions only. Show conditions.'));
-      node.setAttribute('aria-pressed', selected === b ? 'true' : 'false');
+      /* Pins are pointer targets; the keyboard path is the table's buttons. */
+      node.setAttribute('aria-hidden', 'true');
     }
     marker.on('add', decorate);
     decorate();
 
     marker.on('click', function () { select(b, true); });
-    marker.on('keydown', function (e) {
-      var key = e.originalEvent && e.originalEvent.key;
-      if (key === 'Enter' || key === ' ') { e.originalEvent.preventDefault(); select(b, true); }
-    });
 
     markers.push({ marker: marker, beach: b, decorate: decorate });
   });
 
   map.on('zoomend', function () {
     markers.forEach(function (m) { m.marker.setIcon(makeIcon(m.beach, currentSpread(m.beach))); m.decorate(); });
+  });
+
+  /* Table buttons: one keyboard path through the beaches. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-map-select]'), function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-map-select');
+      for (var i = 0; i < BEACHES.length; i++) {
+        if (BEACHES[i].id === id) {
+          select(BEACHES[i], true);
+          map.panTo([BEACHES[i].lat, BEACHES[i].lng], { animate: !reducedMotion });
+          panel.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
+          break;
+        }
+      }
+    });
   });
 
   /* Manly is shown by default: the one beach with detection tested. */

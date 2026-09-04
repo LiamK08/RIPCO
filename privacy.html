@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy · RipCo</title>
-  <meta name="description" content="What this website and the RipCo app collect, and what they do not. No analytics, no tracking, an optional location permission, and an early-access email used for RipCo updates only.">
+  <meta name="description" content="What this website and the RipCo app collect, and what they do not: no analytics or tracking, optional location, and an email used for updates only.">
   <link rel="canonical" href="https://www.ripcosafety.com/privacy">
   <meta name="theme-color" content="#FDFBF7">
   <meta property="og:site_name" content="RipCo">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.ripcosafety.com/privacy">
   <meta property="og:title" content="Privacy · RipCo">
-  <meta property="og:description" content="What this website and the RipCo app collect, and what they do not. No analytics, no tracking, an optional location permission, and an early-access email used for RipCo updates only.">
+  <meta property="og:description" content="What this website and the RipCo app collect, and what they do not: no analytics or tracking, optional location, and an email used for updates only.">
   <meta property="og:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,11 +19,12 @@
   <meta property="og:locale" content="en_AU">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Privacy · RipCo">
-  <meta name="twitter:description" content="What this website and the RipCo app collect, and what they do not. No analytics, no tracking, an optional location permission, and an early-access email used for RipCo updates only.">
+  <meta name="twitter:description" content="What this website and the RipCo app collect, and what they do not: no analytics or tracking, optional location, and an email used for updates only.">
   <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
   <script src="/assets/js-flag.js"></script>
@@ -53,7 +54,7 @@
           <li><a class="nav__link" href="/coverage">Coverage</a></li>
           <li><a class="nav__link" href="/safety">Safety</a></li>
           <li><a class="nav__link" href="/about">About</a></li>
-          <li class="nav__cta"><a class="btn btn--ghost btn--sm" href="/early-access">Early access</a></li>
+          <li class="nav__cta"><a class="btn btn--primary btn--sm" href="/early-access">Early access</a></li>
         </ul>
       </nav>
     </div>
@@ -65,7 +66,7 @@
       <div class="wrap">
         <span class="label">Privacy</span>
         <h1 class="h1" id="page-title">What is collected, and what isn&rsquo;t</h1>
-        <p class="lead">RipCo is a student project, and this page is written to be read rather than skimmed. It covers this website, the early-access list and the app.</p>
+        <p class="lead">This page covers the website, the early-access list and the app.</p>
       </div>
     </section>
 
@@ -77,7 +78,7 @@
         </div>
         <div class="span-7 start-6 prose">
           <p>This site sets no cookies and runs no analytics or advertising scripts. Fonts, scripts and images are served from this site&rsquo;s own domain.</p>
-          <p>Two things load from elsewhere, on the coverage page only. Your browser fetches map tiles from CARTO, drawn from OpenStreetMap data, and beach conditions from this site&rsquo;s own server, which asks Open-Meteo on your behalf. If that server is unavailable your browser asks Open-Meteo directly. In each case the other service receives the same technical details any web request carries, such as your IP address. Neither is given anything about you by this site.</p>
+          <p>Two things load from elsewhere on the coverage page. Your browser fetches map tiles from CARTO, drawn from OpenStreetMap data, and beach conditions from this site&rsquo;s own server, which asks Open-Meteo on your behalf. If that server is unavailable your browser asks Open-Meteo directly. Once the early-access list opens, the early-access page will also contact Supabase, the service that stores the list, and it will receive the address you enter. In each case the other service receives the technical details any web request carries, such as your IP address. This site gives none of them anything else about you.</p>
         </div>
       </div>
     </section>
@@ -90,7 +91,7 @@
         </div>
         <div class="span-7 start-6 prose">
           <p>The early-access list is not open yet, and until it is, the early-access page collects nothing. When it opens, it will ask for an email address and nothing else. That address is used to send RipCo updates: the launch, and detection reaching new beaches.</p>
-          <p>It is not shared or sold. Every email will carry a way to leave the list, and leaving removes your address.</p>
+          <p>I do not share or sell it. Every email will carry a way to leave the list, and leaving removes your address.</p>
         </div>
       </div>
     </section>
@@ -102,9 +103,12 @@
           <h2 class="h2" id="app-title">Location is optional, and the cameras are public</h2>
         </div>
         <div class="span-7 start-6 prose">
-          <p>Location access is optional and is used only to show beaches near you. You can search for any beach without it.</p>
+          <p>Location access is optional. If you allow it, the app shows the beaches near you and the weather where you are; without it, you can pick beaches from the map.</p>
+          <!-- STUDENT: confirm whether alerts or the weather chip also use location, and adjust this sentence. -->
           <p>The camera feeds RipCo reads are public streams that already exist. The model reads the surface of the water for the signature of a rip. It is not built to identify people.</p>
           <p>Hazard sightings you report through Shark Watch are shared with other people using the app at that beach. Reports are unverified.</p>
+          <p>The app has a profile. This page will describe what the profile stores and how to delete it before the app is released.</p>
+          <!-- STUDENT: say what the profile stores (an email? a name? saved beaches?), whether an account is required, and how to delete it. -->
           <!-- STUDENT: if you add a contact email, this is the place: "Questions about privacy: you@example.com". -->
           <p class="caption">This page was last updated in September 2026.</p>
         </div>
@@ -120,7 +124,7 @@
             <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
             <span class="brand__name">RipCo</span>
           </a>
-          <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifeguards on duty.</p>
+          <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifesavers and lifeguards on duty.</p>
           <p class="footer__note">An independent student project. Not affiliated with or endorsed by Surf Life Saving Australia, the Bureau of Meteorology or any beach camera operator.</p>
         </div>
         <nav class="footer__col" aria-label="Product">
@@ -138,16 +142,17 @@
             <li><a href="/safety">The commitment</a></li>
             <li><a href="/safety#caught">If you're caught in a rip</a></li>
             <li><a href="/how-it-works#limits">What it can't see</a></li>
+            <li><a href="/how-it-works#glossary">Glossary</a></li>
             <li><a href="/privacy">Privacy</a></li>
           </ul>
         </nav>
-        <nav class="footer__col" aria-label="Project">
-          <h2>Project</h2>
+        <nav class="footer__col" aria-label="The project">
+          <h2>The project</h2>
           <ul>
             <li><a href="/about">About</a></li>
             <li><a href="/about#research">Research</a></li>
-            <li><a href="/about#decisions">Design decisions</a></li>
-            <li><a href="/about#criteria">Design criteria</a></li>
+            <li><a href="/about#criteria">Criteria and evaluation</a></li>
+            <li><a href="/summary">One-page summary</a></li>
             <li><a href="/about#sources">Sources</a></li>
           </ul>
         </nav>

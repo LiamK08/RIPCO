@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Features · RipCo</title>
-  <meta name="description" content="The five tools in the RipCo app: live camera with rip detection, a plain-English safety brief, marine conditions, Shark Watch hazard reports and the Ask RipCo assistant.">
+  <meta name="description" content="The tools in the RipCo app: live camera with rip detection, a safety brief, conditions and a risk score, alerts, live cameras, Shark Watch and Ask RipCo.">
   <link rel="canonical" href="https://www.ripcosafety.com/features">
   <meta name="theme-color" content="#FDFBF7">
   <meta property="og:site_name" content="RipCo">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.ripcosafety.com/features">
   <meta property="og:title" content="Features · RipCo">
-  <meta property="og:description" content="The five tools in the RipCo app: live camera with rip detection, a plain-English safety brief, marine conditions, Shark Watch hazard reports and the Ask RipCo assistant.">
+  <meta property="og:description" content="The tools in the RipCo app: live camera with rip detection, a safety brief, conditions and a risk score, alerts, live cameras, Shark Watch and Ask RipCo.">
   <meta property="og:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,11 +19,12 @@
   <meta property="og:locale" content="en_AU">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Features · RipCo">
-  <meta name="twitter:description" content="The five tools in the RipCo app: live camera with rip detection, a plain-English safety brief, marine conditions, Shark Watch hazard reports and the Ask RipCo assistant.">
+  <meta name="twitter:description" content="The tools in the RipCo app: live camera with rip detection, a safety brief, conditions and a risk score, alerts, live cameras, Shark Watch and Ask RipCo.">
   <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
   <script src="/assets/js-flag.js"></script>
@@ -53,7 +54,7 @@
           <li><a class="nav__link" href="/coverage">Coverage</a></li>
           <li><a class="nav__link" href="/safety">Safety</a></li>
           <li><a class="nav__link" href="/about">About</a></li>
-          <li class="nav__cta"><a class="btn btn--ghost btn--sm" href="/early-access">Early access</a></li>
+          <li class="nav__cta"><a class="btn btn--primary btn--sm" href="/early-access">Early access</a></li>
         </ul>
       </nav>
     </div>
@@ -69,6 +70,7 @@
           Rip detection is the reason the app exists. Around it sit the
           conditions, a risk score, alerts, live cameras and two community tools,
           so you can check one beach in one place before you leave the house.
+          The home screen is <a href="#annot">annotated below</a>.
         </p>
       </div>
     </section>
@@ -81,29 +83,26 @@
           <h2 class="h2 mt-4" id="f1-title">Live camera with rip detection</h2>
           <div class="prose mt-5">
             <p>The live view from your beach camera, with likely rips outlined in red and a confidence figure beside each outline. You can see where the model is looking and how sure it is, then check that against the water in front of you and against the flags.</p>
-            <p>Detection has been developed and tested on a public camera at Manly Beach. Other beaches with a public camera stream live in the app without detection, and the screen says so.</p>
+            <p>I trained and tested the model on a public camera at Manly Beach. Other beaches with a public camera stream live in the app without detection.</p>
           </div>
           <p class="pills mt-5"><span class="pill">Tested at Manly Beach</span><span class="pill">Prototype</span></p>
           <span class="label mt-7">What the screen shows</span>
           <dl class="dl mt-4">
             <div class="dl__row"><dt>Red outline</dt><dd>Where the model sees the signature of a rip in the current frame.</dd></div>
-            <div class="dl__row"><dt>Confidence</dt><dd>How sure the model is, as a percentage. A reading from a camera, weighed against what you can see.</dd></div>
-            <div class="dl__row"><dt>Unavailable</dt><dd>At night, in heavy rain or strong glare the app says detection is unavailable instead of guessing.</dd></div>
-            <div class="dl__row"><dt>Nothing found</dt><dd>When the model finds no signature it says nothing was found. The word safe does not appear.</dd></div>
+            <div class="dl__row"><dt>Confidence</dt><dd>How sure the model is, as a percentage, to weigh against what you can see.</dd></div>
+            <div class="dl__row"><dt>Unavailable</dt><dd>At night, in heavy rain or strong glare the camera image is not usable, and the app says detection is unavailable.</dd></div>
+            <div class="dl__row"><dt>No outline</dt><dd>A frame with no outline means the model found no rip signature in that frame. It is a reading of one moment.</dd></div>
           </dl>
           <!-- SCREENSHOT SLOT: when you have a capture of the Detect screen, add it here:
                <div class="device mt-6"><div class="device__screen"><img src="/assets/screens/detect.png" width="390" height="844" alt="..." loading="lazy"></div></div> -->
         </div>
         <figure class="figure span-5 start-8 self-center">
           <div class="figure__frame">
+            <span class="figure__tag">Illustration</span>
             <svg class="ill" viewBox="0 0 800 500" role="img" aria-labelledby="fig-camera-title fig-camera-desc">
   <title id="fig-camera-title">Illustration of the detection overlay on a beach camera view</title>
   <desc id="fig-camera-desc">A drawn beach scene from a camera looking out to sea. Lines of breaking waves run across the surf on both sides. A darker, calmer channel cuts out through them and a red dashed outline marks it, labelled Likely rip.</desc>
-  <rect x="0" y="0" width="800" height="30" fill="var(--sea)"/>
-  <circle cx="18" cy="15" r="3.5" fill="var(--on-sea-2)"/>
-  <text x="32" y="19.5" class="ill__t-on">Beach camera</text>
-  <text x="770" y="19.5" class="ill__t-on-2" text-anchor="end">Illustration</text>
-  <rect x="0" y="30" width="800" height="120" fill="var(--sky)"/>
+  <rect x="0" y="0" width="800" height="150" fill="var(--sky)"/>
   <rect x="0" y="150" width="800" height="290" fill="var(--water-2)"/>
   <rect x="0" y="150" width="800" height="62" fill="var(--water-3)"/>
   <path d="M0 212 L800 212 L800 226 C600 220 200 220 0 226 Z" fill="var(--water-3)" opacity="0.55"/>
@@ -149,13 +148,121 @@
   <text x="498" y="166.5" text-anchor="middle" class="ill__t-chip">Likely rip</text>
 </svg>
           </div>
-          <figcaption class="figure__caption"><b>Fig. 1</b> What a detection looks like on the live view: the likely rip outlined in red, with the model&rsquo;s confidence shown beside it in the app. A drawn illustration, not a capture.</figcaption>
+          <figcaption class="figure__caption"><b>Fig. 1</b> How a detection appears on the live view: the likely rip outlined in red, with the model&rsquo;s confidence shown beside it in the app. Drawn illustration.</figcaption>
         </figure>
       </div>
     </section>
 
+    <!-- ========================== DETECT STATES =========================== -->
+    <section class="section section--flush-top" id="states" aria-labelledby="states-title">
+      <div class="wrap">
+        <div class="head">
+          <div class="head__title">
+            <span class="label">Three things the Detect screen can show</span>
+            <h2 class="h2" id="states-title">Streaming, outlined, or unavailable</h2>
+          </div>
+          <div class="head__lead">
+            <p class="lead">The same camera view in three conditions. Only one of them draws anything on the water. Drawn illustrations; the on-screen wording in the app may differ.</p>
+            <!-- STUDENT: paste the exact on-screen wording the Detect tab uses when detection is unavailable, so the third panel can match it. -->
+          </div>
+        </div>
+        <ol class="states">
+          <li class="state">
+            <div class="state__frame"><span class="visually-hidden">Panel one:</span><svg class="ill" viewBox="0 0 400 260" role="img" aria-label="Camera view of the surf with the model running and no outline drawn.">
+  <rect x="0" y="0" width="400" height="80" fill="var(--sky)"/>
+  <rect x="0" y="80" width="400" height="150" fill="var(--water-2)"/>
+  <rect x="0" y="80" width="400" height="30" fill="var(--water-3)"/>
+  <path d="M0 126 C80 122 160 124 236 130 L244 210 C160 214 80 214 0 216 Z" fill="var(--water-1)" opacity="0.85"/>
+  <path d="M400 126 C340 122 320 124 312 130 L302 210 C340 214 370 214 400 216 Z" fill="var(--water-1)" opacity="0.85"/>
+  <path d="M244 230 L302 230 L290 160 L318 118 Q322 102 300 100 L246 100 Q226 102 230 118 L258 160 Z" fill="var(--water-4)" opacity="0.85"/>
+  <g fill="none" stroke="var(--foam)" stroke-width="1.5" stroke-linecap="round" opacity="0.55"><path d="M270 222 L266 202"/><path d="M284 196 L282 178"/><path d="M268 168 L266 150"/><path d="M290 140 L294 126"/></g>
+  <g fill="none" stroke="var(--foam)" stroke-linecap="round" opacity="0.95">
+    <path d="M14 122 q28 -4 56 0 t56 0 t56 0 t40 0" stroke-width="2"/>
+    <path d="M318 122 q26 -4 52 0 t24 0" stroke-width="2"/>
+    <path d="M10 148 q30 -5 60 0 t60 0 t60 0 t44 0" stroke-width="3"/>
+    <path d="M300 148 q30 -5 60 0 t36 0" stroke-width="3"/>
+    <path d="M8 178 q32 -6 64 0 t64 0 t64 0 t28 0" stroke-width="4"/>
+    <path d="M304 178 q30 -6 60 0 t34 0" stroke-width="4"/>
+    <path d="M6 208 q34 -6 68 0 t68 0 t68 0 t10 0" stroke-width="5"/>
+    <path d="M308 208 q30 -6 60 0 t30 0" stroke-width="5"/>
+  </g>
+  <rect x="0" y="230" width="400" height="30" fill="var(--sand)"/>
+  <rect x="0" y="230" width="400" height="6" fill="var(--sand-2)"/>
+  <rect x="0" y="0" width="400" height="22" fill="var(--sea)"/>
+  <circle cx="12" cy="11" r="3" fill="var(--accent-bright)"/>
+  <text x="22" y="15" class="ill__t-on">Live</text>
+</svg></div>
+            <h3 class="h4 state__title">Streaming, no outline</h3>
+            <p class="state__body">The live feed with the model running. No outline means no rip signature in this frame, and the flags line stays under the card.</p>
+          </li>
+          <li class="state">
+            <div class="state__frame"><span class="visually-hidden">Panel two:</span><svg class="ill" viewBox="0 0 400 260" role="img" aria-label="The same camera view with a red dashed outline around the darker channel and a label reading Likely rip.">
+  <rect x="0" y="0" width="400" height="80" fill="var(--sky)"/>
+  <rect x="0" y="80" width="400" height="150" fill="var(--water-2)"/>
+  <rect x="0" y="80" width="400" height="30" fill="var(--water-3)"/>
+  <path d="M0 126 C80 122 160 124 236 130 L244 210 C160 214 80 214 0 216 Z" fill="var(--water-1)" opacity="0.85"/>
+  <path d="M400 126 C340 122 320 124 312 130 L302 210 C340 214 370 214 400 216 Z" fill="var(--water-1)" opacity="0.85"/>
+  <path d="M244 230 L302 230 L290 160 L318 118 Q322 102 300 100 L246 100 Q226 102 230 118 L258 160 Z" fill="var(--water-4)" opacity="0.85"/>
+  <g fill="none" stroke="var(--foam)" stroke-width="1.5" stroke-linecap="round" opacity="0.55"><path d="M270 222 L266 202"/><path d="M284 196 L282 178"/><path d="M268 168 L266 150"/><path d="M290 140 L294 126"/></g>
+  <g fill="none" stroke="var(--foam)" stroke-linecap="round" opacity="0.95">
+    <path d="M14 122 q28 -4 56 0 t56 0 t56 0 t40 0" stroke-width="2"/>
+    <path d="M318 122 q26 -4 52 0 t24 0" stroke-width="2"/>
+    <path d="M10 148 q30 -5 60 0 t60 0 t60 0 t44 0" stroke-width="3"/>
+    <path d="M300 148 q30 -5 60 0 t36 0" stroke-width="3"/>
+    <path d="M8 178 q32 -6 64 0 t64 0 t64 0 t28 0" stroke-width="4"/>
+    <path d="M304 178 q30 -6 60 0 t34 0" stroke-width="4"/>
+    <path d="M6 208 q34 -6 68 0 t68 0 t68 0 t10 0" stroke-width="5"/>
+    <path d="M308 208 q30 -6 60 0 t30 0" stroke-width="5"/>
+  </g>
+  <rect x="0" y="230" width="400" height="30" fill="var(--sand)"/>
+  <rect x="0" y="230" width="400" height="6" fill="var(--sand-2)"/>
+  <rect x="0" y="0" width="400" height="22" fill="var(--sea)"/>
+  <circle cx="12" cy="11" r="3" fill="var(--accent-bright)"/>
+  <text x="22" y="15" class="ill__t-on">Live</text>
+  <path class="ill__detect ill__detect--sm" d="M234 240 L312 240 L300 162 L330 116 Q336 92 302 90 L242 90 Q212 92 218 116 L248 162 Z"/>
+  <rect x="234" y="66" width="70" height="18" rx="3" fill="var(--safety-red)"/>
+  <text x="269" y="78.5" text-anchor="middle" class="ill__t-chip">Likely rip</text>
+</svg></div>
+            <h3 class="h4 state__title">Likely rip outlined</h3>
+            <p class="state__body">The model found the signature of a rip. It draws the outline in red and shows its confidence as a percentage.</p>
+          </li>
+          <li class="state">
+            <div class="state__frame"><span class="visually-hidden">Panel three:</span><svg class="ill" viewBox="0 0 400 260" role="img" aria-label="The same camera view dimmed for night, with a notice that detection is unavailable.">
+  <rect x="0" y="0" width="400" height="80" fill="var(--sky)"/>
+  <rect x="0" y="80" width="400" height="150" fill="var(--water-2)"/>
+  <rect x="0" y="80" width="400" height="30" fill="var(--water-3)"/>
+  <path d="M0 126 C80 122 160 124 236 130 L244 210 C160 214 80 214 0 216 Z" fill="var(--water-1)" opacity="0.85"/>
+  <path d="M400 126 C340 122 320 124 312 130 L302 210 C340 214 370 214 400 216 Z" fill="var(--water-1)" opacity="0.85"/>
+  
+  <g fill="none" stroke="var(--foam)" stroke-linecap="round" opacity="0.95">
+    <path d="M14 122 q28 -4 56 0 t56 0 t56 0 t40 0" stroke-width="2"/>
+    <path d="M318 122 q26 -4 52 0 t24 0" stroke-width="2"/>
+    <path d="M10 148 q30 -5 60 0 t60 0 t60 0 t44 0" stroke-width="3"/>
+    <path d="M300 148 q30 -5 60 0 t36 0" stroke-width="3"/>
+    <path d="M8 178 q32 -6 64 0 t64 0 t64 0 t28 0" stroke-width="4"/>
+    <path d="M304 178 q30 -6 60 0 t34 0" stroke-width="4"/>
+    <path d="M6 208 q34 -6 68 0 t68 0 t68 0 t10 0" stroke-width="5"/>
+    <path d="M308 208 q30 -6 60 0 t30 0" stroke-width="5"/>
+  </g>
+  <rect x="0" y="230" width="400" height="30" fill="var(--sand)"/>
+  <rect x="0" y="230" width="400" height="6" fill="var(--sand-2)"/>
+  <rect x="0" y="0" width="400" height="260" fill="var(--sea)" opacity="0.72"/>
+  <rect x="0" y="0" width="400" height="22" fill="var(--sea)"/>
+  <circle cx="12" cy="11" r="3" fill="var(--on-sea-2)"/>
+  <text x="22" y="15" class="ill__t-on-2">Live</text>
+  <rect x="96" y="106" width="208" height="48" rx="8" fill="var(--paper)" opacity="0.96"/>
+  <text x="200" y="126" text-anchor="middle" class="ill__t-lg">Detection unavailable</text>
+  <text x="200" y="144" text-anchor="middle" class="ill__t-sm">Low light</text>
+</svg></div>
+            <h3 class="h4 state__title">Detection unavailable</h3>
+            <p class="state__body">Night, heavy rain or strong glare: the image is not usable, so the app says detection is unavailable and keeps the conditions.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- ======================= HOME SCREEN, ANNOTATED ====================== -->
-    <section class="section section--tint" aria-labelledby="annot-title">
+    <section class="section section--tint annot-section" id="annot" aria-labelledby="annot-title" data-screen-stage>
       <div class="wrap">
         <div class="head">
           <div class="head__title">
@@ -163,14 +270,15 @@
             <h2 class="h2" id="annot-title">What each part of the screen is for</h2>
           </div>
           <div class="head__lead">
-            <p class="lead">The first screen you see when you open the app. Every element on it exists to answer one question before you leave the house: what is the water doing at my beach?</p>
+            <p class="lead">The first screen you see when you open the app. It answers one question: what is the water doing at my beach?</p>
           </div>
         </div>
-        <div class="annot" data-screen-stage>
+        <div class="annot">
           <div class="annot__stage">
             <div class="device device--auto">
               <div class="device__screen">
                 <img src="/assets/screens/home.png" width="983" height="2000" alt="RipCo home screen, described by the numbered notes beside it." loading="lazy">
+                <noscript><p class="caption">The screenshot is described by the numbered notes.</p></noscript>
                 <div class="annot__overlay" aria-hidden="true">
                   <span class="annot__marker annot__marker--1">1</span>
                   <span class="annot__marker annot__marker--2">2</span>
@@ -183,11 +291,11 @@
             </div>
           </div>
           <ol class="annot__legend">
-            <li><span><b>Weather now.</b> Air temperature and sky at your location, before anything else, because the decision starts at home.</span></li>
+            <li><span><b>Weather now.</b> Air temperature and sky at your location, first, so you can decide before you leave.</span></li>
             <li><span><b>Near you.</b> How many beaches are within reach and how many have a camera streaming live, with one row of conditions across them.</span></li>
             <li><span><b>Patrol line.</b> Patrol status where it is known, and &ldquo;Patrol unknown&rdquo; where it is not. The instruction is the same either way: check the flags.</span></li>
             <li><span><b>Live tag.</b> The camera at this beach is streaming. Rip detection itself has only been developed and tested at Manly.</span></li>
-            <li><span><b>Risk score.</b> A number out of 100 built from the live conditions, labelled as a level of risk. Amber means moderate. The word safe does not appear.</span></li>
+            <li><span><b>Risk score.</b> A number out of 100 built from the live conditions, with a label beside it; 55 reads Moderate risk in amber. <a href="/how-it-works#risk">How it is built</a>.</span></li>
             <li><span><b>Detect.</b> The live camera view with the rip outline, one tap from any screen. Map, Alerts and Profile sit beside it.</span></li>
           </ol>
         </div>
@@ -203,29 +311,29 @@
             <h2 class="h2" id="tools-title">The tools around it</h2>
           </div>
           <div class="head__lead">
-            <p class="lead">Each one describes the beach: what the water is doing, what other people have seen, what has changed. The risk score summarises the conditions as a level of risk. None of them says a beach is safe.</p>
+            <p class="lead">Each one describes the beach. The risk score summarises the conditions as a level of risk, and none of the tools gives a verdict on whether to swim.</p>
           </div>
         </div>
         <div class="items items--3">
           <article class="item">
             <span class="item__kicker">02</span>
             <h3 class="item__title">Safety brief</h3>
-            <p class="item__body">A short plain-English summary of what the water is doing at your beach right now: the wind, the swell, the temperature and what they add up to, with the reminder to swim between the flags built in. It describes conditions; the word safe does not appear.</p>
+            <p class="item__body">A short plain-English summary of what the water is doing at your beach right now: the wind, the swell, the temperature and what they add up to, with the reminder to swim between the flags built in.</p>
           </article>
           <article class="item">
             <span class="item__kicker">03</span>
             <h3 class="item__title">Conditions and risk score</h3>
-            <p class="item__body">Water and air temperature, wind speed and direction, swell height and period, and tide for your beach, in one view. A risk score out of 100 is built from those conditions and shown as a level of risk, amber for moderate, above the patrol line on every beach card.</p>
+            <p class="item__body">Water and air temperature, wind and swell for your beach, in one view. The app builds a risk score out of 100 from those conditions and shows it as a level of risk, amber for moderate, above the patrol line on each beach card. <a href="/how-it-works#risk">How the score is built</a>.</p>
           </article>
           <article class="item">
             <span class="item__kicker">04</span>
             <h3 class="item__title">Alerts</h3>
-            <p class="item__body">The app watches the beaches you save and flags changing conditions before you head out, so the decision to go can be made at home.</p>
+            <p class="item__body">The app watches the beaches you save and flags changing conditions before you head out, so you can decide at home whether to go.</p>
           </article>
           <article class="item">
             <span class="item__kicker">05</span>
             <h3 class="item__title">Live cameras</h3>
-            <p class="item__body">Beaches with a public camera stream live in the app and carry a Live tag. Rip detection runs on top of the stream only where it has been developed and tested, which today means Manly.</p>
+            <p class="item__body">Beaches with a public camera stream live in the app and carry a Live tag. Rip detection runs on top of the stream only where I have tested it, which today means Manly.</p>
           </article>
           <article class="item">
             <span class="item__kicker">06</span>
@@ -235,7 +343,7 @@
           <article class="item">
             <span class="item__kicker">07</span>
             <h3 class="item__title">Ask RipCo</h3>
-            <p class="item__body">A conversational assistant for conditions and beach-safety questions: what the surf is doing, what a flag means, how to spot a rip. Its answers point you back to the flags and the lifeguards.</p>
+            <p class="item__body">A conversational assistant for conditions and beach-safety questions, such as what the surf is doing or what a flag means. It is built to point you to the flags and the lifesavers rather than give a verdict.</p>
           </article>
         </div>
       </div>
@@ -250,9 +358,9 @@
         </div>
         <div class="span-6 start-7">
           <ul class="checks">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>The word &ldquo;safe&rdquo;. The risk score describes conditions as a level of risk, and its lowest band is still a level of risk.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>The word &ldquo;safe&rdquo;. Each card shows a level of risk instead, and the band below Moderate is still a level of risk.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>A verdict on whether to swim. The flags and the lifeguards decide that, and every beach card says so.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Detection at beaches where it has not been developed and tested. Those beaches show conditions only.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Detection at beaches where I have not tested it. Those beaches show conditions, and a live stream where there is a camera.</span></li>
           </ul>
           <p class="mt-5 small body-2">The reasoning is on the <a href="/about#decisions">design decisions</a> section of the About page.</p>
         </div>
@@ -263,7 +371,7 @@
       <div class="wrap">
         <div class="next">
           <div class="next__copy">
-            <h2 class="h3">Next: which beaches are in the app today</h2>
+            <h2 class="h3">Next: the beaches this site tracks, and where detection has been tested</h2>
           </div>
           <div class="next__actions">
             <a class="btn btn--primary" href="/coverage">Coverage map</a>
@@ -282,7 +390,7 @@
             <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
             <span class="brand__name">RipCo</span>
           </a>
-          <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifeguards on duty.</p>
+          <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifesavers and lifeguards on duty.</p>
           <p class="footer__note">An independent student project. Not affiliated with or endorsed by Surf Life Saving Australia, the Bureau of Meteorology or any beach camera operator.</p>
         </div>
         <nav class="footer__col" aria-label="Product">
@@ -300,16 +408,17 @@
             <li><a href="/safety">The commitment</a></li>
             <li><a href="/safety#caught">If you're caught in a rip</a></li>
             <li><a href="/how-it-works#limits">What it can't see</a></li>
+            <li><a href="/how-it-works#glossary">Glossary</a></li>
             <li><a href="/privacy">Privacy</a></li>
           </ul>
         </nav>
-        <nav class="footer__col" aria-label="Project">
-          <h2>Project</h2>
+        <nav class="footer__col" aria-label="The project">
+          <h2>The project</h2>
           <ul>
             <li><a href="/about">About</a></li>
             <li><a href="/about#research">Research</a></li>
-            <li><a href="/about#decisions">Design decisions</a></li>
-            <li><a href="/about#criteria">Design criteria</a></li>
+            <li><a href="/about#criteria">Criteria and evaluation</a></li>
+            <li><a href="/summary">One-page summary</a></li>
             <li><a href="/about#sources">Sources</a></li>
           </ul>
         </nav>

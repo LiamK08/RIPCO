@@ -36,6 +36,21 @@
     else if (typeof desktop.addListener === 'function') desktop.addListener(onViewport);
   });
 
+  /* Print: open every FAQ so answers print, and wire the summary page's button */
+  module(function () {
+    var faqs = document.querySelectorAll('details.faq');
+    var wasOpen = [];
+    window.addEventListener('beforeprint', function () {
+      wasOpen = Array.prototype.map.call(faqs, function (d) { return d.open; });
+      Array.prototype.forEach.call(faqs, function (d) { d.open = true; });
+    });
+    window.addEventListener('afterprint', function () {
+      Array.prototype.forEach.call(faqs, function (d, i) { d.open = !!wasOpen[i]; });
+    });
+    var btn = document.querySelector('[data-print]');
+    if (btn) btn.addEventListener('click', function () { window.print(); });
+  });
+
   /* Device frames: a frame whose screenshot fails to load is removed
      rather than shown empty. */
   module(function () {

@@ -1,4 +1,4 @@
-/* RipCo early access. Loaded on account.html only.
+/* RipCo early access. Loaded on early-access.html only.
 
    ============================ SUPABASE CONFIG ============================
    Fill these two values from your Supabase project (Settings > API) to

@@ -1,0 +1,14 @@
+{
+  "name": "RipCo",
+  "short_name": "RipCo",
+  "description": "Rip current detection on public beach cameras.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FDFBF7",
+  "theme_color": "#FDFBF7",
+  "icons": [
+    { "src": "/assets/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

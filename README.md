@@ -14,13 +14,14 @@ never quotes a figure it cannot source. Keep it that way.
 | URL | Job |
 | --- | --- |
 | `/` | The claim, the problem (sourced figures + the survey), how it works in brief, what is in the app, the safety position, a note from the maker |
-| `/how-it-works` | The three stages, a plan-view diagram of a rip, the three visual cues, what the model cannot see, the Manly pilot, FAQ |
-| `/features` | Rip detection as the core feature, the four tools around it, what was left out on purpose |
+| `/how-it-works` | The three stages, a plan-view diagram of a rip, the three visual cues, what the model cannot see, how the risk score is built, the Manly pilot, a glossary, FAQ |
+| `/features` | Rip detection as the core feature, the three states of the Detect screen, the home screen annotated, the six tools around it, what was left out on purpose |
 | `/coverage` | Map of 26 Sydney beaches with live conditions, the beach table (source of truth for the map), what it takes to add a beach |
 | `/safety` | The commitment, the flags, what to do if caught in a rip |
-| `/about` | Why it was built, research, design decisions, project status, sources and thanks |
+| `/about` | The need, who it is for, what already exists, process, research, design decisions, criteria with status, evaluation, sustainability, status, sources, colophon |
 | `/early-access` | The list (dormant until Supabase keys are set), what happens to your email |
 | `/privacy` | What is and is not collected |
+| `/summary` | One A4 page for the folio: need, how it works, criteria and status, sources; print button |
 
 `/beaches` and `/account` redirect to `/coverage` and `/early-access`
 (see `vercel.json`).
@@ -36,6 +37,13 @@ belongs and a placeholder would be worse than nothing:
 - Which Manly camera, the test date range and what the model got right and wrong
   (How it works, "The Manly Beach pilot").
 - A contact email (Privacy), once you decide to publish one.
+- The camera and the arrangement for using its feed (Safety, ethics; How it works, pilot).
+- The test log (How it works, pilot: a commented-out table is ready to fill).
+- What feeds the risk score and what its bands are called (How it works, risk score).
+- Whether the app's own beach list and conditions source match this site's (Coverage).
+- What the app profile stores (Privacy).
+
+Spelling: this site writes **RipCo**; the app's wordmark reads **Ripco**. Pick one before the screenshots are final.
 
 ### App screenshots
 
@@ -58,7 +66,7 @@ no third-party scripts.
 
 | Piece | What it is |
 | --- | --- |
-| `*.html` | One file per page; header and footer are byte-identical across pages |
+| `*.html` | One file per page; header and footer are identical across pages apart from the current-page marker |
 | `styles.css` | The whole design system; every colour, size and space is a token in `:root` |
 | `assets/js-flag.js` | One line that adds the `js` class so the mobile menu can hide until it works |
 | `script.js` | Mobile navigation, screenshot fallback |

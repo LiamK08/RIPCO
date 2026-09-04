@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coverage · RipCo</title>
-  <meta name="description" content="Which Sydney beaches RipCo covers. Rip detection tested at Manly Beach; live wind, swell and temperature for 26 beaches from Palm Beach to Cronulla.">
+  <meta name="description" content="The 26 Sydney beaches this site tracks with live conditions, and the one beach where RipCo rip detection has been tested: Manly.">
   <link rel="canonical" href="https://www.ripcosafety.com/coverage">
   <meta name="theme-color" content="#FDFBF7">
   <meta property="og:site_name" content="RipCo">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.ripcosafety.com/coverage">
   <meta property="og:title" content="Coverage · RipCo">
-  <meta property="og:description" content="Which Sydney beaches RipCo covers. Rip detection tested at Manly Beach; live wind, swell and temperature for 26 beaches from Palm Beach to Cronulla.">
+  <meta property="og:description" content="The 26 Sydney beaches this site tracks with live conditions, and the one beach where RipCo rip detection has been tested: Manly.">
   <meta property="og:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,11 +19,12 @@
   <meta property="og:locale" content="en_AU">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Coverage · RipCo">
-  <meta name="twitter:description" content="Which Sydney beaches RipCo covers. Rip detection tested at Manly Beach; live wind, swell and temperature for 26 beaches from Palm Beach to Cronulla.">
+  <meta name="twitter:description" content="The 26 Sydney beaches this site tracks with live conditions, and the one beach where RipCo rip detection has been tested: Manly.">
   <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-image.png">
   <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
   <script src="/assets/js-flag.js"></script>
@@ -56,7 +57,7 @@
           <li><a class="nav__link" href="/coverage" aria-current="page">Coverage</a></li>
           <li><a class="nav__link" href="/safety">Safety</a></li>
           <li><a class="nav__link" href="/about">About</a></li>
-          <li class="nav__cta"><a class="btn btn--ghost btn--sm" href="/early-access">Early access</a></li>
+          <li class="nav__cta"><a class="btn btn--primary btn--sm" href="/early-access">Early access</a></li>
         </ul>
       </nav>
     </div>
@@ -67,12 +68,13 @@
     <section class="page-head" aria-labelledby="page-title">
       <div class="wrap">
         <span class="label">Coverage</span>
-        <h1 class="h1" id="page-title">Which beaches RipCo covers</h1>
+        <h1 class="h1" id="page-title">Where detection has been tested, and the beaches this site tracks</h1>
         <p class="lead">
-          Rip detection has been developed and tested at Manly Beach. The 26
-          Sydney beaches below show live conditions from Open-Meteo: wind, swell,
-          air and water temperature. Tide times, patrol hours and hazard warnings
-          are on BeachSafe, linked from the table.
+          I have tested rip detection at Manly Beach only. The 26 Sydney beaches
+          below are the ones this site tracks, with live conditions from
+          Open-Meteo. Patrol hours and hazard warnings are on BeachSafe, linked
+          from the table.
+          <!-- STUDENT: if the app's own beach list or its conditions source differs from this site's, say so here. -->
         </p>
       </div>
     </section>
@@ -81,9 +83,10 @@
     <section class="section" aria-labelledby="map-title">
       <div class="wrap">
         <h2 class="visually-hidden" id="map-title">Map of covered beaches</h2>
+        <a class="skip-link skip-link--inline" href="#beach-table">Skip the map to the beach list</a>
         <div class="map">
           <div class="map__canvas-wrap">
-            <div id="beach-map" class="map__canvas" role="region" aria-label="Map of Sydney beaches in the app, from Palm Beach to Cronulla. Select a pin to show that beach's conditions beside the map.">
+            <div id="beach-map" class="map__canvas" role="region" aria-label="Map of the Sydney beaches this site tracks, from Palm Beach to Cronulla. Select a pin to show that beach's conditions beside the map.">
               <noscript>
                 <p class="map__fallback">The interactive map needs JavaScript. Every beach is listed in the table below.</p>
               </noscript>
@@ -100,13 +103,20 @@
               <span class="map__legend-note" data-map-note>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>, CC BY 4.0</span>
             </div>
           </div>
-          <aside class="map__panel" id="beach-panel" aria-label="Beach details">
-            <div class="map__panel-head">
-              <h3 class="map__panel-name" tabindex="-1" data-panel-name>Pick a beach</h3>
-            </div>
-            <p class="mt-3 small body-2" data-panel-intro>Select a pin on the map to see current conditions for that beach. Without JavaScript, use the table below.</p>
-            <div data-panel-body hidden></div>
-          </aside>
+          <div class="map__side">
+            <dl class="dl map__meta">
+              <div class="dl__row"><dt>Tracked</dt><dd>26 Sydney beaches, Palm Beach to Cronulla</dd></div>
+              <div class="dl__row"><dt>Detection tested</dt><dd>1 beach: Manly</dd></div>
+              <div class="dl__row"><dt>Patrol info</dt><dd><a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">BeachSafe</a>, by Surf Life Saving Australia</dd></div>
+            </dl>
+            <aside class="map__panel" id="beach-panel" aria-label="Beach details">
+              <div class="map__panel-head">
+                <h3 class="map__panel-name" tabindex="-1" data-panel-name>Pick a beach</h3>
+              </div>
+              <p class="mt-3 small body-2" data-panel-intro>Select a pin on the map, or a beach in the table below, to see current conditions. Without JavaScript, use the table.</p>
+              <div data-panel-body hidden></div>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -117,45 +127,52 @@
         <div class="head">
           <div class="head__title">
             <span class="label">All 26 beaches</span>
-            <h2 class="h2" id="table-title">In the app today</h2>
+            <h2 class="h2" id="table-title">The beaches this site tracks</h2>
           </div>
           <div class="head__lead">
-            <p class="lead">Listed north to south. Detection is marked only where it has been developed and tested. Everything else is conditions only.</p>
+            <p class="lead">Listed north to south by area. Detection is marked on the one beach where I have tested it. Every beach has live conditions.</p>
           </div>
         </div>
         <div class="table-wrap">
           <table class="table" id="beach-table">
-            <caption>Patrol times, flags and hazard warnings for each beach are published by Surf Life Saving Australia at <a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">beachsafe.org.au</a>. Conditions in the app and on this page come from Open-Meteo.</caption>
+            <caption>Patrol times, flags and hazard warnings for each beach are published by Surf Life Saving Australia at <a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">beachsafe.org.au</a>. Conditions on this page come from Open-Meteo.</caption>
             <thead>
-              <tr><th scope="col">Beach</th><th scope="col">Area</th><th scope="col">In the app</th></tr>
+              <tr><th scope="col">Beach</th><th scope="col">Rip detection</th><th scope="col"><span class="visually-hidden">Show on map</span></th></tr>
             </thead>
             <tbody>
-              <tr data-id="palm-beach" data-lat="-33.5965" data-lng="151.3235"><td>Palm Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="whale-beach" data-lat="-33.6130" data-lng="151.3315"><td>Whale Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="avalon" data-lat="-33.6357" data-lng="151.3324"><td>Avalon Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="bilgola" data-lat="-33.6462" data-lng="151.3253"><td>Bilgola Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="newport" data-lat="-33.6570" data-lng="151.3225"><td>Newport Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="bungan" data-lat="-33.6690" data-lng="151.3140"><td>Bungan Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="mona-vale" data-lat="-33.6777" data-lng="151.3130"><td>Mona Vale Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="warriewood" data-lat="-33.6890" data-lng="151.3100"><td>Warriewood Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="narrabeen" data-lat="-33.7115" data-lng="151.2995"><td>Narrabeen Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="collaroy" data-lat="-33.7322" data-lng="151.3016"><td>Collaroy Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="long-reef" data-lat="-33.7395" data-lng="151.3078"><td>Long Reef Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="dee-why" data-lat="-33.7515" data-lng="151.2985"><td>Dee Why Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="curl-curl" data-lat="-33.7685" data-lng="151.2930"><td>Curl Curl Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr data-id="freshwater" data-lat="-33.7785" data-lng="151.2890"><td>Freshwater Beach</td><td>Northern Beaches</td><td>Conditions only</td></tr>
-              <tr class="is-highlight" data-id="manly" data-lat="-33.7969" data-lng="151.2880" data-detect="tested"><td>Manly Beach</td><td>Northern Beaches</td><td>Rip detection tested, plus conditions</td></tr>
-              <tr data-id="bondi" data-lat="-33.8910" data-lng="151.2755"><td>Bondi Beach</td><td>Eastern Suburbs</td><td>Conditions only</td></tr>
-              <tr data-id="tamarama" data-lat="-33.8980" data-lng="151.2702"><td>Tamarama Beach</td><td>Eastern Suburbs</td><td>Conditions only</td></tr>
-              <tr data-id="bronte" data-lat="-33.9037" data-lng="151.2671"><td>Bronte Beach</td><td>Eastern Suburbs</td><td>Conditions only</td></tr>
-              <tr data-id="clovelly" data-lat="-33.9120" data-lng="151.2605"><td>Clovelly Beach</td><td>Eastern Suburbs</td><td>Conditions only</td></tr>
-              <tr data-id="coogee" data-lat="-33.9205" data-lng="151.2571"><td>Coogee Beach</td><td>Eastern Suburbs</td><td>Conditions only</td></tr>
-              <tr data-id="maroubra" data-lat="-33.9500" data-lng="151.2570"><td>Maroubra Beach</td><td>Eastern Suburbs</td><td>Conditions only</td></tr>
-              <tr data-id="malabar" data-lat="-33.9622" data-lng="151.2495"><td>Malabar Beach</td><td>Eastern Suburbs</td><td>Conditions only</td></tr>
-              <tr data-id="wanda" data-lat="-34.0390" data-lng="151.1600"><td>Wanda Beach</td><td>Sutherland Shire</td><td>Conditions only</td></tr>
-              <tr data-id="elouera" data-lat="-34.0432" data-lng="151.1575"><td>Elouera Beach</td><td>Sutherland Shire</td><td>Conditions only</td></tr>
-              <tr data-id="north-cronulla" data-lat="-34.0492" data-lng="151.1553"><td>North Cronulla Beach</td><td>Sutherland Shire</td><td>Conditions only</td></tr>
-              <tr data-id="cronulla" data-lat="-34.0546" data-lng="151.1533"><td>Cronulla Beach</td><td>Sutherland Shire</td><td>Conditions only</td></tr>
+              <tr class="table__group"><th scope="rowgroup" colspan="3">Northern Beaches</th></tr>
+              <tr data-id="palm-beach" data-lat="-33.5965" data-lng="151.3235"><th scope="row">Palm Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="palm-beach">Show on map</button></td></tr>
+              <tr data-id="whale-beach" data-lat="-33.6130" data-lng="151.3315"><th scope="row">Whale Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="whale-beach">Show on map</button></td></tr>
+              <tr data-id="avalon" data-lat="-33.6357" data-lng="151.3324"><th scope="row">Avalon Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="avalon">Show on map</button></td></tr>
+              <tr data-id="bilgola" data-lat="-33.6462" data-lng="151.3253"><th scope="row">Bilgola Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bilgola">Show on map</button></td></tr>
+              <tr data-id="newport" data-lat="-33.6570" data-lng="151.3225"><th scope="row">Newport Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="newport">Show on map</button></td></tr>
+              <tr data-id="bungan" data-lat="-33.6690" data-lng="151.3140"><th scope="row">Bungan Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bungan">Show on map</button></td></tr>
+              <tr data-id="mona-vale" data-lat="-33.6777" data-lng="151.3130"><th scope="row">Mona Vale Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="mona-vale">Show on map</button></td></tr>
+              <tr data-id="warriewood" data-lat="-33.6890" data-lng="151.3100"><th scope="row">Warriewood Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="warriewood">Show on map</button></td></tr>
+              <tr data-id="narrabeen" data-lat="-33.7115" data-lng="151.2995"><th scope="row">Narrabeen Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="narrabeen">Show on map</button></td></tr>
+              <tr data-id="collaroy" data-lat="-33.7322" data-lng="151.3016"><th scope="row">Collaroy Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="collaroy">Show on map</button></td></tr>
+              <tr data-id="long-reef" data-lat="-33.7395" data-lng="151.3078"><th scope="row">Long Reef Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="long-reef">Show on map</button></td></tr>
+              <tr data-id="dee-why" data-lat="-33.7515" data-lng="151.2985"><th scope="row">Dee Why Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="dee-why">Show on map</button></td></tr>
+              <tr data-id="curl-curl" data-lat="-33.7685" data-lng="151.2930"><th scope="row">Curl Curl Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="curl-curl">Show on map</button></td></tr>
+              <tr data-id="freshwater" data-lat="-33.7785" data-lng="151.2890"><th scope="row">Freshwater Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="freshwater">Show on map</button></td></tr>
+              <tr class="is-highlight" data-id="manly" data-lat="-33.7969" data-lng="151.2880" data-detect="tested"><th scope="row">Manly Beach</th><td><span class="pill">Tested</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="manly">Show on map</button></td></tr>
+            </tbody>
+            <tbody>
+              <tr class="table__group"><th scope="rowgroup" colspan="3">Eastern Suburbs</th></tr>
+              <tr data-id="bondi" data-lat="-33.8910" data-lng="151.2755"><th scope="row">Bondi Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bondi">Show on map</button></td></tr>
+              <tr data-id="tamarama" data-lat="-33.8980" data-lng="151.2702"><th scope="row">Tamarama Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="tamarama">Show on map</button></td></tr>
+              <tr data-id="bronte" data-lat="-33.9037" data-lng="151.2671"><th scope="row">Bronte Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bronte">Show on map</button></td></tr>
+              <tr data-id="clovelly" data-lat="-33.9120" data-lng="151.2605"><th scope="row">Clovelly Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="clovelly">Show on map</button></td></tr>
+              <tr data-id="coogee" data-lat="-33.9205" data-lng="151.2571"><th scope="row">Coogee Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="coogee">Show on map</button></td></tr>
+              <tr data-id="maroubra" data-lat="-33.9500" data-lng="151.2570"><th scope="row">Maroubra Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="maroubra">Show on map</button></td></tr>
+              <tr data-id="malabar" data-lat="-33.9622" data-lng="151.2495"><th scope="row">Malabar Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="malabar">Show on map</button></td></tr>
+            </tbody>
+            <tbody>
+              <tr class="table__group"><th scope="rowgroup" colspan="3">Sutherland Shire</th></tr>
+              <tr data-id="wanda" data-lat="-34.0390" data-lng="151.1600"><th scope="row">Wanda Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="wanda">Show on map</button></td></tr>
+              <tr data-id="elouera" data-lat="-34.0432" data-lng="151.1575"><th scope="row">Elouera Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="elouera">Show on map</button></td></tr>
+              <tr data-id="north-cronulla" data-lat="-34.0492" data-lng="151.1553"><th scope="row">North Cronulla Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="north-cronulla">Show on map</button></td></tr>
+              <tr data-id="cronulla" data-lat="-34.0546" data-lng="151.1533"><th scope="row">Cronulla Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="cronulla">Show on map</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -170,7 +187,7 @@
           <h2 class="h2" id="add-title">What it takes to add a beach</h2>
         </div>
         <div class="span-6 start-7 prose">
-          <p>Detection needs a public camera with a clear, steady view of the surf zone, a feed the app is allowed to read, and enough local footage to check the model against that beach. Conditions data is already available for any beach with coordinates, which is why the map has 26 beaches and detection has one.</p>
+          <p>Detection needs a public camera with a clear, steady view of the surf zone, and enough local footage to check the model against that beach. Conditions data is available for any beach with coordinates, which is why this page tracks 26 beaches and detection has been tested at one.</p>
           <p>Rips look different from beach to beach and camera to camera. A model that works at Manly is a starting point for the next beach, and each one has to be tested before the app shows an outline there.</p>
         </div>
       </div>
@@ -199,7 +216,7 @@
             <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
             <span class="brand__name">RipCo</span>
           </a>
-          <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifeguards on duty.</p>
+          <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifesavers and lifeguards on duty.</p>
           <p class="footer__note">An independent student project. Not affiliated with or endorsed by Surf Life Saving Australia, the Bureau of Meteorology or any beach camera operator.</p>
         </div>
         <nav class="footer__col" aria-label="Product">
@@ -217,16 +234,17 @@
             <li><a href="/safety">The commitment</a></li>
             <li><a href="/safety#caught">If you're caught in a rip</a></li>
             <li><a href="/how-it-works#limits">What it can't see</a></li>
+            <li><a href="/how-it-works#glossary">Glossary</a></li>
             <li><a href="/privacy">Privacy</a></li>
           </ul>
         </nav>
-        <nav class="footer__col" aria-label="Project">
-          <h2>Project</h2>
+        <nav class="footer__col" aria-label="The project">
+          <h2>The project</h2>
           <ul>
             <li><a href="/about">About</a></li>
             <li><a href="/about#research">Research</a></li>
-            <li><a href="/about#decisions">Design decisions</a></li>
-            <li><a href="/about#criteria">Design criteria</a></li>
+            <li><a href="/about#criteria">Criteria and evaluation</a></li>
+            <li><a href="/summary">One-page summary</a></li>
             <li><a href="/about#sources">Sources</a></li>
           </ul>
         </nav>
