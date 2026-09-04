@@ -69,8 +69,7 @@
         <p class="lead">
           RipCo does not need new cameras. It reads a feed that already watches
           the water, runs a model over each frame and shows a likely rip as a red
-          outline on the live view. This page goes through each stage, then
-          through what the model can&rsquo;t see.
+          outline on the live view.
         </p>
       </div>
     </section>
@@ -84,19 +83,19 @@
             <div class="pipeline__glyph" aria-hidden="true"><svg viewBox="70 40 140 100" class="ill"><g class="ill__glyph"><rect x="96" y="58" width="84" height="52" rx="8"/><circle cx="138" cy="84" r="15"/><circle cx="138" cy="84" r="5.5" fill="var(--ink)"/><path d="M96 66 L84 60 M96 102 L84 108"/><path d="M138 110 V132 M118 132 H158"/></g></svg></div>
             <span class="pipeline__label"></span>
             <h3 class="h4 pipeline__title">It uses a camera that already exists</h3>
-            <p class="pipeline__body">Public beach cameras already stream the surf so people can check it from home. RipCo connects to one of those feeds. Nothing new has to be mounted or maintained, so adding a beach costs software and testing time.</p>
+            <p class="pipeline__body">Public beach cameras already stream the surf so people can check it from home. RipCo connects to one of those feeds, so adding a beach costs software and testing time, not hardware.</p>
           </li>
           <li class="pipeline__item">
             <div class="pipeline__glyph" aria-hidden="true"><svg viewBox="340 36 130 108" class="ill"><g class="ill__glyph"><rect x="352" y="48" width="18" height="18" rx="2"/><rect x="374" y="48" width="18" height="18" rx="2"/><rect x="396" y="48" width="18" height="18" rx="2"/><rect x="418" y="48" width="18" height="18" rx="2"/><rect x="440" y="48" width="18" height="18" rx="2"/><rect x="352" y="70" width="18" height="18" rx="2"/><rect x="374" y="70" width="18" height="18" rx="2"/><rect x="396" y="70" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="418" y="70" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="440" y="70" width="18" height="18" rx="2"/><rect x="352" y="92" width="18" height="18" rx="2"/><rect x="374" y="92" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="396" y="92" width="18" height="18" rx="2" fill="var(--accent)" stroke="var(--accent)"/><rect x="418" y="92" width="18" height="18" rx="2"/><rect x="440" y="92" width="18" height="18" rx="2"/><rect x="352" y="114" width="18" height="18" rx="2"/><rect x="374" y="114" width="18" height="18" rx="2"/><rect x="396" y="114" width="18" height="18" rx="2"/><rect x="418" y="114" width="18" height="18" rx="2"/><rect x="440" y="114" width="18" height="18" rx="2"/></g></svg></div>
             <span class="pipeline__label"></span>
             <h3 class="h4 pipeline__title">A computer-vision model reads each frame</h3>
-            <p class="pipeline__body">The model looks at the surface of the water for the signature of a rip: a darker lane cutting through the surf, a gap in the line of breaking waves, and foam or sand streaming out to sea. I trained it on footage from a public camera at Manly Beach.</p>
+            <p class="pipeline__body">The model looks at the surface of the water for the signature of a rip: a darker lane through the surf, a gap in the breaking waves, foam moving out to sea. I trained it on footage from a public camera at Palm Beach.</p>
           </li>
           <li class="pipeline__item">
             <div class="pipeline__glyph" aria-hidden="true"><svg viewBox="610 22 120 128" class="ill"><g class="ill__glyph"><rect x="640" y="30" width="60" height="112" rx="10"/><path d="M660 38 H680"/><path class="ill__detect ill__detect--sm" d="M654 74 L686 74 L682 106 L658 106 Z"/></g></svg></div>
             <span class="pipeline__label"></span>
             <h3 class="h4 pipeline__title">A likely rip is outlined on the live view</h3>
-            <p class="pipeline__body">When the model finds that signature it draws a red outline on the live image and shows its confidence as a percentage. A frame with no outline means it found no signature in that frame. <a href="/features#states">The three things the Detect screen can show</a>.</p>
+            <p class="pipeline__body">When the model finds that signature it draws a red outline on the live image and shows its confidence as a percentage. <a href="/features#states">The three things the Detect screen can show</a>.</p>
           </li>
         </ol>
       </div>
@@ -111,10 +110,9 @@
             <h2 class="h2" id="anatomy-title">A rip seen from above, and from the beach</h2>
           </div>
           <div class="head__lead">
-            <p class="lead">Waves push water over the sandbars towards the beach. That water has to get back out, and it does so through the lowest point between the bars. That return flow is the rip.</p>
+            <p class="lead">Waves push water over the sandbars towards the beach. That water gets back out through the lowest point between the bars. That return flow is the rip.</p>
           </div>
         </div>
-
         <div class="grid">
           <figure class="figure span-7">
             <div class="figure__frame">
@@ -185,213 +183,126 @@
           </figure>
           <div class="span-5">
             <dl class="dl">
-              <div class="dl__row"><dt>A &middot; Feeders</dt><dd>Water pushed over the sandbars flows along the beach from both sides towards the low point between them.</dd></div>
-              <div class="dl__row"><dt>B &middot; Neck</dt><dd>The flow turns and runs out through the gap. This is the fastest part: narrow, deeper and darker, with no waves breaking in it.</dd></div>
-              <div class="dl__row"><dt>C &middot; Head</dt><dd>Beyond the breaking waves the current slows and spreads out. Swimmers carried here can move sideways and swim back in.</dd></div>
+              <div class="dl__row"><dt>A &middot; Feeders</dt><dd>Water pushed over the sandbars flows along the beach towards the low point between them.</dd></div>
+              <div class="dl__row"><dt>B &middot; Neck</dt><dd>The flow turns and runs out through the gap: narrow, deeper and darker, with no waves breaking in it. The part a camera can see.</dd></div>
+              <div class="dl__row"><dt>C &middot; Head</dt><dd>Beyond the breaking waves the current slows and spreads out.</dd></div>
             </dl>
-            <p class="mt-5 body-2 small">The neck is the part a beach camera can see, and the part the model is trained on. The model looks for three cues, the same ones Surf Life Saving teaches people to look for.</p>
+            <p class="body-2 small mt-5">The model looks for three cues in the neck: a darker channel, a gap in the line of breaking waves, and foam or sand moving out to sea. They are the same cues Surf Life Saving teaches people to look for.</p>
           </div>
-        </div>
-
-        <div class="mt-8 items items--3">
-          <article class="item">
-            <span class="item__kicker">Cue 1</span>
-            <h3 class="item__title item__title--sans">A darker channel</h3>
-            <p class="item__body">Deeper water cutting out through the surf reflects less light, so a rip often reads as a darker lane running away from the beach.</p>
-          </article>
-          <article class="item">
-            <span class="item__kicker">Cue 2</span>
-            <h3 class="item__title item__title--sans">A gap in the breaking waves</h3>
-            <p class="item__body">Waves break on the sandbars either side of a rip but not in the channel itself, leaving a calmer-looking gap in the line of white water.</p>
-          </article>
-          <article class="item">
-            <span class="item__kicker">Cue 3</span>
-            <h3 class="item__title item__title--sans">Foam and sand moving out</h3>
-            <p class="item__body">Foam, sand and debris streaming away from shore show which way the water is pulling, which separates a rip from a patch of still water.</p>
-          </article>
         </div>
       </div>
     </section>
 
     <!-- =============================== LIMITS ============================== -->
     <section class="section" id="limits" aria-labelledby="limits-title">
-      <div class="wrap">
-        <div class="head">
-          <div class="head__title">
-            <span class="label">Limits</span>
-            <h2 class="h2" id="limits-title">What it can&rsquo;t see</h2>
-          </div>
-          <div class="head__lead">
-            <p class="lead">These are the conditions where the model&rsquo;s reading is weak or missing. In each of them the app marks detection as unavailable.</p>
-          </div>
+      <div class="wrap grid">
+        <div class="span-4">
+          <span class="label">Limits</span>
+          <h2 class="h2" id="limits-title">What it can&rsquo;t see</h2>
+          <p class="body-2 mt-4">In each of these the app marks detection as unavailable, or an outline may be missing or wrong. Swim between the flags whatever the screen shows.</p>
         </div>
-
-        <div class="grid">
-          <ol class="steps steps--list span-7">
-            <li class="step">
-              <div>
-                <h3 class="h4 step__title">Night, heavy rain and strong glare</h3>
-                <p class="step__body">The camera image stops being usable, so the app marks detection as unavailable and keeps showing the conditions.</p>
-              </div>
-            </li>
-            <li class="step">
-              <div>
-                <h3 class="h4 step__title">Small, distant or oblique rips</h3>
-                <p class="step__body">A rip that is small, far from the camera or at a shallow angle to it can be missed. A rip can be present without being detected.</p>
-              </div>
-            </li>
-            <li class="step">
-              <div>
-                <h3 class="h4 step__title">False positives</h3>
-                <p class="step__body">The model can outline something that is not a rip, such as a shadow, a patch of weed or a lull between sets. The confidence figure is there so you can weigh each outline.</p>
-              </div>
-            </li>
-            <li class="step">
-              <div>
-                <h3 class="h4 step__title">Water that changes in minutes</h3>
-                <p class="step__body">Rips form, move and fade with the sets and the tide, so an outline describes the frame it was drawn on.</p>
-              </div>
-            </li>
-            <li class="step">
-              <div>
-                <h3 class="h4 step__title">Beaches without a usable camera</h3>
-                <p class="step__body">Detection needs a public camera with a clear view of the surf zone. Everywhere else the app shows conditions, and a live stream where there is a camera.</p>
-              </div>
-            </li>
-          </ol>
-          <div class="span-4 start-9">
-            <div class="callout sticky-aside">
-              <h3 class="callout__title">Whatever the screen shows</h3>
-              <p class="callout__body">Swim between the red and yellow flags and follow the lifesavers and lifeguards on duty. RipCo can miss a rip; they are watching the water in person.</p>
-              <p class="mt-4 small"><a class="link" href="/safety">The safety commitment</a></p>
-            </div>
-          </div>
-        </div>
+        <ol class="steps steps--list span-7 start-6">
+          <li class="step"><div><h3 class="h4 step__title">Night, heavy rain and strong glare</h3><p class="step__body">The camera image stops being usable, so the app marks detection as unavailable and keeps showing the conditions.</p></div></li>
+          <li class="step"><div><h3 class="h4 step__title">Small, distant or oblique rips</h3><p class="step__body">A rip that is small, far from the camera or at a shallow angle to it can be missed.</p></div></li>
+          <li class="step"><div><h3 class="h4 step__title">False outlines</h3><p class="step__body">The model can outline a shadow, a patch of weed or a lull between sets. The confidence figure is there so you can weigh each outline.</p></div></li>
+          <li class="step"><div><h3 class="h4 step__title">Water that changes in minutes</h3><p class="step__body">Rips form, move and fade with the sets and the tide, so an outline describes the frame it was drawn on.</p></div></li>
+        </ol>
       </div>
     </section>
 
     <!-- ============================ RISK SCORE ============================= -->
-    <section class="section" id="risk" aria-labelledby="risk-title">
-      <div class="wrap">
-        <div class="head">
-          <div class="head__title">
-            <span class="label">The risk score</span>
-            <h2 class="h2" id="risk-title">How the number on each beach card is built</h2>
-          </div>
-          <div class="head__lead">
-            <p class="lead">Every beach card carries a score out of 100 with a label beside it. It summarises the conditions the app can measure, and it is deliberately framed as risk.</p>
-          </div>
+    <section class="section section--tint" id="risk" aria-labelledby="risk-title">
+      <div class="wrap grid">
+        <div class="span-6">
+          <span class="label">The risk score</span>
+          <h2 class="h2 mt-4" id="risk-title">How the number on each beach card is built</h2>
+          <p class="body-2 mt-4">Every beach card carries a score out of 100 with a label beside it, built from the live conditions for that beach. On the morning of the screenshot on this site, Thursday 27 August, the Manly card read 55 and Moderate risk in amber, with water at 18.0&nbsp;&deg;C, air at 13.4&nbsp;&deg;C, wind at 19&nbsp;km/h and a 1.2&nbsp;m swell. The band below Moderate is still a level of risk; the word safe does not appear.</p>
+          <!-- STUDENT: state what feeds the score, how many bands there are and what each is called, and how the boundaries were chosen. -->
         </div>
-        <div class="grid">
-          <div class="span-6 prose">
-            <p>The score is built from the live conditions for that beach and shown with a label. On the morning of the screenshot on this site, Thursday 27 August, the Manly card read 55 and Moderate risk in amber, with water at 18.0&nbsp;&deg;C, air at 13.4&nbsp;&deg;C, wind at 19&nbsp;km/h and a 1.2&nbsp;m swell.</p>
-            <p>The label uses the safety colours for their meaning: amber for moderate. The band below Moderate is still a level of risk, and the word safe does not appear on the card. The patrol line sits under the score, so the reading and the instruction to check the flags arrive together.</p>
-            <!-- STUDENT: this is the place to state exactly what feeds the score (which conditions, whether patrol status or detection are inputs),
-                 how many bands there are and what each is called, and how the boundaries were chosen. A marker will read this section closely. -->
-          </div>
-          <div class="span-5 start-8">
-            <dl class="dl">
-              <div class="dl__row"><dt>Scale</dt><dd>0 to 100</dd></div>
-              <div class="dl__row"><dt>Inputs</dt><dd>The live conditions the app measures for that beach</dd></div>
-              <div class="dl__row"><dt>Label</dt><dd>A level of risk beside the number, amber for Moderate</dd></div>
-              <div class="dl__row"><dt>Detection</dt><dd>Shown separately, on the Detect screen, as an outline with a confidence figure</dd></div>
-              <div class="dl__row"><dt>Under it</dt><dd>Patrol status where known, and the line &ldquo;check the flags&rdquo;</dd></div>
-            </dl>
-          </div>
+        <div class="span-5 start-8">
+          <dl class="dl">
+            <div class="dl__row"><dt>Scale</dt><dd>0 to 100</dd></div>
+            <div class="dl__row"><dt>Inputs</dt><dd>The live conditions the app measures for that beach</dd></div>
+            <div class="dl__row"><dt>Label</dt><dd>A level of risk beside the number, amber for Moderate</dd></div>
+            <div class="dl__row"><dt>Detection</dt><dd>Shown separately, on the Detect screen, as an outline with a confidence figure</dd></div>
+            <div class="dl__row"><dt>Under it</dt><dd>Patrol status where known, and the line &ldquo;check the flags&rdquo;</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
-    <!-- ============================ MANLY PILOT ============================ -->
-    <section class="section section--tint" id="pilot" aria-labelledby="pilot-title">
+    <!-- ============================ PALM BEACH PILOT ======================= -->
+    <section class="section" id="pilot" aria-labelledby="pilot-title">
       <div class="wrap grid">
         <div class="span-5">
           <span class="label">Where it stands</span>
-          <h2 class="h2" id="pilot-title">The Manly Beach pilot</h2>
-          <p class="mt-4 max-26 lead">Manly Beach is where I trained and tested the model. It is a patrolled beach with a public camera looking along the surf zone.</p>
-          <!-- STUDENT: this is the place to add real test detail once you are happy to publish it:
-               which camera and operator, the date range you tested over, how many frames you labelled,
-               and what the model got right and wrong. A marker will value an honest number more than a
-               polished sentence. -->
+          <h2 class="h2" id="pilot-title">The Palm Beach pilot</h2>
+          <p class="body-2 mt-4 max-26">Palm Beach is where I trained and tested the model: a patrolled beach with a public camera looking along the surf zone.</p>
+          <!-- STUDENT: this is the place for real test detail once you are happy to publish it. Two things a marker will look for:
+               1. The camera: which one, who operates it, and on what terms you use the feed (a public embed, written permission, or none yet).
+               2. The test record. A skeleton is below; fill the cells and remove the comment markers to show it.
+          <h3 class="h4 mt-6">Test log</h3>
+          <div class="table-wrap mt-3">
+            <table class="table">
+              <thead><tr><th scope="col">Session</th><th scope="col">Date and light</th><th scope="col">Swell and wind</th><th scope="col">Frames checked</th><th scope="col">Outlines shown</th><th scope="col">Confirmed by eye</th><th scope="col">False outlines</th><th scope="col">Missed rips</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">1</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th scope="row">2</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          -->
         </div>
         <div class="span-6 start-7">
           <dl class="dl">
             <div class="dl__row"><dt>Status</dt><dd>Prototype</dd></div>
-            <div class="dl__row"><dt>Detection</dt><dd>Tested at Manly Beach, public camera</dd></div>
+            <div class="dl__row"><dt>Detection</dt><dd>Tested at Palm Beach, public camera</dd></div>
             <div class="dl__row"><dt>Other beaches</dt><dd>Conditions, and a live stream where there is a camera <span class="caption">The <a href="/coverage">coverage page</a> lists the beaches this site tracks.</span></dd></div>
             <div class="dl__row"><dt>App Store</dt><dd>Not yet submitted</dd></div>
-            <div class="dl__row"><dt>Early access</dt><dd>List not open yet</dd></div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== GLOSSARY ============================= -->
-    <section class="section section--tint" id="glossary" aria-labelledby="glossary-title">
-      <div class="wrap">
-        <div class="head">
-          <div class="head__title">
-            <span class="label">Terms</span>
-            <h2 class="h2" id="glossary-title">The words this site uses</h2>
-          </div>
-          <div class="head__lead">
-            <p class="lead">Short definitions of the terms used on this site and in the app.</p>
-          </div>
-        </div>
-        <div class="glossary">
-          <dl class="dl">
-            <div class="dl__row"><dt>Rip current</dt><dd>A narrow, fast channel of water flowing out through the surf, formed where water pushed over the sandbars returns to sea.</dd></div>
-            <div class="dl__row"><dt>Feeders</dt><dd>The flows along the beach that gather water towards the low point between sandbars (A in Fig. 2).</dd></div>
-            <div class="dl__row"><dt>Neck</dt><dd>The narrow, fast part of the rip running out through the gap in the breaking waves (B). The part a camera can see.</dd></div>
-            <div class="dl__row"><dt>Head</dt><dd>Where the current slows and spreads beyond the breaking waves (C).</dd></div>
-            <div class="dl__row"><dt>Sandbar</dt><dd>A ridge of sand under the surf where the waves break.</dd></div>
-            <div class="dl__row"><dt>Sets and lulls</dt><dd>Waves arrive in groups (sets) with calmer gaps between them (lulls). A lull can look like a rip for a moment.</dd></div>
-            <div class="dl__row"><dt>Swell</dt><dd>The height of the waves arriving at the beach, in metres.</dd></div>
-          </dl>
-          <dl class="dl">
-            <div class="dl__row"><dt>Frame</dt><dd>One still image from the camera feed. The model reads the feed frame by frame.</dd></div>
-            <div class="dl__row"><dt>Confidence</dt><dd>The model&rsquo;s own estimate, as a percentage, that an outline is a rip.</dd></div>
-            <div class="dl__row"><dt>False outline</dt><dd>An outline drawn on something that is not a rip. A missed rip is the opposite: a rip present with no outline.</dd></div>
-            <div class="dl__row"><dt>Detection unavailable</dt><dd>The state the app shows when the camera image cannot be read, such as at night or in glare.</dd></div>
-            <div class="dl__row"><dt>Risk score</dt><dd>The number out of 100 on each beach card, built from the live conditions and labelled as a level of risk.</dd></div>
-            <div class="dl__row"><dt>Live</dt><dd>The tag on a beach card meaning the camera at that beach is streaming. It does not mean detection has been tested there.</dd></div>
-            <div class="dl__row"><dt>Patrolled beach and the flags</dt><dd>A beach with lifesavers or lifeguards on duty. The red and yellow flags mark the area they are watching.</dd></div>
           </dl>
         </div>
       </div>
     </section>
 
     <!-- ================================ FAQ ================================ -->
-    <section class="section" aria-labelledby="faq-title">
+    <section class="section section--tint" aria-labelledby="faq-title">
       <div class="wrap grid">
         <div class="span-4">
           <span class="label">Common questions</span>
-          <h2 class="h2" id="faq-title">Accuracy, night, coverage and location</h2>
+          <h2 class="h2" id="faq-title">Accuracy, night, coverage, location, terms</h2>
         </div>
         <div class="span-8 start-5">
           <div class="faq-list">
             <details class="faq">
               <summary>How accurate is the detection?</summary>
-              <div class="faq__body">
-                <p>Each outline carries a confidence percentage. The model misses some rips and outlines some things that are not rips, and the app never shows an all-clear, so assume a rip could be present in any session. The <a href="#pilot">Manly pilot</a> section is where the test record lives.</p>
-              </div>
+              <div class="faq__body"><p>Each outline carries a confidence percentage. The model misses some rips and outlines some things that are not rips, and the app never shows an all-clear, so assume a rip could be present in any session. The <a href="#pilot">Palm Beach pilot</a> section is where the test record lives.</p></div>
             </details>
             <details class="faq">
               <summary>Does it work at night or in poor visibility?</summary>
-              <div class="faq__body">
-                <p>Detection needs a usable camera image. At night, in heavy rain or in strong glare the app marks detection as unavailable and keeps showing the conditions. The rule on the sand does not change: flags first.</p>
-              </div>
+              <div class="faq__body"><p>Detection needs a usable camera image. At night, in heavy rain or in strong glare the app marks detection as unavailable and keeps showing the conditions. The rule on the sand does not change: flags first.</p></div>
             </details>
             <details class="faq">
               <summary>Which beaches have detection?</summary>
-              <div class="faq__body">
-                <p>Manly Beach, where I trained and tested the model. Detection can extend to any beach with a public camera that gives a clear view of the surf zone. The <a href="/coverage">coverage page</a> lists the beaches this site tracks and where detection has been tested.</p>
-              </div>
+              <div class="faq__body"><p>Palm Beach, where I trained and tested the model. Detection can extend to any beach with a public camera that gives a clear view of the surf zone. The <a href="/coverage">coverage page</a> lists the beaches this site tracks.</p></div>
             </details>
             <details class="faq">
               <summary>Does it use my location?</summary>
+              <div class="faq__body"><p>Location is optional. If you allow it, the app shows the beaches near you; without it, you can pick beaches from the map. <a href="/privacy">More on the privacy page</a>.</p></div>
+            </details>
+            <details class="faq" id="glossary">
+              <summary>Glossary</summary>
               <div class="faq__body">
-                <p>Location is optional. If you allow it, the app shows the beaches near you; without it, you can pick beaches from the map. <a href="/privacy">More on the privacy page</a>.</p>
+                <dl class="dl">
+                  <div class="dl__row"><dt>Rip current</dt><dd>A narrow, fast channel of water flowing out through the surf, formed where water pushed over the sandbars returns to sea.</dd></div>
+                  <div class="dl__row"><dt>Feeders, neck, head</dt><dd>The flows along the beach that gather water (A), the narrow fast part running out through the gap (B), and where the current spreads beyond the waves (C).</dd></div>
+                  <div class="dl__row"><dt>Sets and lulls</dt><dd>Waves arrive in groups with calmer gaps between them. A lull can look like a rip for a moment.</dd></div>
+                  <div class="dl__row"><dt>Frame</dt><dd>One still image from the camera feed.</dd></div>
+                  <div class="dl__row"><dt>Confidence</dt><dd>The model&rsquo;s own estimate, as a percentage, that an outline is a rip.</dd></div>
+                  <div class="dl__row"><dt>False outline, missed rip</dt><dd>An outline on something that is not a rip; a rip present with no outline.</dd></div>
+                  <div class="dl__row"><dt>Risk score</dt><dd>The number out of 100 on each beach card, built from the live conditions and labelled as a level of risk.</dd></div>
+                  <div class="dl__row"><dt>Live</dt><dd>The tag meaning the camera at that beach is streaming. It does not mean detection has been tested there.</dd></div>
+                  <div class="dl__row"><dt>The flags</dt><dd>The red and yellow flags mark the area lifesavers and lifeguards are watching on a patrolled beach.</dd></div>
+                </dl>
               </div>
             </details>
           </div>

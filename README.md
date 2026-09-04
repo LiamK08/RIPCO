@@ -14,7 +14,7 @@ never quotes a figure it cannot source. Keep it that way.
 | URL | Job |
 | --- | --- |
 | `/` | The claim, the problem (sourced figures + the survey), how it works in brief, what is in the app, the safety position, a note from the maker |
-| `/how-it-works` | The three stages, a plan-view diagram of a rip, the three visual cues, what the model cannot see, how the risk score is built, the Manly pilot, a glossary, FAQ |
+| `/how-it-works` | The three stages, a plan-view diagram of a rip, the three visual cues, what the model cannot see, how the risk score is built, the Palm Beach pilot, a glossary, FAQ |
 | `/features` | Rip detection as the core feature, the three states of the Detect screen, the home screen annotated, the six tools around it, what was left out on purpose |
 | `/coverage` | Map of 26 Sydney beaches with live conditions, the beach table (source of truth for the map), what it takes to add a beach |
 | `/safety` | The commitment, the flags, what to do if caught in a rip |
@@ -34,10 +34,10 @@ belongs and a placeholder would be worse than nothing:
 - Your name, in the maker's note on the home page and the sign-off on About.
 - Survey sample size, place and month (home page and About).
 - The month of the patrol-member interview (About).
-- Which Manly camera, the test date range and what the model got right and wrong
-  (How it works, "The Manly Beach pilot").
+- Which Palm Beach camera, the test date range and what the model got right and wrong
+  (How it works, "The Palm Beach pilot").
 - A contact email (Privacy), once you decide to publish one.
-- The camera and the arrangement for using its feed (Safety, ethics; How it works, pilot).
+- The Palm Beach camera and the arrangement for using its feed (Safety, ethics; How it works, pilot).
 - The test log (How it works, pilot: a commented-out table is ready to fill).
 - What feeds the risk score and what its bands are called (How it works, risk score).
 - Whether the app's own beach list and conditions source match this site's (Coverage).

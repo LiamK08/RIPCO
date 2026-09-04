@@ -336,7 +336,7 @@
     });
   });
 
-  /* Manly is shown by default: the one beach with detection tested. */
+  /* The tested beach is shown by default. */
   var initial = null;
   for (var i = 0; i < BEACHES.length; i++) { if (BEACHES[i].detect) { initial = BEACHES[i]; break; } }
   select(initial || BEACHES[0], false);
