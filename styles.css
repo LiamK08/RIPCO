@@ -1011,10 +1011,40 @@ html:not(.js) [data-map-select] { display: none; }
 /* -------------------------------- Footer ------------------------------- */
 
 .footer {
+  position: relative;
+  overflow: hidden;
   border-top: 1px solid var(--line);
   background: var(--paper-2);
-  padding-block: var(--s-8) var(--s-6);
+  padding-block: var(--s-8) 0;
   font-size: var(--text-small);
+}
+/* Closing wordmark: the name set very large in the footer's own paper
+   white and cropped by the bottom edge of the page. A watermark, present
+   but quiet, and hidden from assistive technology. */
+.footer__wordmark {
+  position: relative;
+  height: clamp(3.75rem, 12.5vw, 11.5rem);
+  margin-top: var(--s-7);
+  overflow: hidden;
+  text-align: center;
+}
+.footer__wordmark span {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(7rem, 23vw, 21rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--surface);
+  user-select: none;
+}
+.footer__wordmark svg {
+  display: inline-block;
+  height: 0.6em;
+  width: auto;
+  margin-right: 0.1em;
+  vertical-align: baseline;
 }
 .footer__grid {
   display: grid;
@@ -1254,7 +1284,7 @@ html:not(.js) .annot__stage { display: none; }
   @page { size: A4; margin: 16mm; }
   html { font-size: 11pt; }
   body { background: #fff; color: #000; }
-  .masthead, .footer, .skip-link, .cta, .next, .nav-toggle, .map__canvas-wrap, [data-map-select], .btn { display: none !important; }
+  .masthead, .footer, .footer__wordmark, .skip-link, .cta, .next, .nav-toggle, .map__canvas-wrap, [data-map-select], .btn { display: none !important; }
   .print-only { display: block; font-size: 9pt; color: #555; margin-bottom: 6mm; }
   a { color: inherit; text-decoration: none; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #555; }
