@@ -51,19 +51,18 @@
     if (btn) btn.addEventListener('click', function () { window.print(); });
   });
 
-  /* Device frames: a frame whose screenshot fails to load is removed
-     rather than shown empty. */
+  /* Redrawn app screens: if a real capture exists at the same path it is
+     shown over the drawing; otherwise the drawing stays. */
   module(function () {
-    var imgs = document.querySelectorAll('.device__screen img');
+    var imgs = document.querySelectorAll('[data-screen] .device__capture');
     Array.prototype.forEach.call(imgs, function (img) {
-      function hide() {
-        var host = img.closest('.device');
-        if (host) host.classList.add('is-empty');
-        var stage = img.closest('[data-screen-stage]');
-        if (stage) stage.classList.add('is-empty');
+      function show() {
+        img.hidden = false;
+        var screen = img.closest('[data-screen]');
+        if (screen) screen.classList.add('has-capture');
       }
-      if (img.complete && img.naturalWidth === 0) hide();
-      img.addEventListener('error', hide);
+      if (img.complete && img.naturalWidth > 0) { show(); return; }
+      img.addEventListener('load', show);
     });
   });
 })();
