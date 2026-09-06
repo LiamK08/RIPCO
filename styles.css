@@ -1074,7 +1074,7 @@ html:not(.js) [data-map-select] { display: none; }
 .ill--home .hm-caps { text-transform: uppercase; letter-spacing: 0.16em; font-weight: 600; }
 .ill--home .hm-link { fill: #4C8DFF; font-weight: 600; }
 .ill--home .hm-amber { fill: #F5A623; }
-.ill--home .hm-m { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-weight: 600; fill: #F3F5F8; }
+.ill--home .hm-m { font-family: 'SF Mono', ui-monospace, Menlo, Consolas, 'Liberation Mono', monospace; font-weight: 500; fill: #F3F5F8; font-variant-numeric: tabular-nums; }
 
 /* ------------------------- Annotated app screen ------------------------ */
 
