@@ -4,11 +4,23 @@
   "description": "Rip current detection on public beach cameras.",
   "start_url": "/",
   "display": "browser",
-  "background_color": "#FDFBF7",
-  "theme_color": "#FDFBF7",
+  "background_color": "#f7f8f3",
+  "theme_color": "#082f35",
   "icons": [
-    { "src": "/assets/favicon-32.png", "sizes": "32x32", "type": "image/png" },
-    { "src": "/assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "/assets/favicon-32.png?v=4",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/apple-touch-icon.png?v=4",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-512.png?v=4",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }

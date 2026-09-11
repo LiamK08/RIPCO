@@ -45,19 +45,14 @@ belongs and a placeholder would be worse than nothing:
 
 Spelling: this site writes **RipCo**; the app's wordmark reads **Ripco**. Pick one before the screenshots are final.
 
-### App screenshots
+### App interface assets
 
-The home screen capture goes at `assets/screens/home.png` (the site expects the
-983×2000 crop without the status bar; if you export a different size, update the
-`width`/`height` attributes on the two `<img>` tags that reference it). It appears
-in the hero on the home page and in the annotated section on the features page.
-Until the file exists, the hero falls back to the drawn illustration and the
-annotated section hides itself.
-
-Further captures (the Detect screen above all) go in the same folder; use the
-`SCREENSHOT SLOT` comments on the home and features pages. Any capture that shows a
-detection must be genuine model output; write the caption to say the beach, the
-date and the confidence figure shown.
+`assets/screens/home-app.webp` is the actual 621 × 1264 home-screen capture
+provided by the owner, losslessly encoded as WebP with photo metadata removed.
+It appears in the phone close-up, the app reveal and the annotated features page.
+The visible Manly Beach conditions are historical values in the screenshot, not
+live site data. The Live tag refers to the camera, not tested rip detection.
+Any future detection captures must be genuine model output and dated.
 
 ## Stack
 
@@ -69,7 +64,7 @@ no third-party scripts.
 | `*.html` | One file per page; header and footer are identical across pages apart from the current-page marker |
 | `styles.css` | The whole design system; every colour, size and space is a token in `:root` |
 | `assets/js-flag.js` | One line that adds the `js` class so the mobile menu can hide until it works |
-| `script.js` | Mobile navigation, screenshot fallback |
+| `script.js` | Mobile navigation, print support, optional screenshot fallback |
 | `map.js` | Leaflet map on the coverage page; reads the beach table in the HTML |
 | `auth.js` | Supabase early-access signup; dormant until the two keys at the top are set |
 | `api/conditions.js` | Vercel serverless function proxying Open-Meteo, edge-cached |
@@ -86,15 +81,35 @@ npx serve .
 proxy only runs on Vercel (`vercel dev` if you need it); the map falls back to
 Open-Meteo directly, then to "Unavailable".
 
-## Design system in a paragraph
+## Coastal design system
 
-Warm paper, ink, one ocean-blue accent for links and buttons. Newsreader for
-headings (weight 500 at display sizes, 550–600 below), Geist for everything else.
-One 80rem container with a 12-column grid, left-aligned; section titles sit on the
-left with their lead on the right. Diagrams are inline SVG coloured from the
-tokens, numbered as figures with captions. Green, amber and red carry meaning
-only: the flags, and the detection outline. There are no gradients, blur washes,
-grain, scroll animations or count-ups.
+`styles.css` contains the original content components; `coastal.css` defines the
+new shared ocean/sand palette, rounded actions, editorial typography, feature
+cards, page introductions and dark footer. Newsreader and Geist stay self-hosted.
+The homepage has a native scroll-linked opening in `journey.js`: aerial family
+scene, over-the-shoulder phone view with an interface overlay, then a clean app
+reveal. Scroll works in both directions, and no wheel or touch event is captured.
+Reduced-motion users get a static opening. Skip intro moves both scroll and focus
+to the main explanation. All routes remain static HTML with no build step.
+
+### Media status
+
+The current opening animates two generated still photographs. It is not yet a
+continuous generated video. Higgsfield rejected the requested Seedance 2.5 video
+because the connected account requires Plus or higher. No video job was created.
+Image provenance and production prompts are in `assets/MEDIA.md`.
+
+The optional film hook accepts a same-origin `data-film-src` on `[data-journey]`.
+Use a silent H.264 MP4 with faststart and frequent keyframes for accurate seeking.
+The script scrubs the film by scroll progress and keeps the stills if loading
+fails. Integrate and visually test the actual clip before enabling this hook.
+
+### Validation
+
+Run `node --test tests/journey.test.cjs` for motion preference, scroll reversal,
+keyboard focus after skip, and bounded progress tests. Browser QA covers desktop
+and mobile layout, the menu, the intro, all ten pages, internal links, the coverage
+map, and the unconfigured launch-list state.
 
 ## Deployment
 

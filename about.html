@@ -6,40 +6,42 @@
   <title>About · RipCo</title>
   <meta name="description" content="Why RipCo exists, the research behind it, the design decisions, the criteria it is judged against and where the project is up to. A Year 12 major work.">
   <link rel="canonical" href="https://www.ripcosafety.com/about">
-  <meta name="theme-color" content="#FDFBF7">
+  <meta name="theme-color" content="#082F35">
   <meta property="og:site_name" content="RipCo">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.ripcosafety.com/about">
   <meta property="og:title" content="About · RipCo">
   <meta property="og:description" content="Why RipCo exists, the research behind it, the design decisions, the criteria it is judged against and where the project is up to. A Year 12 major work.">
-  <meta property="og:image" content="https://www.ripcosafety.com/assets/og-image.png">
+  <meta property="og:image" content="https://www.ripcosafety.com/assets/og-coastal.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="RipCo wordmark above the line: See the rip before you're in it. AI rip current detection on public beach cameras.">
+  <meta property="og:image:alt" content="RipCo: For the days you live for. Rip current awareness, right in your pocket, over a coastal family scene.">
   <meta property="og:locale" content="en_AU">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="About · RipCo">
   <meta name="twitter:description" content="Why RipCo exists, the research behind it, the design decisions, the criteria it is judged against and where the project is up to. A Year 12 major work.">
-  <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-image.png">
-  <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
-  <link rel="icon" href="/assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
+  <meta name="twitter:image" content="https://www.ripcosafety.com/assets/og-coastal.png">
+  <link rel="icon" href="/assets/favicon.svg?v=4" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png?v=4" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=4">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
   <script src="/assets/js-flag.js"></script>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=coastal-1">
+  <link rel="stylesheet" href="/coastal.css?v=2">
+  <link rel="stylesheet" href="/story.css?v=2">
   <script src="/script.js" defer></script>
 </head>
-<body>
+<body class="inner-page page-about">
 
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="masthead" data-header>
     <div class="masthead__inner wrap">
       <a class="brand" href="/" aria-label="RipCo, home">
-        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
-        <span class="brand__name">RipCo</span>
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="#07182B"/><g fill="none" stroke="#318DFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 23 8-5 9 5 9-5 8 5M15 33l8-5 9 5 9-5 8 5M15 43l8-5 9 5 9-5 8 5"/></g></svg>
+        <span class="brand__name">Ripco</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu" data-nav-toggle>
         <span class="nav-toggle__box" aria-hidden="true">
@@ -54,53 +56,31 @@
           <li><a class="nav__link" href="/coverage">Coverage</a></li>
           <li><a class="nav__link" href="/safety">Safety</a></li>
           <li><a class="nav__link" href="/about" aria-current="page">About</a></li>
-          <li class="nav__cta"><a class="btn btn--primary btn--sm" href="/early-access">Early access</a></li>
+          <li class="nav__cta"><a class="btn btn--primary btn--sm" href="/early-access">Launch updates <span aria-hidden="true">↗</span></a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="page-head" aria-labelledby="page-title">
-      <div class="wrap">
-        <span class="label">About</span>
-        <h1 class="h1" id="page-title">Why I built RipCo</h1>
-        <p class="lead">
-          RipCo is my Year 12 Design and Technology major work: a free iPhone app
-          that reads public beach cameras and outlines likely rip currents on the
-          live view. The need, the research, the decisions and how far the
-          prototype gets, on one page.
-        </p>
-        <nav class="contents" aria-label="On this page">
+    <section class="about-hero" aria-labelledby="page-title"><picture><source media="(max-width: 640px)" srcset="/assets/beach-family-mobile.webp"><img src="/assets/beach-family.webp" alt="A family spending a quiet morning together on the beach" width="1672" height="941" fetchpriority="high"></picture><div class="wrap about-hero__copy"><span class="eyebrow">OUR STORY · SYDNEY, AUSTRALIA</span><h1 id="page-title">Built for the beaches<br><em>we call home.</em></h1><p>A student project. A familiar coastline.<br>A better way to understand the water.</p><a class="text-link" href="#need">The idea behind RipCo <span aria-hidden="true">↓</span></a></div><span class="about-hero__credit">Illustrative coastal scene · AI-created</span></section><div class="story-nav"><div class="wrap"><nav class="contents" aria-label="On this page">
           <a href="#need">The need</a>
           <a href="#research">Research</a>
           <a href="#process">Process</a>
           <a href="#decisions">Design decisions</a>
           <a href="#criteria">Criteria and evaluation</a>
           <a href="#sources">Sources</a>
-        </nav>
-      </div>
-    </section>
+        </nav></div></div>
 
     <!-- =============================== NEED ================================ -->
-    <section class="section" id="need" aria-labelledby="need-title">
-      <div class="wrap grid">
-        <div class="span-4">
-          <span class="label">The need</span>
-          <h2 class="h2" id="need-title">People can&rsquo;t see rips, and the cameras that can are already streaming</h2>
-        </div>
-        <div class="span-7 start-6 prose">
+    <section class="section" id="need" aria-labelledby="need-title"><div class="wrap origin-grid"><div class="origin-copy"><span class="label">Where it started</span><h2 class="h2" id="need-title">A beach day starts<br><em>before the beach.</em></h2><p class="lead">RipCo is my Year 12 Design and Technology major work: a free iPhone app designed to make rip current awareness part of getting ready for the beach.</p><p>Public cameras already look out over the surf. The idea is to use that view to outline likely rip currents, and put it alongside the conditions on the phone you already carry.</p><div class="origin-facts"><div><b>Palm Beach</b><span>Detection tested here first</span></div><div><b>iPhone</b><span>One platform to start</span></div></div><details class="editorial-detail origin-background"><summary><h3>The need behind the idea</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body prose">
           <p>Rip currents are Australia&rsquo;s number one coastal hazard. Surf Life Saving Australia&rsquo;s <cite>National Coastal Safety Report 2025</cite> counted 154 coastal drowning deaths in 2024&ndash;25, the highest number on record, with a rip involved in more than one in three beach drowning deaths.<sup class="fn"><a href="#sources" aria-label="Source 1">1</a></sup> Its 2018 survey found that three in four people could not spot a rip from the beach.<sup class="fn"><a href="#sources" aria-label="Source 2">2</a></sup> Between the flags, lifesavers and lifeguards read the water for you; away from them, you are on your own judgement.</p>
           <p>The tools that exist each do part of the job. BeachSafe shows patrol times and hazards, surf cams show live video, forecast apps show swell and wind. None of them reads the live picture for a rip. Many beaches already have a public camera pointed at the surf, and RipCo reads those feeds.</p>
           <p>The user is a beachgoer who checks conditions before leaving, which 69% of the people I surveyed already do. They open the app at home in the morning with one question, what is the water doing at my beach, and may look again on the sand with one hand free. So the headline has to be readable in one glance, and the detection view is one tap from any screen.</p>
-        </div>
-      </div>
-    </section>
+        </div></details></div><figure class="origin-scene"><div class="origin-scene__image"><img class="origin-scene__photo" src="/assets/beach-phone.webp" alt="Illustrative beach scene with a parent checking RipCo on a phone" width="1672" height="941" loading="lazy"><img class="origin-scene__screen" src="/assets/screens/home-app.webp" alt="" width="621" height="1264" loading="lazy"></div><blockquote>For the people you love.<br><em>Before you head in.</em></blockquote><figcaption>Actual app screen in an AI-created scene.<br>Captured conditions, not live data.</figcaption></figure></div></section>
 
     <!-- ============================== RESEARCH ============================= -->
-    <section class="section section--tint" id="research" aria-labelledby="research-title">
-      <div class="wrap">
-        <div class="head">
+    <section class="section research-section" id="research" aria-labelledby="research-title"><div class="wrap"><div class="head">
           <div class="head__title">
             <span class="label">Research</span>
             <h2 class="h2" id="research-title">Survey, interviews, reading</h2>
@@ -108,31 +88,18 @@
           <div class="head__lead">
             <p class="lead">Two pieces of primary research shaped the app, alongside the published reports. The full method and results are in my design folio; the sample was small, so the figures show direction, not precision.</p>
           </div>
-        </div>
-        <div class="items items--3">
-          <article class="item">
-            <span class="item__kicker">Primary &middot; Survey</span>
-            <h3 class="item__title">Survey of beachgoers</h3>
-            <p class="item__body">78% could not confidently identify a rip current from the beach; 84% would use a mobile tool that shows rips on a live camera view; 69% already check conditions before they go.</p>
-            <p class="item__body caption">What it changed: the outline on the live view, and the one-screen home.</p>
-            <!-- STUDENT: add sample size, where and when, e.g. "62 responses, Palm Beach and online, March 2026". -->
-          </article>
-          <article class="item">
+        </div><div class="research-stats"><article class="research-stat research-stat--1"><div class="research-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-track" cx="60" cy="60" r="52"/><circle class="ring-value" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="78 100"/></svg><span>78<small>%</small></span></div><p>could not confidently identify a rip from the beach</p></article><article class="research-stat research-stat--2"><div class="research-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-track" cx="60" cy="60" r="52"/><circle class="ring-value" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="84 100"/></svg><span>84<small>%</small></span></div><p>would use a mobile tool showing rips on a live camera view</p></article><article class="research-stat research-stat--3"><div class="research-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-track" cx="60" cy="60" r="52"/><circle class="ring-value" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="69 100"/></svg><span>69<small>%</small></span></div><p>already check conditions before heading out</p></article></div><p class="research-caption">From my project survey of beachgoers. Small sample; full method and results in the design folio. These are not population estimates.</p><!-- STUDENT: add survey sample size, location and date from the design folio. --><div class="research-notes"><article><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16s5-9 13-9 13 9 13 9-5 9-13 9S3 16 3 16Z"/><circle cx="16" cy="16" r="4"/></svg><span class="label">What the survey changed</span><h3>Make the invisible easier to see.</h3><p>The outline on the live view and a home screen designed to be understood in one glance.</p></article><article class="item">
             <span class="item__kicker">Primary &middot; Interviews</span>
             <h3 class="item__title">Surf Life Saving NSW patrol members</h3>
             <p class="item__body">Interviews with patrol members shaped the <a href="/safety">safety commitment</a>: no &ldquo;safe&rdquo; verdict anywhere in the app, and the reminder to check the flags on each beach card. The views are mine; nothing here is endorsed by Surf Life Saving.</p>
             <p class="item__body caption">What it changed: risk instead of safety, and the flags line under every card.</p>
             <!-- STUDENT: say how many people you spoke to, which club, and the month. -->
-          </article>
-          <article class="item">
+          </article><article class="item">
             <span class="item__kicker">Secondary</span>
             <h3 class="item__title">Reports and research</h3>
             <p class="item__body">Surf Life Saving Australia&rsquo;s coastal safety reports and survey, the UNSW Beach Safety Research Group&rsquo;s rip research, and BeachSafe. Listed under <a href="#sources">sources</a>.</p>
             <p class="item__body caption">What it changed: the three visual cues the model looks for, and the scale of the need.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+          </article></div></div></section>
 
     <!-- ============================== PROCESS ============================== -->
     <section class="section" id="process" aria-labelledby="process-title">
@@ -140,76 +107,37 @@
         <div class="head">
           <div class="head__title">
             <span class="label">Process</span>
-            <h2 class="h2" id="process-title">How the project ran</h2>
+            <h2 class="h2" id="process-title">From an idea<br><em>to something you can hold.</em></h2>
           </div>
           <div class="head__lead">
             <p class="lead">Six stages, from a hazard most people cannot see to a prototype running on a real camera.</p>
             <!-- STUDENT: add the month each stage ran. Dates are strong evidence of project management. -->
           </div>
         </div>
-        <ol class="steps steps--grid">
-          <li class="step"><h3 class="h4 step__title">Identify the need</h3><p class="step__body">Rips are the number one hazard on Australian beaches, and most people cannot pick one from the sand.</p></li>
-          <li class="step"><h3 class="h4 step__title">Research</h3><p class="step__body">A survey of beachgoers, interviews with patrol members, and the national coastal safety reports.</p></li>
-          <li class="step"><h3 class="h4 step__title">Concept</h3><p class="step__body">Use the public cameras already pointed at the surf, on the phone people already carry.</p></li>
-          <li class="step"><h3 class="h4 step__title">Prototype</h3><p class="step__body">An iPhone app with live cameras, conditions, a risk score and alerts, and a model trained on footage from Palm Beach.</p></li>
-          <li class="step"><h3 class="h4 step__title">Test</h3><p class="step__body">The model run on the Palm Beach camera and its outlines checked against the water, with the limits recorded as they appeared.</p></li>
-          <li class="step"><h3 class="h4 step__title">Evaluate and refine</h3><p class="step__body">The prototype judged against the criteria below; next, the early-access list, App Review and a second beach.</p></li>
+        <ol class="process-timeline">
+          <li class="process-stage"><div class="process-stage__icon"><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16s5-9 13-9 13 9 13 9-5 9-13 9S3 16 3 16Z"/><circle cx="16" cy="16" r="4"/></svg></div><h3 class="h4 step__title">Identify the need</h3><p class="step__body">Rips are the number one hazard on Australian beaches, and most people cannot pick one from the sand.</p></li>
+          <li class="process-stage"><div class="process-stage__icon"><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="13" r="8"/><path d="m19 19 9 9M9 13h8m-4-4v8"/></svg></div><h3 class="h4 step__title">Research</h3><p class="step__body">A survey of beachgoers, interviews with patrol members, and the national coastal safety reports.</p></li>
+          <li class="process-stage"><div class="process-stage__icon"><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 22c0-5-5-6-5-12a10 10 0 1 1 20 0c0 6-5 7-5 12ZM12 27h8m-6 4h4"/></svg></div><h3 class="h4 step__title">Concept</h3><p class="step__body">Use the public cameras already pointed at the surf, on the phone people already carry.</p></li>
+          <li class="process-stage"><div class="process-stage__icon"><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="16" height="28" rx="4"/><path d="M13 6h6m-5 20h4"/></svg></div><h3 class="h4 step__title">Prototype</h3><p class="step__body">An iPhone app with live cameras, conditions, a risk score and alerts, and a model trained on footage from Palm Beach.</p></li>
+          <li class="process-stage"><div class="process-stage__icon"><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 17 7 7L28 8"/><path d="M26 21v7H3V5h17"/></svg></div><h3 class="h4 step__title">Test</h3><p class="step__body">The model run on the Palm Beach camera and its outlines checked against the water, with the limits recorded as they appeared.</p></li>
+          <li class="process-stage"><div class="process-stage__icon"><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M27 13A11 11 0 0 0 7 7L3 12m0-8v8h8M5 19a11 11 0 0 0 20 6l4-5m0 8v-8h-8"/></svg></div><h3 class="h4 step__title">Evaluate and refine</h3><p class="step__body">The prototype judged against the criteria below; next, the early-access list, App Review and a second beach.</p></li>
         </ol>
       </div>
     </section>
 
     <!-- ========================== DESIGN DECISIONS ========================= -->
-    <section class="section section--tint" id="decisions" aria-labelledby="decisions-title">
-      <div class="wrap">
-        <div class="head">
-          <div class="head__title">
-            <span class="label">Design decisions</span>
-            <h2 class="h2" id="decisions-title">Six choices, and where each came from</h2>
-          </div>
-          <div class="head__lead">
-            <p class="lead">Most came out of the research. The rest came from testing on the Palm Beach camera, where a missed rip on a calm-looking day would be the worst outcome.</p>
-          </div>
-        </div>
-        <div class="items items--3">
-          <article class="item">
-            <span class="item__kicker">01</span>
-            <h3 class="item__title item__title--sans">Use cameras that already exist</h3>
-            <p class="item__body">New hardware would need money, permission and maintenance at every beach. Public cameras already look at the surf, so adding a beach costs software and testing. Nothing is manufactured, mounted or powered.</p>
-            <p class="item__body caption">From: the need, and the budget of a student project.</p>
-          </article>
-          <article class="item">
-            <span class="item__kicker">02</span>
-            <h3 class="item__title item__title--sans">Show an outline and a confidence figure</h3>
-            <p class="item__body">A tick or a cross would ask you to trust the model. An outline shows where it is looking and the percentage shows how sure it is, so you can check both against what you see.</p>
-            <p class="item__body caption">From: the survey, where 78% could not pick a rip and 84% wanted it shown on the camera.</p>
-          </article>
-          <article class="item">
-            <span class="item__kicker">03</span>
-            <h3 class="item__title item__title--sans">A risk score instead of a safety rating</h3>
-            <p class="item__body">Each beach card carries a score out of 100 labelled as a level of risk. The lowest band is still a level of risk, and the word safe does not appear in the app. <a href="/how-it-works#risk">How the score is built</a>.</p>
-            <p class="item__body caption">From: the patrol-member interviews.</p>
-          </article>
-          <article class="item">
-            <span class="item__kicker">04</span>
-            <h3 class="item__title item__title--sans">Flags first, under every card</h3>
-            <p class="item__body">The line &ldquo;check the flags&rdquo; sits under each beach card with the patrol status where known, and &ldquo;Patrol unknown&rdquo; where not. Missing information never reads as reassurance.</p>
-            <p class="item__body caption">From: the interviews and Surf Life Saving guidance.</p>
-          </article>
-          <article class="item">
-            <span class="item__kicker">05</span>
-            <h3 class="item__title item__title--sans">Live means the camera, not the model</h3>
-            <p class="item__body">The Live tag says the camera is streaming. Detection is shown separately, on the Detect screen, only where I have tested it, so a stream is never mistaken for a checked beach.</p>
-            <p class="item__body caption">From: testing, where most cameras stream and one has been checked.</p>
-          </article>
-          <article class="item">
-            <span class="item__kicker">06</span>
-            <h3 class="item__title item__title--sans">Free, one beach and one platform first</h3>
-            <p class="item__body">A safety tool behind a paywall protects the people who pay, so there is no subscription. Palm Beach and iPhone first, so I could train and test detection in one place before adding anything else.</p>
-            <p class="item__body caption">From: the survey (84% would use a free mobile tool) and testing.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <section class="section section--tint" id="decisions" aria-labelledby="decisions-title"><div class="wrap editorial-split"><div><span class="label">Made with intention</span><h2 class="h2" id="decisions-title">Every detail<br><em>has a reason.</em></h2><p class="editorial-intro">Six choices shaped by research, patrol-member interviews and testing the prototype at Palm Beach.</p><div class="design-note"><svg class="line-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 28V4m0 1c6-4 12 4 18 0v13c-6 4-12-4-18 0"/><path d="M7 11c6-4 12 4 18 0"/></svg><p>Awareness in your pocket.<br><strong>Judgement on the beach.</strong></p></div></div><div class="editorial-accordion"><details class="editorial-detail"><summary><span class="detail-number">01</span><h3>Use cameras that already exist</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body"><p class="item__body">New hardware would need money, permission and maintenance at every beach. Public cameras already look at the surf, so adding a beach costs software and testing. Nothing is manufactured, mounted or powered.</p>
+            <p class="item__body caption">From: the need, and the budget of a student project.</p></div></details>
+<details class="editorial-detail"><summary><span class="detail-number">02</span><h3>Show an outline and a confidence figure</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body"><p class="item__body">A tick or a cross would ask you to trust the model. An outline shows where it is looking and the percentage shows how sure it is, so you can check both against what you see.</p>
+            <p class="item__body caption">From: the survey, where 78% could not pick a rip and 84% wanted it shown on the camera.</p></div></details>
+<details class="editorial-detail"><summary><span class="detail-number">03</span><h3>A risk score instead of a safety rating</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body"><p class="item__body">Each beach card carries a score out of 100 labelled as a level of risk. The lowest band is still a level of risk, and the word safe does not appear in the app. <a href="/how-it-works#risk">How the score is built</a>.</p>
+            <p class="item__body caption">From: the patrol-member interviews.</p></div></details>
+<details class="editorial-detail"><summary><span class="detail-number">04</span><h3>Flags first, under every card</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body"><p class="item__body">The line &ldquo;check the flags&rdquo; sits under each beach card with the patrol status where known, and &ldquo;Patrol unknown&rdquo; where not. Missing information never reads as reassurance.</p>
+            <p class="item__body caption">From: the interviews and Surf Life Saving guidance.</p></div></details>
+<details class="editorial-detail"><summary><span class="detail-number">05</span><h3>Live means the camera, not the model</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body"><p class="item__body">The Live tag says the camera is streaming. Detection is shown separately, on the Detect screen, only where I have tested it, so a stream is never mistaken for a checked beach.</p>
+            <p class="item__body caption">From: testing, where most cameras stream and one has been checked.</p></div></details>
+<details class="editorial-detail"><summary><span class="detail-number">06</span><h3>Free, one beach and one platform first</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body"><p class="item__body">A safety tool behind a paywall protects the people who pay, so there is no subscription. Palm Beach and iPhone first, so I could train and test detection in one place before adding anything else.</p>
+            <p class="item__body caption">From: the survey (84% would use a free mobile tool) and testing.</p></div></details></div></div></section>
 
     <!-- ========================== CRITERIA + EVALUATION ==================== -->
     <section class="section" id="criteria" aria-labelledby="criteria-title">
@@ -217,14 +145,14 @@
         <div class="head">
           <div class="head__title">
             <span class="label">Criteria and evaluation</span>
-            <h2 class="h2" id="criteria-title">What the app has to do, and how far it does it</h2>
+            <h2 class="h2" id="criteria-title">A work in progress.<br><em>With a clear direction.</em></h2>
           </div>
           <div class="head__lead">
             <p class="lead">Each criterion traces back to the need or the research and carries an honest status.</p>
             <!-- STUDENT: replace a "Partly" with a number once you have one, e.g. from the test log on the How it works page. -->
           </div>
         </div>
-        <div class="table-wrap">
+        <div class="project-status"><article><span class="eyebrow">DETECTION</span><h3>One beach first.</h3><p>Tested at Palm Beach. Each new camera needs its own footage and evaluation.</p></article><article><span class="eyebrow">PRODUCT</span><h3>An iPhone prototype.</h3><p>Conditions, cameras, risk and patrol information brought into one app.</p></article><article><span class="eyebrow">AVAILABILITY</span><h3>Still in development.</h3><p>Not yet on the App Store. More testing comes before a wider release.</p></article></div><details class="editorial-detail evaluation-detail"><summary><h3>Explore the full project evaluation</h3><span class="detail-plus" aria-hidden="true"></span></summary><div class="detail-body"><div class="table-wrap">
           <table class="table table--criteria">
             <thead>
               <tr><th scope="col">Criterion</th><th scope="col">Where it comes from</th><th scope="col">How the app meets it</th><th scope="col">Status</th></tr>
@@ -238,7 +166,7 @@
               <tr><th scope="row">Free, on the phone people already carry</th><td>84% would use a free mobile tool</td><td>A free iPhone app, no subscription (decision 06)</td><td><b>Partly.</b> Not yet on the App Store.</td></tr>
             </tbody>
           </table>
-        </div>
+        </div></div></details>
         <div class="grid mt-7">
           <div class="span-4">
             <h3 class="h4">What I would change</h3>
@@ -269,7 +197,7 @@
             <li>UNSW Beach Safety Research Group, rip current research. <a href="https://www.unsw.edu.au/newsroom/news/2025/04/rip-current-deaths-study" target="_blank" rel="noopener noreferrer">unsw.edu.au</a></li>
             <li>Surf Life Saving Australia, <cite>BeachSafe</cite>. <a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">beachsafe.org.au</a></li>
           </ol>
-          <p class="body-2 small mt-5">Thanks to the Surf Life Saving NSW patrol members who gave their time for the interviews; their advice shaped the app and is not an endorsement of it. Weather data on this site by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> (CC BY 4.0); map tiles by CARTO from OpenStreetMap contributors. This site is static HTML with no trackers, set in Newsreader and Geist. Green, amber and red appear only where they carry a safety meaning, here and in the app.</p>
+          <p class="body-2 small mt-5">Thanks to the Surf Life Saving NSW patrol members who gave their time for the interviews; their advice shaped the app and is not an endorsement of it. Weather data on this site by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> (CC BY 4.0); map tiles by CARTO from OpenStreetMap contributors.</p>
           <p class="note__sign mt-5">
             <!-- STUDENT: put your name here. -->
             Designed and built in Sydney
@@ -285,8 +213,8 @@
       <div class="footer__grid">
         <div>
           <a class="brand" href="/" aria-label="RipCo, home">
-            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"><path d="M15 22c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 32c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/><path d="M15 42c4.2-4.6 8.4-4.6 12.6 0s8.4 4.6 12.6 0 8.4-4.6 12.6 0"/></g></svg>
-            <span class="brand__name">RipCo</span>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="#07182B"/><g fill="none" stroke="#318DFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 23 8-5 9 5 9-5 8 5M15 33l8-5 9 5 9-5 8 5M15 43l8-5 9 5 9-5 8 5"/></g></svg>
+            <span class="brand__name">Ripco</span>
           </a>
           <p class="footer__line">RipCo is an aid, not a lifeguard. Swim between the red and yellow flags and follow the lifesavers and lifeguards on duty.</p>
           <p class="footer__note">An independent student project. Not affiliated with or endorsed by Surf Life Saving Australia, the Bureau of Meteorology or any beach camera operator.</p>
@@ -297,7 +225,7 @@
             <li><a href="/how-it-works">How it works</a></li>
             <li><a href="/features">Features</a></li>
             <li><a href="/coverage">Coverage</a></li>
-            <li><a href="/early-access">Early access</a></li>
+            <li><a href="/early-access">Launch updates <span aria-hidden="true">↗</span></a></li>
           </ul>
         </nav>
         <nav class="footer__col" aria-label="Safety">
@@ -326,7 +254,7 @@
         <p>Weather and marine data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> (CC BY 4.0). Map tiles &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>.</p>
       </div>
     </div>
-    <div class="footer__wordmark" aria-hidden="true"><span>RipCo</span></div>
+    <div class="footer__wordmark" aria-hidden="true"><span>Ripco</span></div>
   </footer>
 
 </body>
