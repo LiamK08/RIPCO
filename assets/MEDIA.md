@@ -11,6 +11,8 @@ historical screenshot content, not live conditions.
 - `beach-family-mobile.webp`: smaller 1000 × 562 version of the same scene.
 - `beach-phone.webp`: matching close over-the-shoulder view, 1672 × 941.
 - `beach-flags.webp`: illustrative red-and-yellow swimming flags, 1536 × 1024.
+- `beach-camera.webp`: fictional coastal webcam and surf scene, 1672 × 941.
+- The How it works interactive schematic is authored SVG, not camera footage or an actual model result. It illustrates a simplified sandbar rip. The risk-card crop uses the same unaltered owner-supplied app capture.
 - `screens/home-app.webp`: actual owner-supplied 621 × 1264 app screenshot,
   encoded losslessly with metadata removed and composited using HTML/CSS.
 - `og-coastal.png`: 1200 × 630 social preview, generated beach artwork with
@@ -74,6 +76,18 @@ beachgoers, chest-height wide composition, subtle sand texture, pale dune grasse
 blue headland on the horizon. Restrained colours, believable ocean texture,
 editorial photography. No writing, branding, signboards, organisation logos or
 fake UI. Illustrative fictional beach, not a specific real location.
+
+### How it works: coastal camera
+
+Premium editorial 16:9 photograph for an Australian beach-awareness app.
+A compact weatherproof white coastal webcam with a black lens on a slim weathered
+silver pole in the right foreground of a coastal lookout, looking out over a
+teal and turquoise ocean. Natural parallel lines of breaking white surf, pale
+sand, a distant headland, softly hazy daylight and subtle native grasses.
+Cinematic but natural light; crisp realistic hardware and sea texture; restrained
+ocean green and warm cream palette. No people, text, branding, camera labels,
+UI overlays, detection boxes or numbers. Leave ocean space on the left for the
+website headline. Fictional illustrative location, not a real Palm Beach camera.
 
 ## Pending Higgsfield film
 
