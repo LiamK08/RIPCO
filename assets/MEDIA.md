@@ -10,6 +10,7 @@ historical screenshot content, not live conditions.
 - `beach-family.webp`: wide oblique aerial family scene, 1672 × 941.
 - `beach-family-mobile.webp`: smaller 1000 × 562 version of the same scene.
 - `beach-phone.webp`: matching close over-the-shoulder view, 1672 × 941.
+- `beach-flags.webp`: illustrative red-and-yellow swimming flags, 1536 × 1024.
 - `screens/home-app.webp`: actual owner-supplied 621 × 1264 app screenshot,
   encoded losslessly with metadata removed and composited using HTML/CSS.
 - `og-coastal.png`: 1200 × 630 social preview, generated beach artwork with
@@ -59,6 +60,20 @@ Left half of image has soft defocused deep turquoise sea and pale sand suitable
 for white overlay text. Wide 16:9 landscape photograph. No text, no logo, no extra
 people, anatomically correct hands, preserve father's shirt and hairstyle and
 original family identity. This is a fictional lifestyle scene.
+
+### Safety-page flags
+
+Create one premium editorial coastal photograph, landscape 3:2, for a
+responsible Australian beach safety website. Realistic photography on a bright
+but softly hazy summer morning. View from dry sand toward turquoise ocean and
+breaking white waves. Two Australian swimming safety flags at distinct positions
+left foreground and right middle distance marking a swimming area: each
+rectangular fabric flag has a red upper half and yellow lower half on a tall
+silver pole planted in sand. Natural fabric, quiet scene, a few tiny distant
+beachgoers, chest-height wide composition, subtle sand texture, pale dune grasses,
+blue headland on the horizon. Restrained colours, believable ocean texture,
+editorial photography. No writing, branding, signboards, organisation logos or
+fake UI. Illustrative fictional beach, not a specific real location.
 
 ## Pending Higgsfield film
 

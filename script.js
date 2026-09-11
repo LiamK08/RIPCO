@@ -36,9 +36,9 @@
     else if (typeof desktop.addListener === 'function') desktop.addListener(onViewport);
   });
 
-  /* Print: open every FAQ so answers print, and wire the summary page's button */
+  /* Print: include FAQ and story disclosures, then restore their previous state. */
   module(function () {
-    var faqs = document.querySelectorAll('details.faq');
+    var faqs = document.querySelectorAll('details.faq, details.editorial-detail');
     var wasOpen = [];
     window.addEventListener('beforeprint', function () {
       wasOpen = Array.prototype.map.call(faqs, function (d) { return d.open; });
