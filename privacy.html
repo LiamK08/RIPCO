@@ -30,7 +30,9 @@
   <script src="/assets/js-flag.js"></script>
   <link rel="stylesheet" href="/styles.css?v=coastal-1">
   <link rel="stylesheet" href="/coastal.css?v=2">
-  <script src="/script.js" defer></script>
+  <script src="/script.js?v=2" defer></script>
+  <link rel="stylesheet" href="/experience.css?v=3">
+  <script src="/experience.js?v=2" defer></script>
 </head>
 <body class="inner-page page-privacy">
 
@@ -59,16 +61,17 @@
         </ul>
       </nav>
     </div>
-  </header>
+    <div class="page-progress" aria-hidden="true"><span data-reading-progress></span></div>
+</header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="page-head" aria-labelledby="page-title">
       <div class="wrap">
         <span class="label">Privacy</span>
         <h1 class="h1" id="page-title">Your privacy.<br><em>In plain English.</em></h1>
         <p class="lead">This page covers the website, the early-access list and the app.</p>
       </div>
-    </section>
+    </section><nav class="privacy-overview wrap" aria-label="Privacy topics"><a href="#site-title"><span class="privacy-overview__number">01 / WEBSITE</span><strong>Just the essentials.</strong><span>No analytics or advertising trackers.</span><b aria-hidden="true">↗</b></a><a href="#list-title"><span class="privacy-overview__number">02 / LAUNCH UPDATES</span><strong>One clear purpose.</strong><span>What the early-access list will collect.</span><b aria-hidden="true">↗</b></a><a href="#app-title"><span class="privacy-overview__number">03 / THE APP</span><strong>You choose.</strong><span>Location, public cameras and your profile.</span><b aria-hidden="true">↗</b></a></nav>
 
     <section class="section" aria-labelledby="site-title">
       <div class="wrap grid">
@@ -165,5 +168,6 @@
     <div class="footer__wordmark" aria-hidden="true"><span>Ripco</span></div>
   </footer>
 
+<a class="back-top" href="#main" aria-label="Back to top" data-back-top hidden><span aria-hidden="true">↑</span><span>Back to top</span></a>
 </body>
 </html>

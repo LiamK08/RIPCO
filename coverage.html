@@ -30,10 +30,12 @@
   <script src="/assets/js-flag.js"></script>
   <link rel="stylesheet" href="/styles.css?v=coastal-1">
   <link rel="stylesheet" href="/coastal.css?v=2">
-  <script src="/script.js" defer></script>
+  <script src="/script.js?v=2" defer></script>
   <script src="/assets/vendor/leaflet/leaflet.js" defer></script>
-  <script src="/map.js" defer></script>
+  <script src="/map.js?v=2" defer></script>
   <link rel="stylesheet" href="/assets/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/experience.css?v=3">
+  <script src="/experience.js?v=2" defer></script>
 </head>
 <body class="inner-page page-coverage">
 
@@ -62,9 +64,10 @@
         </ul>
       </nav>
     </div>
-  </header>
+    <div class="page-progress" aria-hidden="true"><span data-reading-progress></span></div>
+</header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="page-head" aria-labelledby="page-title">
       <div class="wrap">
         <span class="label">Coverage</span>
@@ -82,7 +85,8 @@
     <!-- ================================ MAP ================================ -->
     <section class="section" aria-labelledby="map-title">
       <div class="wrap">
-        <h2 class="visually-hidden" id="map-title">Map of covered beaches</h2>
+        <div class="head" data-reveal><div class="head__title"><span class="label">Your coast, connected</span><h2 class="h2" id="map-title">Find your next<br> <em>beach day.</em></h2></div><div class="head__lead"><p class="lead">Explore a pin for weather and marine conditions, or search the beach directory below. Always check the local patrol and flags.</p></div></div>
+        <div class="coast-shortcuts"><span class="label">Jump to a beach</span><button type="button" data-map-select="palm-beach">Palm Beach <span aria-hidden="true">↗</span></button><button type="button" data-map-select="manly">Manly <span aria-hidden="true">↗</span></button><button type="button" data-map-select="bondi">Bondi <span aria-hidden="true">↗</span></button><button type="button" data-map-select="cronulla">Cronulla <span aria-hidden="true">↗</span></button><a href="#directory">Search all beaches <span aria-hidden="true">↓</span></a></div>
         <a class="skip-link skip-link--inline" href="#beach-table">Skip the map to the beach list</a>
         <div class="map">
           <div class="map__canvas-wrap">
@@ -122,17 +126,24 @@
     </section>
 
     <!-- =============================== TABLE =============================== -->
-    <section class="section section--tint" aria-labelledby="table-title">
+    <section class="section section--tint" id="directory" aria-labelledby="table-title">
       <div class="wrap">
-        <div class="head">
+        <div class="head" data-reveal>
           <div class="head__title">
             <span class="label">All 26 beaches</span>
-            <h2 class="h2" id="table-title">The beaches this site tracks</h2>
+            <h2 class="h2" id="table-title">Your beach directory</h2>
           </div>
           <div class="head__lead">
             <p class="lead">Listed north to south by area. Detection is marked on the one beach where I have tested it; adding another needs a public camera with a clear view of the surf and enough local footage to check the model. Every beach has live conditions.</p>
           </div>
         </div>
+        <form class="beach-filters" role="search" aria-label="Find a beach" data-beach-filters hidden>
+          <div class="beach-search"><label for="beach-search">Find your beach</label><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg><input type="search" id="beach-search" name="beach" placeholder="Try Manly, Bondi, Cronulla…" autocomplete="off" aria-controls="beach-table" aria-describedby="beach-count"></div></div>
+          <div class="beach-region"><label for="beach-region">Coastal area</label><select id="beach-region" name="region" aria-controls="beach-table"><option value="">All areas</option><option>Northern Beaches</option><option>Eastern Suburbs</option><option>Sutherland Shire</option></select></div>
+          <button class="filter-reset" type="reset">Clear filters <span aria-hidden="true">↺</span></button>
+        </form>
+        <p class="beach-count" id="beach-count" role="status" data-beach-count hidden></p>
+        <div class="beach-empty" data-beach-empty hidden><span aria-hidden="true">⌕</span><h3>No beaches found</h3><p>Try a shorter name or choose another coastal area. Clear the filters to see all 26 beaches.</p></div>
         <div class="table-wrap">
           <table class="table" id="beach-table">
             <caption>Patrol times, flags and hazard warnings for each beach are published by Surf Life Saving Australia at <a href="https://beachsafe.org.au" target="_blank" rel="noopener noreferrer">beachsafe.org.au</a>. Conditions on this page come from Open-Meteo.</caption>
@@ -141,38 +152,38 @@
             </thead>
             <tbody>
               <tr class="table__group"><th scope="rowgroup" colspan="3">Northern Beaches</th></tr>
-              <tr class="is-highlight" data-id="palm-beach" data-lat="-33.5965" data-lng="151.3235" data-detect="tested"><th scope="row">Palm Beach</th><td><span class="pill">Tested</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="palm-beach">Show on map</button></td></tr>
-              <tr data-id="whale-beach" data-lat="-33.6130" data-lng="151.3315"><th scope="row">Whale Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="whale-beach">Show on map</button></td></tr>
-              <tr data-id="avalon" data-lat="-33.6357" data-lng="151.3324"><th scope="row">Avalon Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="avalon">Show on map</button></td></tr>
-              <tr data-id="bilgola" data-lat="-33.6462" data-lng="151.3253"><th scope="row">Bilgola Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bilgola">Show on map</button></td></tr>
-              <tr data-id="newport" data-lat="-33.6570" data-lng="151.3225"><th scope="row">Newport Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="newport">Show on map</button></td></tr>
-              <tr data-id="bungan" data-lat="-33.6690" data-lng="151.3140"><th scope="row">Bungan Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bungan">Show on map</button></td></tr>
-              <tr data-id="mona-vale" data-lat="-33.6777" data-lng="151.3130"><th scope="row">Mona Vale Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="mona-vale">Show on map</button></td></tr>
-              <tr data-id="warriewood" data-lat="-33.6890" data-lng="151.3100"><th scope="row">Warriewood Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="warriewood">Show on map</button></td></tr>
-              <tr data-id="narrabeen" data-lat="-33.7115" data-lng="151.2995"><th scope="row">Narrabeen Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="narrabeen">Show on map</button></td></tr>
-              <tr data-id="collaroy" data-lat="-33.7322" data-lng="151.3016"><th scope="row">Collaroy Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="collaroy">Show on map</button></td></tr>
-              <tr data-id="long-reef" data-lat="-33.7395" data-lng="151.3078"><th scope="row">Long Reef Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="long-reef">Show on map</button></td></tr>
-              <tr data-id="dee-why" data-lat="-33.7515" data-lng="151.2985"><th scope="row">Dee Why Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="dee-why">Show on map</button></td></tr>
-              <tr data-id="curl-curl" data-lat="-33.7685" data-lng="151.2930"><th scope="row">Curl Curl Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="curl-curl">Show on map</button></td></tr>
-              <tr data-id="freshwater" data-lat="-33.7785" data-lng="151.2890"><th scope="row">Freshwater Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="freshwater">Show on map</button></td></tr>
-              <tr data-id="manly" data-lat="-33.7969" data-lng="151.2880"><th scope="row">Manly Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="manly">Show on map</button></td></tr>
+              <tr class="is-highlight" data-id="palm-beach" data-lat="-33.5965" data-lng="151.3235" data-detect="tested"><th scope="row">Palm Beach</th><td><span class="pill">Tested</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="palm-beach" aria-label="Show Palm Beach on map">Show on map</button></td></tr>
+              <tr data-id="whale-beach" data-lat="-33.6130" data-lng="151.3315"><th scope="row">Whale Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="whale-beach" aria-label="Show Whale Beach on map">Show on map</button></td></tr>
+              <tr data-id="avalon" data-lat="-33.6357" data-lng="151.3324"><th scope="row">Avalon Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="avalon" aria-label="Show Avalon on map">Show on map</button></td></tr>
+              <tr data-id="bilgola" data-lat="-33.6462" data-lng="151.3253"><th scope="row">Bilgola Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bilgola" aria-label="Show Bilgola on map">Show on map</button></td></tr>
+              <tr data-id="newport" data-lat="-33.6570" data-lng="151.3225"><th scope="row">Newport Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="newport" aria-label="Show Newport on map">Show on map</button></td></tr>
+              <tr data-id="bungan" data-lat="-33.6690" data-lng="151.3140"><th scope="row">Bungan Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bungan" aria-label="Show Bungan on map">Show on map</button></td></tr>
+              <tr data-id="mona-vale" data-lat="-33.6777" data-lng="151.3130"><th scope="row">Mona Vale Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="mona-vale" aria-label="Show Mona Vale on map">Show on map</button></td></tr>
+              <tr data-id="warriewood" data-lat="-33.6890" data-lng="151.3100"><th scope="row">Warriewood Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="warriewood" aria-label="Show Warriewood on map">Show on map</button></td></tr>
+              <tr data-id="narrabeen" data-lat="-33.7115" data-lng="151.2995"><th scope="row">Narrabeen Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="narrabeen" aria-label="Show Narrabeen on map">Show on map</button></td></tr>
+              <tr data-id="collaroy" data-lat="-33.7322" data-lng="151.3016"><th scope="row">Collaroy Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="collaroy" aria-label="Show Collaroy on map">Show on map</button></td></tr>
+              <tr data-id="long-reef" data-lat="-33.7395" data-lng="151.3078"><th scope="row">Long Reef Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="long-reef" aria-label="Show Long Reef on map">Show on map</button></td></tr>
+              <tr data-id="dee-why" data-lat="-33.7515" data-lng="151.2985"><th scope="row">Dee Why Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="dee-why" aria-label="Show Dee Why on map">Show on map</button></td></tr>
+              <tr data-id="curl-curl" data-lat="-33.7685" data-lng="151.2930"><th scope="row">Curl Curl Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="curl-curl" aria-label="Show Curl Curl on map">Show on map</button></td></tr>
+              <tr data-id="freshwater" data-lat="-33.7785" data-lng="151.2890"><th scope="row">Freshwater Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="freshwater" aria-label="Show Freshwater on map">Show on map</button></td></tr>
+              <tr data-id="manly" data-lat="-33.7969" data-lng="151.2880"><th scope="row">Manly Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="manly" aria-label="Show Manly on map">Show on map</button></td></tr>
             </tbody>
             <tbody>
               <tr class="table__group"><th scope="rowgroup" colspan="3">Eastern Suburbs</th></tr>
-              <tr data-id="bondi" data-lat="-33.8910" data-lng="151.2755"><th scope="row">Bondi Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bondi">Show on map</button></td></tr>
-              <tr data-id="tamarama" data-lat="-33.8980" data-lng="151.2702"><th scope="row">Tamarama Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="tamarama">Show on map</button></td></tr>
-              <tr data-id="bronte" data-lat="-33.9037" data-lng="151.2671"><th scope="row">Bronte Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bronte">Show on map</button></td></tr>
-              <tr data-id="clovelly" data-lat="-33.9120" data-lng="151.2605"><th scope="row">Clovelly Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="clovelly">Show on map</button></td></tr>
-              <tr data-id="coogee" data-lat="-33.9205" data-lng="151.2571"><th scope="row">Coogee Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="coogee">Show on map</button></td></tr>
-              <tr data-id="maroubra" data-lat="-33.9500" data-lng="151.2570"><th scope="row">Maroubra Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="maroubra">Show on map</button></td></tr>
-              <tr data-id="malabar" data-lat="-33.9622" data-lng="151.2495"><th scope="row">Malabar Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="malabar">Show on map</button></td></tr>
+              <tr data-id="bondi" data-lat="-33.8910" data-lng="151.2755"><th scope="row">Bondi Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bondi" aria-label="Show Bondi on map">Show on map</button></td></tr>
+              <tr data-id="tamarama" data-lat="-33.8980" data-lng="151.2702"><th scope="row">Tamarama Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="tamarama" aria-label="Show Tamarama on map">Show on map</button></td></tr>
+              <tr data-id="bronte" data-lat="-33.9037" data-lng="151.2671"><th scope="row">Bronte Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="bronte" aria-label="Show Bronte on map">Show on map</button></td></tr>
+              <tr data-id="clovelly" data-lat="-33.9120" data-lng="151.2605"><th scope="row">Clovelly Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="clovelly" aria-label="Show Clovelly on map">Show on map</button></td></tr>
+              <tr data-id="coogee" data-lat="-33.9205" data-lng="151.2571"><th scope="row">Coogee Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="coogee" aria-label="Show Coogee on map">Show on map</button></td></tr>
+              <tr data-id="maroubra" data-lat="-33.9500" data-lng="151.2570"><th scope="row">Maroubra Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="maroubra" aria-label="Show Maroubra on map">Show on map</button></td></tr>
+              <tr data-id="malabar" data-lat="-33.9622" data-lng="151.2495"><th scope="row">Malabar Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="malabar" aria-label="Show Malabar on map">Show on map</button></td></tr>
             </tbody>
             <tbody>
               <tr class="table__group"><th scope="rowgroup" colspan="3">Sutherland Shire</th></tr>
-              <tr data-id="wanda" data-lat="-34.0390" data-lng="151.1600"><th scope="row">Wanda Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="wanda">Show on map</button></td></tr>
-              <tr data-id="elouera" data-lat="-34.0432" data-lng="151.1575"><th scope="row">Elouera Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="elouera">Show on map</button></td></tr>
-              <tr data-id="north-cronulla" data-lat="-34.0492" data-lng="151.1553"><th scope="row">North Cronulla Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="north-cronulla">Show on map</button></td></tr>
-              <tr data-id="cronulla" data-lat="-34.0546" data-lng="151.1533"><th scope="row">Cronulla Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="cronulla">Show on map</button></td></tr>
+              <tr data-id="wanda" data-lat="-34.0390" data-lng="151.1600"><th scope="row">Wanda Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="wanda" aria-label="Show Wanda on map">Show on map</button></td></tr>
+              <tr data-id="elouera" data-lat="-34.0432" data-lng="151.1575"><th scope="row">Elouera Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="elouera" aria-label="Show Elouera on map">Show on map</button></td></tr>
+              <tr data-id="north-cronulla" data-lat="-34.0492" data-lng="151.1553"><th scope="row">North Cronulla Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="north-cronulla" aria-label="Show North Cronulla on map">Show on map</button></td></tr>
+              <tr data-id="cronulla" data-lat="-34.0546" data-lng="151.1533"><th scope="row">Cronulla Beach</th><td><span class="table__dash" aria-label="Not tested">&mdash;</span></td><td class="table__act"><button class="btn btn--ghost btn--sm" type="button" data-map-select="cronulla" aria-label="Show Cronulla on map">Show on map</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -243,5 +254,6 @@
     <div class="footer__wordmark" aria-hidden="true"><span>Ripco</span></div>
   </footer>
 
+<a class="back-top" href="#main" aria-label="Back to top" data-back-top hidden><span aria-hidden="true">↑</span><span>Back to top</span></a>
 </body>
 </html>

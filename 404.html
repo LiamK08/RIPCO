@@ -31,7 +31,9 @@
   <script src="/assets/js-flag.js"></script>
   <link rel="stylesheet" href="/styles.css?v=coastal-1">
   <link rel="stylesheet" href="/coastal.css?v=2">
-  <script src="/script.js" defer></script>
+  <script src="/script.js?v=2" defer></script>
+  <link rel="stylesheet" href="/experience.css?v=3">
+  <script src="/experience.js?v=2" defer></script>
 </head>
 <body class="inner-page page-404">
 
@@ -60,15 +62,16 @@
         </ul>
       </nav>
     </div>
-  </header>
+    <div class="page-progress" aria-hidden="true"><span data-reading-progress></span></div>
+</header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="page-head--plain page-head" aria-labelledby="page-title">
       <div class="wrap">
         <span class="label">404</span>
-        <h1 class="h1" id="page-title">That page has drifted out to sea</h1>
-        <p class="lead">Check the address, or start again from the home page.</p>
-        <div class="mt-6 actions">
+        <h1 class="h1" id="page-title">A little<br> <em>off course.</em></h1>
+        <p class="lead">That page has drifted out to sea. Let’s get you back to familiar shores.</p>
+        <div class="lost-coast" aria-hidden="true"><svg viewBox="0 0 500 400" fill="none"><circle cx="260" cy="180" r="146" stroke="#87a996" stroke-opacity=".25"/><circle cx="260" cy="180" r="111" stroke="#87a996" stroke-opacity=".35"/><path d="M25 292c85-42 116 31 201 0s118-24 239 0M10 315c85-42 116 31 201 0s118-24 264 0M35 338c85-42 116 31 201 0s118-24 219 0" stroke="#668d7c" stroke-width="2"/><g class="lost-buoy"><path d="m216 275 12-45h61l15 45q-44 24-88 0Z" fill="#638e7a"/><path d="M244 230V124h29v106" fill="#dce8d7" stroke="#335f54" stroke-width="2"/><path d="M241 147h35m-35 31h35m-35 31h35" stroke="#638e7a" stroke-width="12"/><path d="M258 124V83m0 0 50 16-50 17" stroke="#335f54" stroke-width="2" fill="#b6cfa1"/></g><path d="m124 131 9-9 9 9m-9-9v37m225 21 7-7 7 7m-7-7v28" stroke="#335f54" stroke-width="1.5"/></svg></div><div class="mt-6 actions">
           <a class="btn btn--primary btn--lg" href="/">Back to the home page</a>
           <a class="btn btn--ghost btn--lg" href="/how-it-works">How it works</a>
         </div>
@@ -125,5 +128,6 @@
     <div class="footer__wordmark" aria-hidden="true"><span>Ripco</span></div>
   </footer>
 
+<a class="back-top" href="#main" aria-label="Back to top" data-back-top hidden><span aria-hidden="true">↑</span><span>Back to top</span></a>
 </body>
 </html>

@@ -89,6 +89,16 @@ ocean green and warm cream palette. No people, text, branding, camera labels,
 UI overlays, detection boxes or numbers. Leave ocean space on the left for the
 website headline. Fictional illustrative location, not a real Palm Beach camera.
 
+## Interactive Features page
+
+The Features tour displays the same supplied `screens/home-app.webp` capture.
+Selectable numbered labels explain its existing interface; the screenshot is
+never presented as live conditions. The detection demo reuses the hand-authored
+SVG coastline diagram from How it works, with selectable outline and visibility
+states. These are explanatory illustrations, not camera footage or model output.
+The launch-page preview combines the existing illustrative coastal photo and the
+real app screenshot using HTML/CSS. No new generated raster assets are used.
+
 ## Pending Higgsfield film
 
 The 10-second 16:9 Seedance 2.5 request was rejected before submission with
