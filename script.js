@@ -38,7 +38,7 @@
 
   /* Print: include FAQ and story disclosures, then restore their previous state. */
   module(function () {
-    var faqs = document.querySelectorAll('details.faq, details.editorial-detail');
+    var faqs = document.querySelectorAll('details.faq, details.editorial-detail, details.tool-card');
     var wasOpen = [];
     window.addEventListener('beforeprint', function () {
       wasOpen = Array.prototype.map.call(faqs, function (d) { return d.open; });

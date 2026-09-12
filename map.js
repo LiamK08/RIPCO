@@ -46,10 +46,22 @@
   }
   if (typeof L === 'undefined') {
     showFallback('The interactive map could not load. Every beach is listed in the table below.');
+    document.querySelectorAll('[data-map-select]').forEach(function (button) {
+      button.disabled = true;
+      button.title = 'The map is unavailable. Use the beach directory below.';
+    });
     return;
   }
 
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reducedMotion = motionPreference.matches;
+  if (motionPreference.addEventListener) motionPreference.addEventListener('change', function () {
+    reducedMotion = motionPreference.matches;
+    map.options.zoomAnimation = !reducedMotion;
+    map.options.fadeAnimation = !reducedMotion;
+    map.options.markerZoomAnimation = !reducedMotion;
+    if (reducedMotion) map.stop();
+  });
 
   /* ---------------- Tiles ----------------
      CARTO's keyless light basemap, with attribution. To move to a keyed
@@ -284,10 +296,13 @@
   var markers = [];
   function select(b, focus) {
     selected = b;
+    document.querySelectorAll('.coast-shortcuts [data-map-select]').forEach(function (button) {
+      button.setAttribute('aria-pressed', button.getAttribute('data-map-select') === b.id ? 'true' : 'false');
+    });
     renderPanel(b);
     markers.forEach(function (m) { m.marker.setIcon(makeIcon(m.beach, currentSpread(m.beach))); m.decorate(); });
     conditionsPromise.then(refreshCells);
-    if (focus && nameEl) nameEl.focus();
+    if (focus && nameEl) nameEl.focus({ preventScroll: true });
   }
 
   /* ---------------- Markers ---------------- */
@@ -312,7 +327,10 @@
     marker.on('add', decorate);
     decorate();
 
-    marker.on('click', function () { select(b, true); });
+    marker.on('click', function () {
+      select(b, true);
+      if (window.matchMedia('(max-width: 56em)').matches) panel.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'instant' : 'smooth' });
+    });
 
     markers.push({ marker: marker, beach: b, decorate: decorate });
   });
@@ -329,7 +347,7 @@
         if (BEACHES[i].id === id) {
           select(BEACHES[i], true);
           map.panTo([BEACHES[i].lat, BEACHES[i].lng], { animate: !reducedMotion });
-          panel.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
+          panel.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'instant' : 'smooth' });
           break;
         }
       }
