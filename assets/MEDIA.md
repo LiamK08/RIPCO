@@ -99,12 +99,31 @@ states. These are explanatory illustrations, not camera footage or model output.
 The launch-page preview combines the existing illustrative coastal photo and the
 real app screenshot using HTML/CSS. No new generated raster assets are used.
 
-## Pending Higgsfield film
+## Cinematic films — September 2026
 
-The 10-second 16:9 Seedance 2.5 request was rejected before submission with
-"Requires plus plan or higher." The account reported a free plan. No video is
-included or represented as generated. After plan access is available, use the
-above scenes to guide a continuous oblique-aerial descent to the parent’s phone,
-keep the display clear for accurate interface compositing, and check family/hand
-continuity. Compress the result for seeking, connect the same-origin film hook,
-and repeat desktop/mobile scroll QA before release.
+Generated through the connected Higgsfield Starter workspace using Seedance 2.0
+Fast, 720p, 16:9, silent, high source bitrate. Two generations used 70 credits.
+The family and coastline are fictional AI-created lifestyle scenes. These are
+not beach-camera footage, rip detection output, or photographs of Palm Beach.
+
+- `films/beach-to-phone.mp4`: 12.04 seconds, job
+  `11065e99-af15-4ab6-8894-b6ad650307bd` (42 credits). Starts at the supplied
+  `beach-family.webp` aerial and ends at `beach-phone.webp`. A continuous descent
+  approaches the same family, then moves behind the father's shoulder to the
+  blank phone. Prompt locked family, clothing, dry-sand activity, smooth camera,
+  no cuts, no invented interface, no lettering or logos.
+- `films/family-coast.mp4`: 8.04 seconds, job
+  `89990f98-8c29-4a4f-b1f0-8fda409bad8b` (28 credits). Uses the same family aerial
+  reference; a gentle coastal glide, moving surf and the family on dry sand.
+  Prompt requested natural movement, a brief phone check, no text or overlays.
+
+Source footage was reviewed as contact sheets and in the scrolling website.
+Web encodes use H.264, 24 fps, CRF 26, a keyframe every 12 frames, no B-frames,
+yuv420p and fast-start MP4 metadata. Desktop versions are 1280 × 720; the
+`-mobile` variants are 960 × 540. The 3D phone and screen overlay are HTML/CSS
+using the user's real `screens/home-app.webp` capture. Displayed app conditions
+are labelled as historical, not live. No generated interface is presented.
+
+The opening seeks with document scroll. The closing film loads near the
+viewport and supports explicit play/pause. Reduced motion and Save-Data prevent
+film downloads; still-image fallbacks preserve content when a film fails.
