@@ -31,10 +31,11 @@
   <link rel="stylesheet" href="/styles.css?v=coastal-1">
   <link rel="stylesheet" href="/coastal.css?v=2">
   <script src="/script.js?v=2" defer></script>
-  <script src="/journey.js" defer></script>
+  <script src="/journey.js?v=cinema-2" defer></script>
   <link rel="preload" href="/assets/fonts/newsreader-latin-opsz-italic.woff2" as="font" type="font/woff2" crossorigin><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"RipCo","url":"https://www.ripcosafety.com/"},{"@type":"MobileApplication","name":"RipCo","url":"https://www.ripcosafety.com/","operatingSystem":"iOS","applicationCategory":"UtilitiesApplication","description":"Runs computer vision on existing public beach cameras to outline likely rip currents on the live view. An aid for beachgoers, never a substitute for lifesavers, lifeguards and the flags.","countriesSupported":"AU","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"image":"https://www.ripcosafety.com/assets/og-coastal.png"}]}</script>
   <link rel="stylesheet" href="/experience.css?v=3">
   <script src="/experience.js?v=2" defer></script>
+  <link rel="stylesheet" href="/cinema.css?v=2">
 </head>
 <body class="home-page">
 
@@ -67,39 +68,47 @@
 </header>
 
   <main id="main" tabindex="-1">
-    <section class="journey" data-journey aria-labelledby="hero-title">
-      <div class="journey__stage">
-        <div class="journey__landscape" data-landscape>
-          <picture><source media="(max-width: 640px)" srcset="/assets/beach-family-mobile.webp"><img class="journey__image" src="/assets/beach-family.webp" width="1920" height="1080" alt="A family spending a morning together on an Australian-style beach, viewed from above." fetchpriority="high"></picture>
+    <section class="journey cinema" data-journey aria-labelledby="hero-title">
+      <div class="cinema__stage">
+        <div class="cinema__world" aria-hidden="true">
+          <picture><source media="(max-width: 640px)" srcset="/assets/beach-family-mobile.webp"><img class="cinema__poster" src="/assets/beach-family.webp" width="1672" height="941" alt="" fetchpriority="high"></picture>
+          <video class="cinema__film" data-hero-film data-src="/assets/films/beach-to-phone.mp4?v=1" data-mobile-src="/assets/films/beach-to-phone-mobile.mp4?v=1" muted playsinline preload="none" tabindex="-1" hidden></video>
         </div>
-        <div class="journey__closeup" aria-hidden="true"><div class="journey__closeup-plane"><img class="journey__closeup-image" src="/assets/beach-phone.webp" width="1672" height="941" alt="" loading="lazy"><img class="journey__screen-insert" src="/assets/screens/home-app.webp" alt="" width="621" height="1264"></div></div>
-        <div class="journey__shade" aria-hidden="true"></div>
-        <div class="journey__opening wrap" data-opening>
-          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> MORE AWARE. BEFORE YOU’RE THERE.</p>
-          <h1 id="hero-title">For the days<br>you live <em>for.</em></h1>
-          <p class="journey__lead">Rip current awareness, right in your pocket.<br>For the people you love. Before you head in.</p>
-          <div class="actions"><a class="btn btn--light" href="#discover">Meet RipCo <span aria-hidden="true">↗</span></a><a class="journey__text-link" href="/how-it-works">How it works <span aria-hidden="true">→</span></a></div>
-          <p class="journey__availability">Rip current awareness for iPhone · In development</p>
+        <div class="cinema__end" aria-hidden="true"><div class="cinema__end-plane"><img class="cinema__end-image" src="/assets/beach-phone.webp" width="1672" height="941" alt="" loading="lazy"><img class="cinema__screen-insert" src="/assets/screens/home-app.webp" width="621" height="1264" alt=""></div></div>
+        <div class="cinema__shade" aria-hidden="true"></div>
+        <div class="cinema__backdrop" aria-hidden="true"><div class="cinema__orbit cinema__orbit--one"></div><div class="cinema__orbit cinema__orbit--two"></div><span class="cinema__watermark">Ripco</span></div>
+
+        <div class="cinema__opening wrap" data-opening>
+          <span class="eyebrow cinema__eyebrow"><span class="status-dot" aria-hidden="true"></span> MADE FOR DAYS BY THE WATER</span>
+          <h1 id="hero-title">For the days<br>
+you live <em>for.</em></h1>
+          <p class="cinema__lead">The people you love. The coastline you call home.<br>
+A little more awareness, before you head in.</p>
+          <div class="actions"><a class="btn btn--light" href="#discover">Meet RipCo <span aria-hidden="true">↗</span></a><a class="cinema__link" href="/how-it-works">How it works <span aria-hidden="true">→</span></a></div>
+          <p class="cinema__availability">Rip current awareness for iPhone · In development</p>
         </div>
-        <div class="journey__middle" data-middle aria-hidden="true"><span class="eyebrow">BEFORE THE FIRST SWIM</span><p>Take a closer look.</p></div>
-        <div class="journey__product wrap" data-product>
-          <div class="journey__product-copy">
-            <span class="eyebrow">MEET RIPCO</span>
-            <h2>Your beach.<br> <em>A clearer picture.</em></h2>
-            <p>Conditions, public beach cameras and rip detection. Together on the phone you already carry.</p>
-            <a class="text-link" href="/features">Explore the app <span aria-hidden="true">↗</span></a>
-            <span class="journey__disclaimer">Actual RipCo app screenshot. Captured conditions, not live data.</span>
-          </div>
-          <div class="journey__phone" data-phone>
-            <div class="phone-shell"><div class="phone-shell__island" aria-hidden="true"></div><img src="/assets/screens/home-app.webp" width="621" height="1264" alt="RipCo app screenshot showing nearby beach conditions and a Manly Beach card. The displayed conditions are from the capture, not live." loading="eager"></div>
-          </div>
+
+        <div class="cinema__moment" aria-hidden="true"><span class="eyebrow">THE PEOPLE. THE PLACE. THE REASON.</span><p>A day worth<br>
+<em>being here for.</em></p></div>
+        <div class="cinema__check" aria-hidden="true"><span class="eyebrow">BEFORE THE FIRST SWIM</span><p>One moment.<br>
+<em>A closer look.</em></p></div>
+
+        <div class="cinema__product wrap" data-product aria-hidden="true" inert>
+          <div class="cinema__product-copy"><span class="eyebrow">THE COAST, IN YOUR HAND</span><h2>Your beach.<br>
+<em>A clearer picture.</em></h2><p>Conditions, public beach cameras and prototype rip detection. A quick check on the phone you already carry.</p><a class="text-link" href="/features">Take a look inside <span aria-hidden="true">↗</span></a><span class="cinema__capture-note">Real app capture · displayed conditions are not live</span></div>
         </div>
-        <div class="journey__bottom wrap">
-          <a href="#discover" class="scroll-cue"><span class="scroll-cue__icon" aria-hidden="true">↓</span><span>SCROLL TO GET CLOSER</span></a>
-          <div class="journey__chapters" aria-hidden="true"><span class="is-active" data-chapter>01 <b>The coast</b></span><span data-chapter>02 <b>The moment</b></span><span data-chapter>03 <b>The app</b></span></div>
-          <a class="journey__skip" href="#discover">Skip intro <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="journey__progress" aria-hidden="true"><span data-progress></span></div>
+
+        <div class="cinema__device-position" data-device-position aria-hidden="true"><div class="cinema__device-perspective"><div class="cinema__device" data-phone>
+          <i class="cinema__device-key cinema__device-key--one"></i><i class="cinema__device-key cinema__device-key--two"></i><i class="cinema__device-key cinema__device-key--three"></i>
+          <div class="cinema__device-frame"><img src="/assets/screens/home-app.webp" width="621" height="1264" alt=""><div class="cinema__device-glass"></div></div>
+        </div></div></div>
+        <div class="cinema__float cinema__float--conditions" aria-hidden="true"><span class="cinema__float-icon">≋</span><div><span>THE CONDITIONS</span><b>Water. Wind. Swell.</b><small>Your beach, in context.</small></div></div>
+        <div class="cinema__float cinema__float--patrol" aria-hidden="true"><span class="mini-flags"><i></i><i></i></span><div><span>THE SAME GOLDEN RULE</span><b>The flags come first.</b><small>Always follow the local patrol.</small></div></div>
+        <div class="cinema__phone-controls" data-phone-controls hidden><span>Give it a turn</span><div role="group" aria-label="Rotate the phone"><button type="button" data-turn="-1" aria-label="Rotate phone left">←</button><button type="button" data-turn="0" aria-label="Centre phone">↺</button><button type="button" data-turn="1" aria-label="Rotate phone right">→</button></div></div>
+
+        <div class="cinema__bottom wrap"><span class="cinema__scroll"><span aria-hidden="true">↓</span><span>SCROLL TO GET CLOSER</span></span><nav class="cinema__chapters" aria-label="Intro scenes" data-chapters hidden><button type="button" data-scene="0" aria-current="step"><span>01</span> The coast</button><button type="button" data-scene="0.25"><span>02</span> Your people</button><button type="button" data-scene="0.5"><span>03</span> A quick check</button><button type="button" data-scene="0.91"><span>04</span> Your app</button></nav><a href="#discover" class="cinema__skip">Skip intro <span aria-hidden="true">↗</span></a></div>
+        <span class="cinema__credit">AI-created coastal scenes · Real RipCo interface</span>
+        <div class="cinema__progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
 
@@ -108,7 +117,8 @@
     <section class="introduction section" id="discover" tabindex="-1" aria-labelledby="intro-title">
       <div class="wrap introduction__grid">
         <span class="eyebrow">01 / A DIFFERENT VIEW OF THE WATER</span>
-        <div><h2 class="display-heading" id="intro-title">The ocean doesn’t<br>show you <em>everything.</em></h2>
+        <div><h2 class="display-heading" id="intro-title">The ocean doesn’t<br>
+show you <em>everything.</em></h2>
         <div class="introduction__body"><p>A calm patch of water can hide a powerful rip. RipCo uses computer vision on existing public beach cameras to help you see what’s happening before you head in.</p><p>Likely rips are outlined on the camera view, with the model’s confidence alongside them. One more source of information. The flags and lifeguards always come first.</p></div>
         <a class="text-link" href="/how-it-works">See how RipCo reads the surf <span aria-hidden="true">↗</span></a></div>
       </div>
@@ -116,7 +126,8 @@
 
     <section class="product-story section" aria-labelledby="tools-title">
       <div class="wrap">
-        <div class="section-heading"><div><span class="eyebrow">02 / A LITTLE CLARITY GOES A LONG WAY</span><h2 class="display-heading" id="tools-title">Check the water.<br><em>Then make your plans.</em></h2></div><a class="text-link" href="/features">Everything in the app <span aria-hidden="true">↗</span></a></div>
+        <div class="section-heading"><div><span class="eyebrow">02 / A LITTLE CLARITY GOES A LONG WAY</span><h2 class="display-heading" id="tools-title">Check the water.<br>
+<em>Then make your plans.</em></h2></div><a class="text-link" href="/features">Everything in the app <span aria-hidden="true">↗</span></a></div>
         <div class="feature-grid">
           <article class="feature-card feature-card--camera" data-reveal><a class="feature-card__link" href="/features#states" aria-label="Learn about rip detection"><div class="feature-card__top"><span class="feature-number">01</span><span class="feature-tag">THE CORE OF RIPCO</span></div><div class="camera-art" aria-hidden="true"><div class="camera-art__corner"></div><span class="camera-art__label">PUBLIC BEACH CAMERA</span><div class="camera-art__focus"></div><span class="camera-art__note">Lifestyle illustration · not detection output</span></div><div class="feature-card__copy"><h3>See beyond the surface.</h3><p>Public camera views with likely rips outlined by a computer-vision model. Detection tested first at Palm Beach.</p><span class="feature-card__arrow" aria-hidden="true">↗</span></div></a></article>
           <article class="feature-card feature-card--conditions" data-reveal><a class="feature-card__link" href="/how-it-works#risk" aria-label="Learn about beach conditions"><div class="feature-card__top"><span class="feature-number">02</span><span class="feature-tag">BEFORE YOU HEAD OUT</span></div><div class="conditions-art" aria-hidden="true"><span class="conditions-art__sun">☀</span><span class="conditions-art__place">A picture of your beach</span><div><span>WATER <b>Temperature</b></span><span>WIND <b>Speed & direction</b></span><span>SWELL <b>Height & period</b></span></div></div><div class="feature-card__copy"><h3>Know the conditions.</h3><p>Water temperature, wind and swell, with a risk score to give those conditions context.</p><span class="feature-card__arrow" aria-hidden="true">↗</span></div></a></article>
@@ -125,9 +136,11 @@
       </div>
     </section>
 
-    <section class="coast-section section" aria-labelledby="coast-title"><div class="wrap coast-grid"><div class="coast-visual" data-reveal><img src="/assets/beach-family.webp" alt="Illustrated coastal lifestyle scene with surf and sand." width="1920" height="1080" loading="lazy"><div class="coast-visual__label"><span>OUR STARTING POINT</span><b>Palm Beach, NSW <span aria-hidden="true">↗</span></b></div><p class="coast-visual__credit">AI-created scene · not a Palm Beach photograph</p></div><div class="coast-copy" data-reveal><span class="eyebrow">03 / A LOCAL BEGINNING</span><h2 class="display-heading" id="coast-title">One beach first.<br><em>A bigger purpose.</em></h2><p>Built in Sydney, with rip detection trained and tested on a public camera at Palm Beach. Every new beach needs its own testing before detection expands.</p><div class="coast-facts"><div><b>01</b><span>Beach with detection tested</span></div><div><b>26</b><span>Sydney beaches with conditions on this site</span></div></div><a class="text-link" href="/coverage">Explore the coastline <span aria-hidden="true">↗</span></a></div></div></section>
+    <section class="coast-section section" aria-labelledby="coast-title"><div class="wrap coast-grid"><div class="coast-visual" data-reveal><img src="/assets/beach-family.webp" alt="Illustrated coastal lifestyle scene with surf and sand." width="1920" height="1080" loading="lazy"><div class="coast-visual__label"><span>OUR STARTING POINT</span><b>Palm Beach, NSW <span aria-hidden="true">↗</span></b></div><p class="coast-visual__credit">AI-created scene · not a Palm Beach photograph</p></div><div class="coast-copy" data-reveal><span class="eyebrow">03 / A LOCAL BEGINNING</span><h2 class="display-heading" id="coast-title">One beach first.<br>
+<em>A bigger purpose.</em></h2><p>Built in Sydney, with rip detection trained and tested on a public camera at Palm Beach. Every new beach needs its own testing before detection expands.</p><div class="coast-facts"><div><b>01</b><span>Beach with detection tested</span></div><div><b>26</b><span>Sydney beaches with conditions on this site</span></div></div><a class="text-link" href="/coverage">Explore the coastline <span aria-hidden="true">↗</span></a></div></div></section>
 
-    <section class="evidence section" aria-labelledby="evidence-title"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">04 / WHY IT MATTERS</span><h2 class="display-heading" id="evidence-title">Familiar water.<br><em>Often unseen risks.</em></h2></div><p>The need behind RipCo is real. These findings are why we’re building another way to understand the surf.</p></div><dl class="stats">
+    <section class="evidence section" aria-labelledby="evidence-title"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">04 / WHY IT MATTERS</span><h2 class="display-heading" id="evidence-title">Familiar water.<br>
+<em>Often unseen risks.</em></h2></div><p>The need behind RipCo is real. These findings are why we’re building another way to understand the surf.</p></div><dl class="stats">
           <div class="stat">
             <dt class="visually-hidden">Coastal drowning deaths in Australia, 2024 to 2025</dt>
             <dd class="stat__value num">154</dd>
@@ -150,7 +163,14 @@
 
     <section class="safety-band" aria-labelledby="safety-title"><div class="wrap safety-band__inner"><div class="flags-symbol" aria-hidden="true"><i></i><i></i></div><div><span class="eyebrow">MORE INFORMATION. THE SAME GOLDEN RULE.</span><h2 id="safety-title">The flags always come first.</h2><p>RipCo is an aid, not a lifeguard. It can miss a rip. Swim between the red and yellow flags and follow the lifesavers and lifeguards on duty.</p></div><a class="text-link" href="/safety">Our safety commitment <span aria-hidden="true">↗</span></a></div></section>
 
-    <section class="closing section" aria-labelledby="closing-title"><div class="wrap"><span class="eyebrow">BUILT WITH PURPOSE. MADE FOR YOUR POCKET.</span><h2 id="closing-title">Here’s to more<br><em>days by the sea.</em></h2><p>RipCo is on its way. Get to know the project<br>and follow the journey to launch.</p><div class="actions"><a class="btn btn--light" href="/early-access">Launch updates <span aria-hidden="true">↗</span></a><a class="btn btn--outline-light" href="/about">The story behind RipCo</a></div><span class="closing__status">iPhone prototype · Free at launch · Early-access list opening soon</span></div></section>
+    <section class="coastal-film" data-coastal-film aria-labelledby="closing-title"><div class="coastal-film__stage">
+      <div class="coastal-film__media" aria-hidden="true"><picture><source media="(max-width: 640px)" srcset="/assets/beach-family-mobile.webp"><img src="/assets/beach-family.webp" width="1672" height="941" alt="" loading="lazy"></picture><video data-coast-video data-src="/assets/films/family-coast.mp4?v=1" data-mobile-src="/assets/films/family-coast-mobile.mp4?v=1" muted playsinline preload="none" tabindex="-1" hidden></video></div>
+      <div class="coastal-film__shade" aria-hidden="true"></div>
+      <div class="wrap coastal-film__copy"><span class="eyebrow">A QUICK CHECK. THEN BACK TO YOUR PEOPLE.</span><h2 id="closing-title">Less screen time.<br>
+<em>More sea time.</em></h2><p>Know a little more about the water.<br>
+Be a little more present for the day.</p><div class="actions"><a class="btn btn--light" href="/early-access">Follow the journey <span aria-hidden="true">↗</span></a><a class="btn btn--outline-light" href="/safety">The flags come first</a></div><span class="coastal-film__status">iPhone prototype · Free at launch · Signups opening soon</span></div>
+      <div class="wrap coastal-film__bottom"><span>AI-created coastal film · Illustrative family scene</span><button type="button" class="coastal-film__play" data-coast-play hidden><span data-play-icon aria-hidden="true">▷</span><span data-play-label>Play beach film</span></button></div>
+    </div></section>
   </main>
   <footer class="footer">
     <div class="wrap">
